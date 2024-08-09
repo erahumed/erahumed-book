@@ -7,12 +7,26 @@ book:
   description: |
     The ERAHUMED Decision Support System: Software Manual and Technical
     Documentation.
-  date: "9/8/2024"
+# cover-image: images/cover-2e-small.png
+# favicon: images/cover-2e-small.png
+
   chapters:
-    - index.qmd
-    - intro.qmd
-    - summary.qmd
-    - references.qmd
+  - index.qmd
+  - intro.qmd
+
+  - part: Technical description
+    chapters:
+    - hydrological_balance.qmd
+
+  - part: User Manual
+    chapters:
+    - erahumed_dss_ui.qmd
+    - erahumed_dss_pkg.qmd
+
+  - references.qmd
+
+  appendices:
+    - appendix.qmd
 
 bibliography: references.bib
 
