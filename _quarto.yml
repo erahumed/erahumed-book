@@ -1,0 +1,26 @@
+project:
+  type: book
+
+book:
+  title: "ERAHUMED DSS"
+  author: "Valerio Gherardi"
+  description: |
+    The ERAHUMED Decision Support System: Software Manual and Technical
+    Documentation.
+  date: "9/8/2024"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+editor: visual
+
