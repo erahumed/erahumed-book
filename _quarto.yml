@@ -7,7 +7,7 @@ book:
   description: |
     The ERAHUMED Decision Support System: Software Manual and Technical
     Documentation.
-# cover-image: images/cover-2e-small.png
+  cover-image: cover.png
 # favicon: images/cover-2e-small.png
 
   chapters:
