@@ -24,7 +24,18 @@
     "href": "hydrological_balance.html",
     "title": "2  Hydrological Balance",
     "section": "",
-    "text": "2.1 Global balance of the Albufera Lake",
+    "text": "2.1 Global balance of the Albufera Lake\nThis modeling layer computes the total daily inflow to the Albufera Lake, from the measured outflows and precipitation/evapotranspiration levels, together with the measured water level changes. The relevant equation expressing the hydrological balance is:\n\\[\n\\text{Inflow} + \\text{Outflow} = \\text{Volume Change} - \\text{Rain} + \\text{Evapotranspiration}\n\\tag{2.1}\\]\nwhere the unknown is \\(\\text{Inflow}\\). The subsections that follow explain in detail how the various volume terms appearing in Equation 2.1 are actually obtained from measured quantities.",
+    "crumbs": [
+      "Technical description",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Hydrological Balance</span>"
+    ]
+  },
+  {
+    "objectID": "hydrological_balance.html#global-balance-of-the-albufera-lake",
+    "href": "hydrological_balance.html#global-balance-of-the-albufera-lake",
+    "title": "2  Hydrological Balance",
+    "section": "",
+    "text": "2.1.1 \\(\\text{Volume Change}\\) term\nThe lake volume change is obtained from the measured water height change, assuming volume and height are related through a linear storage curve:\n\\[\n\\text{Volume} = a+b\\cdot \\text{Height}\n\\tag{2.2}\\]\nThe volume change that appears in Equation 2.1 is given on day \\(d\\) by:\n\\[\n\\text{Volume Change} (d)=\\text{Volume}(d+1)-\\text{Volume}(d)\n\\tag{2.3}\\]\nThe default values used for \\(a\\) and \\(b\\) are discussed in Appendix Section A.4.\n\n\n2.1.2 \\(\\text{Rain and Evapotranspiration}\\) terms\nThe volume changes due to precipitation and evapotranspiration are also assumed to be linearly related to the corresponding measured water levels (usually expressed in \\(\\text{mm}\\)):\n\\[\n\\begin{split}\n\\text{Rain}(\\text{m}^3) &= \\alpha \\cdot \\text{Rain}(\\text{mm})\\\\\n\\text{Evapotranspiration}(\\text{m}^3) &= \\beta \\cdot \\text{Evapotranspiration}(\\text{mm})\\\\\n\\end{split}\n\\tag{2.4}\\]\nThe default values used by the software \\(\\alpha\\) and \\(\\beta\\) are discussed in Appendix Section A.4.\n\n\n2.1.3 \\(\\text{Outflow}\\) term\nThe Albufera lake has two sources of outflow, namely estuaries (golas) and enclosed marshlands (tancats) [TODO: are these terms appropriate?], so that we may write: \\[\n\\text{Outflow} = \\text{Outflow}_{\\text {estuaries}}+ \\text{Outflow}_{\\text {marshlands}}\n\\tag{2.5}\\]\nThe outflows from estuaries are monitored by the Confederación Hidrográfica del Júcar (CHJ), which makes the measurements available on a daily basis (see Section A.1). This results in three additive terms: \\[\n\\text{Outflow}_{\\text {estuaries}} =\n\\text{Outflow}_{\\text {Pujol}}+\n\\text{Outflow}_{\\text {Perellonet}}+\n\\text{Outflow}_{\\text {Perelló}}\n\\tag{2.6}\\] corresponding to the three estuaries of the Albufera lake: Gola de Pujol, Gola del Perellonet and Gola del Perelló.\nIn contrast, the outflow from marshlands is not a measured quantity, and can only be estimated through some additional assumption. The relevant constraint, with a small leap in logic, is that for each day in the considered time series, either \\(\\text{Outflow}_{\\text {marshlands}}\\) or \\(\\text{Inflow}\\) must be zero. [TODO: what is the underlying assumption here?]",
     "crumbs": [
       "Technical description",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Hydrological Balance</span>"
@@ -49,6 +60,50 @@
     "text": "Martı́nez-Megı́as, Claudia, Alba Arenas-Sánchez, Diana Manjarrés-López,\nSandra Pérez, Yolanda Soriano, Yolanda Picó, and Andreu Rico. 2024.\n“Pharmaceutical and Pesticide Mixtures in a Mediterranean Coastal\nWetland: Comparison of Sampling Methods, Ecological Risks, and Removal\nby a Constructed Wetland.” Environmental Science and\nPollution Research 31 (10): 14593–609.",
     "crumbs": [
       "References"
+    ]
+  },
+  {
+    "objectID": "input_data.html",
+    "href": "input_data.html",
+    "title": "Appendix A — Input Data",
+    "section": "",
+    "text": "A.1 Albufera Lake Hydrological Balance",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Input Data</span>"
+    ]
+  },
+  {
+    "objectID": "input_data.html#precipitation-and-evapotranspiration",
+    "href": "input_data.html#precipitation-and-evapotranspiration",
+    "title": "Appendix A — Input Data",
+    "section": "A.2 Precipitation and Evapotranspiration",
+    "text": "A.2 Precipitation and Evapotranspiration",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Input Data</span>"
+    ]
+  },
+  {
+    "objectID": "input_data.html#albufera-rice-paddies-management",
+    "href": "input_data.html#albufera-rice-paddies-management",
+    "title": "Appendix A — Input Data",
+    "section": "A.3 Albufera Rice Paddies Management",
+    "text": "A.3 Albufera Rice Paddies Management",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Input Data</span>"
+    ]
+  },
+  {
+    "objectID": "input_data.html#sec-storage-curve",
+    "href": "input_data.html#sec-storage-curve",
+    "title": "Appendix A — Input Data",
+    "section": "A.4 Storage Curve and P-ETP Surface Values",
+    "text": "A.4 Storage Curve and P-ETP Surface Values",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Input Data</span>"
     ]
   }
 ]

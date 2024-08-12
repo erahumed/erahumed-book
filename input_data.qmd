@@ -1,0 +1,9 @@
+# Input Data
+
+## Albufera Lake Hydrological Balance {#sec-data-hydro-balance}
+
+## Precipitation and Evapotranspiration
+
+## Albufera Rice Paddies Management
+
+## Storage Curve and P-ETP Surface Values {#sec-storage-curve}

@@ -1,5 +1,83 @@
 # Hydrological Balance
 
+This chapter describes the calculation of quantities related to hydrological balance. There are two levels of modeling involved:
+
+-   "Global" balance, *i.e.* the balance of the Albufera Lake. This step involves a reduced set of assumptions, and really boils down to the calculation of the lake's daily total inflow, from its measured outflows and precipitation/evapotranspiration levels, and from the measured water level changes.
+
+-   "Local" balance, that is the hydrological balance of rice paddy clusters in the Albufera National Park. This step uses the output of the global balance calculations, and involves a much wider set of assumptions about how the draining and irrigation of rice paddies is managed, to approximate as closely as possible the ideal water levels required by sowing, fertilization, *etc.* during the year.
+
 ## Global balance of the Albufera Lake
+
+This modeling layer computes the total daily inflow to the Albufera Lake, from the measured outflows and precipitation/evapotranspiration levels, together with the measured water level changes. The relevant equation expressing the hydrological balance is:
+
+$$
+\text{Inflow} + \text{Outflow} = \text{Volume Change} - \text{Rain} + \text{Evapotranspiration}
+$$ {#eq-hb-global}
+
+where the unknown is $\text{Inflow}$. The subsections that follow explain in detail how the various volume terms appearing in @eq-hb-global are actually obtained from measured quantities.
+
+### $\text{Volume Change}$ term
+
+The lake volume change is obtained from the measured water height change, 
+assuming volume and height are related through a linear storage curve:
+
+$$
+\text{Volume} = a+b\cdot \text{Height}
+$$ {#eq-linear-storage-curve}
+
+The volume *change* that appears in @eq-hb-global is given on day 
+$d$ by:
+
+$$
+\text{Volume Change} (d)=\text{Volume}(d+1)-\text{Volume}(d)
+$$ {#eq-volume-change}
+
+The default values used for $a$ and $b$ are discussed in Appendix 
+@sec-storage-curve. 
+
+### $\text{Rain and Evapotranspiration}$ terms
+
+The volume changes due to precipitation and evapotranspiration are also assumed
+to be linearly related to the corresponding measured water levels (usually 
+expressed in $\text{mm}$):
+
+$$
+\begin{split}
+\text{Rain}(\text{m}^3) &= \alpha \cdot \text{Rain}(\text{mm})\\
+\text{Evapotranspiration}(\text{m}^3) &= \beta \cdot \text{Evapotranspiration}(\text{mm})\\
+\end{split}
+$$ {#eq-petp}
+
+The default values used by the software $\alpha$ and $\beta$ are discussed in 
+Appendix @sec-storage-curve.
+
+### $\text{Outflow}$ term
+
+The Albufera lake has two sources of outflow, namely estuaries (*golas*) and 
+enclosed marshlands (*tancats*) [TODO: are these terms appropriate?], so that we
+may write:
+$$
+\text{Outflow} = \text{Outflow}_{\text {estuaries}}+ \text{Outflow}_{\text {marshlands}}
+$$ {#eq-outflows}
+
+The outflows from estuaries are monitored by the 
+*Confederación Hidrográfica del Júcar* (CHJ), which makes the measurements 
+available on a daily basis (see @sec-data-hydro-balance). This results in three 
+additive terms:
+$$
+\text{Outflow}_{\text {estuaries}} = 
+\text{Outflow}_{\text {Pujol}}+
+\text{Outflow}_{\text {Perellonet}}+
+\text{Outflow}_{\text {Perelló}}
+$$ {#eq-outflow-estuaries}
+corresponding to the three estuaries of the Albufera lake: *Gola de Pujol*, 
+*Gola del Perellonet* and *Gola del Perelló*.
+
+In contrast, the outflow from marshlands is not a measured quantity, and can 
+only be estimated through some additional assumption. The relevant constraint, 
+with a small leap in logic, is that for each day in the considered time series, 
+either  $\text{Outflow}_{\text {marshlands}}$ or $\text{Inflow}$ must be zero.
+[TODO: what is the underlying assumption here?]
+
 
 ## Local balance of rice paddy clusters
