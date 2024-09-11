@@ -2,8 +2,10 @@
 
 ## Albufera Lake Hydrological Balance {#sec-data-hydro-balance}
 
-## Precipitation and Evapotranspiration
+## Precipitation and Evapotranspiration {#sec-data-albufera-petp}
 
-## Albufera Rice Paddies Management
+## Albufera Rice Paddies Management {#sec-data-albufera-management}
 
 ## Storage Curve and P-ETP Surface Values {#sec-storage-curve}
+
+## Definition of rice clusters {#sec-data-rice-clusters}
