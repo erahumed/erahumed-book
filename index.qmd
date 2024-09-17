@@ -1,16 +1,11 @@
 # Preface {.unnumbered}
 
-The purpose of this book is to provide a comprehensive reference for the 
-[ERAHUMED Decision Support System](https://www.erahumed.com/decision-support-system/). 
-Here you can find the technical descriptions of the algorithms employed by the 
-system, as well as the user manual for the accompanying software.
+The purpose of this book is to provide a comprehensive reference for the [ERAHUMED Decision Support System](https://www.erahumed.com/decision-support-system/). Here you can find the technical descriptions of the algorithms employed by the system, as well as the user manual for the accompanying software.
 
-The Support System and, hence, this book are currently under development on 
-[Github](https://github.com/erahumed). In particular, the `{erahumed}` R package is hosted [here](https://github.com/erahumed/erahumed).
+The Support System and, hence, this book are currently under development on [Github](https://github.com/erahumed). In particular, the `{erahumed}` R package is hosted [here](https://github.com/erahumed/erahumed).
 
-For general information on the ERAHUMED project, please refer to the [official website](https://www.erahumed.com/). If you want to get in touch, you can 
-contact any of us via e-mail:
+For general information on the ERAHUMED project, please refer to the [official website](https://www.erahumed.com/). If you want to get in touch, you can contact any of us via e-mail:
 
-* [Andreu Rico (Coordinator)](mailto:andreu.rico@uv.es)
-* [Pablo Amador (PhD Researcher)](mailto:pablo.amador@uv.es)
-* [Valerio Gherardi (Software Developer)](mailto:valerio.gherardi@uv.es)
+-   [Andreu Rico (Coordinator)](mailto:andreu.rico@uv.es)
+-   [Pablo Amador (PhD Researcher)](mailto:pamadorc@gmail.com)
+-   [Valerio Gherardi (Software Developer)](mailto:vgherard840@gmail.com)

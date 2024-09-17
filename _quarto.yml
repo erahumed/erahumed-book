@@ -11,6 +11,8 @@ book:
     - name: Pablo Amador Crespo
       orcid: 0000-0002-3793-8794
       email: pamadorc@gmail.com
+    - name: Andreu Rico
+      orcid: 0000-0002-1820-4218
   description: |
     The ERAHUMED Decision Support System: Software Manual and Technical
     Documentation.
