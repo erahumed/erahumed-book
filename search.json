@@ -24,7 +24,7 @@
     "href": "hydrological_balance.html",
     "title": "2  Hydrological Balance",
     "section": "",
-    "text": "2.1 Global balance of the Albufera Lake\nThis modeling layer computes the total daily inflow to the Albufera Lake, from the measured outflows and precipitation/evapotranspiration levels, together with the measured water level changes. The relevant equation expressing the hydrological balance is:\n\\[\n\\text{Inflow} + \\text{Outflow} = \\text{Volume Change} - \\text{Rain} + \\text{Evapotranspiration}\n\\tag{2.1}\\]\nwhere the unknown is \\(\\text{Inflow}\\). The subsections that follow explain in detail how the various volume terms appearing in Equation 2.1 are actually obtained from measured quantities.",
+    "text": "2.1 Global balance of the Albufera Lake\nThis modeling layer computes the total daily inflow to the Albufera Lake, from the measured outflows and precipitation/evapotranspiration levels, together with the measured water level changes. The relevant equation expressing the hydrological balance is:\n\\[\n\\text{Inflow} - \\text{Outflow} = \\text{Volume Change} - \\text{Rain} + \\text{Evapotranspiration}\n\\tag{2.1}\\]\nwhere the unknown is \\(\\text{Inflow}\\). The subsections that follow explain in detail how the various volume terms appearing in Equation 2.1 are actually obtained from measured quantities.",
     "crumbs": [
       "Technical description",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Hydrological Balance</span>"
