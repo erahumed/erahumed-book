@@ -53,6 +53,17 @@
     ]
   },
   {
+    "objectID": "hydrological_balance.html#footnotes",
+    "href": "hydrological_balance.html#footnotes",
+    "title": "2  Hydrological Balance",
+    "section": "",
+    "text": "The condition is again evaluated using the the management data-set, where the relevant variables are the irrigation and draining columns. The cluster is understood to be in flux if both irrigation and draining are TRUE.↩︎\nThe positivity of \\(I_c ^\\text{id}(t)\\) below is ensured by the fact that \\((O_c ^\\text{id}(t))^{(0)}\\geq-\\Delta_c(t)\\) by construction.↩︎\nWith some abuse of notation, we assume the indexes \\(c\\) and \\(c'\\) in Equation 2.17 to be sorted according to this random permutation.↩︎",
+    "crumbs": [
+      "Technical description",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Hydrological Balance</span>"
+    ]
+  },
+  {
     "objectID": "references.html",
     "href": "references.html",
     "title": "References",
@@ -68,50 +79,6 @@
     "title": "Appendix A — Input Data",
     "section": "",
     "text": "A.1 Albufera Lake Hydrological Balance",
-    "crumbs": [
-      "Appendices",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Input Data</span>"
-    ]
-  },
-  {
-    "objectID": "input_data.html#precipitation-and-evapotranspiration",
-    "href": "input_data.html#precipitation-and-evapotranspiration",
-    "title": "Appendix A — Input Data",
-    "section": "A.2 Precipitation and Evapotranspiration",
-    "text": "A.2 Precipitation and Evapotranspiration",
-    "crumbs": [
-      "Appendices",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Input Data</span>"
-    ]
-  },
-  {
-    "objectID": "input_data.html#albufera-rice-paddies-management",
-    "href": "input_data.html#albufera-rice-paddies-management",
-    "title": "Appendix A — Input Data",
-    "section": "A.3 Albufera Rice Paddies Management",
-    "text": "A.3 Albufera Rice Paddies Management",
-    "crumbs": [
-      "Appendices",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Input Data</span>"
-    ]
-  },
-  {
-    "objectID": "input_data.html#sec-storage-curve",
-    "href": "input_data.html#sec-storage-curve",
-    "title": "Appendix A — Input Data",
-    "section": "A.4 Storage Curve and P-ETP Surface Values",
-    "text": "A.4 Storage Curve and P-ETP Surface Values",
-    "crumbs": [
-      "Appendices",
-      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Input Data</span>"
-    ]
-  },
-  {
-    "objectID": "input_data.html#sec-data-rice-clusters",
-    "href": "input_data.html#sec-data-rice-clusters",
-    "title": "Appendix A — Input Data",
-    "section": "A.5 Definition of rice clusters",
-    "text": "A.5 Definition of rice clusters",
     "crumbs": [
       "Appendices",
       "<span class='chapter-number'>A</span>  <span class='chapter-title'>Input Data</span>"
@@ -140,14 +107,25 @@
     ]
   },
   {
-    "objectID": "hydrological_balance.html#footnotes",
-    "href": "hydrological_balance.html#footnotes",
-    "title": "2  Hydrological Balance",
-    "section": "",
-    "text": "The condition is again evaluated using the the management data-set, where the relevant variables are the irrigation and draining columns. The cluster is understood to be in flux if both irrigation and draining are TRUE.↩︎\nThe positivity of \\(I_c ^\\text{id}(t)\\) below is ensured by the fact that \\((O_c ^\\text{id}(t))^{(0)}\\geq-\\Delta_c(t)\\) by construction.↩︎\nWith some abuse of notation, we assume the indexes \\(c\\) and \\(c'\\) in Equation 2.17 to be sorted according to this random permutation.↩︎",
+    "objectID": "input_data.html#sec-storage-curve",
+    "href": "input_data.html#sec-storage-curve",
+    "title": "Appendix A — Input Data",
+    "section": "A.4 Storage Curve and P-ETP Surface Values",
+    "text": "A.4 Storage Curve and P-ETP Surface Values",
     "crumbs": [
-      "Technical description",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Hydrological Balance</span>"
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Input Data</span>"
+    ]
+  },
+  {
+    "objectID": "input_data.html#sec-data-rice-clusters",
+    "href": "input_data.html#sec-data-rice-clusters",
+    "title": "Appendix A — Input Data",
+    "section": "A.5 Definition of rice clusters",
+    "text": "A.5 Definition of rice clusters",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Input Data</span>"
     ]
   }
 ]
