@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "ERAHUMED DSS",
     "section": "",
-    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.\n\n1 + 1\n\n[1] 2",
+    "text": "Preface\nThe purpose of this book is to provide a comprehensive reference for the ERAHUMED Decision Support System. Here you can find the technical descriptions of the algorithms employed by the system, as well as the user manual for the accompanying software.\nThe Support System and, hence, this book are currently under development on Github. In particular, the {erahumed} R package is hosted here.\nFor general information on the ERAHUMED project, please refer to the official website. If you want to get in touch, you can contact any of us via e-mail:\n\nAndreu Rico (Coordinator)\nPablo Amador (PhD Researcher)\nValerio Gherardi (Software Developer)",
     "crumbs": [
       "Preface"
     ]
