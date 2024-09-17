@@ -3,7 +3,14 @@ project:
 
 book:
   title: "ERAHUMED DSS"
-  author: "Valerio Gherardi"
+  author:
+    - name: Valerio Gherardi
+      orcid: 0000-0002-8215-3013
+      email: vgherard840@gmail.com
+      corresponding: true
+    - name: Pablo Amador Crespo
+      orcid: 0000-0002-3793-8794
+      email: pamadorc@gmail.com
   description: |
     The ERAHUMED Decision Support System: Software Manual and Technical
     Documentation.
