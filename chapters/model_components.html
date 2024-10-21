@@ -8,7 +8,7 @@
 
 <meta name="description" content="The ERAHUMED Decision Support System: Software Manual and Technical Documentation.">
 
-<title>2&nbsp; Hydrological Balance – ERAHUMED DSS</title>
+<title>3&nbsp; ERAHUMED model components – ERAHUMED DSS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,24 +24,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./erahumed_dss_ui.html" rel="next">
-<link href="./intro.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/erahumed_dss_ui.html" rel="next">
+<link href="../chapters/birds_eye_view.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -111,7 +111,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./hydrological_balance.html">Technical description</a></li><li class="breadcrumb-item"><a href="./hydrological_balance.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Hydrological Balance</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/birds_eye_view.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/model_components.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">ERAHUMED model components</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -126,7 +126,7 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">ERAHUMED DSS</a> 
+      <a href="../">ERAHUMED DSS</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -138,13 +138,13 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
@@ -159,8 +159,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./hydrological_balance.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Hydrological Balance</span></span></a>
+  <a href="../chapters/birds_eye_view.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ERAHUMED model: a bird’s eye view</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/model_components.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">ERAHUMED model components</span></span></a>
   </div>
 </li>
       </ul>
@@ -176,21 +182,21 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./erahumed_dss_ui.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The ERAHUMED DSS User Interface</span></span></a>
+  <a href="../chapters/erahumed_dss_ui.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The ERAHUMED DSS User Interface</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./erahumed_dss_pkg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The <code>{erahumed}</code> R package</span></span></a>
+  <a href="../chapters/erahumed_dss_pkg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The <code>{erahumed}</code> R package</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -205,7 +211,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./input_data.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/input_data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Input Data</span></span></a>
   </div>
 </li>
@@ -221,27 +227,30 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#global-balance-of-the-albufera-lake" id="toc-global-balance-of-the-albufera-lake" class="nav-link active" data-scroll-target="#global-balance-of-the-albufera-lake"><span class="header-section-number">2.1</span> Global balance of the Albufera Lake</a>
+  <li><a href="#inp-input-data" id="toc-inp-input-data" class="nav-link active" data-scroll-target="#inp-input-data"><span class="header-section-number">3.1</span> INP: Input Data</a></li>
+  <li><a href="#hba-hydrological-balance-of-the-albufera-lake" id="toc-hba-hydrological-balance-of-the-albufera-lake" class="nav-link" data-scroll-target="#hba-hydrological-balance-of-the-albufera-lake"><span class="header-section-number">3.2</span> HBA: Hydrological Balance of the Albufera lake</a>
   <ul class="collapse">
-  <li><a href="#textvolume-change-term" id="toc-textvolume-change-term" class="nav-link" data-scroll-target="#textvolume-change-term"><span class="header-section-number">2.1.1</span> <span class="math inline">\(\text{Volume Change}\)</span> term</a></li>
-  <li><a href="#textrain-and-evapotranspiration-terms" id="toc-textrain-and-evapotranspiration-terms" class="nav-link" data-scroll-target="#textrain-and-evapotranspiration-terms"><span class="header-section-number">2.1.2</span> <span class="math inline">\(\text{Rain and Evapotranspiration}\)</span> terms</a></li>
-  <li><a href="#textoutflow-term" id="toc-textoutflow-term" class="nav-link" data-scroll-target="#textoutflow-term"><span class="header-section-number">2.1.3</span> <span class="math inline">\(\text{Outflow}\)</span> term</a></li>
+  <li><a href="#textvolume-change-term" id="toc-textvolume-change-term" class="nav-link" data-scroll-target="#textvolume-change-term"><span class="header-section-number">3.2.1</span> <span class="math inline">\(\text{Volume Change}\)</span> term</a></li>
+  <li><a href="#textrain-and-evapotranspiration-terms" id="toc-textrain-and-evapotranspiration-terms" class="nav-link" data-scroll-target="#textrain-and-evapotranspiration-terms"><span class="header-section-number">3.2.2</span> <span class="math inline">\(\text{Rain and Evapotranspiration}\)</span> terms</a></li>
+  <li><a href="#textoutflow-term" id="toc-textoutflow-term" class="nav-link" data-scroll-target="#textoutflow-term"><span class="header-section-number">3.2.3</span> <span class="math inline">\(\text{Outflow}\)</span> term</a></li>
   </ul></li>
-  <li><a href="#local-balance-of-rice-paddy-clusters" id="toc-local-balance-of-rice-paddy-clusters" class="nav-link" data-scroll-target="#local-balance-of-rice-paddy-clusters"><span class="header-section-number">2.2</span> Local balance of rice paddy clusters</a>
+  <li><a href="#hbp-hydrological-balance-of-rice-paddy-clusters" id="toc-hbp-hydrological-balance-of-rice-paddy-clusters" class="nav-link" data-scroll-target="#hbp-hydrological-balance-of-rice-paddy-clusters"><span class="header-section-number">3.3</span> HBP: Hydrological Balance of rice Paddy clusters</a>
   <ul class="collapse">
-  <li><a href="#model-inputs-and-parameters" id="toc-model-inputs-and-parameters" class="nav-link" data-scroll-target="#model-inputs-and-parameters"><span class="header-section-number">2.2.1</span> Model inputs and parameters</a></li>
-  <li><a href="#sec-ditch-inflows" id="toc-sec-ditch-inflows" class="nav-link" data-scroll-target="#sec-ditch-inflows"><span class="header-section-number">2.2.2</span> Ditch inflows</a></li>
-  <li><a href="#main-algorithm" id="toc-main-algorithm" class="nav-link" data-scroll-target="#main-algorithm"><span class="header-section-number">2.2.3</span> Main Algorithm</a></li>
+  <li><a href="#model-inputs-and-parameters" id="toc-model-inputs-and-parameters" class="nav-link" data-scroll-target="#model-inputs-and-parameters"><span class="header-section-number">3.3.1</span> Model inputs and parameters</a></li>
+  <li><a href="#sec-ditch-inflows" id="toc-sec-ditch-inflows" class="nav-link" data-scroll-target="#sec-ditch-inflows"><span class="header-section-number">3.3.2</span> Ditch inflows</a></li>
+  <li><a href="#main-algorithm" id="toc-main-algorithm" class="nav-link" data-scroll-target="#main-algorithm"><span class="header-section-number">3.3.3</span> Main Algorithm</a></li>
   </ul></li>
+  <li><a href="#ca-chemical-applications" id="toc-ca-chemical-applications" class="nav-link" data-scroll-target="#ca-chemical-applications"><span class="header-section-number">3.4</span> CA: Chemical Applications</a></li>
+  <li><a href="#ct-chemical-transport" id="toc-ct-chemical-transport" class="nav-link" data-scroll-target="#ct-chemical-transport"><span class="header-section-number">3.5</span> CT: Chemical Transport</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./hydrological_balance.html">Technical description</a></li><li class="breadcrumb-item"><a href="./hydrological_balance.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Hydrological Balance</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/birds_eye_view.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/model_components.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">ERAHUMED model components</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Hydrological Balance</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">ERAHUMED model components</span></h1>
 </div>
 
 
@@ -263,58 +272,61 @@ window.Quarto = {
 <li><p>“Global” balance, <em>i.e.</em> the balance of the Albufera Lake. This step involves a reduced set of assumptions, and really boils down to the calculation of the lake’s daily total inflow, from its measured outflows and precipitation/evapotranspiration levels, and from the measured water level changes.</p></li>
 <li><p>“Local” balance, that is the hydrological balance of rice paddy clusters in the Albufera National Park. This step uses the output of the global balance calculations, and involves a much wider set of assumptions about how the draining and irrigation of rice paddies is managed, to approximate as closely as possible the ideal water levels required by sowing, fertilization, <em>etc.</em> during the year.</p></li>
 </ul>
-<section id="global-balance-of-the-albufera-lake" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="global-balance-of-the-albufera-lake"><span class="header-section-number">2.1</span> Global balance of the Albufera Lake</h2>
+<section id="inp-input-data" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="inp-input-data"><span class="header-section-number">3.1</span> INP: Input Data</h2>
+</section>
+<section id="hba-hydrological-balance-of-the-albufera-lake" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="hba-hydrological-balance-of-the-albufera-lake"><span class="header-section-number">3.2</span> HBA: Hydrological Balance of the Albufera lake</h2>
 <p>This modeling layer computes the total daily inflow to the Albufera Lake, from the measured outflows and precipitation/evapotranspiration levels, together with the measured water level changes. The relevant equation expressing the hydrological balance is:</p>
 <p><span id="eq-hb-global"><span class="math display">\[
 \text{Inflow} - \text{Outflow} = \text{Volume Change} - \text{Rain} + \text{Evapotranspiration}
-\tag{2.1}\]</span></span></p>
-<p>where the unknown is <span class="math inline">\(\text{Inflow}\)</span>. The subsections that follow explain in detail how the various volume terms appearing in <a href="#eq-hb-global" class="quarto-xref">Equation&nbsp;<span>2.1</span></a> are actually obtained from measured quantities.</p>
-<section id="textvolume-change-term" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="textvolume-change-term"><span class="header-section-number">2.1.1</span> <span class="math inline">\(\text{Volume Change}\)</span> term</h3>
+\tag{3.1}\]</span></span></p>
+<p>where the unknown is <span class="math inline">\(\text{Inflow}\)</span>. The subsections that follow explain in detail how the various volume terms appearing in <a href="#eq-hb-global" class="quarto-xref">Equation&nbsp;<span>3.1</span></a> are actually obtained from measured quantities.</p>
+<section id="textvolume-change-term" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="textvolume-change-term"><span class="header-section-number">3.2.1</span> <span class="math inline">\(\text{Volume Change}\)</span> term</h3>
 <p>The lake volume change is obtained from the measured water height change, assuming volume and height are related through a linear storage curve:</p>
 <p><span id="eq-linear-storage-curve"><span class="math display">\[
 \text{Volume} = a+b\cdot \text{Height}
-\tag{2.2}\]</span></span></p>
-<p>The volume <em>change</em> that appears in <a href="#eq-hb-global" class="quarto-xref">Equation&nbsp;<span>2.1</span></a> is given on day <span class="math inline">\(d\)</span> by:</p>
+\tag{3.2}\]</span></span></p>
+<p>The volume <em>change</em> that appears in <a href="#eq-hb-global" class="quarto-xref">Equation&nbsp;<span>3.1</span></a> is given on day <span class="math inline">\(d\)</span> by:</p>
 <p><span id="eq-volume-change"><span class="math display">\[
 \text{Volume Change} (d)=\text{Volume}(d+1)-\text{Volume}(d)
-\tag{2.3}\]</span></span></p>
+\tag{3.3}\]</span></span></p>
 <p>The default values used for <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are discussed in Appendix <a href="input_data.html#sec-storage-curve" class="quarto-xref"><span>Section A.4</span></a>.</p>
 </section>
-<section id="textrain-and-evapotranspiration-terms" class="level3" data-number="2.1.2">
-<h3 data-number="2.1.2" class="anchored" data-anchor-id="textrain-and-evapotranspiration-terms"><span class="header-section-number">2.1.2</span> <span class="math inline">\(\text{Rain and Evapotranspiration}\)</span> terms</h3>
+<section id="textrain-and-evapotranspiration-terms" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="textrain-and-evapotranspiration-terms"><span class="header-section-number">3.2.2</span> <span class="math inline">\(\text{Rain and Evapotranspiration}\)</span> terms</h3>
 <p>The volume changes due to precipitation and evapotranspiration are also assumed to be linearly related to the corresponding measured water levels (usually expressed in <span class="math inline">\(\text{mm}\)</span>):</p>
 <p><span id="eq-petp"><span class="math display">\[
 \begin{split}
 \text{Rain}(\text{m}^3) &amp;= \alpha \cdot \text{Rain}(\text{mm})\\
 \text{Evapotranspiration}(\text{m}^3) &amp;= \beta \cdot \text{Evapotranspiration}(\text{mm})\\
 \end{split}
-\tag{2.4}\]</span></span></p>
+\tag{3.4}\]</span></span></p>
 <p>The default values used by the software <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are discussed in Appendix <a href="input_data.html#sec-storage-curve" class="quarto-xref"><span>Section A.4</span></a>.</p>
 </section>
-<section id="textoutflow-term" class="level3" data-number="2.1.3">
-<h3 data-number="2.1.3" class="anchored" data-anchor-id="textoutflow-term"><span class="header-section-number">2.1.3</span> <span class="math inline">\(\text{Outflow}\)</span> term</h3>
+<section id="textoutflow-term" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="textoutflow-term"><span class="header-section-number">3.2.3</span> <span class="math inline">\(\text{Outflow}\)</span> term</h3>
 <p>The Albufera lake has two sources of outflow, namely estuaries (<em>golas</em>) and enclosed marshlands (<em>tancats</em>) [TODO: terms suggested by chatGPT, are these appropriate?], so that we may write: <span id="eq-outflows"><span class="math display">\[
 \text{Outflow} = \text{Outflow}_{\text {estuaries}}+ \text{Outflow}_{\text {marshlands}}
-\tag{2.5}\]</span></span></p>
+\tag{3.5}\]</span></span></p>
 <p>The outflows from estuaries are monitored by the <em>Confederación Hidrográfica del Júcar</em> (CHJ), which makes the measurements available on a daily basis (see <a href="input_data.html#sec-data-hydro-balance" class="quarto-xref"><span>Section A.1</span></a>). This results in three additive terms: <span id="eq-outflow-estuaries"><span class="math display">\[
 \text{Outflow}_{\text {estuaries}} =
 \text{Outflow}_{\text {Pujol}}+
 \text{Outflow}_{\text {Perellonet}}+
 \text{Outflow}_{\text {Perelló}}
-\tag{2.6}\]</span></span> corresponding to the three estuaries of the Albufera lake: <em>Gola de Pujol</em>, <em>Gola del Perellonet</em> and <em>Gola del Perelló</em>.</p>
+\tag{3.6}\]</span></span> corresponding to the three estuaries of the Albufera lake: <em>Gola de Pujol</em>, <em>Gola del Perellonet</em> and <em>Gola del Perelló</em>.</p>
 <p>In contrast, the outflow from marshlands is not a measured quantity, and can only be estimated through some additional assumption. The relevant constraint, with a small leap in logic, is that for each day in the considered time series, either <span class="math inline">\(\text{Outflow}_{\text {marshlands}}\)</span> or <span class="math inline">\(\text{Inflow}\)</span> must be zero. [TODO: what is the underlying assumption here?]</p>
 </section>
 </section>
-<section id="local-balance-of-rice-paddy-clusters" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="local-balance-of-rice-paddy-clusters"><span class="header-section-number">2.2</span> Local balance of rice paddy clusters</h2>
+<section id="hbp-hydrological-balance-of-rice-paddy-clusters" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="hbp-hydrological-balance-of-rice-paddy-clusters"><span class="header-section-number">3.3</span> HBP: Hydrological Balance of rice Paddy clusters</h2>
 <p>As anticipated, the simulation of local hydrological balance of rice paddies involves an important set of assumptions regarding the management of water levels. We detail in this section the algorithm used in our simulations.</p>
-<section id="model-inputs-and-parameters" class="level3" data-number="2.2.1">
-<h3 data-number="2.2.1" class="anchored" data-anchor-id="model-inputs-and-parameters"><span class="header-section-number">2.2.1</span> Model inputs and parameters</h3>
+<section id="model-inputs-and-parameters" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="model-inputs-and-parameters"><span class="header-section-number">3.3.1</span> Model inputs and parameters</h3>
 <p>The two main observational inputs for this modeling layer are:</p>
 <ul>
-<li><p>The output of the “Global balance” model, described in the previous Section, and in particular the daily total inflow to the Albufera lake, obtained from <a href="#eq-hb-global" class="quarto-xref">Equation&nbsp;<span>2.1</span></a>. As explained below in <a href="#sec-ditch-inflows" class="quarto-xref"><span>Section 2.2.2</span></a>, this is used to estimate the inflow from each of the twenty-six ditches that flow into the Albufera.</p></li>
+<li><p>The output of the “Global balance” model, described in the previous Section, and in particular the daily total inflow to the Albufera lake, obtained from <a href="#eq-hb-global" class="quarto-xref">Equation&nbsp;<span>3.1</span></a>. As explained below in <a href="#sec-ditch-inflows" class="quarto-xref"><span>Section 3.3.2</span></a>, this is used to estimate the inflow from each of the twenty-six ditches that flow into the Albufera.</p></li>
 <li><p>The measured amounts of precipitation and evapotranspiration, which is the same data-set involved in global balance calculations, and is described in <a href="input_data.html#sec-data-albufera-petp" class="quarto-xref"><span>Section A.2</span></a>.</p></li>
 </ul>
 <p>The subdivision of the rice fields surface of the Albufera into clusters of a specific rice variety, and the corresponding assignation of a single ditch to each cluster is described in <a href="input_data.html#sec-data-rice-clusters" class="quarto-xref"><span>Section A.5</span></a>.</p>
@@ -325,28 +337,28 @@ window.Quarto = {
 <li><p><em>Height threshold</em> <span class="math inline">\(H_{\text{thres}}\)</span>. Maximum allowed water level for a cluster to be considered emptied, used in the calculation of draining/irrigation plan delays. Expressed in <span class="math inline">\(\text{cm}\)</span>.</p></li>
 </ul>
 </section>
-<section id="sec-ditch-inflows" class="level3" data-number="2.2.2">
-<h3 data-number="2.2.2" class="anchored" data-anchor-id="sec-ditch-inflows"><span class="header-section-number">2.2.2</span> Ditch inflows</h3>
-<p>The first step consists in breaking down the total inflow to the lake, obtained through <a href="#eq-hb-global" class="quarto-xref">Equation&nbsp;<span>2.1</span></a>, into inflows from individual ditches. Each paddy cluster is assumed to communicate with a single ditch (<em>cf.</em> <a href="input_data.html#sec-data-rice-clusters" class="quarto-xref"><span>Section A.5</span></a>), and the flow through a ditch is assumed to be proportional to the total area of clusters belonging to said ditch. Therefore, denoting by <span class="math inline">\(I_i\)</span> and <span class="math inline">\(A_i\)</span> the inflow and area of ditch <span class="math inline">\(i\)</span>, and by <span class="math inline">\(I\)</span> the total inflow, we compute:</p>
+<section id="sec-ditch-inflows" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="sec-ditch-inflows"><span class="header-section-number">3.3.2</span> Ditch inflows</h3>
+<p>The first step consists in breaking down the total inflow to the lake, obtained through <a href="#eq-hb-global" class="quarto-xref">Equation&nbsp;<span>3.1</span></a>, into inflows from individual ditches. Each paddy cluster is assumed to communicate with a single ditch (<em>cf.</em> <a href="input_data.html#sec-data-rice-clusters" class="quarto-xref"><span>Section A.5</span></a>), and the flow through a ditch is assumed to be proportional to the total area of clusters belonging to said ditch. Therefore, denoting by <span class="math inline">\(I_i\)</span> and <span class="math inline">\(A_i\)</span> the inflow and area of ditch <span class="math inline">\(i\)</span>, and by <span class="math inline">\(I\)</span> the total inflow, we compute:</p>
 <p><span id="eq-ditch-inflow"><span class="math display">\[
 I_i = \frac{A_i}{\sum _j A_j} \cdot I
-\tag{2.7}\]</span></span></p>
+\tag{3.7}\]</span></span></p>
 </section>
-<section id="main-algorithm" class="level3" data-number="2.2.3">
-<h3 data-number="2.2.3" class="anchored" data-anchor-id="main-algorithm"><span class="header-section-number">2.2.3</span> Main Algorithm</h3>
-<p>In the following, we focus on the set of clusters that communicate with a specific ditch, whose inflow (estimated according to <a href="#sec-ditch-inflows" class="quarto-xref"><span>Section 2.2.2</span></a>) we denote by <span class="math inline">\(Q\)</span>. The essence of the algorithm is to approximate as closely as possible the cluster’s <em>ideal</em> inflows and outflows, with the constraint that the sum of the actual outflows from all clusters must equal <span class="math inline">\(Q\)</span>.</p>
+<section id="main-algorithm" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="main-algorithm"><span class="header-section-number">3.3.3</span> Main Algorithm</h3>
+<p>In the following, we focus on the set of clusters that communicate with a specific ditch, whose inflow (estimated according to <a href="#sec-ditch-inflows" class="quarto-xref"><span>Section 3.3.2</span></a>) we denote by <span class="math inline">\(Q\)</span>. The essence of the algorithm is to approximate as closely as possible the cluster’s <em>ideal</em> inflows and outflows, with the constraint that the sum of the actual outflows from all clusters must equal <span class="math inline">\(Q\)</span>.</p>
 <p>Let us start by setting up some basic notation. We denote by:</p>
 <p><span id="eq-hbl-ideal-qts"><span class="math display">\[
 h_c ^\text{id}(t),\quad I_c ^\text{id}(t),\quad O_c ^\text{id}(t),
-\tag{2.8}\]</span></span></p>
+\tag{3.8}\]</span></span></p>
 <p>the ideal water level, inflow and outflow of cluster <span class="math inline">\(c\)</span> at time (<em>i.e.</em> day) <span class="math inline">\(t\)</span>, and by:</p>
 <p><span id="eq-hbl-real-qts"><span class="math display">\[
 h_c ^\text{re}(t),\quad I_c ^\text{re}(t),\quad O_c ^\text{re}(t),
-\tag{2.9}\]</span></span></p>
+\tag{3.9}\]</span></span></p>
 <p>the corresponding real quantities. The area of cluster <span class="math inline">\(c\)</span>, that provides the conversion between water volumes and column heights, is denoted by <span class="math inline">\(A_c\)</span>. Precipitation and evapotranspiration water column values are denoted by:</p>
 <p><span id="eq-hbl-petp"><span class="math display">\[
 \text{P}(t),\quad \text{ETP}(t).
-\tag{2.10}\]</span></span></p>
+\tag{3.10}\]</span></span></p>
 <p>Finally, we will define below a <em>plan delay</em> accumulated for cluster <span class="math inline">\(c\)</span> at time <span class="math inline">\(t\)</span>, denoted <span class="math inline">\(D_c(t)\)</span>. This is computed recursively along the iterations of the algorithm, and its role will be clarified below.</p>
 <p>The local balance algorithm proceeds iteratively as follows. At day <span class="math inline">\(t\)</span>, assume that <span class="math inline">\(h_c ^\text{re}(t-1)\)</span> and <span class="math inline">\(D(t-1)\)</span> have already been computed; a single iteration consists of the following steps, which we describe in full detail below:</p>
 <ul>
@@ -357,21 +369,21 @@ h_c ^\text{re}(t),\quad I_c ^\text{re}(t),\quad O_c ^\text{re}(t),
 <li><p><strong><em>Step 3.</em></strong> Computing the updated plan delays <span class="math inline">\(D_c(t)\)</span>.</p></li>
 </ol>
 <p>In order to initialize the iteration, we assume that at some initial time, say <span class="math inline">\(t = 0\)</span>, we have <span class="math inline">\(D_c(t=0) = 0\)</span> <span class="math inline">\(h_c ^\text{re}(t=0) = h_c ^\text{id}(t=1)\)</span>.</p>
-<section id="step-1-ideal-balance" class="level4" data-number="2.2.3.1">
-<h4 data-number="2.2.3.1" class="anchored" data-anchor-id="step-1-ideal-balance"><span class="header-section-number">2.2.3.1</span> Step 1: ideal balance</h4>
+<section id="step-1-ideal-balance" class="level4" data-number="3.3.3.1">
+<h4 data-number="3.3.3.1" class="anchored" data-anchor-id="step-1-ideal-balance"><span class="header-section-number">3.3.3.1</span> Step 1: ideal balance</h4>
 <p>The management data-set described <a href="input_data.html#sec-data-albufera-management" class="quarto-xref"><span>Section A.3</span></a> provides the ideal water level for each cluster and for every day of the year. Denoting by <span class="math inline">\(d(t)\)</span> the day of the year corresponding to <span class="math inline">\(t\)</span>, the relevant entry of the management data-set is that corresponding to day:</p>
 <p><span id="eq-hbl-yday-shifted"><span class="math display">\[
 d^\prime_c(t) = d(t) - D_c(t-1),
-\tag{2.11}\]</span></span></p>
+\tag{3.11}\]</span></span></p>
 <p>where <span class="math inline">\(D_c(t-1)\)</span> is the accumulated plan delay for thi cluster. Therefore we set:</p>
 <p><span id="eq-hbl-ideal-height"><span class="math display">\[
 h_c^\text{id}(t) = \text{Planned water level on day of year }d_c^\prime(t).
-\tag{2.12}\]</span></span></p>
+\tag{3.12}\]</span></span></p>
 <p>To compute ideal inflow and outflow, we require:</p>
 <p><span id="eq-hbl-ideal-balance"><span class="math display">\[
 h_c^\text{id}(t) = \max(0,\,h_c^\text{re}(t-1)+\text{P}(t)-\text{ETP}(t)) + I_c ^\text{id}(t)-O_c ^\text{id}(t),
-\tag{2.13}\]</span></span></p>
-<p>where we assume <span class="math inline">\(I_c ^\text{id}(t) &gt;0\)</span> and <span class="math inline">\(O_c ^\text{id}(t)&gt;0\)</span>. Clearly, <a href="#eq-hbl-ideal-balance" class="quarto-xref">Equation&nbsp;<span>2.13</span></a> alone does not individually specify <span class="math inline">\(I_c ^\text{id}(t)\)</span> and <span class="math inline">\(O_c ^\text{id}(t)\)</span>, but only their difference <span class="math inline">\(\Delta _c (t) = I_c ^\text{id}(t) - O_c ^\text{id}(t)\)</span>. In order to fix both these quantities, we first define<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
+\tag{3.13}\]</span></span></p>
+<p>where we assume <span class="math inline">\(I_c ^\text{id}(t) &gt;0\)</span> and <span class="math inline">\(O_c ^\text{id}(t)&gt;0\)</span>. Clearly, <a href="#eq-hbl-ideal-balance" class="quarto-xref">Equation&nbsp;<span>3.13</span></a> alone does not individually specify <span class="math inline">\(I_c ^\text{id}(t)\)</span> and <span class="math inline">\(O_c ^\text{id}(t)\)</span>, but only their difference <span class="math inline">\(\Delta _c (t) = I_c ^\text{id}(t) - O_c ^\text{id}(t)\)</span>. In order to fix both these quantities, we first define<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
 <p><span id="eq-hbl-ideal-flows-zero"><span class="math display">\[
 \begin{split}
 (I_c ^\text{id}(t))^{(0)}&amp;= \begin{cases}
@@ -380,50 +392,56 @@ h_c^\text{id}(t) = \max(0,\,h_c^\text{re}(t-1)+\text{P}(t)-\text{ETP}(t)) + I_c 
 \end{cases},\\
 (O_c ^\text{id}(t))^{(0)}&amp;=(I_c ^\text{id}(t))^{(0)}-\Delta_c(t).
 \end{split}
-\tag{2.14}\]</span></span></p>
+\tag{3.14}\]</span></span></p>
 <p>and, in order to ensure that flows are positive<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, we finally set:</p>
 <p><span id="eq-hbl-ideal-flows"><span class="math display">\[
 \begin{split}
 O_c ^\text{id}(t) &amp;= \max\lbrace(O_c ^\text{id}(t))^{(0)},\,0\rbrace\\
 I_c ^\text{id}(t) &amp;= O_c ^\text{id}(t) + \Delta_c ^\text{id}(t)
 \end{split}
-\tag{2.15}\]</span></span></p>
+\tag{3.15}\]</span></span></p>
 </section>
-<section id="step-2-real-balance" class="level4" data-number="2.2.3.2">
-<h4 data-number="2.2.3.2" class="anchored" data-anchor-id="step-2-real-balance"><span class="header-section-number">2.2.3.2</span> Step 2: real balance</h4>
-<p>Real flows are obtained from ideal ones (<a href="#eq-hbl-ideal-flows" class="quarto-xref">Equation&nbsp;<span>2.15</span></a>) in such a way to satisfy the constraint:</p>
+<section id="step-2-real-balance" class="level4" data-number="3.3.3.2">
+<h4 data-number="3.3.3.2" class="anchored" data-anchor-id="step-2-real-balance"><span class="header-section-number">3.3.3.2</span> Step 2: real balance</h4>
+<p>Real flows are obtained from ideal ones (<a href="#eq-hbl-ideal-flows" class="quarto-xref">Equation&nbsp;<span>3.15</span></a>) in such a way to satisfy the constraint:</p>
 <p><span id="eq-hbl-outflow-sum-constraint"><span class="math display">\[
 \sum _c O_c ^\text{re}(t) = Q(t),
-\tag{2.16}\]</span></span></p>
-<p>where the right-hand side is the total ditch flow computed earlier (<a href="#sec-ditch-inflows" class="quarto-xref"><span>Section 2.2.2</span></a>). At each time-step <span class="math inline">\(t\)</span>, the cluster’s index set is randomly permuted<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, and the real flows are calculated as:</p>
+\tag{3.16}\]</span></span></p>
+<p>where the right-hand side is the total ditch flow computed earlier (<a href="#sec-ditch-inflows" class="quarto-xref"><span>Section 3.3.2</span></a>). At each time-step <span class="math inline">\(t\)</span>, the cluster’s index set is randomly permuted<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, and the real flows are calculated as:</p>
 <p><span id="eq-hbl-real-flows"><span class="math display">\[
 \begin{split}
 O_c ^\text{re}(t) &amp;= \min \lbrace O_c ^\text{re}(t),\,Q(t)-\sum_{c'&lt;c}O_{c'} ^\text{re}(t) \rbrace +
 \dfrac{\max \lbrace 0, Q(t)-\sum_{c'}O_{c'} ^\text{re}(t)\rbrace}{\text{number of clusters}},\\
 I_c ^\text{re}(t) &amp;= \max\lbrace I_c ^\text{id}(t)-O_c ^\text{id}(t) + O_c ^\text{re}(t),\,0 \rbrace
 \end{split}
-\tag{2.17}\]</span></span></p>
-<p>In words, clusters are emptied in a random order within the allowed capacity of the corresponding ditch (<em>i.e.</em> its actual total flow) - if the sum of ideal outflows is less than capacity, the remaining outflow is equally shared among clusters. Using <a href="#eq-hbl-real-flows" class="quarto-xref">Equation&nbsp;<span>2.17</span></a>, we finally determine the real water level achieved as:</p>
+\tag{3.17}\]</span></span></p>
+<p>In words, clusters are emptied in a random order within the allowed capacity of the corresponding ditch (<em>i.e.</em> its actual total flow) - if the sum of ideal outflows is less than capacity, the remaining outflow is equally shared among clusters. Using <a href="#eq-hbl-real-flows" class="quarto-xref">Equation&nbsp;<span>3.17</span></a>, we finally determine the real water level achieved as:</p>
 <p><span id="eq-hbl-real-balance"><span class="math display">\[
 h_c^\text{re}(t) = \max(0,\,h_c^\text{re}(t-1)+\text{P}(t)-\text{ETP}(t)) + I_c ^\text{re}(t)-O_c ^\text{re}(t),
-\tag{2.18}\]</span></span></p>
-<p>to be compared with <a href="#eq-hbl-ideal-balance" class="quarto-xref">Equation&nbsp;<span>2.13</span></a>.</p>
+\tag{3.18}\]</span></span></p>
+<p>to be compared with <a href="#eq-hbl-ideal-balance" class="quarto-xref">Equation&nbsp;<span>3.13</span></a>.</p>
 </section>
-<section id="step-3-updating-the-plan-delay" class="level4" data-number="2.2.3.3">
-<h4 data-number="2.2.3.3" class="anchored" data-anchor-id="step-3-updating-the-plan-delay"><span class="header-section-number">2.2.3.3</span> Step 3: updating the plan delay</h4>
-<p>The purpose of the plan delay <span class="math inline">\(D_c(t)\)</span> is to allow all clusters to be emptied as required by the ideal management plan, which may be hindered on the originally scheduled days by the first of <a href="#eq-hbl-real-flows" class="quarto-xref">Equation&nbsp;<span>2.17</span></a>, since this sets to zero the real outflows for some clusters whenever the ditch’s flow is saturated.</p>
+<section id="step-3-updating-the-plan-delay" class="level4" data-number="3.3.3.3">
+<h4 data-number="3.3.3.3" class="anchored" data-anchor-id="step-3-updating-the-plan-delay"><span class="header-section-number">3.3.3.3</span> Step 3: updating the plan delay</h4>
+<p>The purpose of the plan delay <span class="math inline">\(D_c(t)\)</span> is to allow all clusters to be emptied as required by the ideal management plan, which may be hindered on the originally scheduled days by the first of <a href="#eq-hbl-real-flows" class="quarto-xref">Equation&nbsp;<span>3.17</span></a>, since this sets to zero the real outflows for some clusters whenever the ditch’s flow is saturated.</p>
 <p>The updated value <span class="math inline">\(D_c(t)\)</span> is obtained as follows. If <span class="math inline">\(d(t)\)</span> (the <em>actual</em> day of year) is outside of the window <span class="math inline">\(W = [\text{20th of April},\,\text{15th of October}]\)</span>, we reset all <span class="math inline">\(D_c(t) = 0\)</span>. Otherwise, if <span class="math inline">\(h_c ^{\text{id}}(t)&gt;0\)</span> or <span class="math inline">\(h_c ^{\text{re}}(t)&lt;H_{\text{thres}}\)</span>, the plan delay is unchanged for this cluster: <span class="math inline">\(D_c(t) = D_c(t-1)\)</span>. Finally, if <span class="math inline">\(h_c ^{\text{id}}(t)=0\)</span> but <span class="math inline">\(h_c ^{\text{re}}(t)&gt;H_{\text{thres}}\)</span>, we set <span class="math inline">\(D_c(t) = D_c(t-1) + 1\)</span>.</p>
-
-
 </section>
 </section>
+</section>
+<section id="ca-chemical-applications" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="ca-chemical-applications"><span class="header-section-number">3.4</span> CA: Chemical Applications</h2>
+</section>
+<section id="ct-chemical-transport" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="ct-chemical-transport"><span class="header-section-number">3.5</span> CT: Chemical Transport</h2>
+
+
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn1"><p>The condition is again evaluated using the the management data-set, where the relevant variables are the <code>irrigation</code> and <code>draining</code> columns. The cluster is understood to be in flux if both <code>irrigation</code> and <code>draining</code> are <code>TRUE</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>The positivity of <span class="math inline">\(I_c ^\text{id}(t)\)</span> below is ensured by the fact that <span class="math inline">\((O_c ^\text{id}(t))^{(0)}\geq-\Delta_c(t)\)</span> by construction.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>With some abuse of notation, we assume the indexes <span class="math inline">\(c\)</span> and <span class="math inline">\(c'\)</span> in <a href="#eq-hbl-real-flows" class="quarto-xref">Equation&nbsp;<span>2.17</span></a> to be sorted according to this random permutation.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>With some abuse of notation, we assume the indexes <span class="math inline">\(c\)</span> and <span class="math inline">\(c'\)</span> in <a href="#eq-hbl-real-flows" class="quarto-xref">Equation&nbsp;<span>3.17</span></a> to be sorted according to this random permutation.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -850,13 +868,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./intro.html" class="pagination-link" aria-label="Introduction">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      <a href="../chapters/birds_eye_view.html" class="pagination-link" aria-label="The ERAHUMED model: a bird's eye view">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ERAHUMED model: a bird’s eye view</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./erahumed_dss_ui.html" class="pagination-link" aria-label="The ERAHUMED DSS User Interface">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The ERAHUMED DSS User Interface</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/erahumed_dss_ui.html" class="pagination-link" aria-label="The ERAHUMED DSS User Interface">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The ERAHUMED DSS User Interface</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
