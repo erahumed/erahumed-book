@@ -2,16 +2,6 @@
 
 This Chapter provides detailed descriptions of the various components of the ERAHUMED model, briefly introduced in @sec-birds-eye-view.
 
-
-
-This chapter describes the calculation of quantities related to hydrological balance. There are two levels of modeling involved:
-
--   "Global" balance, *i.e.* the balance of the Albufera Lake. This step involves a reduced set of assumptions, and really boils down to the calculation of the lake's daily total inflow, from its measured outflows and precipitation/evapotranspiration levels, and from the measured water level changes.
-
--   "Local" balance, that is the hydrological balance of rice paddy clusters in the Albufera National Park. This step uses the output of the global balance calculations, and involves a much wider set of assumptions about how the draining and irrigation of rice paddies is managed, to approximate as closely as possible the ideal water levels required by sowing, fertilization, *etc.* during the year.
-
-
-
 ## INP: Input Data {#sec-inp}
 
 The purpose of this model component is simply to collect the empirical data that
