@@ -1,66 +1,138 @@
 # ERAHUMED model components
 
+This Chapter provides detailed descriptions of the various components of the ERAHUMED model, briefly introduced in @sec-birds-eye-view.
+
+
+
 This chapter describes the calculation of quantities related to hydrological balance. There are two levels of modeling involved:
 
 -   "Global" balance, *i.e.* the balance of the Albufera Lake. This step involves a reduced set of assumptions, and really boils down to the calculation of the lake's daily total inflow, from its measured outflows and precipitation/evapotranspiration levels, and from the measured water level changes.
 
 -   "Local" balance, that is the hydrological balance of rice paddy clusters in the Albufera National Park. This step uses the output of the global balance calculations, and involves a much wider set of assumptions about how the draining and irrigation of rice paddies is managed, to approximate as closely as possible the ideal water levels required by sowing, fertilization, *etc.* during the year.
 
-## INP: Input Data
+
+
+## INP: Input Data {#sec-inp}
+
+The purpose of this model component is simply to collect the empirical data that
+provides the observational input to all subsequent modeling layers. This data consists of hydrological and meteorological time series data for the Albufera lake in the desired time frame.
+
+### Input
+
+The only inputs to this modeling layer are the two aforementioned time-series data-sets.
+
+Hydrological data consists of the direct measurements of the Albufera lake's 
+daily water levels and outflows. Since the lake has three estuaries (*Gola de Pujol*, *Gola del Perellonet* and *Gola del Perelló*), this data 
+amounts to four daily time series. The actual dataset bundled with the ERAHUMED
+software was obtained from the public data repository compiled by the *Confederación Hidrográfica del Júcar* (TODO: Ref.), and is described in more detail in [Appendix @sec-data-hydro].
+
+Meteorological data consists of the daily measurements of precipitation and evapotranspiration per unit are, and temperature (average, maximum and minimum). This amounts to five daily the series. The actual data bundled with the ERAHUMED
+software was obtained (TODO: where), and is described in more detail in [Appendix @sec-data-meteo].
+
+The time-series inputs described above are collected in the table below (the common index $t$ refers to the time - *i.e.* day - of observation).
+
+| Input                     | Units        | Description                       |
+|---------------------------|--------------|-----------------------------------|
+| $L_t$                     | $\text{m}$   | Lake water level                  |
+| $O_t^{\text{Pujol}}$      | $\text{m}^3$ | *Pujol* daily outflow             |
+| $O_t^{\text{Perelló}}$    | $\text{m}^3$ | *Perelló* daily outflow           |
+| $O_t^{\text{Perellonet}}$ | $\text{m}^3$ | *Perellonet* daily outflow        |
+| $\text{P}_t$              | $\text{mm}$  | Precipitation (per unit area)     |
+| $\text{ETP}_t$            | $\text{mm}$  | Evapotranspiration (per unit area)|
+| $T_t^{\text{max}}$        | $\text{°C}$  | Maximum temperature               |
+| $T_t^{\text{min}}$        | $\text{°C}$  | Minimum temperature               |
+| $T_t^{\text{ave}}$        | $\text{°C}$  | Average temperature               |
+
+: Observational input to the ERAHUMED model (INP model component). {#tbl-inp-time-series}
+
+
+### Output
+
+This modeling layer does not involve any actual computation, and its output is simply a time-series data-set obtained as the combination of the two input data-sets, *i.e.* the collection of time series of @tbl-inp-time-series.
+
 
 ## HBA: Hydrological Balance of the Albufera lake
 
-This modeling layer computes the total daily inflow to the Albufera Lake, from the measured outflows and precipitation/evapotranspiration levels, together with the measured water level changes. The relevant equation expressing the hydrological balance is:
+The purpose of this model component is to compute the total daily inflow to the Albufera lake. The relevant equation expressing the hydrological balance is:
 
 $$
-\text{Inflow} - \text{Outflow} = \text{Volume Change} - \text{Rain} + \text{Evapotranspiration}
-$$ {#eq-hb-global}
+\text{Volume Change} = \text{Inflow} - \text{Outflow} + \text{Precipitation} - \text{Evapotranspiration}
+$$ {#eq-hydro-balance-symbolic}
 
-where the unknown is $\text{Inflow}$. The subsections that follow explain in detail how the various volume terms appearing in @eq-hb-global are actually obtained from measured quantities.
+where the unknown is $\text{Inflow}$, whereas the remaining terms are obtained
+from observational data, as described in the previous Section (@sec-inp).
 
-### $\text{Volume Change}$ term
+### Input
 
-The lake volume change is obtained from the measured water height change, assuming volume and height are related through a linear storage curve:
+The inputs specific to this layer are two numerical functions converting water heights into the water *volumes* that appear in @eq-hydro-balance-symbolic. Specifically:
 
-$$
-\text{Volume} = a+b\cdot \text{Height}
-$$ {#eq-linear-storage-curve}
+* The lake's *storage curve* converts the measured lake's level into a total water volume.
+* The *precipitation-evapotranspiration volume function* (or, for the sake of
+brevity, *P-ETP function*), that converts precipitation and evapotranspiration values *per unit area* into an overall water volume difference.
 
-The volume *change* that appears in @eq-hb-global is given on day $d$ by:
-
-$$
-\text{Volume Change} (d)=\text{Volume}(d+1)-\text{Volume}(d)
-$$ {#eq-volume-change}
-
-The default values used for $a$ and $b$ are discussed in Appendix @sec-storage-curve.
-
-### $\text{Rain and Evapotranspiration}$ terms
-
-The volume changes due to precipitation and evapotranspiration are also assumed to be linearly related to the corresponding measured water levels (usually expressed in $\text{mm}$):
+Even though the R interface to the ERAHUMED software allows arbitrary definitions, the graphical user interface assumes a linear approximation for both these functions. Therefore, the storage curve is assumed to take the form:
 
 $$
-\begin{split}
-\text{Rain}(\text{m}^3) &= \alpha \cdot \text{Rain}(\text{mm})\\
-\text{Evapotranspiration}(\text{m}^3) &= \beta \cdot \text{Evapotranspiration}(\text{mm})\\
-\end{split}
-$$ {#eq-petp}
+V_t = m \cdot L_t + q,
+$$ {#eq-storage-function}
+where $V_t$ is the (daily) water volume of the lake, $L_t$ the corresponding
+water level (*cf.* @tbl-inp-time-series), and $m$ and $q$ are numerical coefficients^[In fact, for the purpose of computing volume *changes* entering the hydrological balance @eq-hydro-balance-symbolic, only the slope $m$ is required.]. Correspondingly, the P-ETP function reads: 
 
-The default values used by the software $\alpha$ and $\beta$ are discussed in Appendix @sec-storage-curve.
+$$
+\Delta V_t ^{\text{P-ETP}} = \alpha \cdot \text{P}_t - \beta\cdot \text{ETP}_t,
+$$ {#eq-petp-function}
+where the left-hand side represents the relevant water volume difference, whereas the $\text{P}$ and $\text{ETP}$ terms in the right-hand side are the measured precipitation and evapotranspiration levels per unit area (*cf.* @tbl-inp-time-series). The actual default values of $m$, $q$, $\alpha$ and $\beta$ are documented in [Appendix @sec-storage-curve].
 
-### $\text{Outflow}$ term
+### Output
 
-The Albufera lake has two sources of outflow, namely estuaries (*golas*) and enclosed marshlands (*tancats*) \[TODO: terms suggested by chatGPT, are these appropriate?\], so that we may write: $$
-\text{Outflow} = \text{Outflow}_{\text {estuaries}}+ \text{Outflow}_{\text {marshlands}}
-$$ {#eq-outflows}
+The output of this model consists of the time-series collected in the table
+below.
 
-The outflows from estuaries are monitored by the *Confederación Hidrográfica del Júcar* (CHJ), which makes the measurements available on a daily basis (see @sec-data-hydro-balance). This results in three additive terms: $$
-\text{Outflow}_{\text {estuaries}} = 
-\text{Outflow}_{\text {Pujol}}+
-\text{Outflow}_{\text {Perellonet}}+
-\text{Outflow}_{\text {Perelló}}
-$$ {#eq-outflow-estuaries} corresponding to the three estuaries of the Albufera lake: *Gola de Pujol*, *Gola del Perellonet* and *Gola del Perelló*.
+| Variable                  | Units        | Description                       |
+|---------------------------|--------------|-----------------------------------|
+| $V_t$                     | $\text{m}^3$ | Lake water volume                 | 
+| $I_t$                     | $\text{m}^3$ | Lake total inflow                 |
+| $O_t$                     | $\text{m}^3$ | Lake total outflow                |
+: HBA model component outputs {#tbl-hba-output}
 
-In contrast, the outflow from marshlands is not a measured quantity, and can only be estimated through some additional assumption. The relevant constraint, with a small leap in logic, is that for each day in the considered time series, either $\text{Outflow}_{\text {marshlands}}$ or $\text{Inflow}$ must be zero. \[TODO: what is the underlying assumption here?\]
+### Details
+
+Using the notation introduced in the previous Subsections, we can rewrite @eq-hydro-balance-symbolic as follows:
+
+$$
+V_{t+1} - V_t = I_t -O_t +\Delta V^{\text {ETP}}_t,
+$$ {#eq-hydro-balance-explicit}
+
+where $V_t$ and $\Delta V^{\text {ETP}}_t$ are computed through the storage and
+P-ETP functions, as in Eqs. [-@eq-storage-function] and [-@eq-petp-function]. 
+The only terms that requires further clarification in @eq-hydro-balance-explicit
+is $O_t$, the total outflow from the lake.
+
+Strictly speaking, $O_t$ is not merely the sum of $O_t^{\text{Pujol}}$, 
+$O_t^{\text{Perelló}}$ and $O_t^{\text{Perellonet}}$, but is rather calculated 
+as follows:
+
+$$
+O_t = \max
+\left[
+O_t^{\text{Pujol}} + O_t^{\text{Perelló}} + O_t^{\text{Perellonet}},\, 
+\Delta V^{\text {ETP}}_t+V_t-V_{t+1}
+\right].
+$$ {#eq-total-outflow}
+
+The rationale is that the simple sum of estuaries outflows omits potentially 
+important contributions from *water recirculation*, that is to say,
+water being pumped out from the lake for rice-field irrigation, by the so-called 
+*tancats*. Such amount of recirculated water is hard to estimate and,
+in the lack of a better model, we simply assume this to be negligible, *except* 
+when a positive amount is required by @eq-hydro-balance-explicit itself, due 
+the physical constraint that $I_t \geq 0$.
+
+Once $O_t$ is calculated through @eq-total-outflow, $I_t$ can be immediately 
+obtained from @eq-hydro-balance-explicit. Notice that whenever the 
+aforementioned compensating outflow term due to water recirculation is included 
+(which happens when the maximum in Eq. [-@eq-total-outflow] is given by the 
+second term), the total inflow is always estimated to be zero.
 
 ## HBP: Hydrological Balance of rice Paddy clusters
 
@@ -70,9 +142,9 @@ As anticipated, the simulation of local hydrological balance of rice paddies inv
 
 The two main observational inputs for this modeling layer are:
 
--   The output of the "Global balance" model, described in the previous Section, and in particular the daily total inflow to the Albufera lake, obtained from @eq-hb-global. As explained below in @sec-ditch-inflows, this is used to estimate the inflow from each of the twenty-six ditches that flow into the Albufera.
+-   The output of the "Global balance" model, described in the previous Section, and in particular the daily total inflow to the Albufera lake, obtained from @eq-hydro-balance-symbolic. As explained below in @sec-ditch-inflows, this is used to estimate the inflow from each of the twenty-six ditches that flow into the Albufera.
 
--   The measured amounts of precipitation and evapotranspiration, which is the same data-set involved in global balance calculations, and is described in @sec-data-albufera-petp.
+-   The measured amounts of precipitation and evapotranspiration, which is the same data-set involved in global balance calculations, and is described in @sec-data-meteo.
 
 The subdivision of the rice fields surface of the Albufera into clusters of a specific rice variety, and the corresponding assignation of a single ditch to each cluster is described in @sec-data-rice-clusters.
 
@@ -86,7 +158,7 @@ Finally, the model receives a few other numerical input parameters:
 
 ### Ditch inflows {#sec-ditch-inflows}
 
-The first step consists in breaking down the total inflow to the lake, obtained through @eq-hb-global, into inflows from individual ditches. Each paddy cluster is assumed to communicate with a single ditch (*cf.* @sec-data-rice-clusters), and the flow through a ditch is assumed to be proportional to the total area of clusters belonging to said ditch. Therefore, denoting by $I_i$ and $A_i$ the inflow and area of ditch $i$, and by $I$ the total inflow, we compute:
+The first step consists in breaking down the total inflow to the lake, obtained through @eq-hydro-balance-symbolic, into inflows from individual ditches. Each paddy cluster is assumed to communicate with a single ditch (*cf.* @sec-data-rice-clusters), and the flow through a ditch is assumed to be proportional to the total area of clusters belonging to said ditch. Therefore, denoting by $I_i$ and $A_i$ the inflow and area of ditch $i$, and by $I$ the total inflow, we compute:
 
 $$
 I_i = \frac{A_i}{\sum _j A_j} \cdot I 
@@ -146,9 +218,9 @@ $$
 h_c^\text{id}(t) = \max(0,\,h_c^\text{re}(t-1)+\text{P}(t)-\text{ETP}(t)) + I_c ^\text{id}(t)-O_c ^\text{id}(t),
 $$ {#eq-hbl-ideal-balance}
 
-where we assume $I_c ^\text{id}(t) >0$ and $O_c ^\text{id}(t)>0$. Clearly, @eq-hbl-ideal-balance alone does not individually specify $I_c ^\text{id}(t)$ and $O_c ^\text{id}(t)$, but only their difference $\Delta _c (t) = I_c ^\text{id}(t) - O_c ^\text{id}(t)$. In order to fix both these quantities, we first define[^hydrological_balance-1]:
+where we assume $I_c ^\text{id}(t) >0$ and $O_c ^\text{id}(t)>0$. Clearly, @eq-hbl-ideal-balance alone does not individually specify $I_c ^\text{id}(t)$ and $O_c ^\text{id}(t)$, but only their difference $\Delta _c (t) = I_c ^\text{id}(t) - O_c ^\text{id}(t)$. In order to fix both these quantities, we first define[^model_components-1]:
 
-[^hydrological_balance-1]: The condition is again evaluated using the the management data-set, where the relevant variables are the `irrigation` and `draining` columns. The cluster is understood to be in flux if both `irrigation` and `draining` are `TRUE`.
+[^model_components-1]: The condition is again evaluated using the the management data-set, where the relevant variables are the `irrigation` and `draining` columns. The cluster is understood to be in flux if both `irrigation` and `draining` are `TRUE`.
 
 $$
 \begin{split}
@@ -160,9 +232,9 @@ $$
 \end{split}
 $$ {#eq-hbl-ideal-flows-zero}
 
-and, in order to ensure that flows are positive[^hydrological_balance-2], we finally set:
+and, in order to ensure that flows are positive[^model_components-2], we finally set:
 
-[^hydrological_balance-2]: The positivity of $I_c ^\text{id}(t)$ below is ensured by the fact that $(O_c ^\text{id}(t))^{(0)}\geq-\Delta_c(t)$ by construction.
+[^model_components-2]: The positivity of $I_c ^\text{id}(t)$ below is ensured by the fact that $(O_c ^\text{id}(t))^{(0)}\geq-\Delta_c(t)$ by construction.
 
 $$
 \begin{split}
@@ -179,9 +251,9 @@ $$
 \sum _c O_c ^\text{re}(t) = Q(t),
 $$ {#eq-hbl-outflow-sum-constraint}
 
-where the right-hand side is the total ditch flow computed earlier (@sec-ditch-inflows). At each time-step $t$, the cluster's index set is randomly permuted[^hydrological_balance-3], and the real flows are calculated as:
+where the right-hand side is the total ditch flow computed earlier (@sec-ditch-inflows). At each time-step $t$, the cluster's index set is randomly permuted[^model_components-3], and the real flows are calculated as:
 
-[^hydrological_balance-3]: With some abuse of notation, we assume the indexes $c$ and $c'$ in @eq-hbl-real-flows to be sorted according to this random permutation.
+[^model_components-3]: With some abuse of notation, we assume the indexes $c$ and $c'$ in @eq-hbl-real-flows to be sorted according to this random permutation.
 
 $$
 \begin{split}
@@ -208,4 +280,3 @@ The updated value $D_c(t)$ is obtained as follows. If $d(t)$ (the *actual* day o
 ## CA: Chemical Applications
 
 ## CT: Chemical Transport
-

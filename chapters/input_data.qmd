@@ -1,11 +1,11 @@
 # Input Data
 
-## Albufera Lake Hydrological Balance {#sec-data-hydro-balance}
+## Hydrological data {#sec-data-hydro}
 
-## Precipitation and Evapotranspiration {#sec-data-albufera-petp}
+## Meteorological data {#sec-data-meteo}
 
 ## Albufera Rice Paddies Management {#sec-data-albufera-management}
 
-## Storage Curve and P-ETP Surface Values {#sec-storage-curve}
+## Storage curve and P-ETP function {#sec-storage-curve}
 
 ## Definition of rice clusters {#sec-data-rice-clusters}
