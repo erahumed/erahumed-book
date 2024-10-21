@@ -1,4 +1,4 @@
-# Hydrological Balance
+# ERAHUMED model components
 
 This chapter describes the calculation of quantities related to hydrological balance. There are two levels of modeling involved:
 
@@ -6,7 +6,9 @@ This chapter describes the calculation of quantities related to hydrological bal
 
 -   "Local" balance, that is the hydrological balance of rice paddy clusters in the Albufera National Park. This step uses the output of the global balance calculations, and involves a much wider set of assumptions about how the draining and irrigation of rice paddies is managed, to approximate as closely as possible the ideal water levels required by sowing, fertilization, *etc.* during the year.
 
-## Global balance of the Albufera Lake
+## INP: Input Data
+
+## HBA: Hydrological Balance of the Albufera lake
 
 This modeling layer computes the total daily inflow to the Albufera Lake, from the measured outflows and precipitation/evapotranspiration levels, together with the measured water level changes. The relevant equation expressing the hydrological balance is:
 
@@ -60,7 +62,7 @@ $$ {#eq-outflow-estuaries} corresponding to the three estuaries of the Albufera 
 
 In contrast, the outflow from marshlands is not a measured quantity, and can only be estimated through some additional assumption. The relevant constraint, with a small leap in logic, is that for each day in the considered time series, either $\text{Outflow}_{\text {marshlands}}$ or $\text{Inflow}$ must be zero. \[TODO: what is the underlying assumption here?\]
 
-## Local balance of rice paddy clusters
+## HBP: Hydrological Balance of rice Paddy clusters
 
 As anticipated, the simulation of local hydrological balance of rice paddies involves an important set of assumptions regarding the management of water levels. We detail in this section the algorithm used in our simulations.
 
@@ -202,3 +204,8 @@ to be compared with @eq-hbl-ideal-balance.
 The purpose of the plan delay $D_c(t)$ is to allow all clusters to be emptied as required by the ideal management plan, which may be hindered on the originally scheduled days by the first of @eq-hbl-real-flows, since this sets to zero the real outflows for some clusters whenever the ditch's flow is saturated.
 
 The updated value $D_c(t)$ is obtained as follows. If $d(t)$ (the *actual* day of year) is outside of the window $W = [\text{20th of April},\,\text{15th of October}]$, we reset all $D_c(t) = 0$. Otherwise, if $h_c ^{\text{id}}(t)>0$ or $h_c ^{\text{re}}(t)<H_{\text{thres}}$, the plan delay is unchanged for this cluster: $D_c(t) = D_c(t-1)$. Finally, if $h_c ^{\text{id}}(t)=0$ but $h_c ^{\text{re}}(t)>H_{\text{thres}}$, we set $D_c(t) = D_c(t-1) + 1$.
+
+## CA: Chemical Applications
+
+## CT: Chemical Transport
+
