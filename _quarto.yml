@@ -21,22 +21,22 @@ book:
 
   chapters:
   - index.qmd
-  - intro.qmd
+  - chapters/intro.qmd
 
   - part: Technical description
     chapters:
-    - birds_eye_view.qmd
-    - model_components.qmd
+    - chapters/birds_eye_view.qmd
+    - chapters/model_components.qmd
 
   - part: User Manual
     chapters:
-    - erahumed_dss_ui.qmd
-    - erahumed_dss_pkg.qmd
+    - chapters/erahumed_dss_ui.qmd
+    - chapters/erahumed_dss_pkg.qmd
 
-  - references.qmd
+  - chapters/references.qmd
 
   appendices:
-    - input_data.qmd
+    - chapters/input_data.qmd
 
 bibliography: references.bib
 
