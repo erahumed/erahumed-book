@@ -41,7 +41,7 @@ The time-series inputs described above are collected in the table below (the com
 This modeling layer does not involve any actual computation, and its output is simply a time-series data-set obtained as the combination of the two input data-sets, *i.e.* the collection of time series of @tbl-inp-time-series.
 
 
-## HBA: Hydrological Balance of the Albufera lake
+## HBA: Hydrological Balance of the Albufera lake {#sec-hba}
 
 The purpose of this model component is to compute the total daily inflow to the Albufera lake. The relevant equation expressing the hydrological balance is:
 
@@ -126,27 +126,77 @@ second term), the total inflow is always estimated to be zero.
 
 ## HBP: Hydrological Balance of rice Paddy clusters
 
-As anticipated, the simulation of local hydrological balance of rice paddies involves an important set of assumptions regarding the management of water levels. We detail in this section the algorithm used in our simulations.
+This modeling layer simulates the local hydrology (*i.e.* water levels, inflows
+and outflows) of rice paddy clusters in the Albufera National Park. The 
+simulation, that literally involves the generation of a synthetic data-set, is 
+based on:
 
-### Model inputs and parameters
+* The hydrology of the Albufera lake, which allows to constrain the total 
+outflow of all rice paddies, assumed to be equal to the lake's total inflow
+(the main output of the HBA layer, see @sec-hba).
+* An estimate of the fraction of the total lake's inflow that comes from each
+of the 26 ditches that flow into the Albufera.
+* A subdivision of the rice fields surface into clusters that are assumed to
+be hydrologically connected with a single ditch - meaning that the sum of 
+outflows of clusters from the same group must equal the total flow through the
+corresponding ditch.
+* An ideal yearly management plan for the irrigation and draining of rice 
+paddies.
 
-The two main observational inputs for this modeling layer are:
+### Input
 
--   The output of the "Global balance" model, described in the previous Section, and in particular the daily total inflow to the Albufera lake, obtained from @eq-hydro-balance-symbolic. As explained below in @sec-ditch-inflows, this is used to estimate the inflow from each of the twenty-six ditches that flow into the Albufera.
+As already mentioned, the simulation is based on a spatial clustering, which is 
+described in greater detail in [Appendix @sec-data-rice-clusters]. For the 
+present purposes, we stress that each cluster, consists of rice paddies of a 
+definite rice variety, is labeled according to whether it is a *tancat* or not,
+and, most importantly, is assumed to be hydrologically connected with a single 
+ditch.
 
--   The measured amounts of precipitation and evapotranspiration, which is the same data-set involved in global balance calculations, and is described in @sec-data-meteo.
+The yearly management plan for these clusters, is described in 
+[Appendix @sec-data-albufera-management], and provides, for each day of the year 
+$d$, the following:
 
-The subdivision of the rice fields surface of the Albufera into clusters of a specific rice variety, and the corresponding assignation of a single ditch to each cluster is described in @sec-data-rice-clusters.
+* $\text{Ir}_d$: boolean expressing whether the cluster is supposed to be 
+irrigated (if true) on day of year $d$.
+* $\text{Dr}_d$: boolean expressing whether the cluster is supposed to be 
+drained (if true) on day of year $d$.
+* $\mathcal H _d$: ideal water level (in $\text{cm}$) of the cluster on day of 
+year $d$.
 
-Our assumptions on the management of water levels are subsumed in the data-set described in @sec-data-albufera-management, that provides the irrigation and draining plans and the ideal water levels for a cluster of a given rice variety, for each day of the year.
+As explained in [Appendix @sec-data-albufera-management], the management plan
+depends on the rice variety and on the *tancat* label of a cluster.
 
-Finally, the model receives a few other numerical input parameters:
+In addition to these rather complex inputs, the model component requires the 
+following numerical parameters:
 
--   *Ideal flow rate* $k$. Rate at which water flows through rice paddies when these are being simultaneously irrigated and drained, with the overall level being kept constant. Expressed in $\text{cm}\cdot\text{day}^{-1}$. \[TODO: this must be some cumbersome paraphrase of a technical expression which I don't know about.\].
+* $k_\text{flow}$ (*Ideal flow rate*). Rate at which water flows through rice 
+paddies when these are being simultaneously irrigated and drained, with the 
+overall level being kept constant. Expressed in $\text{cm}\cdot\text{day}^{-1}$.
 
--   *Height threshold* $H_{\text{thres}}$. Maximum allowed water level for a cluster to be considered emptied, used in the calculation of draining/irrigation plan delays. Expressed in $\text{cm}$.
+* $h_{\text{thres}}$ (*Height threshold*). Maximum allowed water level for a 
+cluster to be considered emptied, used in the calculation of draining/irrigation 
+plan delays. Expressed in $\text{cm}$.
 
-### Ditch inflows {#sec-ditch-inflows}
+Finally, it should be noted that the simulation involves random sampling (see
+[Subsection @sec-hbp-details]), so that the seed of random number generation is 
+an additional pseudo-parameter.
+
+
+### Output
+
+The output of this layer provides a simulation for the local hydrology of each 
+cluster, summarized in the table below
+
+| Variable                    | Units        | Description                     |
+|-----------------------------|--------------|---------------------------------|
+| $h_{c,t}$                   | $\text{m}^3$ | Cluster's water height          | 
+| $I_{c,t}$                   | $\text{m}^3$ | Cluster's inflow                |
+| $O_{c,t}$                   | $\text{m}^3$ | Cluster's outflow               |
+: HBP model component outputs {#tbl-hbp-output}
+
+### Detail {#sec-hbp-details}
+
+#### Ditch inflows {#sec-ditch-inflows}
 
 The first step consists in breaking down the total inflow to the lake, obtained through @eq-hydro-balance-symbolic, into inflows from individual ditches. Each paddy cluster is assumed to communicate with a single ditch (*cf.* @sec-data-rice-clusters), and the flow through a ditch is assumed to be proportional to the total area of clusters belonging to said ditch. Therefore, denoting by $I_i$ and $A_i$ the inflow and area of ditch $i$, and by $I$ the total inflow, we compute:
 
@@ -154,7 +204,7 @@ $$
 I_i = \frac{A_i}{\sum _j A_j} \cdot I 
 $$ {#eq-ditch-inflow}
 
-### Main Algorithm
+#### Main Algorithm
 
 In the following, we focus on the set of clusters that communicate with a specific ditch, whose inflow (estimated according to @sec-ditch-inflows) we denote by $Q$. The essence of the algorithm is to approximate as closely as possible the cluster's *ideal* inflows and outflows, with the constraint that the sum of the actual outflows from all clusters must equal $Q$.
 
@@ -188,7 +238,7 @@ The local balance algorithm proceeds iteratively as follows. At day $t$, assume 
 
 In order to initialize the iteration, we assume that at some initial time, say $t = 0$, we have $D_c(t=0) = 0$ $h_c ^\text{re}(t=0) = h_c ^\text{id}(t=1)$.
 
-#### Step 1: ideal balance
+##### Step 1: ideal balance
 
 The management data-set described @sec-data-albufera-management provides the ideal water level for each cluster and for every day of the year. Denoting by $d(t)$ the day of the year corresponding to $t$, the relevant entry of the management data-set is that corresponding to day:
 
@@ -233,7 +283,7 @@ I_c ^\text{id}(t) &= O_c ^\text{id}(t) + \Delta_c ^\text{id}(t)
 \end{split}
 $$ {#eq-hbl-ideal-flows}
 
-#### Step 2: real balance
+##### Step 2: real balance
 
 Real flows are obtained from ideal ones (@eq-hbl-ideal-flows) in such a way to satisfy the constraint:
 
@@ -261,7 +311,7 @@ $$ {#eq-hbl-real-balance}
 
 to be compared with @eq-hbl-ideal-balance.
 
-#### Step 3: updating the plan delay
+##### Step 3: updating the plan delay
 
 The purpose of the plan delay $D_c(t)$ is to allow all clusters to be emptied as required by the ideal management plan, which may be hindered on the originally scheduled days by the first of @eq-hbl-real-flows, since this sets to zero the real outflows for some clusters whenever the ditch's flow is saturated.
 
