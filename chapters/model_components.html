@@ -232,7 +232,7 @@ window.Quarto = {
   <li><a href="#input" id="toc-input" class="nav-link" data-scroll-target="#input"><span class="header-section-number">3.1.1</span> Input</a></li>
   <li><a href="#output" id="toc-output" class="nav-link" data-scroll-target="#output"><span class="header-section-number">3.1.2</span> Output</a></li>
   </ul></li>
-  <li><a href="#hba-hydrological-balance-of-the-albufera-lake" id="toc-hba-hydrological-balance-of-the-albufera-lake" class="nav-link" data-scroll-target="#hba-hydrological-balance-of-the-albufera-lake"><span class="header-section-number">3.2</span> HBA: Hydrological Balance of the Albufera lake</a>
+  <li><a href="#sec-hba" id="toc-sec-hba" class="nav-link" data-scroll-target="#sec-hba"><span class="header-section-number">3.2</span> HBA: Hydrological Balance of the Albufera lake</a>
   <ul class="collapse">
   <li><a href="#input-1" id="toc-input-1" class="nav-link" data-scroll-target="#input-1"><span class="header-section-number">3.2.1</span> Input</a></li>
   <li><a href="#output-1" id="toc-output-1" class="nav-link" data-scroll-target="#output-1"><span class="header-section-number">3.2.2</span> Output</a></li>
@@ -240,9 +240,9 @@ window.Quarto = {
   </ul></li>
   <li><a href="#hbp-hydrological-balance-of-rice-paddy-clusters" id="toc-hbp-hydrological-balance-of-rice-paddy-clusters" class="nav-link" data-scroll-target="#hbp-hydrological-balance-of-rice-paddy-clusters"><span class="header-section-number">3.3</span> HBP: Hydrological Balance of rice Paddy clusters</a>
   <ul class="collapse">
-  <li><a href="#model-inputs-and-parameters" id="toc-model-inputs-and-parameters" class="nav-link" data-scroll-target="#model-inputs-and-parameters"><span class="header-section-number">3.3.1</span> Model inputs and parameters</a></li>
-  <li><a href="#sec-ditch-inflows" id="toc-sec-ditch-inflows" class="nav-link" data-scroll-target="#sec-ditch-inflows"><span class="header-section-number">3.3.2</span> Ditch inflows</a></li>
-  <li><a href="#main-algorithm" id="toc-main-algorithm" class="nav-link" data-scroll-target="#main-algorithm"><span class="header-section-number">3.3.3</span> Main Algorithm</a></li>
+  <li><a href="#input-2" id="toc-input-2" class="nav-link" data-scroll-target="#input-2"><span class="header-section-number">3.3.1</span> Input</a></li>
+  <li><a href="#output-2" id="toc-output-2" class="nav-link" data-scroll-target="#output-2"><span class="header-section-number">3.3.2</span> Output</a></li>
+  <li><a href="#sec-hbp-details" id="toc-sec-hbp-details" class="nav-link" data-scroll-target="#sec-hbp-details"><span class="header-section-number">3.3.3</span> Detail</a></li>
   </ul></li>
   <li><a href="#ca-chemical-applications" id="toc-ca-chemical-applications" class="nav-link" data-scroll-target="#ca-chemical-applications"><span class="header-section-number">3.4</span> CA: Chemical Applications</a></li>
   <li><a href="#ct-chemical-transport" id="toc-ct-chemical-transport" class="nav-link" data-scroll-target="#ct-chemical-transport"><span class="header-section-number">3.5</span> CT: Chemical Transport</a></li>
@@ -357,8 +357,8 @@ Table&nbsp;3.1: Observational input to the ERAHUMED model (INP model component).
 <p>This modeling layer does not involve any actual computation, and its output is simply a time-series data-set obtained as the combination of the two input data-sets, <em>i.e.</em> the collection of time series of <a href="#tbl-inp-time-series" class="quarto-xref">Table&nbsp;<span>3.1</span></a>.</p>
 </section>
 </section>
-<section id="hba-hydrological-balance-of-the-albufera-lake" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="hba-hydrological-balance-of-the-albufera-lake"><span class="header-section-number">3.2</span> HBA: Hydrological Balance of the Albufera lake</h2>
+<section id="sec-hba" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="sec-hba"><span class="header-section-number">3.2</span> HBA: Hydrological Balance of the Albufera lake</h2>
 <p>The purpose of this model component is to compute the total daily inflow to the Albufera lake. The relevant equation expressing the hydrological balance is:</p>
 <p><span id="eq-hydro-balance-symbolic"><span class="math display">\[
 \text{Volume Change} = \text{Inflow} - \text{Outflow} + \text{Precipitation} - \text{Evapotranspiration}
@@ -444,32 +444,86 @@ O_t^{\text{Pujol}} + O_t^{\text{Perelló}} + O_t^{\text{Perellonet}},\,
 </section>
 <section id="hbp-hydrological-balance-of-rice-paddy-clusters" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="hbp-hydrological-balance-of-rice-paddy-clusters"><span class="header-section-number">3.3</span> HBP: Hydrological Balance of rice Paddy clusters</h2>
-<p>As anticipated, the simulation of local hydrological balance of rice paddies involves an important set of assumptions regarding the management of water levels. We detail in this section the algorithm used in our simulations.</p>
-<section id="model-inputs-and-parameters" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="model-inputs-and-parameters"><span class="header-section-number">3.3.1</span> Model inputs and parameters</h3>
-<p>The two main observational inputs for this modeling layer are:</p>
+<p>This modeling layer simulates the local hydrology (<em>i.e.</em> water levels, inflows and outflows) of rice paddy clusters in the Albufera National Park. The simulation, that literally involves the generation of a synthetic data-set, is based on:</p>
 <ul>
-<li><p>The output of the “Global balance” model, described in the previous Section, and in particular the daily total inflow to the Albufera lake, obtained from <a href="#eq-hydro-balance-symbolic" class="quarto-xref">Equation&nbsp;<span>3.1</span></a>. As explained below in <a href="#sec-ditch-inflows" class="quarto-xref"><span>Section 3.3.2</span></a>, this is used to estimate the inflow from each of the twenty-six ditches that flow into the Albufera.</p></li>
-<li><p>The measured amounts of precipitation and evapotranspiration, which is the same data-set involved in global balance calculations, and is described in <a href="input_data.html#sec-data-meteo" class="quarto-xref"><span>Section A.2</span></a>.</p></li>
+<li>The hydrology of the Albufera lake, which allows to constrain the total outflow of all rice paddies, assumed to be equal to the lake’s total inflow (the main output of the HBA layer, see <a href="#sec-hba" class="quarto-xref"><span>Section 3.2</span></a>).</li>
+<li>An estimate of the fraction of the total lake’s inflow that comes from each of the 26 ditches that flow into the Albufera.</li>
+<li>A subdivision of the rice fields surface into clusters that are assumed to be hydrologically connected with a single ditch - meaning that the sum of outflows of clusters from the same group must equal the total flow through the corresponding ditch.</li>
+<li>An ideal yearly management plan for the irrigation and draining of rice paddies.</li>
 </ul>
-<p>The subdivision of the rice fields surface of the Albufera into clusters of a specific rice variety, and the corresponding assignation of a single ditch to each cluster is described in <a href="input_data.html#sec-data-rice-clusters" class="quarto-xref"><span>Section A.5</span></a>.</p>
-<p>Our assumptions on the management of water levels are subsumed in the data-set described in <a href="input_data.html#sec-data-albufera-management" class="quarto-xref"><span>Section A.3</span></a>, that provides the irrigation and draining plans and the ideal water levels for a cluster of a given rice variety, for each day of the year.</p>
-<p>Finally, the model receives a few other numerical input parameters:</p>
+<section id="input-2" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="input-2"><span class="header-section-number">3.3.1</span> Input</h3>
+<p>As already mentioned, the simulation is based on a spatial clustering, which is described in greater detail in <a href="input_data.html#sec-data-rice-clusters" class="quarto-xref">Appendix&nbsp;<span>A.5</span></a>. For the present purposes, we stress that each cluster, consists of rice paddies of a definite rice variety, is labeled according to whether it is a <em>tancat</em> or not, and, most importantly, is assumed to be hydrologically connected with a single ditch.</p>
+<p>The yearly management plan for these clusters, is described in <a href="input_data.html#sec-data-albufera-management" class="quarto-xref">Appendix&nbsp;<span>A.3</span></a>, and provides, for each day of the year <span class="math inline">\(d\)</span>, the following:</p>
 <ul>
-<li><p><em>Ideal flow rate</em> <span class="math inline">\(k\)</span>. Rate at which water flows through rice paddies when these are being simultaneously irrigated and drained, with the overall level being kept constant. Expressed in <span class="math inline">\(\text{cm}\cdot\text{day}^{-1}\)</span>. [TODO: this must be some cumbersome paraphrase of a technical expression which I don’t know about.].</p></li>
-<li><p><em>Height threshold</em> <span class="math inline">\(H_{\text{thres}}\)</span>. Maximum allowed water level for a cluster to be considered emptied, used in the calculation of draining/irrigation plan delays. Expressed in <span class="math inline">\(\text{cm}\)</span>.</p></li>
+<li><span class="math inline">\(\text{Ir}_d\)</span>: boolean expressing whether the cluster is supposed to be irrigated (if true) on day of year <span class="math inline">\(d\)</span>.</li>
+<li><span class="math inline">\(\text{Dr}_d\)</span>: boolean expressing whether the cluster is supposed to be drained (if true) on day of year <span class="math inline">\(d\)</span>.</li>
+<li><span class="math inline">\(\mathcal H _d\)</span>: ideal water level (in <span class="math inline">\(\text{cm}\)</span>) of the cluster on day of year <span class="math inline">\(d\)</span>.</li>
 </ul>
+<p>As explained in <a href="input_data.html#sec-data-albufera-management" class="quarto-xref">Appendix&nbsp;<span>A.3</span></a>, the management plan depends on the rice variety and on the <em>tancat</em> label of a cluster.</p>
+<p>In addition to these rather complex inputs, the model component requires the following numerical parameters:</p>
+<ul>
+<li><p><span class="math inline">\(k_\text{flow}\)</span> (<em>Ideal flow rate</em>). Rate at which water flows through rice paddies when these are being simultaneously irrigated and drained, with the overall level being kept constant. Expressed in <span class="math inline">\(\text{cm}\cdot\text{day}^{-1}\)</span>.</p></li>
+<li><p><span class="math inline">\(h_{\text{thres}}\)</span> (<em>Height threshold</em>). Maximum allowed water level for a cluster to be considered emptied, used in the calculation of draining/irrigation plan delays. Expressed in <span class="math inline">\(\text{cm}\)</span>.</p></li>
+</ul>
+<p>Finally, it should be noted that the simulation involves random sampling (see <a href="#sec-hbp-details" class="quarto-xref">Subsection&nbsp;<span>3.3.3</span></a>), so that the seed of random number generation is an additional pseudo-parameter.</p>
 </section>
-<section id="sec-ditch-inflows" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="sec-ditch-inflows"><span class="header-section-number">3.3.2</span> Ditch inflows</h3>
+<section id="output-2" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="output-2"><span class="header-section-number">3.3.2</span> Output</h3>
+<p>The output of this layer provides a simulation for the local hydrology of each cluster, summarized in the table below</p>
+<div id="tbl-hbp-output" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-hbp-output-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.3: HBP model component outputs
+</figcaption>
+<div aria-describedby="tbl-hbp-output-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 38%">
+<col style="width: 18%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(h_{c,t}\)</span></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td>Cluster’s water height</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(I_{c,t}\)</span></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td>Cluster’s inflow</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(O_{c,t}\)</span></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td>Cluster’s outflow</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="sec-hbp-details" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="sec-hbp-details"><span class="header-section-number">3.3.3</span> Detail</h3>
+<section id="sec-ditch-inflows" class="level4" data-number="3.3.3.1">
+<h4 data-number="3.3.3.1" class="anchored" data-anchor-id="sec-ditch-inflows"><span class="header-section-number">3.3.3.1</span> Ditch inflows</h4>
 <p>The first step consists in breaking down the total inflow to the lake, obtained through <a href="#eq-hydro-balance-symbolic" class="quarto-xref">Equation&nbsp;<span>3.1</span></a>, into inflows from individual ditches. Each paddy cluster is assumed to communicate with a single ditch (<em>cf.</em> <a href="input_data.html#sec-data-rice-clusters" class="quarto-xref"><span>Section A.5</span></a>), and the flow through a ditch is assumed to be proportional to the total area of clusters belonging to said ditch. Therefore, denoting by <span class="math inline">\(I_i\)</span> and <span class="math inline">\(A_i\)</span> the inflow and area of ditch <span class="math inline">\(i\)</span>, and by <span class="math inline">\(I\)</span> the total inflow, we compute:</p>
 <p><span id="eq-ditch-inflow"><span class="math display">\[
 I_i = \frac{A_i}{\sum _j A_j} \cdot I
 \tag{3.6}\]</span></span></p>
 </section>
-<section id="main-algorithm" class="level3" data-number="3.3.3">
-<h3 data-number="3.3.3" class="anchored" data-anchor-id="main-algorithm"><span class="header-section-number">3.3.3</span> Main Algorithm</h3>
-<p>In the following, we focus on the set of clusters that communicate with a specific ditch, whose inflow (estimated according to <a href="#sec-ditch-inflows" class="quarto-xref"><span>Section 3.3.2</span></a>) we denote by <span class="math inline">\(Q\)</span>. The essence of the algorithm is to approximate as closely as possible the cluster’s <em>ideal</em> inflows and outflows, with the constraint that the sum of the actual outflows from all clusters must equal <span class="math inline">\(Q\)</span>.</p>
+<section id="main-algorithm" class="level4" data-number="3.3.3.2">
+<h4 data-number="3.3.3.2" class="anchored" data-anchor-id="main-algorithm"><span class="header-section-number">3.3.3.2</span> Main Algorithm</h4>
+<p>In the following, we focus on the set of clusters that communicate with a specific ditch, whose inflow (estimated according to <a href="#sec-ditch-inflows" class="quarto-xref"><span>Section 3.3.3.1</span></a>) we denote by <span class="math inline">\(Q\)</span>. The essence of the algorithm is to approximate as closely as possible the cluster’s <em>ideal</em> inflows and outflows, with the constraint that the sum of the actual outflows from all clusters must equal <span class="math inline">\(Q\)</span>.</p>
 <p>Let us start by setting up some basic notation. We denote by:</p>
 <p><span id="eq-hbl-ideal-qts"><span class="math display">\[
 h_c ^\text{id}(t),\quad I_c ^\text{id}(t),\quad O_c ^\text{id}(t),
@@ -492,8 +546,8 @@ h_c ^\text{re}(t),\quad I_c ^\text{re}(t),\quad O_c ^\text{re}(t),
 <li><p><strong><em>Step 3.</em></strong> Computing the updated plan delays <span class="math inline">\(D_c(t)\)</span>.</p></li>
 </ol>
 <p>In order to initialize the iteration, we assume that at some initial time, say <span class="math inline">\(t = 0\)</span>, we have <span class="math inline">\(D_c(t=0) = 0\)</span> <span class="math inline">\(h_c ^\text{re}(t=0) = h_c ^\text{id}(t=1)\)</span>.</p>
-<section id="step-1-ideal-balance" class="level4" data-number="3.3.3.1">
-<h4 data-number="3.3.3.1" class="anchored" data-anchor-id="step-1-ideal-balance"><span class="header-section-number">3.3.3.1</span> Step 1: ideal balance</h4>
+<section id="step-1-ideal-balance" class="level5" data-number="3.3.3.2.1">
+<h5 data-number="3.3.3.2.1" class="anchored" data-anchor-id="step-1-ideal-balance"><span class="header-section-number">3.3.3.2.1</span> Step 1: ideal balance</h5>
 <p>The management data-set described <a href="input_data.html#sec-data-albufera-management" class="quarto-xref"><span>Section A.3</span></a> provides the ideal water level for each cluster and for every day of the year. Denoting by <span class="math inline">\(d(t)\)</span> the day of the year corresponding to <span class="math inline">\(t\)</span>, the relevant entry of the management data-set is that corresponding to day:</p>
 <p><span id="eq-hbl-yday-shifted"><span class="math display">\[
 d^\prime_c(t) = d(t) - D_c(t-1),
@@ -524,13 +578,13 @@ I_c ^\text{id}(t) &amp;= O_c ^\text{id}(t) + \Delta_c ^\text{id}(t)
 \end{split}
 \tag{3.14}\]</span></span></p>
 </section>
-<section id="step-2-real-balance" class="level4" data-number="3.3.3.2">
-<h4 data-number="3.3.3.2" class="anchored" data-anchor-id="step-2-real-balance"><span class="header-section-number">3.3.3.2</span> Step 2: real balance</h4>
+<section id="step-2-real-balance" class="level5" data-number="3.3.3.2.2">
+<h5 data-number="3.3.3.2.2" class="anchored" data-anchor-id="step-2-real-balance"><span class="header-section-number">3.3.3.2.2</span> Step 2: real balance</h5>
 <p>Real flows are obtained from ideal ones (<a href="#eq-hbl-ideal-flows" class="quarto-xref">Equation&nbsp;<span>3.14</span></a>) in such a way to satisfy the constraint:</p>
 <p><span id="eq-hbl-outflow-sum-constraint"><span class="math display">\[
 \sum _c O_c ^\text{re}(t) = Q(t),
 \tag{3.15}\]</span></span></p>
-<p>where the right-hand side is the total ditch flow computed earlier (<a href="#sec-ditch-inflows" class="quarto-xref"><span>Section 3.3.2</span></a>). At each time-step <span class="math inline">\(t\)</span>, the cluster’s index set is randomly permuted<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>, and the real flows are calculated as:</p>
+<p>where the right-hand side is the total ditch flow computed earlier (<a href="#sec-ditch-inflows" class="quarto-xref"><span>Section 3.3.3.1</span></a>). At each time-step <span class="math inline">\(t\)</span>, the cluster’s index set is randomly permuted<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>, and the real flows are calculated as:</p>
 <p><span id="eq-hbl-real-flows"><span class="math display">\[
 \begin{split}
 O_c ^\text{re}(t) &amp;= \min \lbrace O_c ^\text{re}(t),\,Q(t)-\sum_{c'&lt;c}O_{c'} ^\text{re}(t) \rbrace +
@@ -544,10 +598,11 @@ h_c^\text{re}(t) = \max(0,\,h_c^\text{re}(t-1)+\text{P}(t)-\text{ETP}(t)) + I_c 
 \tag{3.17}\]</span></span></p>
 <p>to be compared with <a href="#eq-hbl-ideal-balance" class="quarto-xref">Equation&nbsp;<span>3.12</span></a>.</p>
 </section>
-<section id="step-3-updating-the-plan-delay" class="level4" data-number="3.3.3.3">
-<h4 data-number="3.3.3.3" class="anchored" data-anchor-id="step-3-updating-the-plan-delay"><span class="header-section-number">3.3.3.3</span> Step 3: updating the plan delay</h4>
+<section id="step-3-updating-the-plan-delay" class="level5" data-number="3.3.3.2.3">
+<h5 data-number="3.3.3.2.3" class="anchored" data-anchor-id="step-3-updating-the-plan-delay"><span class="header-section-number">3.3.3.2.3</span> Step 3: updating the plan delay</h5>
 <p>The purpose of the plan delay <span class="math inline">\(D_c(t)\)</span> is to allow all clusters to be emptied as required by the ideal management plan, which may be hindered on the originally scheduled days by the first of <a href="#eq-hbl-real-flows" class="quarto-xref">Equation&nbsp;<span>3.16</span></a>, since this sets to zero the real outflows for some clusters whenever the ditch’s flow is saturated.</p>
 <p>The updated value <span class="math inline">\(D_c(t)\)</span> is obtained as follows. If <span class="math inline">\(d(t)\)</span> (the <em>actual</em> day of year) is outside of the window <span class="math inline">\(W = [\text{20th of April},\,\text{15th of October}]\)</span>, we reset all <span class="math inline">\(D_c(t) = 0\)</span>. Otherwise, if <span class="math inline">\(h_c ^{\text{id}}(t)&gt;0\)</span> or <span class="math inline">\(h_c ^{\text{re}}(t)&lt;H_{\text{thres}}\)</span>, the plan delay is unchanged for this cluster: <span class="math inline">\(D_c(t) = D_c(t-1)\)</span>. Finally, if <span class="math inline">\(h_c ^{\text{id}}(t)=0\)</span> but <span class="math inline">\(h_c ^{\text{re}}(t)&gt;H_{\text{thres}}\)</span>, we set <span class="math inline">\(D_c(t) = D_c(t-1) + 1\)</span>.</p>
+</section>
 </section>
 </section>
 </section>
