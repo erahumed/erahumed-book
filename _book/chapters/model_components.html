@@ -691,6 +691,29 @@ m_f(t) = e^{\gamma t}m_f(0).
 \end{split}
 \tag{3.22}\]</span></span></p>
 <p>which is solved explicitly with standard methods<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>.</p>
+</section>
+<section id="step-2.-mass-losses-due-to-outflow" class="level4" data-number="3.5.3.2">
+<h4 data-number="3.5.3.2" class="anchored" data-anchor-id="step-2.-mass-losses-due-to-outflow"><span class="header-section-number">3.5.3.2</span> Step 2. Mass losses due to outflow</h4>
+<p>Mass losses due to outflow are computed as if the outflow process happened instantaneously after the processes discussed in the previous step took place. The amount of mass in the water compartment is affected as follows:</p>
+<p><span id="eq-mw-outflow"><span class="math display">\[
+m_w \to \frac{V_f}{V_i} m_w,
+\tag{3.23}\]</span></span></p>
+<p>where <span class="math inline">\(V_i\)</span> and <span class="math inline">\(V_f\)</span> denote the initial and final volume for the outflow process. We assume that <span class="math inline">\(V_f\)</span> coincides with the value <span class="math inline">\(V(t)\)</span> simulated by the HBP model component (<em>cf.</em> Sec TODO), so that <span class="math inline">\(V_i = V(t) + O(t)\)</span>, where <span class="math inline">\(O(t)\)</span> denotes the total simulated outflow for day <span class="math inline">\(t\)</span>.</p>
+</section>
+<section id="step-3.-chemical-applications" class="level4" data-number="3.5.3.3">
+<h4 data-number="3.5.3.3" class="anchored" data-anchor-id="step-3.-chemical-applications"><span class="header-section-number">3.5.3.3</span> Step 3. Chemical Applications</h4>
+<p>Applications are computed as instantaneous and subsequent to outflow. Masses in the various compartments (<span class="math inline">\(i = f,\,w,\,s\)</span>) are modified as follows:</p>
+<p><span id="eq-mi-application"><span class="math display">\[
+m_i \to m_i + a_i
+\tag{3.24}\]</span></span></p>
+</section>
+<section id="step-4.-solubility" class="level4" data-number="3.5.3.4">
+<h4 data-number="3.5.3.4" class="anchored" data-anchor-id="step-4.-solubility"><span class="header-section-number">3.5.3.4</span> Step 4. Solubility</h4>
+<p>The chemical density in the water compartment after Steps 1, 2, and 3 is eventually compared with the chemical’s solubility <span class="math inline">\(\rho\)</span>, and any mass excess is instantaneously transferred to the sediment compartment. This implies the following modifications:</p>
+<p><span id="eq-m-solubility"><span class="math display">\[
+m_s \to m_s + \max(0, \,m_w - \rho V),\quad m_w\to\max(m_w,\,\rho V),
+\tag{3.25}\]</span></span></p>
+<p>where, for the volume <span class="math inline">\(V\)</span> we again use the value <span class="math inline">\(V(t)\)</span> simulated by the HBP model component.</p>
 
 
 </section>

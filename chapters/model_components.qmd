@@ -463,3 +463,41 @@ which is solved explicitly with standard methods[^2d-ode-solution].
   $$
   P_{\pm} = \pm \frac{1}{\lambda _+ - \lambda _-}(A-\lambda _{\mp})
   $$
+
+#### Step 2. Mass losses due to outflow
+
+Mass losses due to outflow are computed as if the outflow process happened 
+instantaneously after the processes discussed in the previous step took place. 
+The amount of mass in the water compartment is affected as follows:
+
+$$
+m_w \to \frac{V_f}{V_i} m_w,
+$$ {#eq-mw-outflow}
+
+where $V_i$ and $V_f$ denote the initial and final volume for the outflow 
+process. We assume that $V_f$ coincides with the value $V(t)$ simulated by the
+HBP model component (*cf.* Sec TODO), so that $V_i = V(t) + O(t)$, where $O(t)$
+denotes the total simulated outflow for day $t$.
+
+#### Step 3. Chemical Applications
+
+Applications are computed as instantaneous and subsequent to outflow. Masses in
+the various compartments ($i = f,\,w,\,s$) are modified as follows:
+
+$$
+m_i \to m_i + a_i
+$$ {#eq-mi-application}
+
+#### Step 4. Solubility
+
+The chemical density in the water compartment after Steps 1, 2, and 3 is 
+eventually compared with the chemical's solubility $\rho$, and any mass excess
+is instantaneously transferred to the sediment compartment. This implies the 
+following modifications:
+
+$$
+m_s \to m_s + \max(0, \,m_w - \rho V),\quad m_w\to\max(m_w,\,\rho V),
+$$ {#eq-m-solubility}
+
+where, for the volume $V$ we again use the value $V(t)$ simulated by the
+HBP model component.
