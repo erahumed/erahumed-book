@@ -124,10 +124,10 @@ aforementioned compensating outflow term due to water recirculation is included
 (which happens when the maximum in Eq. [-@eq-total-outflow] is given by the 
 second term), the total inflow is always estimated to be zero.
 
-## HBP: Hydrological Balance of rice Paddy clusters
+## HBP: Hydrological Balance of rice Paddy clusters {#sec-hbp}
 
 This modeling layer simulates the local hydrology (*i.e.* water levels, inflows
-and outflows) of rice paddy clusters in the Albufera National Park. The 
+and outflows) of rice paddy clusters in the Albufera Natural Park. The 
 simulation, that literally involves the generation of a synthetic data-set, is 
 based on:
 
@@ -137,7 +137,7 @@ outflow of all rice paddies, assumed to be equal to the lake's total inflow
 * An estimate of the fraction of the total lake's inflow that comes from each
 of the 26 ditches that flow into the Albufera.
 * A subdivision of the rice fields surface into clusters that are assumed to
-be hydrologically connected with a single ditch - meaning that the sum of 
+be drain water into a single ditch - meaning that the sum of 
 outflows of clusters from the same group must equal the total flow through the
 corresponding ditch.
 * An ideal yearly management plan for the irrigation and draining of rice 
@@ -146,27 +146,27 @@ paddies.
 ### Input
 
 As already mentioned, the simulation is based on a spatial clustering, which is 
-described in greater detail in [Appendix @sec-data-rice-clusters]. For the 
-present purposes, we stress that each cluster, consists of rice paddies of a 
-definite rice variety, is labeled according to whether it is a *tancat* or not,
-and, most importantly, is assumed to be hydrologically connected with a single 
-ditch.
+described in greater detail in [Appendix @sec-data-rice-clusters]. In particular
+each cluster is labeled according to its rice variety, and to its field type 
+(*tancat* or regular field), which we will indicate in the following through the 
+categorical variables $v = \text{Clearfield, Sendra or Bomba}$ and 
+$\theta =\text{Tancat, Regular}$ respectively.
 
-The yearly management plan for these clusters, is described in 
-[Appendix @sec-data-albufera-management], and provides, for each day of the year 
-$d$, the following:
+The yearly management plan for these clusters, is described in [Appendix @sec-data-albufera-management], and provides, for each day of the year 
+$d$, rice variety $v$ and field type $\theta$ the following:
 
-* $\text{Ir}_d$: boolean expressing whether the cluster is supposed to be 
-irrigated (if true) on day of year $d$.
-* $\text{Dr}_d$: boolean expressing whether the cluster is supposed to be 
-drained (if true) on day of year $d$.
-* $\mathcal H _d$: ideal water level (in $\text{cm}$) of the cluster on day of 
-year $d$.
+* $\text{Ir}_{d,v,\theta}$: boolean expressing whether the cluster is supposed 
+to be irrigated (if true) on day of year $d$.
+* $\text{Dr}_{d,v,\theta}$: boolean expressing whether the cluster is supposed 
+to be drained (if true) on day of year $d$.
+* $\mathcal H _{d,v,\theta}$: ideal water level (in $\text{cm}$) of the cluster 
+on day of year $d$.
 
-As explained in [Appendix @sec-data-albufera-management], the management plan
-depends on the rice variety and on the *tancat* label of a cluster.
+We stress that the values of these yearly series are specific to each rice 
+variety and field type, and the corresponding values for a cluster are obtained
+by matching with the corresponding cluster's attributes.
 
-In addition to these rather complex inputs, the model component requires the 
+In addition to these rather complex input, the model component requires the 
 following numerical parameters:
 
 * $k_\text{flow}$ (*Ideal flow rate*). Rate at which water flows through rice 
@@ -185,137 +185,176 @@ an additional pseudo-parameter.
 ### Output
 
 The output of this layer provides a simulation for the local hydrology of each 
-cluster, summarized in the table below
+cluster, summarized by the variables in the table below, in which the indices
+$c$ and $t$ refer to cluster and time, respectively.
 
 | Variable                    | Units        | Description                     |
 |-----------------------------|--------------|---------------------------------|
-| $h_{c,t}$                   | $\text{m}^3$ | Cluster's water height          | 
+| $V_{c,t}$                   | $\text{m}^3$ | Cluster's water volume          | 
 | $I_{c,t}$                   | $\text{m}^3$ | Cluster's inflow                |
 | $O_{c,t}$                   | $\text{m}^3$ | Cluster's outflow               |
-: HBP model component outputs {#tbl-hbp-output}
+: HBP model component outputs. {#tbl-hbp-output}
 
 ### Detail {#sec-hbp-details}
 
-#### Ditch inflows {#sec-ditch-inflows}
-
-The first step consists in breaking down the total inflow to the lake, obtained through @eq-hydro-balance-symbolic, into inflows from individual ditches. Each paddy cluster is assumed to communicate with a single ditch (*cf.* @sec-data-rice-clusters), and the flow through a ditch is assumed to be proportional to the total area of clusters belonging to said ditch. Therefore, denoting by $I_i$ and $A_i$ the inflow and area of ditch $i$, and by $I$ the total inflow, we compute:
+In the notation introduced above, the purpose of this model layer is to simulate 
+for each cluster $c$ the hydrological time series of @tbl-hbp-output, 
+satisfying the hydrological balance:
 
 $$
-I_i = \frac{A_i}{\sum _j A_j} \cdot I 
+V_{c,t+1}-V_{c,t} = I_{c,t}-O_{c,t} + (\text{P}_t-\text{ETP}_t)\times A_c
+$$ {#eq-hbp-balance}
+
+where $\text{P}_t$ and $\text{ETP}_t$  stand for precipitation and 
+evapotranspiration per unit area, as in table @tbl-inp-time-series, whereas 
+$A_c$ denotes the cluster's area. As mentioned in the introduction to this 
+Section (see [-@sec-hbp]), this simulation rests on various simplifications, 
+which we detail in what follows. 
+
+To begin with, we assume that each cluster only drains water into a single one 
+out of the twenty-six main ditches that cross the Albufera Natural Park. In what 
+follows, we will focus on the set of all clusters connected with a given ditch, 
+and we will enumerate clusters through the index $c = 1,\,2,\,\dots,\,N_C$.
+On the other hand, clusters are assumed to be irrigated from the external of the
+Albufera system, *i.e.* not through any of the ditches which eventually flow 
+into the lake.
+
+These two assumptions imply that the sum of cluster outflows is constrained by:
+
+$$
+\sum _{c = 1} ^ {N_C} O_{c,t} = Q_t
+$$ {#eq-sum-outflows-constraint}
+
+where $Q_t$ denotes the daily flow through the ditch. This quantity is, in turn, 
+not measured, and we estimate it through the following simple model:
+
+$$
+Q_t = \frac{\text{Area of clusters draining into ditch}}{\text{Area of all clusters}} \times \text{Lake's Inflow}_t
 $$ {#eq-ditch-inflow}
 
-#### Main Algorithm
+where the lake's inflow is the one computed by the HBA model component (see 
+@sec-hba).
 
-In the following, we focus on the set of clusters that communicate with a specific ditch, whose inflow (estimated according to @sec-ditch-inflows) we denote by $Q$. The essence of the algorithm is to approximate as closely as possible the cluster's *ideal* inflows and outflows, with the constraint that the sum of the actual outflows from all clusters must equal $Q$.
+Qualitatively speaking, the simulation works by finding daily values of 
+$I_{c,t}$ and $O_{c,t}$ compatible with Eqs. [-@eq-hbp-balance] and 
+[-@eq-sum-outflows-constraint], and such that the resulting hydrology is as 
+close as possible with the "ideal" one prescribed by the specified management 
+plan. This is accomplished in three steps:
 
-Let us start by setting up some basic notation. We denote by:
+1. Computing ideal inflows and outflows, given current water levels and 
+management plans.
+2. Computing actual inflows and outflows, and corresponding actual water level 
+changes.  
+3. Computing required management plan delays, if some clusters were scheduled 
+to be drained, but could not due to insufficient flow through the common ditch 
+(see below for details).
 
-$$
-h_c ^\text{id}(t),\quad I_c ^\text{id}(t),\quad O_c ^\text{id}(t),
-$$ {#eq-hbl-ideal-qts}
+These steps are iterated on a daily basis, starting from some initial time 
+(say $t = 0$) at which all cluster water levels coincide with the ideal ones, 
+and no plan delays are present. 
 
-the ideal water level, inflow and outflow of cluster $c$ at time (*i.e.* day) $t$, and by:
+Concerning the last step, a few words may serve to clarify the algorithm 
+described below. The purpose of plan delays is to ensure that during each year's 
+sowing season, all cluster's are emptied at some point, as required for ground  
+applications of chemicals (modeled in subsequent layers of ERAHUMED). This is 
+achieved by delaying by one day the management plan, whenever an emptying 
+condition is not met. When far outside of the sowing window, the delays are 
+reset then to zero, in order to ensure that delays are not carried over 
+indefinitely, which would be quite unrealistic.
 
-$$
-h_c ^\text{re}(t),\quad I_c ^\text{re}(t),\quad O_c ^\text{re}(t),
-$$ {#eq-hbl-real-qts}
+In what follows, the conversion between cluster water volumes and depths is 
+provided by $V_{c,t} = A_c \cdot h_{c,t}$, and we denote by $\delta_{c,t}$ the 
+time-series of plan delays for cluster $c$, which is initialized by 
+$\delta_{c,0} =0$.
 
-the corresponding real quantities. The area of cluster $c$, that provides the conversion between water volumes and column heights, is denoted by $A_c$. Precipitation and evapotranspiration water column values are denoted by:
+#### Step 1: ideal balance
 
-$$
-\text{P}(t),\quad \text{ETP}(t).
-$$ {#eq-hbl-petp}
-
-Finally, we will define below a *plan delay* accumulated for cluster $c$ at time $t$, denoted $D_c(t)$. This is computed recursively along the iterations of the algorithm, and its role will be clarified below.
-
-The local balance algorithm proceeds iteratively as follows. At day $t$, assume that $h_c ^\text{re}(t-1)$ and $D(t-1)$ have already been computed; a single iteration consists of the following steps, which we describe in full detail below:
-
--   ***Step 1.*** Recovering the $h_c ^\text{id}(t)$, $I_c ^\text{id}(t)$ and $O_c ^\text{id}(t)$ from the irrigation and draining plan, applying the computed plan delay $D_c(t-1)$.
-
-2.  ***Step 2.*** Computing $h_c ^\text{re}(t)$, $I_c ^\text{re}(t)$ and $O_c ^\text{re}(t)$ enforcing the constraint $\sum _c O_c ^\text{re}(t) = Q(t)$.
-
-3.  ***Step 3.*** Computing the updated plan delays $D_c(t)$.
-
-In order to initialize the iteration, we assume that at some initial time, say $t = 0$, we have $D_c(t=0) = 0$ $h_c ^\text{re}(t=0) = h_c ^\text{id}(t=1)$.
-
-##### Step 1: ideal balance
-
-The management data-set described @sec-data-albufera-management provides the ideal water level for each cluster and for every day of the year. Denoting by $d(t)$ the day of the year corresponding to $t$, the relevant entry of the management data-set is that corresponding to day:
-
-$$
-d^\prime_c(t) = d(t) - D_c(t-1),
-$$ {#eq-hbl-yday-shifted}
-
-where $D_c(t-1)$ is the accumulated plan delay for thi cluster. Therefore we set:
+Ideal balance quantities for each cluster $c$ are obtained from the management 
+plan data-set, whose relevant row is identified by the cluster's rice variety 
+$v$ and field type $\theta$, and the delayed day:
 
 $$
-h_c^\text{id}(t) = \text{Planned water level on day of year }d_c^\prime(t).
-$$ {#eq-hbl-ideal-height}
+d_{c,t+1} = d_{t+1}-\delta_{c,t},
+$$ {#eq-hbp-delayed-day}
 
-To compute ideal inflow and outflow, we require:
+where $d_{t+1}$ denotes the day of year corresponding to time $t+1$, and 
+$\delta_{c,t}$ the accumulated plan delay. 
+
+Let $h _{c,t+1}^{\text{id}}$ denote the ideal depth for cluster $c$ at time 
+$t+1$ retrieved in this way, and $\text{Ir}_{c,t}$, $\text{Dr}_{c,t}$ the 
+corresponding ideal irrigation and draining plans. Furthermore, denote by 
+$ V_{c,t+1}^{\text{id}} = A_c \cdot h_{c,t+1}^{\text{id}} $ the corresponding 
+ideal water volume.
+
+In order to compute ideal inflow and outflow, we require 
+(*cf.* @eq-hbp-balance):
 
 $$
-h_c^\text{id}(t) = \max(0,\,h_c^\text{re}(t-1)+\text{P}(t)-\text{ETP}(t)) + I_c ^\text{id}(t)-O_c ^\text{id}(t),
-$$ {#eq-hbl-ideal-balance}
+V_{c,t+1}^{\text{id}} = \max \lbrace V_{c,t}^{\text{id}}  + (\text{P}_t-\text{ETP}_t)\times A_c,0 \rbrace + I_{c,t}^{\text{id}}-O_{c,t}^{\text{id}}
+$$ {#eq-hbp-balance-ideal}
 
-where we assume $I_c ^\text{id}(t) >0$ and $O_c ^\text{id}(t)>0$. Clearly, @eq-hbl-ideal-balance alone does not individually specify $I_c ^\text{id}(t)$ and $O_c ^\text{id}(t)$, but only their difference $\Delta _c (t) = I_c ^\text{id}(t) - O_c ^\text{id}(t)$. In order to fix both these quantities, we first define[^model_components-1]:
-
-[^model_components-1]: The condition is again evaluated using the the management data-set, where the relevant variables are the `irrigation` and `draining` columns. The cluster is understood to be in flux if both `irrigation` and `draining` are `TRUE`.
+Clearly, @eq-hbp-balance-ideal alone does not individually specify 
+$I_{c,t}^{\text{id}}$ and $O_{c,t}^{\text{id}}$, but only their difference 
+$\Delta _{c,t}^{\text{id}}= I_{c,t}^{\text{id}}-O_{c,t}^{\text{id}}$. In order to fix both 
+these quantities:
 
 $$
 \begin{split}
-(I_c ^\text{id}(t))^{(0)}&= \begin{cases}
-  k  & \text{cluster planned to be in flux on day of year } d_c^\prime(t) \\
+(I_{c,t} ^\text{id})^{(0)}&= \begin{cases}
+  k_\text{flow}  & \text{if }\text{Ir}_{c,t} = \text{Dr}_{c,t} = 1 \\
   0 & \text{otherwise}
 \end{cases},\\
-(O_c ^\text{id}(t))^{(0)}&=(I_c ^\text{id}(t))^{(0)}-\Delta_c(t).
+(O_{c,t} ^\text{id})^{(0)}&=(I_{c,t} ^\text{id})^{(0)}-\Delta _{c,t}^{\text{id}}.
 \end{split}
-$$ {#eq-hbl-ideal-flows-zero}
+$$ {#eq-hbp-id-flows-zero}
 
-and, in order to ensure that flows are positive[^model_components-2], we finally set:
-
-[^model_components-2]: The positivity of $I_c ^\text{id}(t)$ below is ensured by the fact that $(O_c ^\text{id}(t))^{(0)}\geq-\Delta_c(t)$ by construction.
+and, in order to ensure that flows are positive, we finally set:
 
 $$
 \begin{split}
-O_c ^\text{id}(t) &= \max\lbrace(O_c ^\text{id}(t))^{(0)},\,0\rbrace\\
-I_c ^\text{id}(t) &= O_c ^\text{id}(t) + \Delta_c ^\text{id}(t)
+O_{c,t} ^\text{id} &= \max\lbrace(O_{c,t} ^\text{id})^{(0)},\,0\rbrace\\
+I_{c,t} ^\text{id} &= O_{c,t} ^\text{id} + \Delta _{c,t}^{\text{id}},
 \end{split}
-$$ {#eq-hbl-ideal-flows}
+$$ {#eq-hbp-id-flows}
 
-##### Step 2: real balance
+which satisfy @eq-hbp-balance-ideal and give rise to positive ^
+$O_{c,t}^\text{id}$ and $I_{c,t}^\text{id}$.
 
-Real flows are obtained from ideal ones (@eq-hbl-ideal-flows) in such a way to satisfy the constraint:
+#### Step 2: real balance
 
-$$
-\sum _c O_c ^\text{re}(t) = Q(t),
-$$ {#eq-hbl-outflow-sum-constraint}
+At each time-step $t$, the cluster's index set is randomly permuted
+[^model_components-3], and the real flows are calculated as:
 
-where the right-hand side is the total ditch flow computed earlier (@sec-ditch-inflows). At each time-step $t$, the cluster's index set is randomly permuted[^model_components-3], and the real flows are calculated as:
-
-[^model_components-3]: With some abuse of notation, we assume the indexes $c$ and $c'$ in @eq-hbl-real-flows to be sorted according to this random permutation.
+[^model_components-3]: With some abuse of notation, we assume the indexes $c$ and $c'$ in @eq-hbp-real-flows to be sorted according to this random permutation.
 
 $$
 \begin{split}
-O_c ^\text{re}(t) &= \min \lbrace O_c ^\text{re}(t),\,Q(t)-\sum_{c'<c}O_{c'} ^\text{re}(t) \rbrace +
-\dfrac{\max \lbrace 0, Q(t)-\sum_{c'}O_{c'} ^\text{re}(t)\rbrace}{\text{number of clusters}},\\
-I_c ^\text{re}(t) &= \max\lbrace I_c ^\text{id}(t)-O_c ^\text{id}(t) + O_c ^\text{re}(t),\,0 \rbrace
+O_{c,t} &= \min \lbrace O_{c,t}^\text{id},\,Q_t-\sum_{c'<c}O_{c',t} \rbrace +
+\dfrac{\max \lbrace 0, Q(t)-\sum_{c'}O_{c,t}^\text{id}\rbrace}{N_C},\\
+I_{c,t} &= \max\lbrace I_{c,t}^\text{id}-O_{c,t}^\text{id} + O_{c,t},\,0 \rbrace
 \end{split}
-$$ {#eq-hbl-real-flows}
+$$ {#eq-hbp-real-flows}
 
-In words, clusters are emptied in a random order within the allowed capacity of the corresponding ditch (*i.e.* its actual total flow) - if the sum of ideal outflows is less than capacity, the remaining outflow is equally shared among clusters. Using @eq-hbl-real-flows, we finally determine the real water level achieved as:
+In words, clusters are emptied in a random order within the allowed capacity of 
+the corresponding ditch; if the sum of ideal outflows is less than capacity, the 
+remaining outflow volume is shared uniformly among clusters. Using 
+@eq-hbp-real-flows, we finally determine the real water level achieved as:
 
 $$
-h_c^\text{re}(t) = \max(0,\,h_c^\text{re}(t-1)+\text{P}(t)-\text{ETP}(t)) + I_c ^\text{re}(t)-O_c ^\text{re}(t),
-$$ {#eq-hbl-real-balance}
+V_{c,t+1} = \max \lbrace V_{c,t}  + (\text{P}_t-\text{ETP}_t)\times A_c,0 \rbrace + I_{c,t}-O_{c,t}
+$$ {#eq-hbp-balance-real}
 
-to be compared with @eq-hbl-ideal-balance.
+to be compared with @eq-hbp-balance-ideal.
 
-##### Step 3: updating the plan delay
+#### Step 3: updating the plan delay
 
-The purpose of the plan delay $D_c(t)$ is to allow all clusters to be emptied as required by the ideal management plan, which may be hindered on the originally scheduled days by the first of @eq-hbl-real-flows, since this sets to zero the real outflows for some clusters whenever the ditch's flow is saturated.
-
-The updated value $D_c(t)$ is obtained as follows. If $d(t)$ (the *actual* day of year) is outside of the window $W = [\text{20th of April},\,\text{15th of October}]$, we reset all $D_c(t) = 0$. Otherwise, if $h_c ^{\text{id}}(t)>0$ or $h_c ^{\text{re}}(t)<H_{\text{thres}}$, the plan delay is unchanged for this cluster: $D_c(t) = D_c(t-1)$. Finally, if $h_c ^{\text{id}}(t)=0$ but $h_c ^{\text{re}}(t)>H_{\text{thres}}$, we set $D_c(t) = D_c(t-1) + 1$.
+The updated value $\delta _{c,t+1}$ is obtained as follows. If $d_{t+1}$ (the 
+*actual* day of year) is outside of the window 
+$W = [\text{20th of April},\,\text{15th of October}]$, then $\delta_{c,t+1} = 0$. 
+Otherwise, if $h_{c,t}^\text{id} > 0$ or $h_{c,t} < h_{\text{thres}}$, the plan 
+delay is unchanged: $\delta_{c,t+1} = \delta_{c,t}$. Finally, if 
+$h_{c,t}^\text{id} = 0$ but $h_{c,t} > h_{\text{thres}}$, we add one day of 
+delay: $\delta_{c,t+1} = \delta_{c,t}+1$.
 
 ## CA: Chemical Applications
 
@@ -396,7 +435,7 @@ excess to the sediment compartment ($m_s$).
 In the following, we describe in full detail the computations involved in these 
 four steps.
 
-#### Step 1. Linear ODE evolution (physico-chemical processes)
+#### Step 1: linear ODE evolution (physico-chemical processes)
 
 Disregarding outflow, mass application and solubility, we get a linear ODE of 
 the form:
@@ -464,7 +503,7 @@ which is solved explicitly with standard methods[^2d-ode-solution].
   P_{\pm} = \pm \frac{1}{\lambda _+ - \lambda _-}(A-\lambda _{\mp})
   $$
 
-#### Step 2. Mass losses due to outflow
+#### Step 2: mass losses due to outflow
 
 Mass losses due to outflow are computed as if the outflow process happened 
 instantaneously after the processes discussed in the previous step took place. 
@@ -479,7 +518,7 @@ process. We assume that $V_f$ coincides with the value $V(t)$ simulated by the
 HBP model component (*cf.* Sec TODO), so that $V_i = V(t) + O(t)$, where $O(t)$
 denotes the total simulated outflow for day $t$.
 
-#### Step 3. Chemical Applications
+#### Step 3: chemical applications
 
 Applications are computed as instantaneous and subsequent to outflow. Masses in
 the various compartments ($i = f,\,w,\,s$) are modified as follows:
@@ -488,7 +527,7 @@ $$
 m_i \to m_i + a_i
 $$ {#eq-mi-application}
 
-#### Step 4. Solubility
+#### Step 4: solubility
 
 The chemical density in the water compartment after Steps 1, 2, and 3 is 
 eventually compared with the chemical's solubility $\rho$, and any mass excess
