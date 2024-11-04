@@ -552,7 +552,7 @@ applications of chemicals (modeled in subsequent layers of ERAHUMED). This is ac
 d_{c,t+1} = d_{t+1}-\delta_{c,t},
 \tag{3.9}\]</span></span></p>
 <p>where <span class="math inline">\(d_{t+1}\)</span> denotes the day of year corresponding to time <span class="math inline">\(t+1\)</span>, and <span class="math inline">\(\delta_{c,t}\)</span> the accumulated plan delay.</p>
-<p>Let <span class="math inline">\(h _{c,t+1}^{\text{id}}\)</span> denote the ideal depth for cluster <span class="math inline">\(c\)</span> at time <span class="math inline">\(t+1\)</span> retrieved in this way, and <span class="math inline">\(\text{Ir}_{c,t}\)</span>, <span class="math inline">\(\text{Dr}_{c,t}\)</span> the corresponding ideal irrigation and draining plans. Furthermore, denote by $ V_{c,t+1}^{} = A_c h_{c,t+1}^{} $ the corresponding ideal water volume.</p>
+<p>Let <span class="math inline">\(h _{c,t+1}^{\text{id}}\)</span> denote the ideal depth for cluster <span class="math inline">\(c\)</span> at time <span class="math inline">\(t+1\)</span> retrieved in this way, and <span class="math inline">\(\text{Ir}_{c,t}\)</span>, <span class="math inline">\(\text{Dr}_{c,t}\)</span> the corresponding ideal irrigation and draining plans. Furthermore, denote by <span class="math inline">\(V_{c,t+1}^{\text{id}} = A_c \cdot h_{c,t+1}^{\text{id}}\)</span> the corresponding ideal water volume.</p>
 <p>In order to compute ideal inflow and outflow, we require (<em>cf.</em> <a href="#eq-hbp-balance" class="quarto-xref">Equation&nbsp;<span>3.6</span></a>):</p>
 <p><span id="eq-hbp-balance-ideal"><span class="math display">\[
 V_{c,t+1}^{\text{id}} = \max \lbrace V_{c,t}^{\text{id}}  + (\text{P}_t-\text{ETP}_t)\times A_c,0 \rbrace + I_{c,t}^{\text{id}}-O_{c,t}^{\text{id}}
