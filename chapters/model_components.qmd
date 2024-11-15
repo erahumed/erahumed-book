@@ -132,14 +132,14 @@ simulation, that literally involves the generation of a synthetic data-set, is
 based on:
 
 * The hydrology of the Albufera lake, which allows to constrain the total 
-outflow of all rice paddies, assumed to be equal to the lake's total inflow
-(the main output of the HBA layer, see @sec-hba).
+outflow of all rice paddies, assumed to be less than or equal to the lake's 
+total inflow (the main output of the HBA layer, see @sec-hba).
 * An estimate of the fraction of the total lake's inflow that comes from each
 of the 26 ditches that flow into the Albufera.
 * A subdivision of the rice fields surface into clusters that are assumed to
-be drain water into a single ditch - meaning that the sum of 
-outflows of clusters from the same group must equal the total flow through the
-corresponding ditch.
+drain water into a single ditch - meaning that the sum of 
+outflows of clusters from the same group must be less than or equal to the total 
+flow through the corresponding ditch.
 * An ideal yearly management plan for the irrigation and draining of rice 
 paddies.
 
@@ -222,7 +222,7 @@ into the lake.
 These two assumptions imply that the sum of cluster outflows is constrained by:
 
 $$
-\sum _{c = 1} ^ {N_C} O_{c,t} = Q_t
+\sum _{c = 1} ^ {N_C} O_{c,t} \leq Q_t
 $$ {#eq-sum-outflows-constraint}
 
 where $Q_t$ denotes the daily flow through the ditch. This quantity is, in turn, 
@@ -329,16 +329,14 @@ At each time-step $t$, the cluster's index set is randomly permuted
 
 $$
 \begin{split}
-O_{c,t} &= \min \lbrace O_{c,t}^\text{id},\,Q_t-\sum_{c'<c}O_{c',t} \rbrace +
-\dfrac{\max \lbrace 0, Q(t)-\sum_{c'}O_{c,t}^\text{id}\rbrace}{N_C},\\
+O_{c,t} &= \min \lbrace O_{c,t}^\text{id},\,Q_t-\sum_{c'<c}O_{c',t} \rbrace ,\\
 I_{c,t} &= \max\lbrace I_{c,t}^\text{id}-O_{c,t}^\text{id} + O_{c,t},\,0 \rbrace
 \end{split}
 $$ {#eq-hbp-real-flows}
 
-In words, clusters are emptied in a random order within the allowed capacity of 
-the corresponding ditch; if the sum of ideal outflows is less than capacity, the 
-remaining outflow volume is shared uniformly among clusters. Using 
-@eq-hbp-real-flows, we finally determine the real water level achieved as:
+In simple terms, clusters are emptied in a random order within the allowed 
+capacity of the corresponding ditch. Using @eq-hbp-real-flows, we finally 
+determine the real water level achieved as:
 
 $$
 V_{c,t+1} = \max \lbrace V_{c,t}  + (\text{P}_t-\text{ETP}_t)\times A_c,0 \rbrace + I_{c,t}-O_{c,t}
