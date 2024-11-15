@@ -26,7 +26,7 @@ book:
   - part: Technical description
     chapters:
     - chapters/birds_eye_view.qmd
-    - chapters/model_components.qmd
+    - chapters/simulation_layers.qmd
 
   - part: User Manual
     chapters:

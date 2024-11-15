@@ -1,15 +1,18 @@
-# ERAHUMED model components
+# ERAHUMED simulation layers
 
-This Chapter provides detailed descriptions of the various components of the ERAHUMED model, briefly introduced in @sec-birds-eye-view.
+This Chapter provides detailed descriptions of the various layers of the 
+ERAHUMED simulation chain, briefly introduced in @sec-birds-eye-view.
 
 ## INP: Input Data {#sec-inp}
 
-The purpose of this model component is simply to collect the empirical data that
-provides the observational input to all subsequent modeling layers. This data consists of hydrological and meteorological time series data for the Albufera lake in the desired time frame.
+The purpose of this layer is simply to collect the empirical data that
+provides the observational input to all subsequent simulation layers. This data
+consists of hydrological and meteorological time series data for the Albufera 
+lake in the desired time frame.
 
 ### Input
 
-The only inputs to this modeling layer are the two aforementioned time-series data-sets.
+The only inputs to this layer are the two aforementioned time-series data-sets.
 
 Hydrological data consists of the direct measurements of the Albufera lake's 
 daily water levels and outflows. Since the lake has three estuaries (*Gola de Pujol*, *Gola del Perellonet* and *Gola del Perelló*), this data 
@@ -33,17 +36,19 @@ The time-series inputs described above are collected in the table below (the com
 | $T_t^{\text{min}}$        | $\text{°C}$  | Minimum temperature               |
 | $T_t^{\text{ave}}$        | $\text{°C}$  | Average temperature               |
 
-: Observational input to the ERAHUMED model (INP model component). {#tbl-inp-time-series}
+: Observational input to the ERAHUMED simulation (INP layer). {#tbl-inp-time-series}
 
 
 ### Output
 
-This modeling layer does not involve any actual computation, and its output is simply a time-series data-set obtained as the combination of the two input data-sets, *i.e.* the collection of time series of @tbl-inp-time-series.
+This layer does not involve any actual computation, and its output is simply a time-series data-set obtained as the combination of the two input data-sets, 
+*i.e.* the collection of time series of @tbl-inp-time-series.
 
 
 ## HBA: Hydrological Balance of the Albufera lake {#sec-hba}
 
-The purpose of this model component is to compute the total daily inflow to the Albufera lake. The relevant equation expressing the hydrological balance is:
+The purpose of this layer is to compute the total daily inflow to the Albufera 
+lake. The relevant equation expressing the hydrological balance is:
 
 $$
 \text{Volume Change} = \text{Inflow} - \text{Outflow} + \text{Precipitation} - \text{Evapotranspiration}
@@ -75,7 +80,7 @@ where the left-hand side represents the relevant water volume difference, wherea
 
 ### Output
 
-The output of this model consists of the time-series collected in the table
+The output of this layer consists of the time-series collected in the table
 below.
 
 | Variable                  | Units        | Description                       |
@@ -83,7 +88,7 @@ below.
 | $V_t$                     | $\text{m}^3$ | Lake water volume                 | 
 | $I_t$                     | $\text{m}^3$ | Lake total inflow                 |
 | $O_t$                     | $\text{m}^3$ | Lake total outflow                |
-: HBA model component outputs {#tbl-hba-output}
+: HBA layer outputs {#tbl-hba-output}
 
 ### Details
 
@@ -126,7 +131,7 @@ second term), the total inflow is always estimated to be zero.
 
 ## HBP: Hydrological Balance of rice Paddy clusters {#sec-hbp}
 
-This modeling layer simulates the local hydrology (*i.e.* water levels, inflows
+This layer simulates the local hydrology (*i.e.* water levels, inflows
 and outflows) of rice paddy clusters in the Albufera Natural Park. The 
 simulation, that literally involves the generation of a synthetic data-set, is 
 based on:
@@ -166,7 +171,7 @@ We stress that the values of these yearly series are specific to each rice
 variety and field type, and the corresponding values for a cluster are obtained
 by matching with the corresponding cluster's attributes.
 
-In addition to these rather complex input, the model component requires the 
+In addition to these rather complex input, the layer requires the 
 following numerical parameters:
 
 * $k_\text{flow}$ (*Ideal flow rate*). Rate at which water flows through rice 
@@ -198,11 +203,11 @@ $c$ and $t$ refer to cluster and time, respectively.
 | $V_{c,t}$                   | $\text{m}^3$ | Cluster's water volume          | 
 | $I_{c,t}$                   | $\text{m}^3$ | Cluster's inflow                |
 | $O_{c,t}$                   | $\text{m}^3$ | Cluster's outflow               |
-: HBP model component outputs. {#tbl-hbp-output}
+: HBP layer outputs. {#tbl-hbp-output}
 
 ### Detail {#sec-hbp-details}
 
-In the notation introduced above, the purpose of this model layer is to simulate 
+In the notation introduced above, the purpose of this layer is to simulate 
 for each cluster $c$ the hydrological time series of @tbl-hbp-output, 
 satisfying the hydrological balance:
 
@@ -237,7 +242,7 @@ $$
 Q_t = \frac{\text{Area of clusters draining into ditch}}{\text{Area of all clusters}} \times \text{Lake's Inflow}_t
 $$ {#eq-ditch-inflow}
 
-where the lake's inflow is the one computed by the HBA model component (see 
+where the lake's inflow is the one computed by the HBA layer (see 
 @sec-hba).
 
 Qualitatively speaking, the simulation works by finding daily values of 
@@ -328,9 +333,9 @@ $O_{c,t}^\text{id}$ and $I_{c,t}^\text{id}$.
 #### Step 2: real balance
 
 At each time-step $t$, the cluster's index set is randomly permuted
-[^model_components-3], and the real flows are calculated as:
+[^layers-3], and the real flows are calculated as:
 
-[^model_components-3]: With some abuse of notation, we assume the indexes $c$ and $c'$ in @eq-hbp-real-flows to be sorted according to this random permutation.
+[^layers-3]: With some abuse of notation, we assume the indexes $c$ and $c'$ in @eq-hbp-real-flows to be sorted according to this random permutation.
 
 $$
 \begin{split}
@@ -361,8 +366,8 @@ delay: $\delta_{c,t+1} = \delta_{c,t}+1$.
 
 ## CA: Chemical Applications
 
-This model component describes the application of chemicals to rice fields 
-based on the simulated hydrology computed by the previous layer.
+This simulation layer describes the application of chemicals to rice fields 
+based on the simulated hydrology computed in the previous layer (@sec-hbp).
 
 ### Input
 
@@ -406,7 +411,8 @@ is non-empty.
 
 ## CT: Chemical Transport
 
-This model component describes the evolution of chemical masses in the three compartments of foliage, water and sediment. This is obtained by solving the
+This layer describes the evolution of chemical masses in the three compartments 
+of foliage, water and sediment. This is obtained by solving the
 system of differential equations that describes the dynamics of chemicals, 
 through a semi-analytic approach with suitable approximations and 
 simplifications.
@@ -559,7 +565,7 @@ $$ {#eq-mw-outflow}
 
 where $V_i$ and $V_f$ denote the initial and final volume for the outflow 
 process. We assume that $V_f$ coincides with the value $V(t)$ simulated by the
-HBP model component (*cf.* Sec TODO), so that $V_i = V(t) + O(t)$, where $O(t)$
+HBP simulation layer (*cf.* Sec TODO), so that $V_i = V(t) + O(t)$, where $O(t)$
 denotes the total simulated outflow for day $t$.
 
 #### Step 3: chemical applications
@@ -583,4 +589,4 @@ m_s \to m_s + \max(0, \,m_w - \rho V),\quad m_w\to\max(m_w,\,\rho V),
 $$ {#eq-m-solubility}
 
 where, for the volume $V$ we again use the value $V(t)$ simulated by the
-HBP model component.
+HBP simulation layer.

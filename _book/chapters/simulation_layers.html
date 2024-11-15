@@ -8,7 +8,7 @@
 
 <meta name="description" content="The ERAHUMED Decision Support System: Software Manual and Technical Documentation.">
 
-<title>3&nbsp; ERAHUMED model components – ERAHUMED DSS</title>
+<title>3&nbsp; ERAHUMED simulation layers – ERAHUMED DSS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -111,7 +111,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/birds_eye_view.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/model_components.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">ERAHUMED model components</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/birds_eye_view.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/simulation_layers.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">ERAHUMED simulation layers</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -165,8 +165,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/model_components.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">ERAHUMED model components</span></span></a>
+  <a href="../chapters/simulation_layers.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">ERAHUMED simulation layers</span></span></a>
   </div>
 </li>
       </ul>
@@ -262,9 +262,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/birds_eye_view.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/model_components.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">ERAHUMED model components</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/birds_eye_view.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/simulation_layers.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">ERAHUMED simulation layers</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">ERAHUMED model components</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">ERAHUMED simulation layers</span></h1>
 </div>
 
 
@@ -281,20 +281,20 @@ window.Quarto = {
 </header>
 
 
-<p>This Chapter provides detailed descriptions of the various components of the ERAHUMED model, briefly introduced in <a href="birds_eye_view.html" class="quarto-xref"><span>Chapter 2</span></a>.</p>
+<p>This Chapter provides detailed descriptions of the various layers of the ERAHUMED simulation chain, briefly introduced in <a href="birds_eye_view.html" class="quarto-xref"><span>Chapter 2</span></a>.</p>
 <section id="sec-inp" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="sec-inp"><span class="header-section-number">3.1</span> INP: Input Data</h2>
-<p>The purpose of this model component is simply to collect the empirical data that provides the observational input to all subsequent modeling layers. This data consists of hydrological and meteorological time series data for the Albufera lake in the desired time frame.</p>
+<p>The purpose of this layer is simply to collect the empirical data that provides the observational input to all subsequent simulation layers. This data consists of hydrological and meteorological time series data for the Albufera lake in the desired time frame.</p>
 <section id="input" class="level3" data-number="3.1.1">
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="input"><span class="header-section-number">3.1.1</span> Input</h3>
-<p>The only inputs to this modeling layer are the two aforementioned time-series data-sets.</p>
+<p>The only inputs to this layer are the two aforementioned time-series data-sets.</p>
 <p>Hydrological data consists of the direct measurements of the Albufera lake’s daily water levels and outflows. Since the lake has three estuaries (<em>Gola de Pujol</em>, <em>Gola del Perellonet</em> and <em>Gola del Perelló</em>), this data amounts to four daily time series. The actual dataset bundled with the ERAHUMED software was obtained from the public data repository compiled by the <em>Confederación Hidrográfica del Júcar</em> (TODO: Ref.), and is described in more detail in <a href="input_data.html#sec-data-hydro" class="quarto-xref">Appendix&nbsp;<span>A.1</span></a>.</p>
 <p>Meteorological data consists of the daily measurements of precipitation and evapotranspiration per unit are, and temperature (average, maximum and minimum). This amounts to five daily the series. The actual data bundled with the ERAHUMED software was obtained (TODO: where), and is described in more detail in <a href="input_data.html#sec-data-meteo" class="quarto-xref">Appendix&nbsp;<span>A.2</span></a>.</p>
 <p>The time-series inputs described above are collected in the table below (the common index <span class="math inline">\(t\)</span> refers to the time - <em>i.e.</em> day - of observation).</p>
 <div id="tbl-inp-time-series" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-inp-time-series-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3.1: Observational input to the ERAHUMED model (INP model component).
+Table&nbsp;3.1: Observational input to the ERAHUMED simulation (INP layer).
 </figcaption>
 <div aria-describedby="tbl-inp-time-series-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -364,12 +364,12 @@ Table&nbsp;3.1: Observational input to the ERAHUMED model (INP model component).
 </section>
 <section id="output" class="level3" data-number="3.1.2">
 <h3 data-number="3.1.2" class="anchored" data-anchor-id="output"><span class="header-section-number">3.1.2</span> Output</h3>
-<p>This modeling layer does not involve any actual computation, and its output is simply a time-series data-set obtained as the combination of the two input data-sets, <em>i.e.</em> the collection of time series of <a href="#tbl-inp-time-series" class="quarto-xref">Table&nbsp;<span>3.1</span></a>.</p>
+<p>This layer does not involve any actual computation, and its output is simply a time-series data-set obtained as the combination of the two input data-sets, <em>i.e.</em> the collection of time series of <a href="#tbl-inp-time-series" class="quarto-xref">Table&nbsp;<span>3.1</span></a>.</p>
 </section>
 </section>
 <section id="sec-hba" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="sec-hba"><span class="header-section-number">3.2</span> HBA: Hydrological Balance of the Albufera lake</h2>
-<p>The purpose of this model component is to compute the total daily inflow to the Albufera lake. The relevant equation expressing the hydrological balance is:</p>
+<p>The purpose of this layer is to compute the total daily inflow to the Albufera lake. The relevant equation expressing the hydrological balance is:</p>
 <p><span id="eq-hydro-balance-symbolic"><span class="math display">\[
 \text{Volume Change} = \text{Inflow} - \text{Outflow} + \text{Precipitation} - \text{Evapotranspiration}
 \tag{3.1}\]</span></span></p>
@@ -391,11 +391,11 @@ V_t = m \cdot L_t + q,
 </section>
 <section id="output-1" class="level3" data-number="3.2.2">
 <h3 data-number="3.2.2" class="anchored" data-anchor-id="output-1"><span class="header-section-number">3.2.2</span> Output</h3>
-<p>The output of this model consists of the time-series collected in the table below.</p>
+<p>The output of this layer consists of the time-series collected in the table below.</p>
 <div id="tbl-hba-output" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-hba-output-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3.2: HBA model component outputs
+Table&nbsp;3.2: HBA layer outputs
 </figcaption>
 <div aria-describedby="tbl-hba-output-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -454,7 +454,7 @@ O_t^{\text{Pujol}} + O_t^{\text{Perelló}} + O_t^{\text{Perellonet}},\,
 </section>
 <section id="sec-hbp" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="sec-hbp"><span class="header-section-number">3.3</span> HBP: Hydrological Balance of rice Paddy clusters</h2>
-<p>This modeling layer simulates the local hydrology (<em>i.e.</em> water levels, inflows and outflows) of rice paddy clusters in the Albufera Natural Park. The simulation, that literally involves the generation of a synthetic data-set, is based on:</p>
+<p>This layer simulates the local hydrology (<em>i.e.</em> water levels, inflows and outflows) of rice paddy clusters in the Albufera Natural Park. The simulation, that literally involves the generation of a synthetic data-set, is based on:</p>
 <ul>
 <li>The hydrology of the Albufera lake, which allows to constrain the total outflow of all rice paddies, assumed to be less than or equal to the lake’s total inflow (the main output of the HBA layer, see <a href="#sec-hba" class="quarto-xref"><span>Section 3.2</span></a>).</li>
 <li>An estimate of the fraction of the total lake’s inflow that comes from each of the 26 ditches that flow into the Albufera.</li>
@@ -471,7 +471,7 @@ O_t^{\text{Pujol}} + O_t^{\text{Perelló}} + O_t^{\text{Perellonet}},\,
 <li><span class="math inline">\(\mathcal H _{d,v,\theta}\)</span>: ideal water level (in <span class="math inline">\(\text{cm}\)</span>) of the cluster on day of year <span class="math inline">\(d\)</span>.</li>
 </ul>
 <p>We stress that the values of these yearly series are specific to each rice variety and field type, and the corresponding values for a cluster are obtained by matching with the corresponding cluster’s attributes.</p>
-<p>In addition to these rather complex input, the model component requires the following numerical parameters:</p>
+<p>In addition to these rather complex input, the layer requires the following numerical parameters:</p>
 <ul>
 <li><p><span class="math inline">\(k_\text{flow}\)</span> (<em>Ideal flow rate</em>). Rate at which water flows through rice paddies when these are being simultaneously irrigated and drained, with the overall level being kept constant. Expressed in <span class="math inline">\(\text{cm}\cdot\text{day}^{-1}\)</span>.</p></li>
 <li><p><span class="math inline">\(h_{\text{thres}}\)</span> (<em>Height threshold</em>). Maximum allowed water level for a cluster to be considered emptied, used in the calculation of draining/irrigation plan delays. Expressed in <span class="math inline">\(\text{cm}\)</span>.</p></li>
@@ -485,7 +485,7 @@ O_t^{\text{Pujol}} + O_t^{\text{Perelló}} + O_t^{\text{Perellonet}},\,
 <div id="tbl-hbp-output" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-hbp-output-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3.3: HBP model component outputs.
+Table&nbsp;3.3: HBP layer outputs.
 </figcaption>
 <div aria-describedby="tbl-hbp-output-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -525,7 +525,7 @@ Table&nbsp;3.3: HBP model component outputs.
 </section>
 <section id="sec-hbp-details" class="level3" data-number="3.3.3">
 <h3 data-number="3.3.3" class="anchored" data-anchor-id="sec-hbp-details"><span class="header-section-number">3.3.3</span> Detail</h3>
-<p>In the notation introduced above, the purpose of this model layer is to simulate for each cluster <span class="math inline">\(c\)</span> the hydrological time series of <a href="#tbl-hbp-output" class="quarto-xref">Table&nbsp;<span>3.3</span></a>, satisfying the hydrological balance:</p>
+<p>In the notation introduced above, the purpose of this layer is to simulate for each cluster <span class="math inline">\(c\)</span> the hydrological time series of <a href="#tbl-hbp-output" class="quarto-xref">Table&nbsp;<span>3.3</span></a>, satisfying the hydrological balance:</p>
 <p><span id="eq-hbp-balance"><span class="math display">\[
 V_{c,t+1}-V_{c,t} = I_{c,t}-O_{c,t} + (\text{P}_t-\text{ETP}_t)\times A_c
 \tag{3.6}\]</span></span></p>
@@ -539,7 +539,7 @@ V_{c,t+1}-V_{c,t} = I_{c,t}-O_{c,t} + (\text{P}_t-\text{ETP}_t)\times A_c
 <p><span id="eq-ditch-inflow"><span class="math display">\[
 Q_t = \frac{\text{Area of clusters draining into ditch}}{\text{Area of all clusters}} \times \text{Lake's Inflow}_t
 \tag{3.8}\]</span></span></p>
-<p>where the lake’s inflow is the one computed by the HBA model component (see <a href="#sec-hba" class="quarto-xref"><span>Section 3.2</span></a>).</p>
+<p>where the lake’s inflow is the one computed by the HBA layer (see <a href="#sec-hba" class="quarto-xref"><span>Section 3.2</span></a>).</p>
 <p>Qualitatively speaking, the simulation works by finding daily values of <span class="math inline">\(I_{c,t}\)</span> and <span class="math inline">\(O_{c,t}\)</span> compatible with Eqs. <a href="#eq-hbp-balance" class="quarto-xref"><span>3.6</span></a> and <a href="#eq-sum-outflows-constraint" class="quarto-xref"><span>3.7</span></a>, and such that the resulting hydrology is as close as possible with the “ideal” one prescribed by the specified management plan. This is accomplished in three steps:</p>
 <ol type="1">
 <li>Computing ideal inflows and outflows, given current water levels and management plans.</li>
@@ -605,7 +605,7 @@ V_{c,t+1} = \max \lbrace V_{c,t}  + (\text{P}_t-\text{ETP}_t)\times A_c,0 \rbrac
 </section>
 <section id="ca-chemical-applications" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="ca-chemical-applications"><span class="header-section-number">3.4</span> CA: Chemical Applications</h2>
-<p>This model component describes the application of chemicals to rice fields based on the simulated hydrology computed by the previous layer.</p>
+<p>This simulation layer describes the application of chemicals to rice fields based on the simulated hydrology computed in the previous layer (<a href="#sec-hbp" class="quarto-xref"><span>Section 3.3</span></a>).</p>
 <section id="input-2" class="level3" data-number="3.4.1">
 <h3 data-number="3.4.1" class="anchored" data-anchor-id="input-2"><span class="header-section-number">3.4.1</span> Input</h3>
 <p>TBD.</p>
@@ -628,7 +628,7 @@ V_{c,t+1} = \max \lbrace V_{c,t}  + (\text{P}_t-\text{ETP}_t)\times A_c,0 \rbrac
 </section>
 <section id="ct-chemical-transport" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="ct-chemical-transport"><span class="header-section-number">3.5</span> CT: Chemical Transport</h2>
-<p>This model component describes the evolution of chemical masses in the three compartments of foliage, water and sediment. This is obtained by solving the system of differential equations that describes the dynamics of chemicals, through a semi-analytic approach with suitable approximations and simplifications.</p>
+<p>This layer describes the evolution of chemical masses in the three compartments of foliage, water and sediment. This is obtained by solving the system of differential equations that describes the dynamics of chemicals, through a semi-analytic approach with suitable approximations and simplifications.</p>
 <section id="input-3" class="level3" data-number="3.5.1">
 <h3 data-number="3.5.1" class="anchored" data-anchor-id="input-3"><span class="header-section-number">3.5.1</span> Input</h3>
 <p>TBD.</p>
@@ -709,7 +709,7 @@ m_f(t) = e^{\gamma t}m_f(0).
 <p><span id="eq-mw-outflow"><span class="math display">\[
 m_w \to \frac{V_f}{V_i} m_w,
 \tag{3.20}\]</span></span></p>
-<p>where <span class="math inline">\(V_i\)</span> and <span class="math inline">\(V_f\)</span> denote the initial and final volume for the outflow process. We assume that <span class="math inline">\(V_f\)</span> coincides with the value <span class="math inline">\(V(t)\)</span> simulated by the HBP model component (<em>cf.</em> Sec TODO), so that <span class="math inline">\(V_i = V(t) + O(t)\)</span>, where <span class="math inline">\(O(t)\)</span> denotes the total simulated outflow for day <span class="math inline">\(t\)</span>.</p>
+<p>where <span class="math inline">\(V_i\)</span> and <span class="math inline">\(V_f\)</span> denote the initial and final volume for the outflow process. We assume that <span class="math inline">\(V_f\)</span> coincides with the value <span class="math inline">\(V(t)\)</span> simulated by the HBP simulation layer (<em>cf.</em> Sec TODO), so that <span class="math inline">\(V_i = V(t) + O(t)\)</span>, where <span class="math inline">\(O(t)\)</span> denotes the total simulated outflow for day <span class="math inline">\(t\)</span>.</p>
 </section>
 <section id="step-3-chemical-applications" class="level4" data-number="3.5.3.3">
 <h4 data-number="3.5.3.3" class="anchored" data-anchor-id="step-3-chemical-applications"><span class="header-section-number">3.5.3.3</span> Step 3: chemical applications</h4>
@@ -724,7 +724,7 @@ m_i \to m_i + a_i
 <p><span id="eq-m-solubility"><span class="math display">\[
 m_s \to m_s + \max(0, \,m_w - \rho V),\quad m_w\to\max(m_w,\,\rho V),
 \tag{3.22}\]</span></span></p>
-<p>where, for the volume <span class="math inline">\(V\)</span> we again use the value <span class="math inline">\(V(t)\)</span> simulated by the HBP model component.</p>
+<p>where, for the volume <span class="math inline">\(V\)</span> we again use the value <span class="math inline">\(V(t)\)</span> simulated by the HBP simulation layer.</p>
 
 
 </section>
