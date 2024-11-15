@@ -451,9 +451,9 @@ O_t^{\text{Pujol}} + O_t^{\text{Perelló}} + O_t^{\text{Perellonet}},\,
 <h2 data-number="3.3" class="anchored" data-anchor-id="sec-hbp"><span class="header-section-number">3.3</span> HBP: Hydrological Balance of rice Paddy clusters</h2>
 <p>This modeling layer simulates the local hydrology (<em>i.e.</em> water levels, inflows and outflows) of rice paddy clusters in the Albufera Natural Park. The simulation, that literally involves the generation of a synthetic data-set, is based on:</p>
 <ul>
-<li>The hydrology of the Albufera lake, which allows to constrain the total outflow of all rice paddies, assumed to be equal to the lake’s total inflow (the main output of the HBA layer, see <a href="#sec-hba" class="quarto-xref"><span>Section 3.2</span></a>).</li>
+<li>The hydrology of the Albufera lake, which allows to constrain the total outflow of all rice paddies, assumed to be less than or equal to the lake’s total inflow (the main output of the HBA layer, see <a href="#sec-hba" class="quarto-xref"><span>Section 3.2</span></a>).</li>
 <li>An estimate of the fraction of the total lake’s inflow that comes from each of the 26 ditches that flow into the Albufera.</li>
-<li>A subdivision of the rice fields surface into clusters that are assumed to be drain water into a single ditch - meaning that the sum of outflows of clusters from the same group must equal the total flow through the corresponding ditch.</li>
+<li>A subdivision of the rice fields surface into clusters that are assumed to drain water into a single ditch - meaning that the sum of outflows of clusters from the same group must be less than or equal to the total flow through the corresponding ditch.</li>
 <li>An ideal yearly management plan for the irrigation and draining of rice paddies.</li>
 </ul>
 <section id="input-2" class="level3" data-number="3.3.1">
@@ -527,7 +527,7 @@ V_{c,t+1}-V_{c,t} = I_{c,t}-O_{c,t} + (\text{P}_t-\text{ETP}_t)\times A_c
 <p>To begin with, we assume that each cluster only drains water into a single one out of the twenty-six main ditches that cross the Albufera Natural Park. In what follows, we will focus on the set of all clusters connected with a given ditch, and we will enumerate clusters through the index <span class="math inline">\(c = 1,\,2,\,\dots,\,N_C\)</span>. On the other hand, clusters are assumed to be irrigated from the external of the Albufera system, <em>i.e.</em> not through any of the ditches which eventually flow into the lake.</p>
 <p>These two assumptions imply that the sum of cluster outflows is constrained by:</p>
 <p><span id="eq-sum-outflows-constraint"><span class="math display">\[
-\sum _{c = 1} ^ {N_C} O_{c,t} = Q_t
+\sum _{c = 1} ^ {N_C} O_{c,t} \leq Q_t
 \tag{3.7}\]</span></span></p>
 <p>where <span class="math inline">\(Q_t\)</span> denotes the daily flow through the ditch. This quantity is, in turn, not measured, and we estimate it through the following simple model:</p>
 <p><span id="eq-ditch-inflow"><span class="math display">\[
@@ -581,12 +581,11 @@ I_{c,t} ^\text{id} &amp;= O_{c,t} ^\text{id} + \Delta _{c,t}^{\text{id}},
 <p>At each time-step <span class="math inline">\(t\)</span>, the cluster’s index set is randomly permuted <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, and the real flows are calculated as:</p>
 <p><span id="eq-hbp-real-flows"><span class="math display">\[
 \begin{split}
-O_{c,t} &amp;= \min \lbrace O_{c,t}^\text{id},\,Q_t-\sum_{c'&lt;c}O_{c',t} \rbrace +
-\dfrac{\max \lbrace 0, Q(t)-\sum_{c'}O_{c,t}^\text{id}\rbrace}{N_C},\\
+O_{c,t} &amp;= \min \lbrace O_{c,t}^\text{id},\,Q_t-\sum_{c'&lt;c}O_{c',t} \rbrace ,\\
 I_{c,t} &amp;= \max\lbrace I_{c,t}^\text{id}-O_{c,t}^\text{id} + O_{c,t},\,0 \rbrace
 \end{split}
 \tag{3.13}\]</span></span></p>
-<p>In words, clusters are emptied in a random order within the allowed capacity of the corresponding ditch; if the sum of ideal outflows is less than capacity, the remaining outflow volume is shared uniformly among clusters. Using <a href="#eq-hbp-real-flows" class="quarto-xref">Equation&nbsp;<span>3.13</span></a>, we finally determine the real water level achieved as:</p>
+<p>In simple terms, clusters are emptied in a random order within the allowed capacity of the corresponding ditch. Using <a href="#eq-hbp-real-flows" class="quarto-xref">Equation&nbsp;<span>3.13</span></a>, we finally determine the real water level achieved as:</p>
 <p><span id="eq-hbp-balance-real"><span class="math display">\[
 V_{c,t+1} = \max \lbrace V_{c,t}  + (\text{P}_t-\text{ETP}_t)\times A_c,0 \rbrace + I_{c,t}-O_{c,t}
 \tag{3.14}\]</span></span></p>
