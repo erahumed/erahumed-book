@@ -177,6 +177,11 @@ overall level being kept constant. Expressed in $\text{cm}\cdot\text{day}^{-1}$.
 cluster to be considered emptied, used in the calculation of draining/irrigation 
 plan delays. Expressed in $\text{cm}$.
 
+* $\text{seed}$ The seed passed to the random number generator involved in the
+permutation of clusters described below. Clearly, this parameter is of no 
+physical consequence, its main purpose being to ensure the exact reproducibility
+of simulations.
+
 Finally, it should be noted that the simulation involves random sampling (see
 [Subsection @sec-hbp-details]), so that the seed of random number generation is 
 an additional pseudo-parameter.
