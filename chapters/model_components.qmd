@@ -143,7 +143,7 @@ flow through the corresponding ditch.
 * An ideal yearly management plan for the irrigation and draining of rice 
 paddies.
 
-### Input
+### Input {#sec-hbp-input}
 
 As already mentioned, the simulation is based on a spatial clustering, which is 
 described in greater detail in [Appendix @sec-data-rice-clusters]. In particular
@@ -361,7 +361,48 @@ delay: $\delta_{c,t+1} = \delta_{c,t}+1$.
 
 ## CA: Chemical Applications
 
+This model component describes the application of chemicals to rice fields 
+based on the simulated hydrology computed by the previous layer.
+
+### Input
+
 TBD.
+
+### Output
+
+TBD.
+
+### Details
+
+As described above, each application has a scheduled date $D$ and is either of
+"aerial" or "ground" type. In order to determine the actual application date, we
+proceed as follows:
+
+1. For ground applications, we select only those days in which both 
+$\text{Ir}_{c,t} = \text{Dr}_{c,t} = 0$, where $\text{Ir}_{c,t}$ and 
+$\text{Dr}_{c,t}$ are the true (in contrast to ideal) irrigation and draining
+states time-series described after @eq-hbp-delayed-day. Similarly, for aerial
+applications, we select days according to 
+$\text{Ir}_{c,t} = \text{Dr}_{c,t} = 1$.
+
+1. For ground applications, out of the days selected in the previous step, we 
+select the subset for which clusters' simulated water levels satisfy 
+$h_{c,t} < h_{\text{thres}}$, where $h_{\text{thres}}$ is the same threshold 
+used by the HBP layer (see @sec-hbp-input). For aerial applications, there is no
+corresponding constraint applied in this step.
+
+1. Out of the days selected in the previous step, we select the subset of days 
+that are at least five days away from other applications of the same chemical.
+
+1. Finally, from the list of days resulting from all the above steps, we pick 
+the single day for which the *delayed day* defined by @eq-hbp-delayed-day is 
+as close as possible to $D$.
+
+These steps are meant to be repeated for all subsequent applications of a 
+given chemical in a given cluster. It is worth to notice that the algorithm for 
+simulating clusters' hydrological balance described in @sec-hbp guarantees that 
+the list of candidate days for application surviving until the final step above 
+is non-empty.
 
 ## CT: Chemical Transport
 

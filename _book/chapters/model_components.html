@@ -240,16 +240,21 @@ window.Quarto = {
   </ul></li>
   <li><a href="#sec-hbp" id="toc-sec-hbp" class="nav-link" data-scroll-target="#sec-hbp"><span class="header-section-number">3.3</span> HBP: Hydrological Balance of rice Paddy clusters</a>
   <ul class="collapse">
-  <li><a href="#input-2" id="toc-input-2" class="nav-link" data-scroll-target="#input-2"><span class="header-section-number">3.3.1</span> Input</a></li>
+  <li><a href="#sec-hbp-input" id="toc-sec-hbp-input" class="nav-link" data-scroll-target="#sec-hbp-input"><span class="header-section-number">3.3.1</span> Input</a></li>
   <li><a href="#output-2" id="toc-output-2" class="nav-link" data-scroll-target="#output-2"><span class="header-section-number">3.3.2</span> Output</a></li>
   <li><a href="#sec-hbp-details" id="toc-sec-hbp-details" class="nav-link" data-scroll-target="#sec-hbp-details"><span class="header-section-number">3.3.3</span> Detail</a></li>
   </ul></li>
-  <li><a href="#ca-chemical-applications" id="toc-ca-chemical-applications" class="nav-link" data-scroll-target="#ca-chemical-applications"><span class="header-section-number">3.4</span> CA: Chemical Applications</a></li>
+  <li><a href="#ca-chemical-applications" id="toc-ca-chemical-applications" class="nav-link" data-scroll-target="#ca-chemical-applications"><span class="header-section-number">3.4</span> CA: Chemical Applications</a>
+  <ul class="collapse">
+  <li><a href="#input-2" id="toc-input-2" class="nav-link" data-scroll-target="#input-2"><span class="header-section-number">3.4.1</span> Input</a></li>
+  <li><a href="#output-3" id="toc-output-3" class="nav-link" data-scroll-target="#output-3"><span class="header-section-number">3.4.2</span> Output</a></li>
+  <li><a href="#details-1" id="toc-details-1" class="nav-link" data-scroll-target="#details-1"><span class="header-section-number">3.4.3</span> Details</a></li>
+  </ul></li>
   <li><a href="#ct-chemical-transport" id="toc-ct-chemical-transport" class="nav-link" data-scroll-target="#ct-chemical-transport"><span class="header-section-number">3.5</span> CT: Chemical Transport</a>
   <ul class="collapse">
   <li><a href="#input-3" id="toc-input-3" class="nav-link" data-scroll-target="#input-3"><span class="header-section-number">3.5.1</span> Input</a></li>
-  <li><a href="#output-3" id="toc-output-3" class="nav-link" data-scroll-target="#output-3"><span class="header-section-number">3.5.2</span> Output</a></li>
-  <li><a href="#details-1" id="toc-details-1" class="nav-link" data-scroll-target="#details-1"><span class="header-section-number">3.5.3</span> Details</a></li>
+  <li><a href="#output-4" id="toc-output-4" class="nav-link" data-scroll-target="#output-4"><span class="header-section-number">3.5.2</span> Output</a></li>
+  <li><a href="#details-2" id="toc-details-2" class="nav-link" data-scroll-target="#details-2"><span class="header-section-number">3.5.3</span> Details</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -456,8 +461,8 @@ O_t^{\text{Pujol}} + O_t^{\text{Perelló}} + O_t^{\text{Perellonet}},\,
 <li>A subdivision of the rice fields surface into clusters that are assumed to drain water into a single ditch - meaning that the sum of outflows of clusters from the same group must be less than or equal to the total flow through the corresponding ditch.</li>
 <li>An ideal yearly management plan for the irrigation and draining of rice paddies.</li>
 </ul>
-<section id="input-2" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="input-2"><span class="header-section-number">3.3.1</span> Input</h3>
+<section id="sec-hbp-input" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="sec-hbp-input"><span class="header-section-number">3.3.1</span> Input</h3>
 <p>As already mentioned, the simulation is based on a spatial clustering, which is described in greater detail in <a href="input_data.html#sec-data-rice-clusters" class="quarto-xref">Appendix&nbsp;<span>A.5</span></a>. In particular each cluster is labeled according to its rice variety, and to its field type (<em>tancat</em> or regular field), which we will indicate in the following through the categorical variables <span class="math inline">\(v = \text{Clearfield, Sendra or Bomba}\)</span> and <span class="math inline">\(\theta =\text{Tancat, Regular}\)</span> respectively.</p>
 <p>The yearly management plan for these clusters, is described in <a href="input_data.html#sec-data-albufera-management" class="quarto-xref">Appendix&nbsp;<span>A.3</span></a>, and provides, for each day of the year <span class="math inline">\(d\)</span>, rice variety <span class="math inline">\(v\)</span> and field type <span class="math inline">\(\theta\)</span> the following:</p>
 <ul>
@@ -600,7 +605,26 @@ V_{c,t+1} = \max \lbrace V_{c,t}  + (\text{P}_t-\text{ETP}_t)\times A_c,0 \rbrac
 </section>
 <section id="ca-chemical-applications" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="ca-chemical-applications"><span class="header-section-number">3.4</span> CA: Chemical Applications</h2>
+<p>This model component describes the application of chemicals to rice fields based on the simulated hydrology computed by the previous layer.</p>
+<section id="input-2" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="input-2"><span class="header-section-number">3.4.1</span> Input</h3>
 <p>TBD.</p>
+</section>
+<section id="output-3" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="output-3"><span class="header-section-number">3.4.2</span> Output</h3>
+<p>TBD.</p>
+</section>
+<section id="details-1" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="details-1"><span class="header-section-number">3.4.3</span> Details</h3>
+<p>As described above, each application has a scheduled date <span class="math inline">\(D\)</span> and is either of “aerial” or “ground” type. In order to determine the actual application date, we proceed as follows:</p>
+<ol type="1">
+<li><p>For ground applications, we select only those days in which both <span class="math inline">\(\text{Ir}_{c,t} = \text{Dr}_{c,t} = 0\)</span>, where <span class="math inline">\(\text{Ir}_{c,t}\)</span> and <span class="math inline">\(\text{Dr}_{c,t}\)</span> are the true (in contrast to ideal) irrigation and draining states time-series described after <a href="#eq-hbp-delayed-day" class="quarto-xref">Equation&nbsp;<span>3.9</span></a>. Similarly, for aerial applications, we select days according to <span class="math inline">\(\text{Ir}_{c,t} = \text{Dr}_{c,t} = 1\)</span>.</p></li>
+<li><p>For ground applications, out of the days selected in the previous step, we select the subset for which clusters’ simulated water levels satisfy <span class="math inline">\(h_{c,t} &lt; h_{\text{thres}}\)</span>, where <span class="math inline">\(h_{\text{thres}}\)</span> is the same threshold used by the HBP layer (see <a href="#sec-hbp-input" class="quarto-xref"><span>Section 3.3.1</span></a>). For aerial applications, there is no corresponding constraint applied in this step.</p></li>
+<li><p>Out of the days selected in the previous step, we select the subset of days that are at least five days away from other applications of the same chemical.</p></li>
+<li><p>Finally, from the list of days resulting from all the above steps, we pick the single day for which the <em>delayed day</em> defined by <a href="#eq-hbp-delayed-day" class="quarto-xref">Equation&nbsp;<span>3.9</span></a> is as close as possible to <span class="math inline">\(D\)</span>.</p></li>
+</ol>
+<p>These steps are meant to be repeated for all subsequent applications of a given chemical in a given cluster. It is worth to notice that the algorithm for simulating clusters’ hydrological balance described in <a href="#sec-hbp" class="quarto-xref"><span>Section 3.3</span></a> guarantees that the list of candidate days for application surviving until the final step above is non-empty.</p>
+</section>
 </section>
 <section id="ct-chemical-transport" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="ct-chemical-transport"><span class="header-section-number">3.5</span> CT: Chemical Transport</h2>
@@ -609,12 +633,12 @@ V_{c,t+1} = \max \lbrace V_{c,t}  + (\text{P}_t-\text{ETP}_t)\times A_c,0 \rbrac
 <h3 data-number="3.5.1" class="anchored" data-anchor-id="input-3"><span class="header-section-number">3.5.1</span> Input</h3>
 <p>TBD.</p>
 </section>
-<section id="output-3" class="level3" data-number="3.5.2">
-<h3 data-number="3.5.2" class="anchored" data-anchor-id="output-3"><span class="header-section-number">3.5.2</span> Output</h3>
+<section id="output-4" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="output-4"><span class="header-section-number">3.5.2</span> Output</h3>
 <p>TBD.</p>
 </section>
-<section id="details-1" class="level3" data-number="3.5.3">
-<h3 data-number="3.5.3" class="anchored" data-anchor-id="details-1"><span class="header-section-number">3.5.3</span> Details</h3>
+<section id="details-2" class="level3" data-number="3.5.3">
+<h3 data-number="3.5.3" class="anchored" data-anchor-id="details-2"><span class="header-section-number">3.5.3</span> Details</h3>
 <p>The evolution of masses in the foliage, water and sediment compartments is described by the following system of differential equations:</p>
 <p><span id="eq-ct-ode"><span class="math display">\[
 \begin{split}
