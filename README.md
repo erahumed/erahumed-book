@@ -2,8 +2,9 @@
 
 This repository hosts the reference manual for the ERAHUMED DSS. The manual is 
 designed as a [Quarto](https://quarto.org/) book, with a website version that 
-you can access [here](https://erahumed.github.io/erahumed-book/). A PDF version 
-is available [here]https://github.com/erahumed/erahumed-book/blob/master/_book/ERAHUMED-DSS.pdf).
+you will be able to access [here](https://erahumed.github.io/erahumed-book/)
+when this repository goes public. A PDF version 
+is available [here](https://github.com/erahumed/erahumed-book/blob/master/_book/ERAHUMED-DSS.pdf).
 
 The manual is currently WIP. Further information, including technical 
 documentation for the website administration, will appear in the Wiki section 
