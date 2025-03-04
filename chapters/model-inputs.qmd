@@ -5,3 +5,40 @@ This chapter will collect all model inputs (numeric parameters, as well as more 
 The goal here is not to explain in detail what every parameter represents, which will be clarified when explaining the algorithms. Rather, the goal is to have a central reference for all users inputs.
 
 The table could contain links to the sections describing the specific algorithms for which the parameters being described play a role.
+
+```{r}
+#| echo: false
+if (knitr::opts_knit$get("rmarkdown.pandoc.to") == "html") {
+  render_fun <- \(x) DT::datatable(x, escape = FALSE)
+} else {
+  render_fun <- \(x) knitr::kable(x, format = "latex")
+}
+
+docs_layers <- erahumed::erahumed_docs("layers") |>
+  (\(.) .[c("inp", "hbl", "hbc", "hbd", "ca", "ctc", "rc", "rd", "rl")])()
+
+strip_roxy_macros <- function(x) 
+  gsub("\\\\link(?:\\[[^]]+\\])?\\{([^}]+)\\}", "`\\1`", x = x)
+
+extract_layers_parameters_df <- function(l) {
+  params <- l$parameters
+  
+  if (length(params) == 0) {
+    return(NULL)
+  }
+
+  res <- data.frame(name = names(params), type = NA, description = NA)
+  
+  for (i in seq_along(params)) {
+    res[i, "type"] <- params[[i]]$type
+    res[i, "description"] <- strip_roxy_macros(params[[i]]$description)
+  }
+  
+  return(res)
+}
+
+lapply(docs_layers, extract_layers_parameters_df) |>
+  Reduce(rbind, x = _) |>
+  render_fun()
+```
+
