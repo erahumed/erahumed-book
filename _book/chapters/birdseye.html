@@ -236,9 +236,37 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This section should contain a brief overview of how the model is structured, introducing the three main model components (hydrology, exposure, risk) and hydrological elements (lake, ditches, clusters), as well as explaining how the various components are interconnected with each other (<em>e.g.</em> the order of calculation).</p>
+<p>The ERAHUMED model for assessing the ecological status of the Albufera Natural Park consists of three key components:</p>
+<ul>
+<li><strong>Hydrology</strong>: Water dynamics within the park</li>
+<li><strong>Exposure</strong>: Estimating the exposure to toxic chemicals</li>
+<li><strong>Risk Assessment</strong>: Evaluating the impact of exposure</li>
+</ul>
+<p>From a spatial perspective, the natural park is divided into three types of water bodies: the Albufera lake, rice field clusters<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, and irrigation ditches, which hydrologically connect the lake to the fields. Each of the model’s computational layers incorporates specific quantitative models to simulate the relevant processes across all water bodies. This is summarized in <a href="#fig-layers" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>, where arrows indicate downstream dependencies and define the logical computation order.</p>
+<div id="fig-layers" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-layers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/layers.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-layers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: Scheme of ERAHUMED model components. Directional arrows indicate the downstream dependencies of the various simulation layers.
+</figcaption>
+</figure>
+</div>
+<p>To clarify this structure, we can summarize the role of each simulation layer in <a href="#fig-layers" class="quarto-xref">Figure&nbsp;<span>2.1</span></a> as follows:</p>
+<ol type="1">
+<li><p>The system’s hydrology, including water volumes and flows for all hydrological elements, is derived from minimal input data: daily water levels and sea outlet outflows for the Albufera lake. This is achieved through a set of simplifying assumptions about the hydrology of rice fields and irrigation ditches. Details on this model are provided in <a href="hydrology.html" class="quarto-xref"><span>Chapter 4</span></a>.</p></li>
+<li><p>Exposure to chemicals is calculated by first simulating their application to rice fields based on typical cultivation patterns. The dispersion of chemicals is then modeled using a simplified set of differential equations designed to capture the key physical processes driving their spread. These calculations are described in detail <a href="exposure.html" class="quarto-xref"><span>Chapter 5</span></a>.</p></li>
+<li><p>The impact of chemicals is evaluated across all water bodies using a simplified approach based on Species Sensitivity Distributions, utilizing publicly available toxicity data for their estimation. This is described in detail in <a href="risk.html" class="quarto-xref"><span>Chapter 6</span></a>.</p></li>
+</ol>
 
 
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>The exact definition of “clusters” is discussed in <a href="hydrology.html#sec-hydrology-scheme" class="quarto-xref"><span>Section 4.2</span></a>. For the purposes of this high-level description, we can think of them simply as groups of rice fields.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

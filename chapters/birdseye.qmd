@@ -1,7 +1,44 @@
 # The ERAHUMED model: a bird's eye view {#sec-birdseye}
 
-This section should contain a brief overview of how the model is structured, 
-introducing the three main model components (hydrology, exposure, risk) and 
-hydrological elements (lake, ditches, clusters), as well as explaining how the
-various components are interconnected with each other (*e.g.* the order of 
-calculation).
+The ERAHUMED model for assessing the ecological status of the Albufera Natural 
+Park consists of three key components:
+
+* **Hydrology**: Water dynamics within the park
+* **Exposure**: Estimating the exposure to toxic chemicals
+* **Risk Assessment**: Evaluating the impact of exposure
+
+From a spatial perspective, the natural park is divided into three types of 
+water bodies: the Albufera lake, rice field clusters[^clusters], and irrigation 
+ditches, which hydrologically connect the lake to the fields. Each of the model’s 
+computational layers incorporates specific quantitative models to simulate the 
+relevant processes across all water bodies. This is summarized in @fig-layers, 
+where arrows indicate downstream dependencies and define the logical computation 
+order.
+
+[^clusters]: The exact definition of "clusters" is discussed in 
+@sec-hydrology-scheme. For the purposes of this high-level description, we can 
+think of them simply as groups of rice fields.
+
+
+
+![Scheme of ERAHUMED model components. Directional arrows indicate the downstream dependencies of the various simulation layers.](img/layers.png){width=100% #fig-layers}
+
+To clarify this structure, we can summarize the role of each simulation layer in
+@fig-layers as follows:
+
+1. The system's hydrology, including water volumes and flows for all 
+hydrological elements, is derived from minimal input data: daily water levels 
+and sea outlet outflows for the Albufera lake. This is achieved 
+through a set of simplifying assumptions about the hydrology of rice fields 
+and irrigation ditches. Details on this model are provided in @sec-hydrology.
+
+2. Exposure to chemicals is calculated by first simulating their application to 
+rice fields based on typical cultivation patterns. The dispersion of chemicals 
+is then modeled using a simplified set of differential equations designed to 
+capture the key physical processes driving their spread. These calculations are
+described in detail @sec-exposure.
+
+3. The impact of chemicals is evaluated across all water bodies using a 
+simplified approach based on Species Sensitivity Distributions, utilizing 
+publicly available toxicity data for their estimation. This is described in 
+detail in @sec-risk.
