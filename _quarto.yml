@@ -25,8 +25,11 @@ book:
 
   - part: Technical description
     chapters:
-    - chapters/birds_eye_view.qmd
-    - chapters/simulation_layers.qmd
+    - chapters/birdseye.qmd
+    - chapters/model-inputs.qmd
+    - chapters/hydrology.qmd
+    - chapters/exposure.qmd
+    - chapters/risk.qmd
 
   - part: User Manual
     chapters:

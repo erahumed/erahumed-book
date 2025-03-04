@@ -8,7 +8,7 @@
 
 <meta name="description" content="The ERAHUMED Decision Support System: Software Manual and Technical Documentation.">
 
-<title>7&nbsp; The ERAHUMED DSS User Interface – ERAHUMED DSS</title>
+<title>5&nbsp; Exposure – ERAHUMED DSS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,8 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/erahumed_dss_pkg.html" rel="next">
-<link href="../chapters/risk.html" rel="prev">
+<link href="../chapters/risk.html" rel="next">
+<link href="../chapters/hydrology.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -82,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/erahumed_dss_ui.html">User Manual</a></li><li class="breadcrumb-item"><a href="../chapters/erahumed_dss_ui.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The ERAHUMED DSS User Interface</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/birdseye.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/exposure.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exposure</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -148,7 +148,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/exposure.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/exposure.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exposure</span></span></a>
   </div>
 </li>
@@ -171,7 +171,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/erahumed_dss_ui.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/erahumed_dss_ui.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The ERAHUMED DSS User Interface</span></span></a>
   </div>
 </li>
@@ -216,18 +216,23 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#how-to-run-the-dss" id="toc-how-to-run-the-dss" class="nav-link active" data-scroll-target="#how-to-run-the-dss"><span class="header-section-number">7.0.1</span> How to run the DSS?</a></li>
-  <li><a href="#the-output-tab" id="toc-the-output-tab" class="nav-link" data-scroll-target="#the-output-tab"><span class="header-section-number">7.0.2</span> The “Output” tab</a></li>
-  <li><a href="#the-input-tab" id="toc-the-input-tab" class="nav-link" data-scroll-target="#the-input-tab"><span class="header-section-number">7.0.3</span> The “Input” tab</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">5.1</span> Overview</a></li>
+  <li><a href="#pesticide-applications" id="toc-pesticide-applications" class="nav-link" data-scroll-target="#pesticide-applications"><span class="header-section-number">5.2</span> Pesticide applications</a></li>
+  <li><a href="#pesticide-dispersion" id="toc-pesticide-dispersion" class="nav-link" data-scroll-target="#pesticide-dispersion"><span class="header-section-number">5.3</span> Pesticide dispersion</a>
+  <ul class="collapse">
+  <li><a href="#diagram-of-physical-processes" id="toc-diagram-of-physical-processes" class="nav-link" data-scroll-target="#diagram-of-physical-processes"><span class="header-section-number">5.3.1</span> Diagram of physical processes</a></li>
+  <li><a href="#evolution-equations" id="toc-evolution-equations" class="nav-link" data-scroll-target="#evolution-equations"><span class="header-section-number">5.3.2</span> Evolution Equations</a></li>
+  <li><a href="#semi-numerical-approach" id="toc-semi-numerical-approach" class="nav-link" data-scroll-target="#semi-numerical-approach"><span class="header-section-number">5.3.3</span> Semi-numerical approach</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/erahumed_dss_ui.html">User Manual</a></li><li class="breadcrumb-item"><a href="../chapters/erahumed_dss_ui.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The ERAHUMED DSS User Interface</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/birdseye.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/exposure.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exposure</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The ERAHUMED DSS User Interface</span></h1>
+<h1 class="title"><span id="sec-exposure" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exposure</span></span></h1>
 </div>
 
 
@@ -244,18 +249,27 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This chapter should explain how to run ERAHUMED simulations using the Shiny app. It may contain screenshots taken from the app to exemplify the various points.</p>
-<section id="how-to-run-the-dss" class="level3" data-number="7.0.1">
-<h3 data-number="7.0.1" class="anchored" data-anchor-id="how-to-run-the-dss"><span class="header-section-number">7.0.1</span> How to run the DSS?</h3>
-<p>Describe various options available (which at the moment of writing may as well be “download the package” only - and perhaps a basic deployment on shinyapps.io).</p>
+<section id="overview" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">5.1</span> Overview</h2>
 </section>
-<section id="the-output-tab" class="level3" data-number="7.0.2">
-<h3 data-number="7.0.2" class="anchored" data-anchor-id="the-output-tab"><span class="header-section-number">7.0.2</span> The “Output” tab</h3>
+<section id="pesticide-applications" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="pesticide-applications"><span class="header-section-number">5.2</span> Pesticide applications</h2>
+<p>This should describe how chemical applications are simulated.</p>
 </section>
-<section id="the-input-tab" class="level3" data-number="7.0.3">
-<h3 data-number="7.0.3" class="anchored" data-anchor-id="the-input-tab"><span class="header-section-number">7.0.3</span> The “Input” tab</h3>
+<section id="pesticide-dispersion" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="pesticide-dispersion"><span class="header-section-number">5.3</span> Pesticide dispersion</h2>
+<section id="diagram-of-physical-processes" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="diagram-of-physical-processes"><span class="header-section-number">5.3.1</span> Diagram of physical processes</h3>
+<p>Roughly the content of this <a href="https://erahumed.github.io/erahumed/articles/ct-diagram.html">vignette</a>.</p>
+</section>
+<section id="evolution-equations" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="evolution-equations"><span class="header-section-number">5.3.2</span> Evolution Equations</h3>
+</section>
+<section id="semi-numerical-approach" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="semi-numerical-approach"><span class="header-section-number">5.3.3</span> Semi-numerical approach</h3>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -681,13 +695,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/risk.html" class="pagination-link" aria-label="Risk assessment">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Risk assessment</span></span>
+      <a href="../chapters/hydrology.html" class="pagination-link" aria-label="Hydrological model of the Albufera Natural Park">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hydrological model of the Albufera Natural Park</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/erahumed_dss_pkg.html" class="pagination-link" aria-label="The `{erahumed}` R package">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">The <code>{erahumed}</code> R package</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/risk.html" class="pagination-link" aria-label="Risk assessment">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Risk assessment</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

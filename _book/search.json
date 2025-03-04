@@ -20,80 +20,135 @@
     ]
   },
   {
-    "objectID": "chapters/simulation_layers.html",
-    "href": "chapters/simulation_layers.html",
-    "title": "3  ERAHUMED simulation layers",
+    "objectID": "chapters/birdseye.html",
+    "href": "chapters/birdseye.html",
+    "title": "2  The ERAHUMED model: a bird’s eye view",
     "section": "",
-    "text": "3.1 INP: Input Data\nThe purpose of this layer is simply to collect the empirical data that provides the observational input to all subsequent simulation layers. This data consists of hydrological and meteorological time series data for the Albufera lake in the desired time frame.",
+    "text": "This section should contain a brief overview of how the model is structured, introducing the three main model components (hydrology, exposure, risk) and hydrological elements (lake, ditches, clusters), as well as explaining how the various components are interconnected with each other (e.g. the order of calculation).",
     "crumbs": [
       "Technical description",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>ERAHUMED simulation layers</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>The ERAHUMED model: a bird's eye view</span>"
     ]
   },
   {
-    "objectID": "chapters/simulation_layers.html#sec-inp",
-    "href": "chapters/simulation_layers.html#sec-inp",
-    "title": "3  ERAHUMED simulation layers",
+    "objectID": "chapters/model-inputs.html",
+    "href": "chapters/model-inputs.html",
+    "title": "3  Model inputs",
     "section": "",
-    "text": "3.1.1 Input\nThe only inputs to this layer are the two aforementioned time-series data-sets.\nHydrological data consists of the direct measurements of the Albufera lake’s daily water levels and outflows. Since the lake has three estuaries (Gola de Pujol, Gola del Perellonet and Gola del Perelló), this data amounts to four daily time series. The actual dataset bundled with the ERAHUMED software was obtained from the public data repository compiled by the Confederación Hidrográfica del Júcar (TODO: Ref.), and is described in more detail in Appendix A.1.\nMeteorological data consists of the daily measurements of precipitation and evapotranspiration per unit are, and temperature (average, maximum and minimum). This amounts to five daily the series. The actual data bundled with the ERAHUMED software was obtained (TODO: where), and is described in more detail in Appendix A.2.\nThe time-series inputs described above are collected in the table below (the common index \\(t\\) refers to the time - i.e. day - of observation).\n\n\n\nTable 3.1: Observational input to the ERAHUMED simulation (INP layer).\n\n\n\n\n\n\n\n\n\n\nInput\nUnits\nDescription\n\n\n\n\n\\(L_t\\)\n\\(\\text{m}\\)\nLake water level\n\n\n\\(O_t^{\\text{Pujol}}\\)\n\\(\\text{m}^3\\)\nPujol daily outflow\n\n\n\\(O_t^{\\text{Perelló}}\\)\n\\(\\text{m}^3\\)\nPerelló daily outflow\n\n\n\\(O_t^{\\text{Perellonet}}\\)\n\\(\\text{m}^3\\)\nPerellonet daily outflow\n\n\n\\(\\text{P}_t\\)\n\\(\\text{mm}\\)\nPrecipitation (per unit area)\n\n\n\\(\\text{ETP}_t\\)\n\\(\\text{mm}\\)\nEvapotranspiration (per unit area)\n\n\n\\(T_t^{\\text{max}}\\)\n\\(\\text{°C}\\)\nMaximum temperature\n\n\n\\(T_t^{\\text{min}}\\)\n\\(\\text{°C}\\)\nMinimum temperature\n\n\n\\(T_t^{\\text{ave}}\\)\n\\(\\text{°C}\\)\nAverage temperature\n\n\n\n\n\n\n\n\n3.1.2 Output\nThis layer does not involve any actual computation, and its output is simply a time-series data-set obtained as the combination of the two input data-sets, i.e. the collection of time series of Table 3.1.",
+    "text": "This chapter will collect all model inputs (numeric parameters, as well as more complex information such as time-series or data-frames). The description should be generally succinct and parameters should be collected in a table - leveraging on erahumed::erahumed_docs() to retrieve parameters documentation).\nThe goal here is not to explain in detail what every parameter represents, which will be clarified when explaining the algorithms. Rather, the goal is to have a central reference for all users inputs.\nThe table could contain links to the sections describing the specific algorithms for which the parameters being described play a role.",
     "crumbs": [
       "Technical description",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>ERAHUMED simulation layers</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Model inputs</span>"
     ]
   },
   {
-    "objectID": "chapters/simulation_layers.html#sec-hba",
-    "href": "chapters/simulation_layers.html#sec-hba",
-    "title": "3  ERAHUMED simulation layers",
-    "section": "3.2 HBA: Hydrological Balance of the Albufera lake",
-    "text": "3.2 HBA: Hydrological Balance of the Albufera lake\nThe purpose of this layer is to compute the total daily inflow to the Albufera lake. The relevant equation expressing the hydrological balance is:\n\\[\n\\text{Volume Change} = \\text{Inflow} - \\text{Outflow} + \\text{Precipitation} - \\text{Evapotranspiration}\n\\tag{3.1}\\]\nwhere the unknown is \\(\\text{Inflow}\\), whereas the remaining terms are obtained from observational data, as described in the previous Section (Section 3.1).\n\n3.2.1 Input\nThe inputs specific to this layer are two numerical functions converting water heights into the water volumes that appear in Equation 3.1. Specifically:\n\nThe lake’s storage curve converts the measured lake’s level into a total water volume.\nThe precipitation-evapotranspiration volume function (or, for the sake of brevity, P-ETP function), that converts precipitation and evapotranspiration values per unit area into an overall water volume difference.\n\nEven though the R interface to the ERAHUMED software allows arbitrary definitions, the graphical user interface assumes a linear approximation for both these functions. Therefore, the storage curve is assumed to take the form:\n\\[\nV_t = m \\cdot L_t + q,\n\\tag{3.2}\\] where \\(V_t\\) is the (daily) water volume of the lake, \\(L_t\\) the corresponding water level (cf. Table 3.1), and \\(m\\) and \\(q\\) are numerical coefficients1. Correspondingly, the P-ETP function reads:\n\\[\n\\Delta V_t ^{\\text{P-ETP}} = \\alpha \\cdot \\text{P}_t - \\beta\\cdot \\text{ETP}_t,\n\\tag{3.3}\\] where the left-hand side represents the relevant water volume difference, whereas the \\(\\text{P}\\) and \\(\\text{ETP}\\) terms in the right-hand side are the measured precipitation and evapotranspiration levels per unit area (cf. Table 3.1). The actual default values of \\(m\\), \\(q\\), \\(\\alpha\\) and \\(\\beta\\) are documented in Appendix A.4.\n\n\n3.2.2 Output\nThe output of this layer consists of the time-series collected in the table below.\n\n\n\nTable 3.2: HBA layer outputs\n\n\n\n\n\n\n\n\n\n\nVariable\nUnits\nDescription\n\n\n\n\n\\(V_t\\)\n\\(\\text{m}^3\\)\nLake water volume\n\n\n\\(I_t\\)\n\\(\\text{m}^3\\)\nLake total inflow\n\n\n\\(O_t\\)\n\\(\\text{m}^3\\)\nLake total outflow\n\n\n\n\n\n\n\n\n3.2.3 Details\nUsing the notation introduced in the previous Subsections, we can rewrite Equation 3.1 as follows:\n\\[\nV_{t+1} - V_t = I_t -O_t +\\Delta V^{\\text {ETP}}_t,\n\\tag{3.4}\\]\nwhere \\(V_t\\) and \\(\\Delta V^{\\text {ETP}}_t\\) are computed through the storage and P-ETP functions, as in Eqs. 3.2 and 3.3. The only terms that requires further clarification in Equation 3.4 is \\(O_t\\), the total outflow from the lake.\nStrictly speaking, \\(O_t\\) is not merely the sum of \\(O_t^{\\text{Pujol}}\\), \\(O_t^{\\text{Perelló}}\\) and \\(O_t^{\\text{Perellonet}}\\), but is rather calculated as follows:\n\\[\nO_t = \\max\n\\left[\nO_t^{\\text{Pujol}} + O_t^{\\text{Perelló}} + O_t^{\\text{Perellonet}},\\,\n\\Delta V^{\\text {ETP}}_t+V_t-V_{t+1}\n\\right].\n\\tag{3.5}\\]\nThe rationale is that the simple sum of estuaries outflows omits potentially important contributions from water recirculation, that is to say, water being pumped out from the lake for rice-field irrigation, by the so-called tancats. Such amount of recirculated water is hard to estimate and, in the lack of a better model, we simply assume this to be negligible, except when a positive amount is required by Equation 3.4 itself, due the physical constraint that \\(I_t \\geq 0\\).\nOnce \\(O_t\\) is calculated through Equation 3.5, \\(I_t\\) can be immediately obtained from Equation 3.4. Notice that whenever the aforementioned compensating outflow term due to water recirculation is included (which happens when the maximum in Eq. 3.5 is given by the second term), the total inflow is always estimated to be zero.",
-    "crumbs": [
-      "Technical description",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>ERAHUMED simulation layers</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/simulation_layers.html#sec-hbp",
-    "href": "chapters/simulation_layers.html#sec-hbp",
-    "title": "3  ERAHUMED simulation layers",
-    "section": "3.3 HBP: Hydrological Balance of rice Paddy clusters",
-    "text": "3.3 HBP: Hydrological Balance of rice Paddy clusters\nThis layer simulates the local hydrology (i.e. water levels, inflows and outflows) of rice paddy clusters in the Albufera Natural Park. The simulation, that literally involves the generation of a synthetic data-set, is based on:\n\nThe hydrology of the Albufera lake, which allows to constrain the total outflow of all rice paddies, assumed to be less than or equal to the lake’s total inflow (the main output of the HBA layer, see Section 3.2).\nAn estimate of the fraction of the total lake’s inflow that comes from each of the 26 ditches that flow into the Albufera.\nA subdivision of the rice fields surface into clusters that are assumed to drain water into a single ditch - meaning that the sum of outflows of clusters from the same group must be less than or equal to the total flow through the corresponding ditch.\nAn ideal yearly management plan for the irrigation and draining of rice paddies.\n\n\n3.3.1 Input\nAs already mentioned, the simulation is based on a spatial clustering, which is described in greater detail in Appendix A.5. In particular each cluster is labeled according to its rice variety, and to its field type (tancat or regular field), which we will indicate in the following through the categorical variables \\(v = \\text{Clearfield, Sendra or Bomba}\\) and \\(\\theta =\\text{Tancat, Regular}\\) respectively.\nThe yearly management plan for these clusters, is described in Appendix A.3, and provides, for each day of the year \\(d\\), rice variety \\(v\\) and field type \\(\\theta\\) the following:\n\n\\(\\text{Ir}_{d,v,\\theta}\\): boolean expressing whether the cluster is supposed to be irrigated (if true) on day of year \\(d\\).\n\\(\\text{Dr}_{d,v,\\theta}\\): boolean expressing whether the cluster is supposed to be drained (if true) on day of year \\(d\\).\n\\(\\mathcal H _{d,v,\\theta}\\): ideal water level (in \\(\\text{cm}\\)) of the cluster on day of year \\(d\\).\n\nWe stress that the values of these yearly series are specific to each rice variety and field type, and the corresponding values for a cluster are obtained by matching with the corresponding cluster’s attributes.\nIn addition to these rather complex input, the layer requires the following numerical parameters:\n\n\\(k_\\text{flow}\\) (Ideal flow rate). Rate at which water flows through rice paddies when these are being simultaneously irrigated and drained, with the overall level being kept constant. Expressed in \\(\\text{cm}\\cdot\\text{day}^{-1}\\).\n\\(h_{\\text{thres}}\\) (Height threshold). Maximum allowed water level for a cluster to be considered emptied, used in the calculation of draining/irrigation plan delays. Expressed in \\(\\text{cm}\\).\n\\(\\text{seed}\\) The seed passed to the random number generator involved in the permutation of clusters described below. Clearly, this parameter is of no physical consequence, its main purpose being to ensure the exact reproducibility of simulations.\n\nFinally, it should be noted that the simulation involves random sampling (see Subsection 3.3.3), so that the seed of random number generation is an additional pseudo-parameter.\n\n\n3.3.2 Output\nThe output of this layer provides a simulation for the local hydrology of each cluster, summarized by the variables in the table below, in which the indices \\(c\\) and \\(t\\) refer to cluster and time, respectively.\n\n\n\nTable 3.3: HBP layer outputs.\n\n\n\n\n\n\n\n\n\n\nVariable\nUnits\nDescription\n\n\n\n\n\\(V_{c,t}\\)\n\\(\\text{m}^3\\)\nCluster’s water volume\n\n\n\\(I_{c,t}\\)\n\\(\\text{m}^3\\)\nCluster’s inflow\n\n\n\\(O_{c,t}\\)\n\\(\\text{m}^3\\)\nCluster’s outflow\n\n\n\n\n\n\n\n\n3.3.3 Detail\nIn the notation introduced above, the purpose of this layer is to simulate for each cluster \\(c\\) the hydrological time series of Table 3.3, satisfying the hydrological balance:\n\\[\nV_{c,t+1}-V_{c,t} = I_{c,t}-O_{c,t} + (\\text{P}_t-\\text{ETP}_t)\\times A_c\n\\tag{3.6}\\]\nwhere \\(\\text{P}_t\\) and \\(\\text{ETP}_t\\) stand for precipitation and evapotranspiration per unit area, as in table Table 3.1, whereas \\(A_c\\) denotes the cluster’s area. As mentioned in the introduction to this Section (see 3.3), this simulation rests on various simplifications, which we detail in what follows.\nTo begin with, we assume that each cluster only drains water into a single one out of the twenty-six main ditches that cross the Albufera Natural Park. In what follows, we will focus on the set of all clusters connected with a given ditch, and we will enumerate clusters through the index \\(c = 1,\\,2,\\,\\dots,\\,N_C\\). On the other hand, clusters are assumed to be irrigated from the external of the Albufera system, i.e. not through any of the ditches which eventually flow into the lake.\nThese two assumptions imply that the sum of cluster outflows is constrained by:\n\\[\n\\sum _{c = 1} ^ {N_C} O_{c,t} \\leq Q_t\n\\tag{3.7}\\]\nwhere \\(Q_t\\) denotes the daily flow through the ditch. This quantity is, in turn, not measured, and we estimate it through the following simple model:\n\\[\nQ_t = \\frac{\\text{Area of clusters draining into ditch}}{\\text{Area of all clusters}} \\times \\text{Lake's Inflow}_t\n\\tag{3.8}\\]\nwhere the lake’s inflow is the one computed by the HBA layer (see Section 3.2).\nQualitatively speaking, the simulation works by finding daily values of \\(I_{c,t}\\) and \\(O_{c,t}\\) compatible with Eqs. 3.6 and 3.7, and such that the resulting hydrology is as close as possible with the “ideal” one prescribed by the specified management plan. This is accomplished in three steps:\n\nComputing ideal inflows and outflows, given current water levels and management plans.\nComputing actual inflows and outflows, and corresponding actual water level changes.\n\nComputing required management plan delays, if some clusters were scheduled to be drained, but could not due to insufficient flow through the common ditch (see below for details).\n\nThese steps are iterated on a daily basis, starting from some initial time (say \\(t = 0\\)) at which all cluster water levels coincide with the ideal ones, and no plan delays are present.\nConcerning the last step, a few words may serve to clarify the algorithm described below. The purpose of plan delays is to ensure that during each year’s sowing season, all cluster’s are emptied at some point, as required for ground\napplications of chemicals (modeled in subsequent layers of ERAHUMED). This is achieved by delaying by one day the management plan, whenever an emptying condition is not met. When far outside of the sowing window, the delays are reset then to zero, in order to ensure that delays are not carried over indefinitely, which would be quite unrealistic.\nIn what follows, the conversion between cluster water volumes and depths is provided by \\(V_{c,t} = A_c \\cdot h_{c,t}\\), and we denote by \\(\\delta_{c,t}\\) the time-series of plan delays for cluster \\(c\\), which is initialized by \\(\\delta_{c,0} =0\\).\n\n3.3.3.1 Step 1: ideal balance\nIdeal balance quantities for each cluster \\(c\\) are obtained from the management plan data-set, whose relevant row is identified by the cluster’s rice variety \\(v\\) and field type \\(\\theta\\), and the delayed day:\n\\[\nd_{c,t+1} = d_{t+1}-\\delta_{c,t},\n\\tag{3.9}\\]\nwhere \\(d_{t+1}\\) denotes the day of year corresponding to time \\(t+1\\), and \\(\\delta_{c,t}\\) the accumulated plan delay.\nLet \\(h _{c,t+1}^{\\text{id}}\\) denote the ideal depth for cluster \\(c\\) at time \\(t+1\\) retrieved in this way, and \\(\\text{Ir}_{c,t}\\), \\(\\text{Dr}_{c,t}\\) the corresponding ideal irrigation and draining plans. Furthermore, denote by \\(V_{c,t+1}^{\\text{id}} = A_c \\cdot h_{c,t+1}^{\\text{id}}\\) the corresponding ideal water volume.\nIn order to compute ideal inflow and outflow, we require (cf. Equation 3.6):\n\\[\nV_{c,t+1}^{\\text{id}} = \\max \\lbrace V_{c,t}^{\\text{id}}  + (\\text{P}_t-\\text{ETP}_t)\\times A_c,0 \\rbrace + I_{c,t}^{\\text{id}}-O_{c,t}^{\\text{id}}\n\\tag{3.10}\\]\nClearly, Equation 3.10 alone does not individually specify \\(I_{c,t}^{\\text{id}}\\) and \\(O_{c,t}^{\\text{id}}\\), but only their difference \\(\\Delta _{c,t}^{\\text{id}}= I_{c,t}^{\\text{id}}-O_{c,t}^{\\text{id}}\\). In order to fix both these quantities:\n\\[\n\\begin{split}\n(I_{c,t} ^\\text{id})^{(0)}&= \\begin{cases}\n  k_\\text{flow}  & \\text{if }\\text{Ir}_{c,t} = \\text{Dr}_{c,t} = 1 \\\\\n  0 & \\text{otherwise}\n\\end{cases},\\\\\n(O_{c,t} ^\\text{id})^{(0)}&=(I_{c,t} ^\\text{id})^{(0)}-\\Delta _{c,t}^{\\text{id}}.\n\\end{split}\n\\tag{3.11}\\]\nand, in order to ensure that flows are positive, we finally set:\n\\[\n\\begin{split}\nO_{c,t} ^\\text{id} &= \\max\\lbrace(O_{c,t} ^\\text{id})^{(0)},\\,0\\rbrace\\\\\nI_{c,t} ^\\text{id} &= O_{c,t} ^\\text{id} + \\Delta _{c,t}^{\\text{id}},\n\\end{split}\n\\tag{3.12}\\]\nwhich satisfy Equation 3.10 and give rise to positive ^ \\(O_{c,t}^\\text{id}\\) and \\(I_{c,t}^\\text{id}\\).\n\n\n3.3.3.2 Step 2: real balance\nAt each time-step \\(t\\), the cluster’s index set is randomly permuted 2, and the real flows are calculated as:\n\\[\n\\begin{split}\nO_{c,t} &= \\min \\lbrace O_{c,t}^\\text{id},\\,Q_t-\\sum_{c'&lt;c}O_{c',t} \\rbrace ,\\\\\nI_{c,t} &= \\max\\lbrace I_{c,t}^\\text{id}-O_{c,t}^\\text{id} + O_{c,t},\\,0 \\rbrace\n\\end{split}\n\\tag{3.13}\\]\nIn simple terms, clusters are emptied in a random order within the allowed capacity of the corresponding ditch. Using Equation 3.13, we finally determine the real water level achieved as:\n\\[\nV_{c,t+1} = \\max \\lbrace V_{c,t}  + (\\text{P}_t-\\text{ETP}_t)\\times A_c,0 \\rbrace + I_{c,t}-O_{c,t}\n\\tag{3.14}\\]\nto be compared with Equation 3.10.\n\n\n3.3.3.3 Step 3: updating the plan delay\nThe updated value \\(\\delta _{c,t+1}\\) is obtained as follows. If \\(d_{t+1}\\) (the actual day of year) is outside of the window \\(W = [\\text{20th of April},\\,\\text{15th of October}]\\), then \\(\\delta_{c,t+1} = 0\\). Otherwise, if \\(h_{c,t}^\\text{id} &gt; 0\\) or \\(h_{c,t} &lt; h_{\\text{thres}}\\), the plan delay is unchanged: \\(\\delta_{c,t+1} = \\delta_{c,t}\\). Finally, if \\(h_{c,t}^\\text{id} = 0\\) but \\(h_{c,t} &gt; h_{\\text{thres}}\\), we add one day of delay: \\(\\delta_{c,t+1} = \\delta_{c,t}+1\\).",
-    "crumbs": [
-      "Technical description",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>ERAHUMED simulation layers</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/simulation_layers.html#ca-chemical-applications",
-    "href": "chapters/simulation_layers.html#ca-chemical-applications",
-    "title": "3  ERAHUMED simulation layers",
-    "section": "3.4 CA: Chemical Applications",
-    "text": "3.4 CA: Chemical Applications\nThis simulation layer describes the application of chemicals to rice fields based on the simulated hydrology computed in the previous layer (Section 3.3).\n\n3.4.1 Input\nTBD.\n\n\n3.4.2 Output\nTBD.\n\n\n3.4.3 Details\nAs described above, each application has a scheduled date \\(D\\) and is either of “aerial” or “ground” type. In order to determine the actual application date, we proceed as follows:\n\nFor ground applications, we select only those days in which both \\(\\text{Ir}_{c,t} = \\text{Dr}_{c,t} = 0\\), where \\(\\text{Ir}_{c,t}\\) and \\(\\text{Dr}_{c,t}\\) are the true (in contrast to ideal) irrigation and draining states time-series described after Equation 3.9. Similarly, for aerial applications, we select days according to \\(\\text{Ir}_{c,t} = \\text{Dr}_{c,t} = 1\\).\nFor ground applications, out of the days selected in the previous step, we select the subset for which clusters’ simulated water levels satisfy \\(h_{c,t} &lt; h_{\\text{thres}}\\), where \\(h_{\\text{thres}}\\) is the same threshold used by the HBP layer (see Section 3.3.1). For aerial applications, there is no corresponding constraint applied in this step.\nOut of the days selected in the previous step, we select the subset of days that are at least five days away from other applications of the same chemical.\nFinally, from the list of days resulting from all the above steps, we pick the single day for which the delayed day defined by Equation 3.9 is as close as possible to \\(D\\).\n\nThese steps are meant to be repeated for all subsequent applications of a given chemical in a given cluster. It is worth to notice that the algorithm for simulating clusters’ hydrological balance described in Section 3.3 guarantees that the list of candidate days for application surviving until the final step above is non-empty.",
-    "crumbs": [
-      "Technical description",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>ERAHUMED simulation layers</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/simulation_layers.html#ct-chemical-transport",
-    "href": "chapters/simulation_layers.html#ct-chemical-transport",
-    "title": "3  ERAHUMED simulation layers",
-    "section": "3.5 CT: Chemical Transport",
-    "text": "3.5 CT: Chemical Transport\nThis layer describes the evolution of chemical masses in the three compartments of foliage, water and sediment. This is obtained by solving the system of differential equations that describes the dynamics of chemicals, through a semi-analytic approach with suitable approximations and simplifications.\n\n3.5.1 Input\nTBD.\n\n\n3.5.2 Output\nTBD.\n\n\n3.5.3 Details\nThe evolution of masses in the foliage, water and sediment compartments is described by the following system of differential equations:\n\\[\n\\begin{split}\n\\dfrac{\\text d{m}_f}{\\text d t} & = -(k_f+w)m_f+a_f\\\\\n\\dfrac{\\text d{m}_w}{\\text d t} & = -(k_w+d_w+s+\\frac{O}{V})m_w+d_sm_s+wm_f+a_w-\\sigma(\\frac{m_w}{\\rho V}) \\\\\n\\dfrac{\\text d{m}_s}{\\text d t} & = (d_w+s)m_w-(k_s+d_s)m_s+a_s+\\sigma(\\frac{m_w}{\\rho V})\n\\end{split}\n\\tag{3.15}\\]\nwhere:\n\n\\(a_{f,w,s}\\) are the mass application rates of the chemical in the three compartments,\n\\(k_{f,w,s}\\) are the degradation rates of the chemical in the three compartments,\n\\(d_w\\) and \\(d_s\\) are the water-sediment diffusion rates,\n\\(s\\) is the settling rate,\n\\(w\\) is the washout rate,\n\\(O\\) is the outflow rate of the rice field,\n\\(V\\) is the volume of water in the rice field,\n\\(\\rho\\) is the chemical solubility in water,\n\\(\\sigma(x)\\) is a function (not further specified, see below) that grows quickly for \\(x &gt; 1\\), and vanishes for \\(x \\leq 1\\). This function accounts for solubility. (TODO: motivate the inclusion of exactly these processes)\n\nStrictly speaking, all these terms have instantaneous time dependence3. Apart from making the system 3.15 hard to attack by analytic means, such a dependence is troubling because we don’t have access to the exact time dependence of the majority of these terms (e.g. outflow, volume or chemical applications), our input consisting of simple daily average/cumulative values. On the other hand, if all the terms were constant, and if we could neglect \\(\\sigma\\), the solution of Equation 3.15 would be immediate, as the corresponding system becomes a linear ODE with constant coefficients, in addition whose eigenvalues and eigenvectors can be computed explicitly.\nWhat we use in practice is an intermediate semi-analytic approach that allows us to compute daily values of \\(m_{f,w,s}\\), which we can briefly summarize as follows. The time evolution of \\(m_{f,w,s}\\) in a daily time-step (from \\(t\\) to \\(t+1\\), say, assuming \\(t\\) is measured in days) is obtained through the following four consecutive stages:\n\nWe compute the exact evolution of \\(m_{f,w,s}\\) according to the linear ODE obtained by disregarding the processes of outflow, chemical application and solubility, and using daily constant values for all the remaining constants involved (described in more detail below).\nWe compute the \\(m_w\\) losses due to outflow as if they happened instantaneously after the processes computed in the previous step took place, with the water volume of the rice paddy varying from \\(V(t)+O(t)\\) to \\(V(t)\\)4\n\nWe compute the mass applications again as instantaneous, after the losses in the water compartment due to outflows took place.\nWe compare the resulting \\(m_w\\) with the maximum amount allowed by the solubility in water, that is \\(m_w ^{\\text{max}}(t) = \\rho V(t)\\) and transfer any excess to the sediment compartment (\\(m_s\\)).\n\nIn the following, we describe in full detail the computations involved in these four steps.\n\n3.5.3.1 Step 1: linear ODE evolution (physico-chemical processes)\nDisregarding outflow, mass application and solubility, we get a linear ODE of the form:\n\\[\n\\begin{split}\n\\dfrac{\\text d{m}_f}{\\text d t} & = \\gamma m_f,\\\\\n\\dfrac{\\text d{m}_w}{\\text d t} & = a_{ww} m_w+a_{ws}m_s + w m_f, \\\\\n\\dfrac{\\text d{m}_s}{\\text d t} & = a_{sw}m_w+a_{ss}m_s,\n\\end{split}\n\\tag{3.16}\\]\nwith:\n\\[\n\\begin{split}\n\\gamma                  &= -(k_f + w),\\\\\na_{ww}                  &= - (k_w + d_ w +s)\\\\\na_{ws}                  &= d_s\\\\\na_{sw}                  &= d_w+s\\\\\na_{ss}                  &= -(k_s+d_s)\n\\end{split}\n\\tag{3.17}\\]\nwhere the various physico-chemical parameters are assumed to be constant during a daily time-step (see Sec. TODO for the actual numerical values).\nThe evolution of \\(m_f\\) is easily obtained:\n\\[\nm_f(t) = e^{\\gamma t}m_f(0).\n\\tag{3.18}\\]\nPlugging this into the three-dimensional system 3.16 we obtain a reduced two-dimensional system for the water-sediment compartments:\n\\[\n\\begin{split}\n\\dfrac{\\text d{m}_w}{\\text d t} & = a_{ww} m_w+a_{ws}m_s + w e ^{\\gamma t}m_f(0), \\\\\n\\dfrac{\\text d{m}_s}{\\text d t} & = a_{sw}m_w+a_{ss}m_s,\n\\end{split}\n\\tag{3.19}\\]\nwhich is solved explicitly with standard methods5.\n\n\n3.5.3.2 Step 2: mass losses due to outflow\nMass losses due to outflow are computed as if the outflow process happened instantaneously after the processes discussed in the previous step took place. The amount of mass in the water compartment is affected as follows:\n\\[\nm_w \\to \\frac{V_f}{V_i} m_w,\n\\tag{3.20}\\]\nwhere \\(V_i\\) and \\(V_f\\) denote the initial and final volume for the outflow process. We assume that \\(V_f\\) coincides with the value \\(V(t)\\) simulated by the HBP simulation layer (cf. Sec TODO), so that \\(V_i = V(t) + O(t)\\), where \\(O(t)\\) denotes the total simulated outflow for day \\(t\\).\n\n\n3.5.3.3 Step 3: chemical applications\nApplications are computed as instantaneous and subsequent to outflow. Masses in the various compartments (\\(i = f,\\,w,\\,s\\)) are modified as follows:\n\\[\nm_i \\to m_i + a_i\n\\tag{3.21}\\]\n\n\n3.5.3.4 Step 4: solubility\nThe chemical density in the water compartment after Steps 1, 2, and 3 is eventually compared with the chemical’s solubility \\(\\rho\\), and any mass excess is instantaneously transferred to the sediment compartment. This implies the following modifications:\n\\[\nm_s \\to m_s + \\max(0, \\,m_w - \\rho V),\\quad m_w\\to\\max(m_w,\\,\\rho V),\n\\tag{3.22}\\]\nwhere, for the volume \\(V\\) we again use the value \\(V(t)\\) simulated by the HBP simulation layer.",
-    "crumbs": [
-      "Technical description",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>ERAHUMED simulation layers</span>"
-    ]
-  },
-  {
-    "objectID": "chapters/simulation_layers.html#footnotes",
-    "href": "chapters/simulation_layers.html#footnotes",
-    "title": "3  ERAHUMED simulation layers",
+    "objectID": "chapters/hydrology.html",
+    "href": "chapters/hydrology.html",
+    "title": "4  Hydrological model of the Albufera Natural Park",
     "section": "",
-    "text": "In fact, for the purpose of computing volume changes entering the hydrological balance Equation 3.1, only the slope \\(m\\) is required.↩︎\nWith some abuse of notation, we assume the indexes \\(c\\) and \\(c'\\) in Equation 3.13 to be sorted according to this random permutation.↩︎\n This observation also includes pure physico-chemical “constants” such as degradation rates, where the time dependence would stem from temperature dependence.↩︎\n Recall that, in the notation of TODO, \\(V(t)\\) denotes the final volume on day \\(t\\).↩︎\nLetting \\(x = (m_w,\\,m_s)^T\\) and \\(b = w(m_f(0),0)^T\\), the system can be rewritten in the form: \\[ \\dot x = Ax + e^{\\gamma t }b \\] where \\[ A = \\begin{pmatrix} a_{ww} & a_{ws} \\\\ a_{sw} & a_{ss} \\end{pmatrix} \\] The general solution reads: \\[\n  x(t) = e^{At}x(0)+(e^{At}-e^{\\gamma t}I)(A-\\gamma I)^{-1}b\n  \\] where \\(I\\) is the identity matrix. Notice that the exponential can be computed explicitly from the eigenvalues of \\(A\\): \\[\n  e^{At} = e^{\\lambda _+ t} P_+ + e^{\\lambda _- t} P_-,\n  \\] with: \\[\n  \\lambda _{\\pm} = \\frac{\\text{Tr}A}{2} \\sqrt{\\left(\\frac{\\text{Tr}A}{2}\\right)^2 - \\det A}\n  \\] and \\[\n  P_{\\pm} = \\pm \\frac{1}{\\lambda _+ - \\lambda _-}(A-\\lambda _{\\mp})\n  \\]↩︎",
+    "text": "4.1 Overview",
     "crumbs": [
       "Technical description",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>ERAHUMED simulation layers</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Hydrological model of the Albufera Natural Park</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/hydrology.html#scheme-of-the-hydrological-model",
+    "href": "chapters/hydrology.html#scheme-of-the-hydrological-model",
+    "title": "4  Hydrological model of the Albufera Natural Park",
+    "section": "4.2 Scheme of the hydrological model",
+    "text": "4.2 Scheme of the hydrological model\nThe content of this sections should be roughly the same as the corresponding package vignette.",
+    "crumbs": [
+      "Technical description",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Hydrological model of the Albufera Natural Park</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/hydrology.html#water-balance-calculations",
+    "href": "chapters/hydrology.html#water-balance-calculations",
+    "title": "4  Hydrological model of the Albufera Natural Park",
+    "section": "4.3 Water balance calculations",
+    "text": "4.3 Water balance calculations\n\n4.3.1 Albufera Lake\n\n\n4.3.2 Rice field clusters\n\n\n4.3.3 Irrigation ditches",
+    "crumbs": [
+      "Technical description",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Hydrological model of the Albufera Natural Park</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/exposure.html",
+    "href": "chapters/exposure.html",
+    "title": "5  Exposure",
+    "section": "",
+    "text": "5.1 Overview",
+    "crumbs": [
+      "Technical description",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Exposure</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/exposure.html#pesticide-applications",
+    "href": "chapters/exposure.html#pesticide-applications",
+    "title": "5  Exposure",
+    "section": "5.2 Pesticide applications",
+    "text": "5.2 Pesticide applications\nThis should describe how chemical applications are simulated.",
+    "crumbs": [
+      "Technical description",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Exposure</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/exposure.html#pesticide-dispersion",
+    "href": "chapters/exposure.html#pesticide-dispersion",
+    "title": "5  Exposure",
+    "section": "5.3 Pesticide dispersion",
+    "text": "5.3 Pesticide dispersion\n\n5.3.1 Diagram of physical processes\nRoughly the content of this vignette.\n\n\n5.3.2 Evolution Equations\n\n\n5.3.3 Semi-numerical approach",
+    "crumbs": [
+      "Technical description",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Exposure</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/risk.html",
+    "href": "chapters/risk.html",
+    "title": "6  Risk assessment",
+    "section": "",
+    "text": "6.1 Overview",
+    "crumbs": [
+      "Technical description",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Risk assessment</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/risk.html#calculation-of-risk-using-ssds",
+    "href": "chapters/risk.html#calculation-of-risk-using-ssds",
+    "title": "6  Risk assessment",
+    "section": "6.2 Calculation of risk using SSDs",
+    "text": "6.2 Calculation of risk using SSDs",
+    "crumbs": [
+      "Technical description",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Risk assessment</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/erahumed_dss_ui.html",
+    "href": "chapters/erahumed_dss_ui.html",
+    "title": "7  The ERAHUMED DSS User Interface",
+    "section": "",
+    "text": "This chapter should explain how to run ERAHUMED simulations using the Shiny app. It may contain screenshots taken from the app to exemplify the various points.\n\n7.0.1 How to run the DSS?\nDescribe various options available (which at the moment of writing may as well be “download the package” only - and perhaps a basic deployment on shinyapps.io).\n\n\n7.0.2 The “Output” tab\n\n\n7.0.3 The “Input” tab",
+    "crumbs": [
+      "User Manual",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>The ERAHUMED DSS User Interface</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/erahumed_dss_pkg.html",
+    "href": "chapters/erahumed_dss_pkg.html",
+    "title": "8  The {erahumed} R package",
+    "section": "",
+    "text": "This should not be an exhaustive description of the R package, but rather mention its existence and giving basic instructions for its installation and refer to the package vignette’s and documentation for more details.",
+    "crumbs": [
+      "User Manual",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>The `{erahumed}` R package</span>"
     ]
   },
   {

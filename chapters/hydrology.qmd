@@ -1,0 +1,15 @@
+# Hydrological model of the Albufera Natural Park {#sec-hydrology}
+
+## Overview
+
+## Scheme of the hydrological model
+
+The content of this sections should be roughly the same as the corresponding [package vignette](https://erahumed.github.io/erahumed/articles/hydrology-scheme.html).
+
+## Water balance calculations
+
+### Albufera Lake
+
+### Rice field clusters
+
+### Irrigation ditches

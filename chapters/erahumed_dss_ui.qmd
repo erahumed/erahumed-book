@@ -1,1 +1,13 @@
 # The ERAHUMED DSS User Interface
+
+This chapter should explain how to run ERAHUMED simulations using the Shiny app.
+It may contain screenshots taken from the app to exemplify the various points.
+
+### How to run the DSS?
+
+Describe various options available (which at the moment of writing may as well 
+be "download the package" only - and perhaps a basic deployment on shinyapps.io).
+
+### The "Output" tab
+
+### The "Input" tab

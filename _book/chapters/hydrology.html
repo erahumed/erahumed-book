@@ -8,7 +8,7 @@
 
 <meta name="description" content="The ERAHUMED Decision Support System: Software Manual and Technical Documentation.">
 
-<title>2&nbsp; The ERAHUMED model: a bird’s eye view – ERAHUMED DSS</title>
+<title>4&nbsp; Hydrological model of the Albufera Natural Park – ERAHUMED DSS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,8 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/simulation_layers.html" rel="next">
-<link href="../chapters/intro.html" rel="prev">
+<link href="../chapters/exposure.html" rel="next">
+<link href="../chapters/model-inputs.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -82,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/birds_eye_view.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/birds_eye_view.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ERAHUMED model: a bird’s eye view</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/birdseye.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/hydrology.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hydrological model of the Albufera Natural Park</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -130,14 +130,32 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/birds_eye_view.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/birdseye.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ERAHUMED model: a bird’s eye view</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/simulation_layers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">ERAHUMED simulation layers</span></span></a>
+  <a href="../chapters/model-inputs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Model inputs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/hydrology.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hydrological model of the Albufera Natural Park</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/exposure.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exposure</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/risk.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Risk assessment</span></span></a>
   </div>
 </li>
       </ul>
@@ -154,13 +172,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/erahumed_dss_ui.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The ERAHUMED DSS User Interface</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">The ERAHUMED DSS User Interface</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/erahumed_dss_pkg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">The <code>{erahumed}</code> R package</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">The <code>{erahumed}</code> R package</span></span></a>
   </div>
 </li>
       </ul>
@@ -193,15 +211,28 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">4.1</span> Overview</a></li>
+  <li><a href="#scheme-of-the-hydrological-model" id="toc-scheme-of-the-hydrological-model" class="nav-link" data-scroll-target="#scheme-of-the-hydrological-model"><span class="header-section-number">4.2</span> Scheme of the hydrological model</a></li>
+  <li><a href="#water-balance-calculations" id="toc-water-balance-calculations" class="nav-link" data-scroll-target="#water-balance-calculations"><span class="header-section-number">4.3</span> Water balance calculations</a>
+  <ul class="collapse">
+  <li><a href="#albufera-lake" id="toc-albufera-lake" class="nav-link" data-scroll-target="#albufera-lake"><span class="header-section-number">4.3.1</span> Albufera Lake</a></li>
+  <li><a href="#rice-field-clusters" id="toc-rice-field-clusters" class="nav-link" data-scroll-target="#rice-field-clusters"><span class="header-section-number">4.3.2</span> Rice field clusters</a></li>
+  <li><a href="#irrigation-ditches" id="toc-irrigation-ditches" class="nav-link" data-scroll-target="#irrigation-ditches"><span class="header-section-number">4.3.3</span> Irrigation ditches</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/birds_eye_view.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/birds_eye_view.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ERAHUMED model: a bird’s eye view</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/birdseye.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/hydrology.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hydrological model of the Albufera Natural Park</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-birds-eye-view" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ERAHUMED model: a bird’s eye view</span></span></h1>
+<h1 class="title"><span id="sec-hydrology" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hydrological model of the Albufera Natural Park</span></span></h1>
 </div>
 
 
@@ -218,8 +249,27 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="overview" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">4.1</span> Overview</h2>
+</section>
+<section id="scheme-of-the-hydrological-model" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="scheme-of-the-hydrological-model"><span class="header-section-number">4.2</span> Scheme of the hydrological model</h2>
+<p>The content of this sections should be roughly the same as the corresponding <a href="https://erahumed.github.io/erahumed/articles/hydrology-scheme.html">package vignette</a>.</p>
+</section>
+<section id="water-balance-calculations" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="water-balance-calculations"><span class="header-section-number">4.3</span> Water balance calculations</h2>
+<section id="albufera-lake" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="albufera-lake"><span class="header-section-number">4.3.1</span> Albufera Lake</h3>
+</section>
+<section id="rice-field-clusters" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="rice-field-clusters"><span class="header-section-number">4.3.2</span> Rice field clusters</h3>
+</section>
+<section id="irrigation-ditches" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="irrigation-ditches"><span class="header-section-number">4.3.3</span> Irrigation ditches</h3>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -644,13 +694,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/intro.html" class="pagination-link" aria-label="Introduction">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      <a href="../chapters/model-inputs.html" class="pagination-link" aria-label="Model inputs">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Model inputs</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/simulation_layers.html" class="pagination-link" aria-label="ERAHUMED simulation layers">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">ERAHUMED simulation layers</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/exposure.html" class="pagination-link" aria-label="Exposure">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exposure</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

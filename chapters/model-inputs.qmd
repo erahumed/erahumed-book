@@ -1,0 +1,14 @@
+# Model inputs {#sec-model-inputs}
+
+This chapter will collect all model inputs (numeric parameters, as well as more 
+complex information such as time-series or data-frames). The description should 
+be generally succinct and parameters should be collected in a table - leveraging 
+on `erahumed::erahumed_docs()` to retrieve parameters documentation). 
+
+The goal here is not to explain in detail what every parameter represents, which
+will be clarified when explaining the algorithms. Rather, the goal is to have
+a central reference for all users inputs.
+
+The table could contain links to the sections describing the specific algorithms
+for which the parameters being described play a role.
+

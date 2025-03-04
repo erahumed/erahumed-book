@@ -1,0 +1,7 @@
+# The ERAHUMED model: a bird's eye view {#sec-birdseye}
+
+This section should contain a brief overview of how the model is structured, 
+introducing the three main model components (hydrology, exposure, risk) and 
+hydrological elements (lake, ditches, clusters), as well as explaining how the
+various components are interconnected with each other (*e.g.* the order of 
+calculation).
