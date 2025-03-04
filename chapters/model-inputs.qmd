@@ -6,11 +6,20 @@ The goal here is not to explain in detail what every parameter represents, which
 
 The table could contain links to the sections describing the specific algorithms for which the parameters being described play a role.
 
+---
+
+Landscape parameters are collected in @tbl-landscape-params. In this table, 
+`numeric(n)` type parameters indicate numeric vectors of `n` components, while 
+`data.frame` inputs have more complex formats, discussed in detail below.
+
 ```{r}
 #| echo: false
+#| label: tbl-landscape-params
+#| tbl-cap: "ERAHUMED input parameters"
+
 if (knitr::opts_knit$get("rmarkdown.pandoc.to") == "html") {
-  render_fun <- \(x) DT::datatable(x, escape = FALSE)
-} else {
+  render_fun <- \(x) knitr::kable(x, format = "html", escape = FALSE) 
+  } else {
   render_fun <- \(x) knitr::kable(x, format = "latex")
 }
 
@@ -30,8 +39,13 @@ extract_layers_parameters_df <- function(l) {
   res <- data.frame(name = names(params), type = NA, description = NA)
   
   for (i in seq_along(params)) {
-    res[i, "type"] <- params[[i]]$type
-    res[i, "description"] <- strip_roxy_macros(params[[i]]$description)
+    res[i, "name"] <- paste0("`", res[i, "name"], "`") |>
+      gt::vec_fmt_markdown()
+    res[i, "type"] <- paste0("`", params[[i]]$type, "`") |>
+      gt::vec_fmt_markdown()
+    res[i, "description"] <- strip_roxy_macros(params[[i]]$description) |>
+      gt::vec_fmt_markdown()
+      
   }
   
   return(res)
@@ -41,4 +55,3 @@ lapply(docs_layers, extract_layers_parameters_df) |>
   Reduce(rbind, x = _) |>
   render_fun()
 ```
-

@@ -69,26 +69,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
-
-<script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-
-<link href="../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-
-<script src="../site_libs/datatables-binding-0.33/datatables.js"></script>
-
-<script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-
-<link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
-
-<link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
-
-<script src="../site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
-
-<link href="../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
-
-<script src="../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
-
 
 
 </head>
@@ -259,10 +239,147 @@ ul.task-list li input[type="checkbox"] {
 <p>This chapter will collect all model inputs (numeric parameters, as well as more complex information such as time-series or data-frames). The description should be generally succinct and parameters should be collected in a table - leveraging on <code>erahumed::erahumed_docs()</code> to retrieve parameters documentation).</p>
 <p>The goal here is not to explain in detail what every parameter represents, which will be clarified when explaining the algorithms. Rather, the goal is to have a central reference for all users inputs.</p>
 <p>The table could contain links to the sections describing the specific algorithms for which the parameters being described play a role.</p>
+<hr>
+<p>Landscape parameters are collected in <a href="#tbl-landscape-params" class="quarto-xref">Table&nbsp;<span>3.1</span></a>. In this table, <code>numeric(n)</code> type parameters indicate numeric vectors of <code>n</code> components, while <code>data.frame</code> inputs have more complex formats, discussed in detail below.</p>
 <div class="cell">
+<div id="tbl-landscape-params" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-landscape-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.1: ERAHUMED input parameters
+</figcaption>
+<div aria-describedby="tbl-landscape-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-770d43f73fae7c861b02" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-770d43f73fae7c861b02">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23"],["outflows_df","weather_df","variety_prop","seed","storage_curve_slope_m2","storage_curve_intercept_m3","petp_surface_m2","management_df","ideal_flow_rate_cm","height_thresh_cm","ditch_level_m","ca_schedules_df","drift","covmax","jgrow","SNK","dact_m","css_ppm","foc","bd_g_cm3","qseep_m_day","wilting","fc"],["data.frame","data.frame","numeric(3)","numeric(1)","numeric(1)","numeric(1)","numeric(1)","data.frame","numeric(1)","numeric(1)","numeric(1)","data.frame","numeric(1)","numeric(1)","numeric(1)","numeric(1)","numeric(1)","numeric(1)","numeric(1)","numeric(1)","numeric(1)","numeric(1)","numeric(1)"],["Time-series dataset that provides the observational hydrological data on the Albufera lake, along the template of `albufera_outflows` (the default value).","A dataset that provides the relevant metereological time series, along the template of `albufera_weather` (the default value).","Vector of `3` positive values. Controls the proportions of field surface allocated to the cultivation of the J. Sendra, Bomba, and Clearfield varieties, respectively (positive vectors that do not sum to one are allowed, with entries being understood as relative proportions).","Seed for random number generation used by the simulation algorithms.","Slope of the (linear) storage curve of the Albufera Lake, in square meters. Numeric values for the default are taken from the CHJ report [*Modelo de seguimiento de l’Albufera de Valencia con AQUATOOLDMA*](https://www.chj.es/Descargas/ProyectosOPH/Consulta%20publica/PHC-2015-2021/ReferenciasBibliograficas/HumedalesZonasProtegidas/CHJ,2012.Aquatool_Albufera.pdf).","Intercept of the (linear) storage curve of the Albufera Lake, in cubic meters. Numeric values for the default are taken from the CHJ report [*Modelo de seguimiento de l’Albufera de Valencia con AQUATOOLDMA*](https://www.chj.es/Descargas/ProyectosOPH/Consulta%20publica/PHC-2015-2021/ReferenciasBibliograficas/HumedalesZonasProtegidas/CHJ,2012.Aquatool_Albufera.pdf).","The value (in squared meters) of the surface that converts precipitation and evapotranspiration per unit area into volume changes for the Albufera lake. This function should take two numeric vectors of common length as inputs (representing the precipitation and evapotranspiration time series, respectively), and should return a numeric vector of the same length. The numeric values used in the default (linear) function were computed by the package authors, and correspond to the total study area (consisting of the lake and irrigation ditches) and the flooded fraction, that are relevant for precipitation and evapotranspiration volume changes, respectively.","Dataset that provides the yearly schedule for irrigation and draining, along the template of `albufera_management` (the default value).","Ideal inflow/outflow of a cluster, for days in which the cluster is scheduled to be in flux (*i.e.* when being simultaneously irrigated and drained). Expressed in centimeters per day.","A positive number. Height threshold for water levels, below which a cluster is considered to be emptied.","Constant water depth in ditches.","A dataset that provides the list of scheduled chemical applications, along the template of `albufera_ca_schedules`.","A number between `0` and `1`. Percentage of chemical applications lost to drift.","A number between `0` and `1`. Interception potential of foliage at crop maturation.","A positive integer. Length (in days) of crop maturation cycle.","A number between `0` and `1`. (TODO).","A positive number. Active sediment layer depth, expressed in meters.","A positive number. Suspended sediment concentration, expressed in parts per million.","A number between `0` and `1`. Fraction of organic content.","A positive number. Bulk density of the sediment, expressed in grams per cubic centimeter.","A positive number. Seepage rate, expressed in meters per day.","A number between `0` and `1`. Wilting point.","A number between `0` and `1`. Field capacity."]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>name<\/th>\n      <th>type<\/th>\n      <th>description<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"name","targets":1},{"name":"type","targets":2},{"name":"description","targets":3}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">name</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">type</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>outflows_df</code></td>
+<td style="text-align: left;"><code>data.frame</code></td>
+<td style="text-align: left;">Time-series dataset that provides the observational hydrological data on the Albufera lake, along the template of <code>albufera_outflows</code> (the default value).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>weather_df</code></td>
+<td style="text-align: left;"><code>data.frame</code></td>
+<td style="text-align: left;">A dataset that provides the relevant metereological time series, along the template of <code>albufera_weather</code> (the default value).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>variety_prop</code></td>
+<td style="text-align: left;"><code>numeric(3)</code></td>
+<td style="text-align: left;">Vector of <code>3</code> positive values. Controls the proportions of field surface allocated to the cultivation of the J. Sendra, Bomba, and Clearfield varieties, respectively (positive vectors that do not sum to one are allowed, with entries being understood as relative proportions).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>seed</code></td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Seed for random number generation used by the simulation algorithms.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>storage_curve_slope_m2</code></td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Slope of the (linear) storage curve of the Albufera Lake, in square meters. Numeric values for the default are taken from the CHJ report <a href="https://www.chj.es/Descargas/ProyectosOPH/Consulta%20publica/PHC-2015-2021/ReferenciasBibliograficas/HumedalesZonasProtegidas/CHJ,2012.Aquatool_Albufera.pdf"><em>Modelo de seguimiento de l’Albufera de Valencia con AQUATOOLDMA</em></a>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>storage_curve_intercept_m3</code></td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Intercept of the (linear) storage curve of the Albufera Lake, in cubic meters. Numeric values for the default are taken from the CHJ report <a href="https://www.chj.es/Descargas/ProyectosOPH/Consulta%20publica/PHC-2015-2021/ReferenciasBibliograficas/HumedalesZonasProtegidas/CHJ,2012.Aquatool_Albufera.pdf"><em>Modelo de seguimiento de l’Albufera de Valencia con AQUATOOLDMA</em></a>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>petp_surface_m2</code></td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">The value (in squared meters) of the surface that converts precipitation and evapotranspiration per unit area into volume changes for the Albufera lake. This function should take two numeric vectors of common length as inputs (representing the precipitation and evapotranspiration time series, respectively), and should return a numeric vector of the same length. The numeric values used in the default (linear) function were computed by the package authors, and correspond to the total study area (consisting of the lake and irrigation ditches) and the flooded fraction, that are relevant for precipitation and evapotranspiration volume changes, respectively.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>management_df</code></td>
+<td style="text-align: left;"><code>data.frame</code></td>
+<td style="text-align: left;">Dataset that provides the yearly schedule for irrigation and draining, along the template of <code>albufera_management</code> (the default value).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>ideal_flow_rate_cm</code></td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Ideal inflow/outflow of a cluster, for days in which the cluster is scheduled to be in flux (<em>i.e.</em> when being simultaneously irrigated and drained). Expressed in centimeters per day.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>height_thresh_cm</code></td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">A positive number. Height threshold for water levels, below which a cluster is considered to be emptied.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>ditch_level_m</code></td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Constant water depth in ditches.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ca_schedules_df</code></td>
+<td style="text-align: left;"><code>data.frame</code></td>
+<td style="text-align: left;">A dataset that provides the list of scheduled chemical applications, along the template of <code>albufera_ca_schedules</code>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>drift</code></td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">A number between <code>0</code> and <code>1</code>. Percentage of chemical applications lost to drift.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>covmax</code></td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">A number between <code>0</code> and <code>1</code>. Interception potential of foliage at crop maturation.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>jgrow</code></td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">A positive integer. Length (in days) of crop maturation cycle.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>SNK</code></td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">A number between <code>0</code> and <code>1</code>. (TODO).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>dact_m</code></td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">A positive number. Active sediment layer depth, expressed in meters.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>css_ppm</code></td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">A positive number. Suspended sediment concentration, expressed in parts per million.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>foc</code></td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">A number between <code>0</code> and <code>1</code>. Fraction of organic content.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>bd_g_cm3</code></td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">A positive number. Bulk density of the sediment, expressed in grams per cubic centimeter.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>qseep_m_day</code></td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">A positive number. Seepage rate, expressed in meters per day.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>wilting</code></td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">A number between <code>0</code> and <code>1</code>. Wilting point.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>fc</code></td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">A number between <code>0</code> and <code>1</code>. Field capacity.</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</figure>
 </div>
 </div>
 
