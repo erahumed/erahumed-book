@@ -24,7 +24,7 @@
     "href": "chapters/birdseye.html#footnotes",
     "title": "2  The ERAHUMED model: a bird’s eye view",
     "section": "",
-    "text": "The exact definition of “clusters” is discussed in Section 4.2. For the purposes of this high-level description, we can think of them simply as groups of rice fields.↩︎",
+    "text": "The exact definition of “clusters” is discussed in Section 4.3. For the purposes of this high-level description, we can think of them simply as groups of rice fields.↩︎",
     "crumbs": [
       "Technical description",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>The ERAHUMED model: a bird's eye view</span>"
@@ -75,11 +75,22 @@
     ]
   },
   {
+    "objectID": "chapters/hydrology.html#definition-of-hydrological-elements",
+    "href": "chapters/hydrology.html#definition-of-hydrological-elements",
+    "title": "4  Hydrological model of the Albufera Natural Park",
+    "section": "4.2 Definition of hydrological elements",
+    "text": "4.2 Definition of hydrological elements\nOur hydrological modeling represents the Albufera Natural Park in terms of three main hydrological elements (or “water bodies”): rice field clusters, irrigation ditches, and Albufera Lake.\nThe definition of rice field clusters and irrigation ditches used in our modeling is discussed in detail in Ref. [TODO: insert Pablo’s paper reference]. For our purposes, we note that:\n\nThe park’s cultivation area is divided into rice field clusters, each comprising several rice fields that share the same variety and type (tancat or regular).\nEach cluster is assumed to drain into a single irrigation ditch, selected based on the shortest distance (see Ref. TODO for details).",
+    "crumbs": [
+      "Technical description",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Hydrological model of the Albufera Natural Park</span>"
+    ]
+  },
+  {
     "objectID": "chapters/hydrology.html#sec-hydrology-scheme",
     "href": "chapters/hydrology.html#sec-hydrology-scheme",
     "title": "4  Hydrological model of the Albufera Natural Park",
-    "section": "4.2 Scheme of the hydrological model",
-    "text": "4.2 Scheme of the hydrological model\nThe content of this sections should be roughly the same as the corresponding package vignette.",
+    "section": "4.3 Scheme of the hydrological model",
+    "text": "4.3 Scheme of the hydrological model\nThis schematic diagram represents the simplified hydrological model of the Albufera Natural Park employed by ERAHUMED. It highlights water flows across the three primary landscape elements defined in the previous Section. Key simplifying assumptions embedded in the model and visually summarized in the diagram are as follows:\n\nRice Clusters Clusters are irrigated by external water sources and drain exclusively a single ditch. There is no direct hydrological interaction or exchange between individual clusters.\nDitches Ditches collect water from the clusters and, potentially, from additional external sources, channeling all inflows directly into the Albufera lake.\nThe Albufera Lake The lake receives water exclusively from the ditches. While two types of outflow are considered, namely direct discharge to the sea and water recirculation to the rice fields, the latter is typically negligible1.\n\n\n\n\n\n\n\nFigure 4.1: Scheme of ERAHUMED hydrological model of the Albufera Natural Park",
     "crumbs": [
       "Technical description",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Hydrological model of the Albufera Natural Park</span>"
@@ -89,8 +100,19 @@
     "objectID": "chapters/hydrology.html#water-balance-calculations",
     "href": "chapters/hydrology.html#water-balance-calculations",
     "title": "4  Hydrological model of the Albufera Natural Park",
-    "section": "4.3 Water balance calculations",
-    "text": "4.3 Water balance calculations\n\n4.3.1 Albufera Lake\n\n\n4.3.2 Rice field clusters\n\n\n4.3.3 Irrigation ditches",
+    "section": "4.4 Water balance calculations",
+    "text": "4.4 Water balance calculations\nThis section provides the details of the water balance calculations for (in the order of computation) the Albufera Lake, rice field clusters, and irrigation ditches of the park.\n\n4.4.1 Albufera Lake\nWater balance calculations for the Albufera Lake are relatively simple. The relevant equation expressing hydrological balance is:\n\\[\n\\text{Volume Change} = \\text{Inflow} - \\text{Outflow} + \\text{Precipitation} - \\text{Evapotranspiration}.\n\\tag{4.1}\\]\nIn order to start fixing the notation, we define the following variables which have direct correspondence with model input parameters listed in Chapter 3 (we use the notation df$col to indicate column col of data frame df).\n\n\n\n\n\n\n\n\n\nVariable\nSource\nUnits\nDescription\n\n\n\n\n\\(h_t\\)\noutflows_df$level\n\\(\\text{m}\\)\nLake water level daily time series\n\n\n\\(O_t^{\\text{Pujol}}\\)\noutflows_df$outflow_pujol\n\\(\\text{m}^3\\)\nPujol outflow daily time series\n\n\n\\(O_t^{\\text{Perelló}}\\)\noutflows_df$outflow_perello\n\\(\\text{m}^3\\)\nPerelló outflow daily time series\n\n\n\\(O_t^{\\text{Perellonet}}\\)\noutflows_df$outflow_perellonet\n\\(\\text{m}^3\\)\nPerellonet outflow daily time series\n\n\n\\(\\text{P}_t\\)\noutflows_df$precipitation_mm\n\\(\\text{mm}\\)\nPrecipitation (per unit area) daily time series\n\n\n\\(\\text{ET}_t\\)\noutflows_df$evapotranspiration_mm\n\\(\\text{mm}\\)\nEvapotranspiration (per unit area) daily time series\n\n\n\\(\\alpha\\)\nstorage_curve_intercept_m3\n\\(\\text{m}^3\\)\nStorage curve intercept\n\n\n\\(\\beta\\)\nstorage_curve_slope_m2\n\\(\\text{m}^2\\)\nStorage curve slope\n\n\n\\(\\sigma _\\text{PET}\\)\npetp_surface_m2\n\\(\\text{m}^2\\)\nPET surface\n\n\n\nIn addition we denote:\n\n\n\n\n\n\n\n\nVariable\nUnits\nDescription\n\n\n\n\n\\(V_t\\)\n\\(\\text{m}^3\\)\nLake water volume daily time series\n\n\n\\(\\Delta V_t \\equiv V_{t+1}-V_t\\)\n\\(\\text{m}^3\\)\nLake water volume change daily time series\n\n\n\\(\\Delta V_t^{\\text{PET}}\\)\n\\(\\text{m}^3\\)\nLake water volume change due to precipitation and evapotranspiration daily time series\n\n\n\\(I_t\\)\n\\(\\text{m}^3\\)\nLake total inflow daily time series\n\n\n\\(O_t\\)\n\\(\\text{m}^3\\)\nLake total outflow daily time series\n\n\n\nThe volume time-series is calculated as:\n\\[\nV_t = \\alpha + \\beta \\cdot h_t,\n\\tag{4.2}\\]\nwhile the volume changes due to precipitation and evapotranspiration are given by:\n\\[\n\\Delta V_t ^{\\text{PET}} = \\sigma _{\\text{PET}}(\\text{P}_t - \\text{ET}_t),\n\\tag{4.3}\\]\nTotal inflow and outflow must satisfy Equation 4.1, which we may rewrite explicitly as:\n\\[\n\\Delta V_{t} -\\Delta V^{\\text{PET}}_t = I_t - O_t,\n\\tag{4.4}\\]\nStrictly speaking, \\(O_t\\) is not merely the sum of \\(O_t^{\\text{Pujol}}\\), \\(O_t^{\\text{Perelló}}\\) and \\(O_t^{\\text{Perellonet}}\\), but is rather calculated as follows:\n\\[\nO_t = \\max\n\\left[\nO_t^{\\text{Pujol}} + O_t^{\\text{Perelló}} + O_t^{\\text{Perellonet}},\\,\n\\Delta V^{\\text{PET}}_t -\\Delta V_{t}\n\\right].\n\\tag{4.5}\\]\nThe rationale is that the simple sum of estuaries outflows omits potentially important contributions from water recirculation, that is to say, water being pumped out from the lake for rice-field irrigation, by the so-called tancats. Such amount of recirculated water is hard to estimate and, in the lack of a better model, we simply assume this to be negligible, except when a positive amount is required by Equation 4.4 itself, due the physical constraint that \\(I_t \\geq 0\\).\nOnce \\(O_t\\) is calculated through Equation 4.5, \\(I_t\\) can be immediately obtained from Equation 4.4. Notice that whenever the aforementioned compensating outflow term due to water recirculation is included (which happens when the maximum in Eq. 4.5 is given by the second term), the total inflow is always estimated to be zero.\n\n\n4.4.2 Rice field clusters\n\n\n4.4.3 Irrigation ditches",
+    "crumbs": [
+      "Technical description",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Hydrological model of the Albufera Natural Park</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/hydrology.html#footnotes",
+    "href": "chapters/hydrology.html#footnotes",
+    "title": "4  Hydrological model of the Albufera Natural Park",
+    "section": "",
+    "text": "Further details on this are discussed in Section 4.4.1.↩︎",
     "crumbs": [
       "Technical description",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Hydrological model of the Albufera Natural Park</span>"

@@ -70,6 +70,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -217,12 +246,13 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">4.1</span> Overview</a></li>
-  <li><a href="#sec-hydrology-scheme" id="toc-sec-hydrology-scheme" class="nav-link" data-scroll-target="#sec-hydrology-scheme"><span class="header-section-number">4.2</span> Scheme of the hydrological model</a></li>
-  <li><a href="#water-balance-calculations" id="toc-water-balance-calculations" class="nav-link" data-scroll-target="#water-balance-calculations"><span class="header-section-number">4.3</span> Water balance calculations</a>
+  <li><a href="#definition-of-hydrological-elements" id="toc-definition-of-hydrological-elements" class="nav-link" data-scroll-target="#definition-of-hydrological-elements"><span class="header-section-number">4.2</span> Definition of hydrological elements</a></li>
+  <li><a href="#sec-hydrology-scheme" id="toc-sec-hydrology-scheme" class="nav-link" data-scroll-target="#sec-hydrology-scheme"><span class="header-section-number">4.3</span> Scheme of the hydrological model</a></li>
+  <li><a href="#water-balance-calculations" id="toc-water-balance-calculations" class="nav-link" data-scroll-target="#water-balance-calculations"><span class="header-section-number">4.4</span> Water balance calculations</a>
   <ul class="collapse">
-  <li><a href="#albufera-lake" id="toc-albufera-lake" class="nav-link" data-scroll-target="#albufera-lake"><span class="header-section-number">4.3.1</span> Albufera Lake</a></li>
-  <li><a href="#rice-field-clusters" id="toc-rice-field-clusters" class="nav-link" data-scroll-target="#rice-field-clusters"><span class="header-section-number">4.3.2</span> Rice field clusters</a></li>
-  <li><a href="#irrigation-ditches" id="toc-irrigation-ditches" class="nav-link" data-scroll-target="#irrigation-ditches"><span class="header-section-number">4.3.3</span> Irrigation ditches</a></li>
+  <li><a href="#sec-albufera-lake-hydrology" id="toc-sec-albufera-lake-hydrology" class="nav-link" data-scroll-target="#sec-albufera-lake-hydrology"><span class="header-section-number">4.4.1</span> Albufera Lake</a></li>
+  <li><a href="#rice-field-clusters" id="toc-rice-field-clusters" class="nav-link" data-scroll-target="#rice-field-clusters"><span class="header-section-number">4.4.2</span> Rice field clusters</a></li>
+  <li><a href="#irrigation-ditches" id="toc-irrigation-ditches" class="nav-link" data-scroll-target="#irrigation-ditches"><span class="header-section-number">4.4.3</span> Irrigation ditches</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -252,23 +282,195 @@ ul.task-list li input[type="checkbox"] {
 <section id="overview" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">4.1</span> Overview</h2>
 </section>
-<section id="sec-hydrology-scheme" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="sec-hydrology-scheme"><span class="header-section-number">4.2</span> Scheme of the hydrological model</h2>
-<p>The content of this sections should be roughly the same as the corresponding <a href="https://erahumed.github.io/erahumed/articles/hydrology-scheme.html">package vignette</a>.</p>
+<section id="definition-of-hydrological-elements" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="definition-of-hydrological-elements"><span class="header-section-number">4.2</span> Definition of hydrological elements</h2>
+<p>Our hydrological modeling represents the Albufera Natural Park in terms of three main hydrological elements (or “water bodies”): rice field clusters, irrigation ditches, and Albufera Lake.</p>
+<p>The definition of rice field clusters and irrigation ditches used in our modeling is discussed in detail in Ref. [TODO: insert Pablo’s paper reference]. For our purposes, we note that:</p>
+<ul>
+<li><p>The park’s cultivation area is divided into rice field clusters, each comprising several rice fields that share the same variety and type (<em>tancat</em> or regular).</p></li>
+<li><p>Each cluster is assumed to drain into a single irrigation ditch, selected based on the shortest distance (see Ref. TODO for details).</p></li>
+</ul>
 </section>
-<section id="water-balance-calculations" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="water-balance-calculations"><span class="header-section-number">4.3</span> Water balance calculations</h2>
-<section id="albufera-lake" class="level3" data-number="4.3.1">
-<h3 data-number="4.3.1" class="anchored" data-anchor-id="albufera-lake"><span class="header-section-number">4.3.1</span> Albufera Lake</h3>
+<section id="sec-hydrology-scheme" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="sec-hydrology-scheme"><span class="header-section-number">4.3</span> Scheme of the hydrological model</h2>
+<p>This schematic diagram represents the simplified hydrological model of the Albufera Natural Park employed by ERAHUMED. It highlights water flows across the three primary landscape elements defined in the previous Section. Key simplifying assumptions embedded in the model and visually summarized in the diagram are as follows:</p>
+<ul>
+<li><p><strong>Rice Clusters</strong> Clusters are irrigated by external water sources and drain exclusively a single ditch. There is no direct hydrological interaction or exchange between individual clusters.</p></li>
+<li><p><strong>Ditches</strong> Ditches collect water from the clusters and, potentially, from additional external sources, channeling all inflows directly into the Albufera lake.</p></li>
+<li><p><strong>The Albufera Lake</strong> The lake receives water exclusively from the ditches. While two types of outflow are considered, namely direct discharge to the sea and water recirculation to the rice fields, the latter is typically negligible<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p></li>
+</ul>
+<div id="fig-hydrology-scheme" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-hydrology-scheme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/hydrology-scheme.jpg" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hydrology-scheme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.1: Scheme of ERAHUMED hydrological model of the Albufera Natural Park
+</figcaption>
+</figure>
+</div>
 </section>
-<section id="rice-field-clusters" class="level3" data-number="4.3.2">
-<h3 data-number="4.3.2" class="anchored" data-anchor-id="rice-field-clusters"><span class="header-section-number">4.3.2</span> Rice field clusters</h3>
+<section id="water-balance-calculations" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="water-balance-calculations"><span class="header-section-number">4.4</span> Water balance calculations</h2>
+<p>This section provides the details of the water balance calculations for (in the order of computation) the Albufera Lake, rice field clusters, and irrigation ditches of the park.</p>
+<section id="sec-albufera-lake-hydrology" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="sec-albufera-lake-hydrology"><span class="header-section-number">4.4.1</span> Albufera Lake</h3>
+<p>Water balance calculations for the Albufera Lake are relatively simple. The relevant equation expressing hydrological balance is:</p>
+<p><span id="eq-hbl-hydro-balance-symbolic"><span class="math display">\[
+\text{Volume Change} = \text{Inflow} - \text{Outflow} + \text{Precipitation} - \text{Evapotranspiration}.
+\tag{4.1}\]</span></span></p>
+<p>In order to start fixing the notation, we define the following variables which have direct correspondence with model input parameters listed in <a href="model-inputs.html" class="quarto-xref"><span>Chapter 3</span></a> (we use the notation <code>df$col</code> to indicate column <code>col</code> of data frame <code>df</code>).</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 18%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Source</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(h_t\)</span></td>
+<td><code>outflows_df$level</code></td>
+<td><span class="math inline">\(\text{m}\)</span></td>
+<td>Lake water level daily time series</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(O_t^{\text{Pujol}}\)</span></td>
+<td><code>outflows_df$outflow_pujol</code></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td><em>Pujol</em> outflow daily time series</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(O_t^{\text{Perelló}}\)</span></td>
+<td><code>outflows_df$outflow_perello</code></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td><em>Perelló</em> outflow daily time series</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(O_t^{\text{Perellonet}}\)</span></td>
+<td><code>outflows_df$outflow_perellonet</code></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td><em>Perellonet</em> outflow daily time series</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\text{P}_t\)</span></td>
+<td><code>outflows_df$precipitation_mm</code></td>
+<td><span class="math inline">\(\text{mm}\)</span></td>
+<td>Precipitation (per unit area) daily time series</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\text{ET}_t\)</span></td>
+<td><code>outflows_df$evapotranspiration_mm</code></td>
+<td><span class="math inline">\(\text{mm}\)</span></td>
+<td>Evapotranspiration (per unit area) daily time series</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\alpha\)</span></td>
+<td><code>storage_curve_intercept_m3</code></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td>Storage curve intercept</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\beta\)</span></td>
+<td><code>storage_curve_slope_m2</code></td>
+<td><span class="math inline">\(\text{m}^2\)</span></td>
+<td>Storage curve slope</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\sigma _\text{PET}\)</span></td>
+<td><code>petp_surface_m2</code></td>
+<td><span class="math inline">\(\text{m}^2\)</span></td>
+<td>PET surface</td>
+</tr>
+</tbody>
+</table>
+<p>In addition we denote:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(V_t\)</span></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td>Lake water volume daily time series</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\Delta V_t \equiv V_{t+1}-V_t\)</span></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td>Lake water volume change daily time series</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\Delta V_t^{\text{PET}}\)</span></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td>Lake water volume change due to precipitation and evapotranspiration daily time series</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(I_t\)</span></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td>Lake total inflow daily time series</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(O_t\)</span></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td>Lake total outflow daily time series</td>
+</tr>
+</tbody>
+</table>
+<p>The volume time-series is calculated as:</p>
+<p><span id="eq-hbl-storage-function"><span class="math display">\[
+V_t = \alpha + \beta \cdot h_t,
+\tag{4.2}\]</span></span></p>
+<p>while the volume changes due to precipitation and evapotranspiration are given by:</p>
+<p><span id="eq-hbl-petp-function"><span class="math display">\[
+\Delta V_t ^{\text{PET}} = \sigma _{\text{PET}}(\text{P}_t - \text{ET}_t),
+\tag{4.3}\]</span></span></p>
+<p>Total inflow and outflow must satisfy <a href="#eq-hbl-hydro-balance-symbolic" class="quarto-xref">Equation&nbsp;<span>4.1</span></a>, which we may rewrite explicitly as:</p>
+<p><span id="eq-hbl-hydro-balance-explicit"><span class="math display">\[
+\Delta V_{t} -\Delta V^{\text{PET}}_t = I_t - O_t,
+\tag{4.4}\]</span></span></p>
+<p>Strictly speaking, <span class="math inline">\(O_t\)</span> is not merely the sum of <span class="math inline">\(O_t^{\text{Pujol}}\)</span>, <span class="math inline">\(O_t^{\text{Perelló}}\)</span> and <span class="math inline">\(O_t^{\text{Perellonet}}\)</span>, but is rather calculated as follows:</p>
+<p><span id="eq-hbl-total-outflow"><span class="math display">\[
+O_t = \max
+\left[
+O_t^{\text{Pujol}} + O_t^{\text{Perelló}} + O_t^{\text{Perellonet}},\,
+\Delta V^{\text{PET}}_t -\Delta V_{t}
+\right].
+\tag{4.5}\]</span></span></p>
+<p>The rationale is that the simple sum of estuaries outflows omits potentially important contributions from <em>water recirculation</em>, that is to say, water being pumped out from the lake for rice-field irrigation, by the so-called <em>tancats</em>. Such amount of recirculated water is hard to estimate and, in the lack of a better model, we simply assume this to be negligible, <em>except</em> when a positive amount is required by <a href="#eq-hbl-hydro-balance-explicit" class="quarto-xref">Equation&nbsp;<span>4.4</span></a> itself, due the physical constraint that <span class="math inline">\(I_t \geq 0\)</span>.</p>
+<p>Once <span class="math inline">\(O_t\)</span> is calculated through <a href="#eq-hbl-total-outflow" class="quarto-xref">Equation&nbsp;<span>4.5</span></a>, <span class="math inline">\(I_t\)</span> can be immediately obtained from <a href="#eq-hbl-hydro-balance-explicit" class="quarto-xref">Equation&nbsp;<span>4.4</span></a>. Notice that whenever the aforementioned compensating outflow term due to water recirculation is included (which happens when the maximum in Eq. <a href="#eq-hbl-total-outflow" class="quarto-xref"><span>4.5</span></a> is given by the second term), the total inflow is always estimated to be zero.</p>
 </section>
-<section id="irrigation-ditches" class="level3" data-number="4.3.3">
-<h3 data-number="4.3.3" class="anchored" data-anchor-id="irrigation-ditches"><span class="header-section-number">4.3.3</span> Irrigation ditches</h3>
+<section id="rice-field-clusters" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="rice-field-clusters"><span class="header-section-number">4.4.2</span> Rice field clusters</h3>
+</section>
+<section id="irrigation-ditches" class="level3" data-number="4.4.3">
+<h3 data-number="4.4.3" class="anchored" data-anchor-id="irrigation-ditches"><span class="header-section-number">4.4.3</span> Irrigation ditches</h3>
 
 
 </section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Further details on this are discussed in <a href="#sec-albufera-lake-hydrology" class="quarto-xref"><span>Section 4.4.1</span></a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->

@@ -2,13 +2,98 @@
 
 ## Overview
 
+## Definition of hydrological elements
+
+Our hydrological modeling represents the Albufera Natural Park in terms of three main hydrological elements (or "water bodies"): rice field clusters, irrigation ditches, and Albufera Lake.
+
+The definition of rice field clusters and irrigation ditches used in our modeling is discussed in detail in Ref. \[TODO: insert Pablo's paper reference\]. For our purposes, we note that:
+
+-   The park’s cultivation area is divided into rice field clusters, each comprising several rice fields that share the same variety and type (*tancat* or regular).
+
+-   Each cluster is assumed to drain into a single irrigation ditch, selected based on the shortest distance (see Ref. TODO for details).
+
 ## Scheme of the hydrological model {#sec-hydrology-scheme}
 
-The content of this sections should be roughly the same as the corresponding [package vignette](https://erahumed.github.io/erahumed/articles/hydrology-scheme.html).
+This schematic diagram represents the simplified hydrological model of the Albufera Natural Park employed by ERAHUMED. It highlights water flows across the three primary landscape elements defined in the previous Section. Key simplifying assumptions embedded in the model and visually summarized in the diagram are as follows:
+
+-   **Rice Clusters** Clusters are irrigated by external water sources and drain exclusively a single ditch. There is no direct hydrological interaction or exchange between individual clusters.
+
+-   **Ditches** Ditches collect water from the clusters and, potentially, from additional external sources, channeling all inflows directly into the Albufera lake.
+
+-   **The Albufera Lake** The lake receives water exclusively from the ditches. While two types of outflow are considered, namely direct discharge to the sea and water recirculation to the rice fields, the latter is typically negligible[^hydrology-1].
+
+[^hydrology-1]: Further details on this are discussed in @sec-albufera-lake-hydrology.
+
+![Scheme of ERAHUMED hydrological model of the Albufera Natural Park](img/hydrology-scheme.jpg){#fig-hydrology-scheme width="100%"}
 
 ## Water balance calculations
 
-### Albufera Lake
+This section provides the details of the water balance calculations for (in the order of computation) the Albufera Lake, rice field clusters, and irrigation ditches of the park.
+
+### Albufera Lake {#sec-albufera-lake-hydrology}
+
+Water balance calculations for the Albufera Lake are relatively simple. The relevant equation expressing hydrological balance is:
+
+$$
+\text{Volume Change} = \text{Inflow} - \text{Outflow} + \text{Precipitation} - \text{Evapotranspiration}.
+$$ {#eq-hbl-hydro-balance-symbolic}
+
+In order to start fixing the notation, we define the following variables which have direct correspondence with model input parameters listed in @sec-model-inputs (we use the notation `df$col` to indicate column `col` of data frame `df`).
+
+| Variable | Source | Units | Description |
+|-----------------------|-----------------------|------------------|-------------------------------|
+| $h_t$ | `outflows_df$level` | $\text{m}$ | Lake water level daily time series |
+| $O_t^{\text{Pujol}}$ | `outflows_df$outflow_pujol` | $\text{m}^3$ | *Pujol* outflow daily time series |
+| $O_t^{\text{Perelló}}$ | `outflows_df$outflow_perello` | $\text{m}^3$ | *Perelló* outflow daily time series |
+| $O_t^{\text{Perellonet}}$ | `outflows_df$outflow_perellonet` | $\text{m}^3$ | *Perellonet* outflow daily time series |
+| $\text{P}_t$ | `outflows_df$precipitation_mm` | $\text{mm}$ | Precipitation (per unit area) daily time series |
+| $\text{ET}_t$ | `outflows_df$evapotranspiration_mm` | $\text{mm}$ | Evapotranspiration (per unit area) daily time series |
+| $\alpha$ | `storage_curve_intercept_m3` | $\text{m}^3$ | Storage curve intercept |
+| $\beta$ | `storage_curve_slope_m2` | $\text{m}^2$ | Storage curve slope |
+| $\sigma _\text{PET}$ | `petp_surface_m2` | $\text{m}^2$ | PET surface |
+
+In addition we denote:
+
+| Variable | Units | Description |
+|----|----|----|
+| $V_t$ | $\text{m}^3$ | Lake water volume daily time series |
+| $\Delta V_t \equiv V_{t+1}-V_t$ | $\text{m}^3$ | Lake water volume change daily time series |
+| $\Delta V_t^{\text{PET}}$ | $\text{m}^3$ | Lake water volume change due to precipitation and evapotranspiration daily time series |
+| $I_t$ | $\text{m}^3$ | Lake total inflow daily time series |
+| $O_t$ | $\text{m}^3$ | Lake total outflow daily time series |
+
+The volume time-series is calculated as:
+
+$$
+V_t = \alpha + \beta \cdot h_t,
+$$ {#eq-hbl-storage-function}
+
+while the volume changes due to precipitation and evapotranspiration are given by:
+
+$$
+\Delta V_t ^{\text{PET}} = \sigma _{\text{PET}}(\text{P}_t - \text{ET}_t),
+$$ {#eq-hbl-petp-function}
+
+Total inflow and outflow must satisfy @eq-hbl-hydro-balance-symbolic, which we may rewrite explicitly as:
+
+$$
+\Delta V_{t} -\Delta V^{\text{PET}}_t = I_t - O_t,
+$$ {#eq-hbl-hydro-balance-explicit}
+
+Strictly speaking, $O_t$ is not merely the sum of $O_t^{\text{Pujol}}$, $O_t^{\text{Perelló}}$ and $O_t^{\text{Perellonet}}$, but is rather calculated as follows:
+
+$$
+O_t = \max
+\left[
+O_t^{\text{Pujol}} + O_t^{\text{Perelló}} + O_t^{\text{Perellonet}},\, 
+\Delta V^{\text{PET}}_t -\Delta V_{t} 
+\right].
+$$ {#eq-hbl-total-outflow}
+
+The rationale is that the simple sum of estuaries outflows omits potentially important contributions from *water recirculation*, that is to say, water being pumped out from the lake for rice-field irrigation, by the so-called *tancats*. Such amount of recirculated water is hard to estimate and, in the lack of a better model, we simply assume this to be negligible, *except* when a positive amount is required by @eq-hbl-hydro-balance-explicit itself, due the physical constraint that $I_t \geq 0$.
+
+Once $O_t$ is calculated through @eq-hbl-total-outflow, $I_t$ can be immediately obtained from @eq-hbl-hydro-balance-explicit. Notice that whenever the aforementioned compensating outflow term due to water recirculation is included (which happens when the maximum in Eq. [-@eq-hbl-total-outflow] is given by the second term), the total inflow is always estimated to be zero.
+
 
 ### Rice field clusters
 
