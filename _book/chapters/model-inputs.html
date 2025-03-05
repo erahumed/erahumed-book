@@ -215,8 +215,22 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#landscape-parameters" id="toc-landscape-parameters" class="nav-link active" data-scroll-target="#landscape-parameters"><span class="header-section-number">3.1</span> Landscape parameters</a></li>
+  <li><a href="#chemical-specific-parameters" id="toc-chemical-specific-parameters" class="nav-link" data-scroll-target="#chemical-specific-parameters"><span class="header-section-number">3.2</span> Chemical-specific parameters</a></li>
+  <li><a href="#data-frame-inputs" id="toc-data-frame-inputs" class="nav-link" data-scroll-target="#data-frame-inputs"><span class="header-section-number">3.3</span> Data frame inputs</a>
+  <ul class="collapse">
+  <li><a href="#lake-outflows-and-levels-data-frame" id="toc-lake-outflows-and-levels-data-frame" class="nav-link" data-scroll-target="#lake-outflows-and-levels-data-frame"><span class="header-section-number">3.3.1</span> Lake outflows and levels data frame</a></li>
+  <li><a href="#weather-data-frame" id="toc-weather-data-frame" class="nav-link" data-scroll-target="#weather-data-frame"><span class="header-section-number">3.3.2</span> Weather data frame</a></li>
+  <li><a href="#rice-paddy-management-data-frame" id="toc-rice-paddy-management-data-frame" class="nav-link" data-scroll-target="#rice-paddy-management-data-frame"><span class="header-section-number">3.3.3</span> Rice paddy management data frame</a></li>
+  <li><a href="#chemical-application-schedules-data-frame" id="toc-chemical-application-schedules-data-frame" class="nav-link" data-scroll-target="#chemical-application-schedules-data-frame"><span class="header-section-number">3.3.4</span> Chemical application schedules data frame</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -240,11 +254,10 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This chapter will collect all model inputs (numeric parameters, as well as more complex information such as time-series or data-frames). The description should be generally succinct and parameters should be collected in a table - leveraging on <code>erahumed::erahumed_docs()</code> to retrieve parameters documentation).</p>
-<p>The goal here is not to explain in detail what every parameter represents, which will be clarified when explaining the algorithms. Rather, the goal is to have a central reference for all users inputs.</p>
-<p>The table could contain links to the sections describing the specific algorithms for which the parameters being described play a role.</p>
-<hr>
-<p>Landscape parameters are collected in <a href="#tbl-landscape-params" class="quarto-xref">Table&nbsp;<span>3.1</span></a>. In this table, <code>numeric(n)</code> type parameters indicate numeric vectors of <code>n</code> components, while <code>data.frame</code> inputs have more complex formats, discussed in detail below.</p>
+<p>This chapter serves as a central reference for all input parameters used in ERAHUMED simulations.</p>
+<section id="landscape-parameters" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="landscape-parameters"><span class="header-section-number">3.1</span> Landscape parameters</h2>
+<p>Landscape parameters are collected in <a href="#tbl-landscape-params" class="quarto-xref">Table&nbsp;<span>3.1</span></a>. In this table, a <code>numeric(n)</code> type indicates a numeric vector of <code>n</code> components, while <code>data.frame</code> inputs have more complex formats, detailed below.</p>
 <div class="cell">
 <div id="tbl-landscape-params" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -449,8 +462,205 @@ Table&nbsp;3.1: ERAHUMED input parameters
 </figure>
 </div>
 </div>
+</section>
+<section id="chemical-specific-parameters" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="chemical-specific-parameters"><span class="header-section-number">3.2</span> Chemical-specific parameters</h2>
+<p>In addition to landscape parameters, ERAHUMED includes a set of parameters for each supported chemical, defining their physico-chemical and toxicological properties. At this stage, these parameters are internal and not reported here. However, our roadmap includes future support for customizing these parameters and defining new chemicals.</p>
+</section>
+<section id="data-frame-inputs" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="data-frame-inputs"><span class="header-section-number">3.3</span> Data frame inputs</h2>
+<p>We detail in the following sections the format of data frame inputs.</p>
+<section id="lake-outflows-and-levels-data-frame" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="lake-outflows-and-levels-data-frame"><span class="header-section-number">3.3.1</span> Lake outflows and levels data frame</h3>
+<p>Time-series dataset that provides the observational hydrological data on the Albufera lake, along the template of <code>albufera_outflows</code> (the default value).</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Lake outflows and levels data frame [one row per day in the desired study frame.]</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Column</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">date</td>
+<td style="text-align: left;">Date of measurement</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">level</td>
+<td style="text-align: left;">Lake level (in meters above sea level)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">outflow_pujol</td>
+<td style="text-align: left;">Outflow at Pujol (meters cube per second)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">outflow_perellonet</td>
+<td style="text-align: left;">Outflow at Perellonet (meters cube per second)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">outflow_perello</td>
+<td style="text-align: left;">Outflow at Perello (meters cube per second)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">is_imputed_level</td>
+<td style="text-align: left;">Whether the <code>level</code> value was imputed.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">is_imputed_outflow</td>
+<td style="text-align: left;">Whether (any of) the outflows were imputed.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="weather-data-frame" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="weather-data-frame"><span class="header-section-number">3.3.2</span> Weather data frame</h3>
+<p>A dataset that provides the relevant metereological time series, along the template of <code>albufera_weather</code> (the default value).</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Weather data frame [one row per day in the desired study frame.]</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Column</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">date</td>
+<td style="text-align: left;">Date of measurement</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">temperature_ave</td>
+<td style="text-align: left;">Average temperature.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">temperature_min</td>
+<td style="text-align: left;">Minimum temperature.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">temperature_max</td>
+<td style="text-align: left;">Maximum temperature.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">precipitation_mm</td>
+<td style="text-align: left;">Daily precipitation in millimiters.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">evapotranspiration_mm</td>
+<td style="text-align: left;">Daily evapotranspiration in millimiters.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="rice-paddy-management-data-frame" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="rice-paddy-management-data-frame"><span class="header-section-number">3.3.3</span> Rice paddy management data frame</h3>
+<p>Dataset that provides the yearly schedule for irrigation and draining, along the template of <code>albufera_management</code> (the default value).</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Rice paddy management data frame [one row per day of year (29th of Feb.&nbsp;included) and per combination of the categorical variables <code>tancat</code> and <code>variety</code>.]</caption>
+<colgroup>
+<col style="width: 15%">
+<col style="width: 84%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Column</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">mm</td>
+<td style="text-align: left;">numeric. Month of year (1 = January, 2 = February, <em>etc.</em>).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">dd</td>
+<td style="text-align: left;">numeric. Day of month.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tancat</td>
+<td style="text-align: left;">logical. Whether the paddy is a tancat or not.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">variety</td>
+<td style="text-align: left;">character. Rice variety of the paddy under consideration.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sowing</td>
+<td style="text-align: left;">logical. Whether <code>mm</code> and <code>dd</code> correspond to the sowing day.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ideal_irrigation</td>
+<td style="text-align: left;">logical. Whether the paddy is scheduled to be irrigated on this day.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ideal_draining</td>
+<td style="text-align: left;">logical. Whether the paddy is scheduled to be drained on this day.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ideal_height_eod_cm</td>
+<td style="text-align: left;">numeric. Scheduled water level of the paddy <em>at the end of the day</em> (that is, after irrigation and draining).</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="chemical-application-schedules-data-frame" class="level3" data-number="3.3.4">
+<h3 data-number="3.3.4" class="anchored" data-anchor-id="chemical-application-schedules-data-frame"><span class="header-section-number">3.3.4</span> Chemical application schedules data frame</h3>
+<p>A dataset that provides the list of scheduled chemical applications, along the template of <code>albufera_ca_schedules</code>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Chemical application schedules data frame [one row per scheduled application.]</caption>
+<colgroup>
+<col style="width: 14%">
+<col style="width: 85%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Column</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">day</td>
+<td style="text-align: left;">numeric. Scheduled day, counted starting from the sowing day, for the application under consideration.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">rice_variety</td>
+<td style="text-align: left;">character. Rice variety for this specific application.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">chemical</td>
+<td style="text-align: left;">character. Name of applied chemical.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">kg_per_ha</td>
+<td style="text-align: left;">numeric. Amount of chemical applied, in kilograms per hectare.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">application_type</td>
+<td style="text-align: left;">either <code>"ground"</code> or <code>"aerial"</code>. Application mode of the chemical to rice paddies.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
