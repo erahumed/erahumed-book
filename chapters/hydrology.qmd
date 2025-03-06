@@ -129,35 +129,34 @@ The outputs are collected below, where the indices $c$ and $t$ denotes the clust
 | $I_{c,t}$ | $\text{m}^3$ | Cluster's inflow       |
 | $O_{c,t}$ | $\text{m}^3$ | Cluster's outflow      |
 
-The fundamental equation for hydrological balance are:
+The fundamental equation for hydrological balance is:
 
 $$ V_{c,t+1}-V_{c,t} = I_{c,t}-O_{c,t} + (\text{P}_t-\text{ETP}_t)\times A_c $$ {#eq-hbc-balance}
 
-where $\text{P}_t$ and $\text{ETP}_t$ are the same as in @sec-hbl, this simulation rests on various simplifications, which we detail in what follows.
+where $\text{P}_t$ and $\text{ETP}_t$ are the same as in @sec-hbl.
 
-In what follows, we will focus on the set of all clusters draining into a given ditch, and we will enumerate clusters through the index $c = 1,\,2,\,\dots,\,N_C$. On the other hand, clusters are assumed to be irrigated from the external of the Albufera system, *i.e.* not through any of the ditches which eventually flow into the lake. According to our assumptions on the hydrology of clusters and ditches (*cf.* @sec-hydrology-scheme), the sum of cluster outflows is constrained by:
+In what follows, we will focus on the set of all clusters draining into a given ditch, and we will enumerate clusters through the index $c = 1,\,2,\,\dots,\,N_C$. On the other hand, clusters are assumed to be irrigated from sources external the Albufera system, *i.e.*, not through any of the ditches that eventually flow into the lake. According to our assumptions on the hydrology of clusters and ditches (*cf.* @sec-hydrology-scheme), the sum of cluster outflows is constrained by:
 
 $$ \sum _{c = 1} ^ {N_C} O_{c,t} \leq Q_t $$ {#eq-hbc-outflow-constraint}
 
-where $Q_t$ denotes the relevant ditch's inflow. With a small leap in logic, we anticipate from @sec-hbd, that the water levels in irrigation ditches are assumed to be constant, so that $Q_t$ can also identified with the ditch 
+where $Q_t$ denotes the inflow to the relevant ditch. With a small leap in logic, we anticipate from @sec-hbd, that the water levels in irrigation ditches are assumed to be constant, so that $Q_t$ can also be identified with the ditch 
 outflow, that is in turn estimated as:
 
 $$ Q_t = \frac{\text{Area of clusters draining into ditch}}{\text{Area of all clusters}} \times \text{Lake's Inflow}_t $$ {#eq-hbc-ditch-outflow}
 
 where the lake's inflow is computed as described in @sec-hbl.
 
-Qualitatively speaking, the simulation works by finding daily values of $I_{c,t}$ and $O_{c,t}$ compatible with Eqs. [-@eq-hbc-balance] and [-@eq-hbc-outflow-constraint], and such that the resulting hydrology is as close as possible with the "ideal" one prescribed by the specified management plan. This is accomplished in three steps:
+Qualitatively speaking, the simulation determines daily values of $I_{c,t}$ and $O_{c,t}$ that satisfy Eqs. [-@eq-hbc-balance] and [-@eq-hbc-outflow-constraint], and such that the resulting hydrology aligns as closely as possible with the "ideal" conditions prescribed by the specified management plan. This is accomplished in three steps:
 
-1.  Computing ideal inflows and outflows, given current water levels and management plans.
-2.  Computing actual inflows and outflows, and corresponding actual water level changes.\
-3.  Computing required management plan delays, if some clusters were scheduled to be drained, but could not due to insufficient flow through the common ditch (see below for details).
+1.  Computing ideal inflows and outflows based on current water levels and management plans.
+2.  Determining actual inflows and outflows, along with the corresponding actual water level changes.\
+3.  Adjusting management plan delays if some clusters were scheduled to be drained but could not be due to insufficient flow through the common ditch (see below for details).
 
-These steps are iterated on a daily basis, starting from some initial time (say $t = 0$) at which all cluster water levels coincide with the ideal ones, and no plan delays are present.
+These steps are iterated on a daily basis, starting from some initial time (say $t = 0$) at which all cluster water levels match the ideal ones, and no plan delays are present.
 
-Concerning the last step, a few words may serve to clarify the algorithm described below. The purpose of plan delays is to ensure that during each year's sowing season, all cluster's are emptied at some point, as required for ground
-applications of chemicals (modeled in subsequent layers of ERAHUMED). This is achieved by delaying by one day the management plan, whenever an emptying condition is not met. When far outside of the sowing window, the delays are reset then to zero, in order to ensure that delays are not carried over indefinitely, which would be quite unrealistic.
+Concerning the last step, a few words may serve to clarify the algorithm described below. The purpose of management plan delays is to ensure that during each year's sowing season, all cluster's are eventually emptied as required for ground applications of chemicals (modeled in subsequent layers of the simulation). This is achieved by postponing the management plan by one day whenever an emptying condition is not met. Outside of the sowing window, delays are reset to zero to prevent them from accumulating indefinitely, which would be unrealistic.
 
-In what follows, the conversion between cluster water volumes and depths is provided by $V_{c,t} = A_c \cdot h_{c,t}$, and we denote by $\delta_{c,t}$ the time-series of plan delays for cluster $c$, which is initialized by $\delta_{c,0} =0$.
+In what follows, the conversion between cluster water volumes and depths is provided by $V_{c,t} = A_c \cdot h_{c,t}$, and we denote by $\delta_{c,t}$ the time series of plan delays for cluster $c$, which is initialized by $\delta_{c,0} =0$.
 
 #### Step 1: ideal balance
 
@@ -231,3 +230,4 @@ The updated value $\delta _{c,t+1}$ is obtained as follows. If $d_{t+1}$ (the *a
 The updated value $\delta _{c,t+1}$ is obtained as follows. If $d_{t+1}$ (the *actual* day of year) is outside of the window $W = [\text{20th of April},\,\text{15th of October}]$, then $\delta_{c,t+1} = 0$. Otherwise, if $h_{c,t}^\text{id} > 0$ or $h_{c,t} < h_{\text{thres}}$, the plan delay is unchanged: $\delta_{c,t+1} = \delta_{c,t}$. Finally, if $h_{c,t}^\text{id} = 0$ but $h_{c,t} > h_{\text{thres}}$, we add one day of delay: $\delta_{c,t+1} = \delta_{c,t}+1$.
 
 ### Irrigation ditches {#sec-hbd}
+
