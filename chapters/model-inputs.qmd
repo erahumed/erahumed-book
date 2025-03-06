@@ -127,7 +127,7 @@ weather_df_desc <- df_input_description("weather_df", "inp")
 knitr::kable(weather_df_desc$table, caption = weather_df_desc$caption)
 ```
 
-### Rice paddy management data frame
+### Rice paddy management data frame {#sec-management-df}
 
 ```{r}
 #| include: false

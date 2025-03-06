@@ -246,13 +246,14 @@ window.Quarto = {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">4.1</span> Overview</a></li>
-  <li><a href="#definition-of-hydrological-elements" id="toc-definition-of-hydrological-elements" class="nav-link" data-scroll-target="#definition-of-hydrological-elements"><span class="header-section-number">4.2</span> Definition of hydrological elements</a></li>
-  <li><a href="#sec-hydrology-scheme" id="toc-sec-hydrology-scheme" class="nav-link" data-scroll-target="#sec-hydrology-scheme"><span class="header-section-number">4.3</span> Scheme of the hydrological model</a></li>
-  <li><a href="#water-balance-calculations" id="toc-water-balance-calculations" class="nav-link" data-scroll-target="#water-balance-calculations"><span class="header-section-number">4.4</span> Water balance calculations</a>
+  <li><a href="#sec-hydrology-defs" id="toc-sec-hydrology-defs" class="nav-link" data-scroll-target="#sec-hydrology-defs"><span class="header-section-number">4.2</span> Definition of hydrological elements</a></li>
+  <li><a href="#random-assignation-of-rice-variety" id="toc-random-assignation-of-rice-variety" class="nav-link" data-scroll-target="#random-assignation-of-rice-variety"><span class="header-section-number">4.3</span> Random assignation of rice variety</a></li>
+  <li><a href="#sec-hydrology-scheme" id="toc-sec-hydrology-scheme" class="nav-link" data-scroll-target="#sec-hydrology-scheme"><span class="header-section-number">4.4</span> Scheme of the hydrological model</a></li>
+  <li><a href="#water-balance-calculations" id="toc-water-balance-calculations" class="nav-link" data-scroll-target="#water-balance-calculations"><span class="header-section-number">4.5</span> Water balance calculations</a>
   <ul class="collapse">
-  <li><a href="#sec-albufera-lake-hydrology" id="toc-sec-albufera-lake-hydrology" class="nav-link" data-scroll-target="#sec-albufera-lake-hydrology"><span class="header-section-number">4.4.1</span> Albufera Lake</a></li>
-  <li><a href="#rice-field-clusters" id="toc-rice-field-clusters" class="nav-link" data-scroll-target="#rice-field-clusters"><span class="header-section-number">4.4.2</span> Rice field clusters</a></li>
-  <li><a href="#irrigation-ditches" id="toc-irrigation-ditches" class="nav-link" data-scroll-target="#irrigation-ditches"><span class="header-section-number">4.4.3</span> Irrigation ditches</a></li>
+  <li><a href="#sec-hbl" id="toc-sec-hbl" class="nav-link" data-scroll-target="#sec-hbl"><span class="header-section-number">4.5.1</span> Albufera Lake</a></li>
+  <li><a href="#sec-hbc" id="toc-sec-hbc" class="nav-link" data-scroll-target="#sec-hbc"><span class="header-section-number">4.5.2</span> Rice field clusters</a></li>
+  <li><a href="#sec-hbd" id="toc-sec-hbd" class="nav-link" data-scroll-target="#sec-hbd"><span class="header-section-number">4.5.3</span> Irrigation ditches</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -282,17 +283,26 @@ window.Quarto = {
 <section id="overview" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">4.1</span> Overview</h2>
 </section>
-<section id="definition-of-hydrological-elements" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="definition-of-hydrological-elements"><span class="header-section-number">4.2</span> Definition of hydrological elements</h2>
+<section id="sec-hydrology-defs" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="sec-hydrology-defs"><span class="header-section-number">4.2</span> Definition of hydrological elements</h2>
 <p>Our hydrological modeling represents the Albufera Natural Park in terms of three main hydrological elements (or “water bodies”): rice field clusters, irrigation ditches, and Albufera Lake.</p>
 <p>The definition of rice field clusters and irrigation ditches used in our modeling is discussed in detail in Ref. [TODO: insert Pablo’s paper reference]. For our purposes, we note that:</p>
 <ul>
-<li><p>The park’s cultivation area is divided into rice field clusters, each comprising several rice fields that share the same variety and type (<em>tancat</em> or regular).</p></li>
+<li><p>The park’s cultivation area is divided into rice field clusters, each comprising several rice fields that share the same hydrological management system (<em>tancat</em> or regular) and rice variety (<em>J.Sendra</em>, <em>Bomba</em> or <em>Clearfield</em>).</p></li>
 <li><p>Each cluster is assumed to drain into a single irrigation ditch, selected based on the shortest distance (see Ref. TODO for details).</p></li>
 </ul>
 </section>
-<section id="sec-hydrology-scheme" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="sec-hydrology-scheme"><span class="header-section-number">4.3</span> Scheme of the hydrological model</h2>
+<section id="random-assignation-of-rice-variety" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="random-assignation-of-rice-variety"><span class="header-section-number">4.3</span> Random assignation of rice variety</h2>
+<p>Since the actual rice variety cultivated in individual fields is unknown, a random variety is assigned to each cluster based on the following criteria:</p>
+<ul>
+<li>The proportion of cultivated surface allocated to each variety is determined by the <code>variety_prop</code> parameter (cf. <a href="model-inputs.html#tbl-landscape-params" class="quarto-xref">Table&nbsp;<span>3.1</span></a>).</li>
+<li>The <em>Bomba</em> variety is cultivated exclusively in <em>tancats</em>.</li>
+<li>The <em>Clearfield</em> variety is restricted to the northern part of the natural park, in clusters draining into ditches <span class="math inline">\(1\)</span> to <span class="math inline">\(19\)</span>.</li>
+</ul>
+</section>
+<section id="sec-hydrology-scheme" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="sec-hydrology-scheme"><span class="header-section-number">4.4</span> Scheme of the hydrological model</h2>
 <p>This schematic diagram represents the simplified hydrological model of the Albufera Natural Park employed by ERAHUMED. It highlights water flows across the three primary landscape elements defined in the previous Section. Key simplifying assumptions embedded in the model and visually summarized in the diagram are as follows:</p>
 <ul>
 <li><p><strong>Rice Clusters</strong> Clusters are irrigated by external water sources and drain exclusively a single ditch. There is no direct hydrological interaction or exchange between individual clusters.</p></li>
@@ -310,22 +320,22 @@ Figure&nbsp;4.1: Scheme of ERAHUMED hydrological model of the Albufera Natural P
 </figure>
 </div>
 </section>
-<section id="water-balance-calculations" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="water-balance-calculations"><span class="header-section-number">4.4</span> Water balance calculations</h2>
+<section id="water-balance-calculations" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="water-balance-calculations"><span class="header-section-number">4.5</span> Water balance calculations</h2>
 <p>This section provides the details of the water balance calculations for (in the order of computation) the Albufera Lake, rice field clusters, and irrigation ditches of the park.</p>
-<section id="sec-albufera-lake-hydrology" class="level3" data-number="4.4.1">
-<h3 data-number="4.4.1" class="anchored" data-anchor-id="sec-albufera-lake-hydrology"><span class="header-section-number">4.4.1</span> Albufera Lake</h3>
+<section id="sec-hbl" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="sec-hbl"><span class="header-section-number">4.5.1</span> Albufera Lake</h3>
 <p>Water balance calculations for the Albufera Lake are relatively simple. The relevant equation expressing hydrological balance is:</p>
 <p><span id="eq-hbl-hydro-balance-symbolic"><span class="math display">\[
 \text{Volume Change} = \text{Inflow} - \text{Outflow} + \text{Precipitation} - \text{Evapotranspiration}.
 \tag{4.1}\]</span></span></p>
-<p>In order to start fixing the notation, we define the following variables which have direct correspondence with model input parameters listed in <a href="model-inputs.html" class="quarto-xref"><span>Chapter 3</span></a> (we use the notation <code>df$col</code> to indicate column <code>col</code> of data frame <code>df</code>).</p>
+<p>The variables collected into the following table, that enter the balance equation <a href="#eq-hbl-hydro-balance-symbolic" class="quarto-xref"><span>4.1</span></a>, have direct correspondence with model input parameters listed in <a href="model-inputs.html" class="quarto-xref"><span>Chapter 3</span></a> (we use the notation <code>df$col</code> to indicate column <code>col</code> of data frame <code>df</code>).</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 24%">
-<col style="width: 24%">
-<col style="width: 18%">
-<col style="width: 32%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 30%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -392,7 +402,7 @@ Figure&nbsp;4.1: Scheme of ERAHUMED hydrological model of the Albufera Natural P
 </tr>
 </tbody>
 </table>
-<p>In addition we denote:</p>
+<p>Calculated quantities are listed in the following table.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -434,7 +444,7 @@ Figure&nbsp;4.1: Scheme of ERAHUMED hydrological model of the Albufera Natural P
 </tr>
 </tbody>
 </table>
-<p>The volume time-series is calculated as:</p>
+<p>The volume time-series is computed as:</p>
 <p><span id="eq-hbl-storage-function"><span class="math display">\[
 V_t = \alpha + \beta \cdot h_t,
 \tag{4.2}\]</span></span></p>
@@ -457,11 +467,171 @@ O_t^{\text{Pujol}} + O_t^{\text{Perelló}} + O_t^{\text{Perellonet}},\,
 <p>The rationale is that the simple sum of estuaries outflows omits potentially important contributions from <em>water recirculation</em>, that is to say, water being pumped out from the lake for rice-field irrigation, by the so-called <em>tancats</em>. Such amount of recirculated water is hard to estimate and, in the lack of a better model, we simply assume this to be negligible, <em>except</em> when a positive amount is required by <a href="#eq-hbl-hydro-balance-explicit" class="quarto-xref">Equation&nbsp;<span>4.4</span></a> itself, due the physical constraint that <span class="math inline">\(I_t \geq 0\)</span>.</p>
 <p>Once <span class="math inline">\(O_t\)</span> is calculated through <a href="#eq-hbl-total-outflow" class="quarto-xref">Equation&nbsp;<span>4.5</span></a>, <span class="math inline">\(I_t\)</span> can be immediately obtained from <a href="#eq-hbl-hydro-balance-explicit" class="quarto-xref">Equation&nbsp;<span>4.4</span></a>. Notice that whenever the aforementioned compensating outflow term due to water recirculation is included (which happens when the maximum in Eq. <a href="#eq-hbl-total-outflow" class="quarto-xref"><span>4.5</span></a> is given by the second term), the total inflow is always estimated to be zero.</p>
 </section>
-<section id="rice-field-clusters" class="level3" data-number="4.4.2">
-<h3 data-number="4.4.2" class="anchored" data-anchor-id="rice-field-clusters"><span class="header-section-number">4.4.2</span> Rice field clusters</h3>
+<section id="sec-hbc" class="level3" data-number="4.5.2">
+<h3 data-number="4.5.2" class="anchored" data-anchor-id="sec-hbc"><span class="header-section-number">4.5.2</span> Rice field clusters</h3>
+<p>Water balance calculations for rice field clusters are complex due to the lack of observational data. The simulation algorithm relies on several key components:</p>
+<ul>
+<li>The hydrology of the Albufera lake (<a href="#sec-hbl" class="quarto-xref"><span>Section 4.5.1</span></a>).</li>
+<li>Assumptions about the hydrological connections between the various water bodies in the natural park, detailed in <a href="#sec-hydrology-scheme" class="quarto-xref"><span>Section 4.4</span></a>.</li>
+<li>An ideal yearly management plan for irrigation and drainage of the rice paddies.</li>
+</ul>
+<p>The quantitative inputs for this calculation are collected in the following table; see the definition of the <code>management_df</code> input data frame, discussed in <a href="model-inputs.html#sec-management-df" class="quarto-xref"><span>Section 3.3.3</span></a>. Below, <span class="math inline">\(v\)</span> denotes rice variety, and <span class="math inline">\(\theta\)</span> denotes the hydrological management system (<em>tancat</em> or <em>regular</em>).</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 24%">
+<col style="width: 23%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Source</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\text{Ir}_{d,v,\theta}\)</span></td>
+<td><code>management_df$ideal_irrigation</code></td>
+<td><span class="math inline">\(\text{NA}\)</span></td>
+<td>Boolean expressing whether a cluster of variety <span class="math inline">\(v\)</span> and management system <span class="math inline">\(\theta\)</span> is supposed to be irrigated on day of year <span class="math inline">\(d\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\text{Dr}_{d,v,\theta}\)</span></td>
+<td><code>management_df$ideal_draining</code></td>
+<td><span class="math inline">\(\text{NA}\)</span></td>
+<td>Boolean expressing whether a cluster of variety <span class="math inline">\(v\)</span> and management system <span class="math inline">\(\theta\)</span> is supposed to be drained on day of year <span class="math inline">\(d\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\mathcal H _{d,v,\theta}\)</span></td>
+<td><code>management_df$ideal_height_eod_cm</code></td>
+<td><span class="math inline">\(\text{cm}\)</span></td>
+<td>Ideal water depth (in <span class="math inline">\(\text{cm}\)</span>) of a cluster of variety <span class="math inline">\(v\)</span> and management system <span class="math inline">\(\theta\)</span> on day of year <span class="math inline">\(d\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(k_\text{flow}\)</span></td>
+<td><code>ideal_flow_rate_cm</code></td>
+<td><span class="math inline">\(\text{cm}\cdot \text{day} ^{-1}\)</span></td>
+<td>Rate of water flow through rice paddies during simultaneous irrigation and drainage, while maintaining a constant overall water level.</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(h_{\text{thres}}\)</span></td>
+<td><code>height_thresh_cm</code></td>
+<td><span class="math inline">\(\text{cm}\)</span></td>
+<td>Water height below which a cluster is considered emptied. Used to determine delays in the draining/irrigation plan. Expressed in <span class="math inline">\(\text{cm}\)</span>.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(A_c\)</span></td>
+<td>Internal parameter</td>
+<td><span class="math inline">\(\text{m}^2\)</span></td>
+<td>Surface area of cluster <span class="math inline">\(c\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The outputs are collected below, where the indices <span class="math inline">\(c\)</span> and <span class="math inline">\(t\)</span> denotes the cluster and time, respectively:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(V_{c,t}\)</span></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td>Cluster’s water volume</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(I_{c,t}\)</span></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td>Cluster’s inflow</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(O_{c,t}\)</span></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td>Cluster’s outflow</td>
+</tr>
+</tbody>
+</table>
+<p>The fundamental equation for hydrological balance are:</p>
+<p><span id="eq-hbc-balance"><span class="math display">\[ V_{c,t+1}-V_{c,t} = I_{c,t}-O_{c,t} + (\text{P}_t-\text{ETP}_t)\times A_c  \tag{4.6}\]</span></span></p>
+<p>where <span class="math inline">\(\text{P}_t\)</span> and <span class="math inline">\(\text{ETP}_t\)</span> are the same as in <a href="#sec-hbl" class="quarto-xref"><span>Section 4.5.1</span></a>, this simulation rests on various simplifications, which we detail in what follows.</p>
+<p>In what follows, we will focus on the set of all clusters draining into a given ditch, and we will enumerate clusters through the index <span class="math inline">\(c = 1,\,2,\,\dots,\,N_C\)</span>. On the other hand, clusters are assumed to be irrigated from the external of the Albufera system, <em>i.e.</em> not through any of the ditches which eventually flow into the lake. According to our assumptions on the hydrology of clusters and ditches (<em>cf.</em> <a href="#sec-hydrology-scheme" class="quarto-xref"><span>Section 4.4</span></a>), the sum of cluster outflows is constrained by:</p>
+<p><span id="eq-hbc-outflow-constraint"><span class="math display">\[ \sum _{c = 1} ^ {N_C} O_{c,t} \leq Q_t  \tag{4.7}\]</span></span></p>
+<p>where <span class="math inline">\(Q_t\)</span> denotes the relevant ditch’s inflow. With a small leap in logic, we anticipate from <a href="#sec-hbd" class="quarto-xref"><span>Section 4.5.3</span></a>, that the water levels in irrigation ditches are assumed to be constant, so that <span class="math inline">\(Q_t\)</span> can also identified with the ditch outflow, that is in turn estimated as:</p>
+<p><span id="eq-hbc-ditch-outflow"><span class="math display">\[ Q_t = \frac{\text{Area of clusters draining into ditch}}{\text{Area of all clusters}} \times \text{Lake's Inflow}_t  \tag{4.8}\]</span></span></p>
+<p>where the lake’s inflow is computed as described in <a href="#sec-hbl" class="quarto-xref"><span>Section 4.5.1</span></a>.</p>
+<p>Qualitatively speaking, the simulation works by finding daily values of <span class="math inline">\(I_{c,t}\)</span> and <span class="math inline">\(O_{c,t}\)</span> compatible with Eqs. <a href="#eq-hbc-balance" class="quarto-xref"><span>4.6</span></a> and <a href="#eq-hbc-outflow-constraint" class="quarto-xref"><span>4.7</span></a>, and such that the resulting hydrology is as close as possible with the “ideal” one prescribed by the specified management plan. This is accomplished in three steps:</p>
+<ol type="1">
+<li>Computing ideal inflows and outflows, given current water levels and management plans.</li>
+<li>Computing actual inflows and outflows, and corresponding actual water level changes.<br>
+</li>
+<li>Computing required management plan delays, if some clusters were scheduled to be drained, but could not due to insufficient flow through the common ditch (see below for details).</li>
+</ol>
+<p>These steps are iterated on a daily basis, starting from some initial time (say <span class="math inline">\(t = 0\)</span>) at which all cluster water levels coincide with the ideal ones, and no plan delays are present.</p>
+<p>Concerning the last step, a few words may serve to clarify the algorithm described below. The purpose of plan delays is to ensure that during each year’s sowing season, all cluster’s are emptied at some point, as required for ground applications of chemicals (modeled in subsequent layers of ERAHUMED). This is achieved by delaying by one day the management plan, whenever an emptying condition is not met. When far outside of the sowing window, the delays are reset then to zero, in order to ensure that delays are not carried over indefinitely, which would be quite unrealistic.</p>
+<p>In what follows, the conversion between cluster water volumes and depths is provided by <span class="math inline">\(V_{c,t} = A_c \cdot h_{c,t}\)</span>, and we denote by <span class="math inline">\(\delta_{c,t}\)</span> the time-series of plan delays for cluster <span class="math inline">\(c\)</span>, which is initialized by <span class="math inline">\(\delta_{c,0} =0\)</span>.</p>
+<section id="step-1-ideal-balance" class="level4" data-number="4.5.2.1">
+<h4 data-number="4.5.2.1" class="anchored" data-anchor-id="step-1-ideal-balance"><span class="header-section-number">4.5.2.1</span> Step 1: ideal balance</h4>
+<p>Ideal balance quantities for each cluster <span class="math inline">\(c\)</span> are obtained from the management plan data-set, whose relevant row is identified by the cluster’s rice variety <span class="math inline">\(v\)</span> and field type <span class="math inline">\(\theta\)</span>, and the delayed day:</p>
+<p><span id="eq-hbc-delayed-day"><span class="math display">\[
+d_{c,t+1} = d_{t+1}-\delta_{c,t},
+\tag{4.9}\]</span></span></p>
+<p>where <span class="math inline">\(d_{t+1}\)</span> denotes the day of year corresponding to time <span class="math inline">\(t+1\)</span>, and <span class="math inline">\(\delta_{c,t}\)</span> the accumulated plan delay.</p>
+<p>Let <span class="math inline">\(h _{c,t+1}^{\text{id}}\)</span> denote the ideal depth for cluster <span class="math inline">\(c\)</span> at time <span class="math inline">\(t+1\)</span> retrieved in this way, and <span class="math inline">\(\text{Ir}_{c,t}\)</span>, <span class="math inline">\(\text{Dr}_{c,t}\)</span> the corresponding ideal irrigation and draining plans. Furthermore, denote by <span class="math inline">\(V_{c,t+1}^{\text{id}} = A_c \cdot h_{c,t+1}^{\text{id}}\)</span> the corresponding ideal water volume.</p>
+<p>In order to compute ideal inflow and outflow, we require (<em>cf.</em> <a href="#eq-hbc-balance" class="quarto-xref">Equation&nbsp;<span>4.6</span></a>):</p>
+<p><span id="eq-hbc-balance-ideal"><span class="math display">\[
+V_{c,t+1}^{\text{id}} = \max \lbrace V_{c,t}^{\text{id}}  + (\text{P}_t-\text{ETP}_t)\times A_c,0 \rbrace + I_{c,t}^{\text{id}}-O_{c,t}^{\text{id}}
+\tag{4.10}\]</span></span></p>
+<p>Clearly, <a href="#eq-hbc-balance-ideal" class="quarto-xref">Equation&nbsp;<span>4.10</span></a> alone does not individually specify <span class="math inline">\(I_{c,t}^{\text{id}}\)</span> and <span class="math inline">\(O_{c,t}^{\text{id}}\)</span>, but only their difference <span class="math inline">\(\Delta _{c,t}^{\text{id}}= I_{c,t}^{\text{id}}-O_{c,t}^{\text{id}}\)</span>. In order to fix both these quantities:</p>
+<p><span id="eq-hbc-id-flows-zero"><span class="math display">\[
+\begin{split}
+(I_{c,t} ^\text{id})^{(0)}&amp;= \begin{cases}
+  k_\text{flow}  &amp; \text{if }\text{Ir}_{c,t} = \text{Dr}_{c,t} = 1 \\
+  0 &amp; \text{otherwise}
+\end{cases},\\
+(O_{c,t} ^\text{id})^{(0)}&amp;=(I_{c,t} ^\text{id})^{(0)}-\Delta _{c,t}^{\text{id}}.
+\end{split}
+\tag{4.11}\]</span></span></p>
+<p>and, in order to ensure that flows are positive, we finally set:</p>
+<p><span id="eq-hbc-id-flows"><span class="math display">\[
+\begin{split}
+O_{c,t} ^\text{id} &amp;= \max\lbrace(O_{c,t} ^\text{id})^{(0)},\,0\rbrace\\
+I_{c,t} ^\text{id} &amp;= O_{c,t} ^\text{id} + \Delta _{c,t}^{\text{id}},
+\end{split}
+\tag{4.12}\]</span></span></p>
+<p>which satisfy <a href="#eq-hbc-balance-ideal" class="quarto-xref">Equation&nbsp;<span>4.10</span></a> and give rise to positive <span class="math inline">\(O_{c,t}^\text{id}\)</span> and <span class="math inline">\(I_{c,t}^\text{id}\)</span>.</p>
 </section>
-<section id="irrigation-ditches" class="level3" data-number="4.4.3">
-<h3 data-number="4.4.3" class="anchored" data-anchor-id="irrigation-ditches"><span class="header-section-number">4.4.3</span> Irrigation ditches</h3>
+<section id="step-2-real-balance" class="level4" data-number="4.5.2.2">
+<h4 data-number="4.5.2.2" class="anchored" data-anchor-id="step-2-real-balance"><span class="header-section-number">4.5.2.2</span> Step 2: real balance</h4>
+<p>At each time-step <span class="math inline">\(t\)</span>, the cluster’s index set is randomly permuted <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, and the real flows are calculated as:</p>
+<p><span id="eq-hbc-real-flows"><span class="math display">\[
+\begin{split}
+O_{c,t} &amp;= \min \lbrace O_{c,t}^\text{id},\,Q_t-\sum_{c'&lt;c}O_{c',t} \rbrace ,\\
+I_{c,t} &amp;= \max\lbrace I_{c,t}^\text{id}-O_{c,t}^\text{id} + O_{c,t},\,0 \rbrace
+\end{split}
+\tag{4.13}\]</span></span></p>
+<p>In simple terms, clusters are emptied in a random order within the allowed capacity of the corresponding ditch. Using <a href="#eq-hbc-real-flows" class="quarto-xref">Equation&nbsp;<span>4.13</span></a>, we finally determine the real water level achieved as:</p>
+<p><span id="eq-hbc-balance-real"><span class="math display">\[
+V_{c,t+1} = \max \lbrace V_{c,t}  + (\text{P}_t-\text{ETP}_t)\times A_c,0 \rbrace + I_{c,t}-O_{c,t}
+\tag{4.14}\]</span></span></p>
+<p>to be compared with <a href="#eq-hbc-balance-ideal" class="quarto-xref">Equation&nbsp;<span>4.10</span></a>.</p>
+</section>
+<section id="step-3-updating-the-plan-delay" class="level4" data-number="4.5.2.3">
+<h4 data-number="4.5.2.3" class="anchored" data-anchor-id="step-3-updating-the-plan-delay"><span class="header-section-number">4.5.2.3</span> Step 3: updating the plan delay</h4>
+<p>The updated value <span class="math inline">\(\delta _{c,t+1}\)</span> is obtained as follows. If <span class="math inline">\(d_{t+1}\)</span> (the <em>actual</em> day of year) is outside of the window <span class="math inline">\(W = [\text{20th of April},\,\text{15th of October}]\)</span>, then <span class="math inline">\(\delta_{c,t+1} = 0\)</span>. Otherwise, if <span class="math inline">\(h_{c,t}^\text{id} &gt; 0\)</span> or <span class="math inline">\(h_{c,t} &lt; h_{\text{thres}}\)</span>, the plan delay is unchanged: <span class="math inline">\(\delta_{c,t+1} = \delta_{c,t}\)</span>. Finally, if <span class="math inline">\(h_{c,t}^\text{id} = 0\)</span> but <span class="math inline">\(h_{c,t} &gt; h_{\text{thres}}\)</span>, we add one day of delay: <span class="math inline">\(\delta_{c,t+1} = \delta_{c,t}+1\)</span>.</p>
+</section>
+<section id="step-3-updating-the-plan-delay-1" class="level4" data-number="4.5.2.4">
+<h4 data-number="4.5.2.4" class="anchored" data-anchor-id="step-3-updating-the-plan-delay-1"><span class="header-section-number">4.5.2.4</span> Step 3: updating the plan delay</h4>
+<p>The updated value <span class="math inline">\(\delta _{c,t+1}\)</span> is obtained as follows. If <span class="math inline">\(d_{t+1}\)</span> (the <em>actual</em> day of year) is outside of the window <span class="math inline">\(W = [\text{20th of April},\,\text{15th of October}]\)</span>, then <span class="math inline">\(\delta_{c,t+1} = 0\)</span>. Otherwise, if <span class="math inline">\(h_{c,t}^\text{id} &gt; 0\)</span> or <span class="math inline">\(h_{c,t} &lt; h_{\text{thres}}\)</span>, the plan delay is unchanged: <span class="math inline">\(\delta_{c,t+1} = \delta_{c,t}\)</span>. Finally, if <span class="math inline">\(h_{c,t}^\text{id} = 0\)</span> but <span class="math inline">\(h_{c,t} &gt; h_{\text{thres}}\)</span>, we add one day of delay: <span class="math inline">\(\delta_{c,t+1} = \delta_{c,t}+1\)</span>.</p>
+</section>
+</section>
+<section id="sec-hbd" class="level3" data-number="4.5.3">
+<h3 data-number="4.5.3" class="anchored" data-anchor-id="sec-hbd"><span class="header-section-number">4.5.3</span> Irrigation ditches</h3>
 
 
 </section>
@@ -469,7 +639,8 @@ O_t^{\text{Pujol}} + O_t^{\text{Perelló}} + O_t^{\text{Perellonet}},\,
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>Further details on this are discussed in <a href="#sec-albufera-lake-hydrology" class="quarto-xref"><span>Section 4.4.1</span></a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Further details on this are discussed in <a href="#sec-hbl" class="quarto-xref"><span>Section 4.5.1</span></a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>With some abuse of notation, we assume the indexes <span class="math inline">\(c\)</span> and <span class="math inline">\(c'\)</span> in <a href="#eq-hbc-real-flows" class="quarto-xref">Equation&nbsp;<span>4.13</span></a> to be sorted according to this random permutation.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

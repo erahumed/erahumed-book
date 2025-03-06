@@ -17,7 +17,7 @@ Meteorological data consists of the daily measurements of precipitation and evap
 The time-series inputs described above are collected in the table below (the common index $t$ refers to the time - *i.e.* day - of observation).
 
 | Input                     | Units        | Description                        |
-|---------------------------|--------------|------------------------------------|
+|------------------------|-----------------|--------------------------------|
 | $L_t$                     | $\text{m}$   | Lake water level                   |
 | $O_t^{\text{Pujol}}$      | $\text{m}^3$ | *Pujol* daily outflow              |
 | $O_t^{\text{Perelló}}$    | $\text{m}^3$ | *Perelló* daily outflow            |
@@ -311,7 +311,7 @@ where:
 
 Strictly speaking, all these terms have instantaneous time dependence[^simulation_layers-3]. Apart from making the [system @eq-ct-ode] hard to attack by analytic means, such a dependence is troubling because we don't have access to the exact time dependence of the majority of these terms (*e.g.* outflow, volume or chemical applications), our input consisting of simple daily average/cumulative values. On the other hand, if all the terms were constant, and if we could neglect $\sigma$, the solution of @eq-ct-ode would be immediate, as the corresponding system becomes a linear ODE with constant coefficients, in addition whose eigenvalues and eigenvectors can be computed explicitly.
 
-[^simulation_layers-3]:  This observation also includes pure physico-chemical "constants" such as degradation rates, where the time dependence would stem from *temperature* dependence.
+[^simulation_layers-3]: This observation also includes pure physico-chemical "constants" such as degradation rates, where the time dependence would stem from *temperature* dependence.
 
 What we use in practice is an intermediate semi-analytic approach that allows us to compute daily values of $m_{f,w,s}$, which we can briefly summarize as follows. The time evolution of $m_{f,w,s}$ in a daily time-step (from $t$ to $t+1$, say, assuming $t$ is measured in days) is obtained through the following four consecutive stages:
 
@@ -320,7 +320,7 @@ What we use in practice is an intermediate semi-analytic approach that allows us
 3.  We compute the mass applications again as instantaneous, after the losses in the water compartment due to outflows took place.
 4.  We compare the resulting $m_w$ with the maximum amount allowed by the solubility in water, that is $m_w ^{\text{max}}(t) = \rho V(t)$ and transfer any excess to the sediment compartment ($m_s$).
 
-[^simulation_layers-4]:  Recall that, in the notation of TODO, $V(t)$ denotes the final volume on day $t$.
+[^simulation_layers-4]: Recall that, in the notation of TODO, $V(t)$ denotes the final volume on day $t$.
 
 In the following, we describe in full detail the computations involved in these four steps.
 
