@@ -231,3 +231,6 @@ The updated value $\delta _{c,t+1}$ is obtained as follows. If $d_{t+1}$ (the *a
 
 ### Irrigation ditches {#sec-hbd}
 
+Our approach to the hydrology of irrigation ditches is simplified, with the main assumption being that all ditches have a common, constant water depth $h_\text{ditch}$ corresponding to the input parameter `ditch_level_m`.
+
+Using the index $D =1,2,\dots,26$ to enumerate the park's main ditches, ditch outflows to the Albufera lake $O_{D,t}$ are calculated according to @eq-hbc-ditch-outflow. These outflows also coincide with the total ditch inflows $I_{D,t}$ (due to the constant water volume assumption). 
