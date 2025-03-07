@@ -1,10 +1,10 @@
 # Hydrological model of the Albufera Natural Park {#sec-hydrology}
 
-## Overview
+The first step in assessing toxicological risks in the Albufera Natural Park is to determine the system's hydrology, as water serves as the primary transport medium for the chemicals under study. Specifically, by "hydrology," we refer to the water volumes present in each water body at a given moment and the flow of water between them over a defined time frame (*e.g.*, one day). Since most of these quantities are not directly measurable, they must be estimated through simulation. This Chapter outlines the algorithms used for this process.
 
 ## Definition of hydrological elements {#sec-hydrology-defs}
 
-Our hydrological modeling represents the Albufera Natural Park in terms of three main hydrological elements (or "water bodies"): rice field clusters, irrigation ditches, and Albufera Lake.
+Our hydrological model represents the Albufera Natural Park in terms of three main landscape elements (or "water bodies"): rice field clusters, irrigation ditches, and Albufera Lake.
 
 The definition of rice field clusters and irrigation ditches used in our modeling is discussed in detail in Ref. \[TODO: insert Pablo's paper reference\]. For our purposes, we note that:
 

@@ -10,8 +10,7 @@ This should describe how chemical applications are simulated.
 
 ### Diagram of physical processes
 
-Roughly the content of this 
-[vignette](https://erahumed.github.io/erahumed/articles/ct-diagram.html).
+Roughly the content of this [vignette](https://erahumed.github.io/erahumed/articles/ct-diagram.html).
 
 ### Evolution Equations
 
