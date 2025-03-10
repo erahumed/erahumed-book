@@ -1,6 +1,14 @@
 # Exposure {#sec-exposure}
 
-## Overview
+This Chapter describes how ERAHUMED models pesticide exposure in the Albufera 
+Natural Park. The hydrological simulation discussed in the previous Chapter 
+provides the foundation for this analysis, as water serves as the primary medium 
+for pesticide transport. Here, we outline how ERAHUMED simulates the 
+introduction, dispersion, and fate of pesticides within the system. This 
+includes processes such as deposition, degradation, and transfer between water 
+bodies. By integrating hydrological dynamics with chemical behavior, the model 
+estimates exposure levels over time and space, supporting risk assessment 
+efforts.
 
 ## Pesticide applications {#sec-ca}
 
