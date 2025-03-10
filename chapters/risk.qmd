@@ -1,5 +1,29 @@
 # Risk assessment {#sec-risk}
 
-## Overview
+This Chapter describes how ERAHUMED assesses the toxicological risks associated 
+with pesticide exposure in the Albufera Natural Park. Building on the 
+hydrological and exposure models from the previous Chapters, this step estimates 
+the potential impacts on aquatic organisms and the broader ecosystem. 
+We employ the Species Sensitivity Distribution (SSD) approach, a widely used 
+method in ecological risk assessment [TODO reference]. This approach allows for 
+the identification of high-risk scenarios, supporting management decisions to 
+mitigate adverse effects.
 
 ## Calculation of risk using SSDs
+
+The risk calculation follows the approach outlined in [TODO A.Rico Reference], 
+to which we refer the reader for further details. Here, we summarize the key 
+aspects relevant to our model.
+
+SSDs transform the chemical concentrations computed in the previous "Exposure" 
+simulation layer (@sec-exposure) into the potentially affected fraction of 
+species (PAF). As described in [TODO], chemicals are grouped by toxic mode of 
+action (TMoA), and different TMoAs are assumed to act independently.
+
+Separate distributions are used to assess acute and chronic risks. In the case 
+of acute risk, we use daily chemical concentration values (computed as described 
+in @sec-exposure). For chronic risk, we use a 21-day rolling average of 
+concentrations.
+
+The parameters of each SSD, as well as the TMoA classification for each 
+chemical, are internal to ERAHUMED and are not directly accessible to the user.

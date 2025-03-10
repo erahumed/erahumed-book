@@ -216,8 +216,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">6.1</span> Overview</a></li>
-  <li><a href="#calculation-of-risk-using-ssds" id="toc-calculation-of-risk-using-ssds" class="nav-link" data-scroll-target="#calculation-of-risk-using-ssds"><span class="header-section-number">6.2</span> Calculation of risk using SSDs</a></li>
+  <li><a href="#calculation-of-risk-using-ssds" id="toc-calculation-of-risk-using-ssds" class="nav-link active" data-scroll-target="#calculation-of-risk-using-ssds"><span class="header-section-number">6.1</span> Calculation of risk using SSDs</a></li>
   </ul>
 </nav>
     </div>
@@ -243,11 +242,13 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="overview" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">6.1</span> Overview</h2>
-</section>
-<section id="calculation-of-risk-using-ssds" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="calculation-of-risk-using-ssds"><span class="header-section-number">6.2</span> Calculation of risk using SSDs</h2>
+<p>This Chapter describes how ERAHUMED assesses the toxicological risks associated with pesticide exposure in the Albufera Natural Park. Building on the hydrological and exposure models from the previous Chapters, this step estimates the potential impacts on aquatic organisms and the broader ecosystem. We employ the Species Sensitivity Distribution (SSD) approach, a widely used method in ecological risk assessment [TODO reference]. This approach allows for the identification of high-risk scenarios, supporting management decisions to mitigate adverse effects.</p>
+<section id="calculation-of-risk-using-ssds" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="calculation-of-risk-using-ssds"><span class="header-section-number">6.1</span> Calculation of risk using SSDs</h2>
+<p>The risk calculation follows the approach outlined in [TODO A.Rico Reference], to which we refer the reader for further details. Here, we summarize the key aspects relevant to our model.</p>
+<p>SSDs transform the chemical concentrations computed in the previous “Exposure” simulation layer (<a href="exposure.html" class="quarto-xref"><span>Chapter 5</span></a>) into the potentially affected fraction of species (PAF). As described in [TODO], chemicals are grouped by toxic mode of action (TMoA), and different TMoAs are assumed to act independently.</p>
+<p>Separate distributions are used to assess acute and chronic risks. In the case of acute risk, we use daily chemical concentration values (computed as described in <a href="exposure.html" class="quarto-xref"><span>Chapter 5</span></a>). For chronic risk, we use a 21-day rolling average of concentrations.</p>
+<p>The parameters of each SSD, as well as the TMoA classification for each chemical, are internal to ERAHUMED and are not directly accessible to the user.</p>
 
 
 </section>
