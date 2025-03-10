@@ -99,7 +99,7 @@ df_input_description <- function(name, layer) {
 ```
 
 
-### Lake outflows and levels data frame	
+### Lake outflows and levels data frame	{#sec-weather-df}
 
 ```{r}
 #| include: false
@@ -141,7 +141,7 @@ management_df_desc <- df_input_description("management_df", "hbc")
 knitr::kable(management_df_desc$table, caption = management_df_desc$caption)
 ```
 
-### Chemical application schedules data frame
+### Chemical application schedules data frame {#sec-ca-schedules-df}
 
 ```{r}
 #| include: false

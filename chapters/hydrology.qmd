@@ -168,7 +168,11 @@ $$ {#eq-hbc-delayed-day}
 
 where $d_{t+1}$ denotes the day of year corresponding to time $t+1$, and $\delta_{c,t}$ the accumulated plan delay.
 
-Let $h _{c,t+1}^{\text{id}}$ denote the ideal depth for cluster $c$ at time $t+1$ retrieved in this way, and $\text{Ir}_{c,t}$, $\text{Dr}_{c,t}$ the corresponding ideal irrigation and draining plans. Furthermore, denote by $V_{c,t+1}^{\text{id}} = A_c \cdot h_{c,t+1}^{\text{id}}$ the corresponding ideal water volume.
+Let $h _{c,t+1}^{\text{id}}$ denote the ideal depth for cluster $c$ at time 
+$t+1$ retrieved in this way, and $\text{Ir}_{c,t}$, $\text{Dr}_{c,t}$ the 
+corresponding irrigation and draining plans. Furthermore, denote by 
+$V_{c,t+1}^{\text{id}} = A_c \cdot h_{c,t+1}^{\text{id}}$ the corresponding 
+ideal water volume.
 
 In order to compute ideal inflow and outflow, we require (*cf.* @eq-hbc-balance):
 
