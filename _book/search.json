@@ -189,7 +189,7 @@
     "href": "chapters/erahumed_dss_ui.html",
     "title": "7  The ERAHUMED DSS Graphical User Interface",
     "section": "",
-    "text": "7.1 How to run the GUI\nAt the present moment, the GUI can only be run from R, through the package {erahumed}, which is publicly available on Github. Details on R and on the {erahumed} package are provided in Chapter 8 and references therein (see, in particular, Sections 8.0.1 and 8.0.2 for instructions on how to install R and the {erahumed} package). Once you have installed {erahumed}, you can access its GUI by running in R the following command:\nerahumed::launch_dss()",
+    "text": "7.1 How to run the GUI\nAt the present moment, the GUI can only be run from R, through the package {erahumed}, which is publicly available on Github. Details on R and on the {erahumed} package are provided in Chapter 8 and references therein (see, in particular, Sections 8.1 and 8.2 for instructions on how to install R and the {erahumed} package). Once you have installed {erahumed}, you can access its GUI by running in R the following command:\nerahumed::launch_dss()",
     "crumbs": [
       "User Manual",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>The ERAHUMED DSS Graphical User Interface</span>"
@@ -222,7 +222,40 @@
     "href": "chapters/erahumed_dss_pkg.html",
     "title": "8  The {erahumed} R package",
     "section": "",
-    "text": "This should not be an exhaustive description of the R package, but rather mention its existence and giving basic instructions for its installation and refer to the package vignette’s and documentation for more details.\n\n8.0.1 Installing R\n\n\n8.0.2 Installing {erahumed}",
+    "text": "8.1 Installing R\nR is a free programming language and software environment widely adopted in the scientific community due to its powerful statistical capabilities and user-friendly interface. The {erahumed} package allows users to run simulations, prepare custom inputs, and explore outputs in detail—all from the R command line. Compared to the graphical user interface (GUI), using R directly provides greater flexibility and control over these operations.\nTo install R, visit the official R project website, where you will find detailed installation instructions for various operating systems. If you are new to R, there are many introductory resources available online, including the official R manual from the R Core Team. However, if your only goal is to run the ERAHUMED GUI on your local machine, you won’t need extensive knowledge of R. Simply installing R and running a few commands in the command line will be enough to get started.",
+    "crumbs": [
+      "User Manual",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>The `{erahumed}` R package</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/erahumed_dss_pkg.html#sec-installing-erahumed",
+    "href": "chapters/erahumed_dss_pkg.html#sec-installing-erahumed",
+    "title": "8  The {erahumed} R package",
+    "section": "8.2 Installing {erahumed}",
+    "text": "8.2 Installing {erahumed}\nOnce R is installed, setting up the {erahumed} package requires just one or two commands in the R console. Detailed installation instructions are available here.",
+    "crumbs": [
+      "User Manual",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>The `{erahumed}` R package</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/erahumed_dss_pkg.html#sec-using-erahumed",
+    "href": "chapters/erahumed_dss_pkg.html#sec-using-erahumed",
+    "title": "8  The {erahumed} R package",
+    "section": "8.3 Using {erahumed}",
+    "text": "8.3 Using {erahumed}\nFor a quick start with {erahumed}—whether using the GUI or the R command line—refer to the usage guide. For a more in-depth walkthrough of the command-line workflow, see the main package vignette.",
+    "crumbs": [
+      "User Manual",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>The `{erahumed}` R package</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/erahumed_dss_pkg.html#getting-help",
+    "href": "chapters/erahumed_dss_pkg.html#getting-help",
+    "title": "8  The {erahumed} R package",
+    "section": "8.4 Getting Help",
+    "text": "8.4 Getting Help\nFor support and troubleshooting, visit the help section.",
     "crumbs": [
       "User Manual",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>The `{erahumed}` R package</span>"
