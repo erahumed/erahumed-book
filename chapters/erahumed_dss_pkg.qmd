@@ -1,5 +1,7 @@
-# The `{erahumed}` R package
+# The `{erahumed}` R package {#sec-erahumed-pkg}
 
-This should not be an exhaustive description of the R package, but rather 
-mention its existence and giving basic instructions for its installation and 
-refer to the package vignette's and documentation for more details.
+This should not be an exhaustive description of the R package, but rather mention its existence and giving basic instructions for its installation and refer to the package vignette's and documentation for more details.
+
+### Installing R {#sec-installing-r}
+
+### Installing `{erahumed}` {#sec-installing-erahumed}

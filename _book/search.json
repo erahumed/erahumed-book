@@ -187,12 +187,34 @@
   {
     "objectID": "chapters/erahumed_dss_ui.html",
     "href": "chapters/erahumed_dss_ui.html",
-    "title": "7  The ERAHUMED DSS User Interface",
+    "title": "7  The ERAHUMED DSS Graphical User Interface",
     "section": "",
-    "text": "This chapter should explain how to run ERAHUMED simulations using the Shiny app. It may contain screenshots taken from the app to exemplify the various points.\n\n7.0.1 How to run the DSS?\nDescribe various options available (which at the moment of writing may as well be “download the package” only - and perhaps a basic deployment on shinyapps.io).\n\n\n7.0.2 The “Output” tab\n\n\n7.0.3 The “Input” tab",
+    "text": "7.1 How to run the GUI\nAt the present moment, the GUI can only be run from R, through the package {erahumed}, which is publicly available on Github. Details on R and on the {erahumed} package are provided in Chapter 8 and references therein (see, in particular, Sections 8.0.1 and 8.0.2 for instructions on how to install R and the {erahumed} package). Once you have installed {erahumed}, you can access its GUI by running in R the following command:\nerahumed::launch_dss()",
     "crumbs": [
       "User Manual",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>The ERAHUMED DSS User Interface</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>The ERAHUMED DSS Graphical User Interface</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/erahumed_dss_ui.html#the-output-tab",
+    "href": "chapters/erahumed_dss_ui.html#the-output-tab",
+    "title": "7  The ERAHUMED DSS Graphical User Interface",
+    "section": "7.2 The Output tab",
+    "text": "7.2 The Output tab\nUpon launching the GUI, you are greeted by the Output tab (Figure 7.1), which serves as the main dashboard for viewing model results through interactive visualizations. Generating the plots may take around 10 to 20 seconds, corresponding to the time required to complete a full simulation for a one-year period.\nThe dashboard is divided into three sections, each corresponding to a model component:\n\nHydrology (Chapter 4): Displays water level variations and flow patterns over time.\nExposure (Chapter 5): Shows the concentration of different pesticides in water and sediment.\nRisk (Chapter 6): Assesses potential ecological impacts based on pesticide exposure.\n\nUsers can explore these components across different hydrological elements of the Albufera Natural Park, including the Albufera lake, irrigation ditches, and rice field clusters. The specific location can be selected using the “Water body” dropdown menu. The interactive plots allow users to zoom, pan, and filter data over specific time periods, facilitating a more detailed analysis of model outputs.\nThe “Download results” button, located in the top-right corner, exports all raw model outputs as a compressed .zip file containing .csv data.\n\n\n\n\n\n\nFigure 7.1: Graphical User Interface - Output tab\n\n\n\nThe visualizations in this tab reflect the selected input parameters. Adjusting inputs in the Input tab described in the next Section allows users to explore different scenarios and assess their impact on model outcomes.",
+    "crumbs": [
+      "User Manual",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>The ERAHUMED DSS Graphical User Interface</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/erahumed_dss_ui.html#the-input-tab",
+    "href": "chapters/erahumed_dss_ui.html#the-input-tab",
+    "title": "7  The ERAHUMED DSS Graphical User Interface",
+    "section": "7.3 The Input tab",
+    "text": "7.3 The Input tab",
+    "crumbs": [
+      "User Manual",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>The ERAHUMED DSS Graphical User Interface</span>"
     ]
   },
   {
@@ -200,7 +222,7 @@
     "href": "chapters/erahumed_dss_pkg.html",
     "title": "8  The {erahumed} R package",
     "section": "",
-    "text": "This should not be an exhaustive description of the R package, but rather mention its existence and giving basic instructions for its installation and refer to the package vignette’s and documentation for more details.",
+    "text": "This should not be an exhaustive description of the R package, but rather mention its existence and giving basic instructions for its installation and refer to the package vignette’s and documentation for more details.\n\n8.0.1 Installing R\n\n\n8.0.2 Installing {erahumed}",
     "crumbs": [
       "User Manual",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>The `{erahumed}` R package</span>"
