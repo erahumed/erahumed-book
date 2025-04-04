@@ -8,7 +8,7 @@
 
 <meta name="description" content="The ERAHUMED Decision Support System: Software Manual and Technical Documentation.">
 
-<title>7&nbsp; Risk assessment – ERAHUMED DSS</title>
+<title>2&nbsp; The ERAHUMED model: a bird’s eye view – ERAHUMED DSS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,7 +21,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -31,8 +51,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/erahumed_dss_ui.html" rel="next">
-<link href="../chapters/exposure.html" rel="prev">
+<link href="../chapters/birdseye.html" rel="next">
+<link href="../chapters/intro.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -82,7 +102,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/birdseye.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/risk.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Risk assessment</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/ackno.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ERAHUMED model: a bird’s eye view</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -121,7 +141,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/ackno.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/ackno.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ERAHUMED model: a bird’s eye view</span></span></a>
   </div>
 </li>
@@ -160,7 +180,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/risk.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/risk.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Risk assessment</span></span></a>
   </div>
 </li>
@@ -217,21 +237,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#calculation-of-risk-using-ssds" id="toc-calculation-of-risk-using-ssds" class="nav-link active" data-scroll-target="#calculation-of-risk-using-ssds"><span class="header-section-number">7.1</span> Calculation of risk using SSDs</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/birdseye.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/risk.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Risk assessment</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-risk" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Risk assessment</span></span></h1>
+<h1 class="title"><span id="sec-ackno" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ERAHUMED model: a bird’s eye view</span></span></h1>
 </div>
 
 
@@ -248,16 +262,15 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This Chapter describes how ERAHUMED assesses the toxicological risks associated with pesticide exposure in the Albufera Natural Park. Building on the hydrological and exposure models from the previous Chapters, this step estimates the potential impacts on aquatic organisms and the broader ecosystem. We employ the Species Sensitivity Distribution (SSD) approach, a widely used method in ecological risk assessment [TODO reference]. This approach allows for the identification of high-risk scenarios, supporting management decisions to mitigate adverse effects.</p>
-<section id="calculation-of-risk-using-ssds" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="calculation-of-risk-using-ssds"><span class="header-section-number">7.1</span> Calculation of risk using SSDs</h2>
-<p>The risk calculation follows the approach outlined in [TODO A.Rico Reference], to which we refer the reader for further details. Here, we summarize the key aspects relevant to our model.</p>
-<p>SSDs transform the chemical concentrations computed in the previous “Exposure” simulation layer (<a href="exposure.html" class="quarto-xref"><span>Chapter 6</span></a>) into the potentially affected fraction of species (PAF). As described in [TODO], chemicals are grouped by toxic mode of action (TMoA), and different TMoAs are assumed to act independently.</p>
-<p>Separate distributions are used to assess acute and chronic risks. In the case of acute risk, we use daily chemical concentration values (computed as described in <a href="exposure.html" class="quarto-xref"><span>Chapter 6</span></a>). For chronic risk, we use a 21-day rolling average of concentrations.</p>
-<p>The parameters of each SSD, as well as the TMoA classification for each chemical, are internal to ERAHUMED and are not directly accessible to the user.</p>
+<p>The ERAHUMED DSS has been financed by the Talented Researcher Support Programme - PlanGenT (CIDEGENT/2020/043) of the Generalitat Valenciana.</p>
+<p>TODO: Based on existing work <span class="citation" data-cites="martinez2024pharmaceutical">Martı́nez-Megı́as et al. (<a href="references.html#ref-martinez2024pharmaceutical" role="doc-biblioref">2024</a>)</span></p>
 
 
-</section>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-martinez2024pharmaceutical" class="csl-entry" role="listitem">
+Martı́nez-Megı́as, Claudia, Alba Arenas-Sánchez, Diana Manjarrés-López, Sandra Pérez, Yolanda Soriano, Yolanda Picó, and Andreu Rico. 2024. <span>“Pharmaceutical and Pesticide Mixtures in a Mediterranean Coastal Wetland: Comparison of Sampling Methods, Ecological Risks, and Removal by a Constructed Wetland.”</span> <em>Environmental Science and Pollution Research</em> 31 (10): 14593–609.
+</div>
+</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -682,13 +695,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/exposure.html" class="pagination-link" aria-label="Exposure">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Exposure</span></span>
+      <a href="../chapters/intro.html" class="pagination-link" aria-label="Introduction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/erahumed_dss_ui.html" class="pagination-link" aria-label="The ERAHUMED DSS Graphical User Interface">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">The ERAHUMED DSS Graphical User Interface</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/birdseye.html" class="pagination-link" aria-label="The ERAHUMED model: a bird's eye view">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">The ERAHUMED model: a bird’s eye view</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

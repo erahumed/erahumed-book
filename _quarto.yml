@@ -22,6 +22,7 @@ book:
   chapters:
   - index.qmd
   - chapters/intro.qmd
+  - chapters/ackno.qmd
 
   - part: Technical description
     chapters:

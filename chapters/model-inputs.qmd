@@ -4,9 +4,7 @@ This chapter serves as a central reference for all input parameters used in ERAH
 
 ## Landscape parameters
 
-Landscape parameters are collected in @tbl-landscape-params. In this table, 
-a `numeric(n)` type indicates a numeric vector of `n` components, while 
-`data.frame` inputs have more complex formats, detailed below.
+Landscape parameters are collected in @tbl-landscape-params. In this table, a `numeric(n)` type indicates a numeric vector of `n` components, while `data.frame` inputs have more complex formats, detailed below.
 
 ```{r}
 #| echo: false
@@ -30,22 +28,15 @@ if (knitr::opts_knit$get("rmarkdown.pandoc.to") == "html") {
     }
 }
 
-docs_layers <- erahumed::erahumed_docs("layers") |>
-  (\(.) .[c("inp", "hbl", "hbc", "hbd", "ca", "ctc", "rc", "rd", "rl")])()
-
 strip_roxy_macros <- function(x) 
   gsub("\\\\link(?:\\[[^]]+\\])?\\{([^}]+)\\}", "`\\1`", x = x)
 
 wrap_bcktcks <- function(x) paste0("`", x, "`")
 
-extract_layers_parameters_df <- function(l) {
-  params <- l$parameters
-  
-  if (length(params) == 0) {
-    return(NULL)
-  }
+input_docs_df <- function() {
+  docs <- erahumed:::erahumed_input_docs()
 
-  res <- data.frame(Parameter = names(params) |> 
+  res <- data.frame(Parameter = names(docs) |> 
                       wrap_bcktcks() |> gt::vec_fmt_markdown(),
                     Name = NA,
                     Unit = NA,
@@ -54,13 +45,13 @@ extract_layers_parameters_df <- function(l) {
                     Description = NA
                     )
   
-  for (i in seq_along(params)) {
-    res[i, "Name"] <- (params[[i]]$name %||% res[i, "Parameter"])
-    res[i, "Unit"] <- (params[[i]]$unit %||% "N/A")
-    res[i, "Type"] <- params[[i]]$type |> 
+  for (i in seq_along(docs)) {
+    res[i, "Name"] <- (docs[[i]]$name %||% res[i, "Parameter"])
+    res[i, "Unit"] <- (docs[[i]]$unit %||% "N/A")
+    res[i, "Type"] <- docs[[i]]$type |> 
       wrap_bcktcks() |> gt::vec_fmt_markdown()
-    res[i, "Group"] <- params[[i]]$group
-    res[i, "Description"] <- params[[i]]$description |> 
+    res[i, "Group"] <- docs[[i]]$group
+    res[i, "Description"] <- docs[[i]]$description |> 
       strip_roxy_macros() |> gt::vec_fmt_markdown()
       
   }
@@ -68,10 +59,10 @@ extract_layers_parameters_df <- function(l) {
   return(res)
 }
 
-lapply(docs_layers, extract_layers_parameters_df) |>
-  Reduce(rbind, x = _) |>
+input_docs_df() |>
   render_fun()
 ```
+
 ## Chemical-specific parameters
 
 In addition to landscape parameters, ERAHUMED includes a set of parameters for each supported chemical, defining their physico-chemical and toxicological properties. At this stage, these parameters are internal and not reported here. However, our roadmap includes future support for customizing these parameters and defining new chemicals.
@@ -82,8 +73,8 @@ We detail in the following sections the format of data frame inputs.
 
 ```{r}
 #| include: false
-df_input_description <- function(name, layer) {
-  docs <- erahumed::erahumed_docs("layers", layer, "parameters", name)
+df_input_description <- function(name) {
+  docs <- erahumed:::erahumed_input_docs(name)
   
   res <- list()
   
@@ -98,12 +89,11 @@ df_input_description <- function(name, layer) {
 }
 ```
 
-
-### Lake outflows and levels data frame	{#sec-weather-df}
+### Lake outflows and levels data frame {#sec-weather-df}
 
 ```{r}
 #| include: false
-outflows_df_desc <- df_input_description("outflows_df", "inp")
+outflows_df_desc <- df_input_description("outflows_df")
 ```
 
 `r outflows_df_desc$description`
@@ -113,11 +103,11 @@ outflows_df_desc <- df_input_description("outflows_df", "inp")
 knitr::kable(outflows_df_desc$table, caption = outflows_df_desc$caption)
 ```
 
-### Weather data frame	
+### Weather data frame
 
 ```{r}
 #| include: false
-weather_df_desc <- df_input_description("weather_df", "inp")
+weather_df_desc <- df_input_description("weather_df")
 ```
 
 `r weather_df_desc$description`
@@ -131,7 +121,7 @@ knitr::kable(weather_df_desc$table, caption = weather_df_desc$caption)
 
 ```{r}
 #| include: false
-management_df_desc <- df_input_description("management_df", "hbc")
+management_df_desc <- df_input_description("management_df")
 ```
 
 `r management_df_desc$description`
@@ -145,7 +135,7 @@ knitr::kable(management_df_desc$table, caption = management_df_desc$caption)
 
 ```{r}
 #| include: false
-ca_schedules_df_desc <- df_input_description("ca_schedules_df", "ca")
+ca_schedules_df_desc <- df_input_description("ca_schedules_df")
 ```
 
 `r ca_schedules_df_desc$description`

@@ -1,5 +1,13 @@
-# Introduction
+# Introduction {#sec-intro}
 
-This is a book created from markdown and executable code.
+Mediterranean coastal wetlands are exposed to multiple anthropogenic pressures, one of the most significant being pollution from intensive rice production. Among the most critical pollutants associated with rice cultivation are synthetic pesticides, particularly herbicides, insecticides, and fungicides. Once applied in rice production, pesticides can be transported through spray-drift, surface runoff or leaching into nearby water bodies, threatening the structure and functioning of aquatic ecosystems.
 
-See @martinez2024pharmaceutical for additional info.
+The ERAHUMED Decision Support System (DSS) was designed to evaluate the exposure and risks of pesticides used in rice cultivation, focusing on the Albufera Natural Park as a reference and study wetland. The Albufera Natural Park, located near Valencia, Spain, is one of the most important wetlands in the Mediterranean region. It spans an area of 21 hectares, including the Albufera lagoon, surrounding marshlands, rice fields, and sand dunes. The freshwater lagoon is connected to the Mediterranean Sea through a system of canals known as "*golas*." The park is a Ramsar site and hosts a wide variety of flora and fauna, including several endemic and endangered species.
+
+The DSS dynamically calculates the volume of water available in rice fields, canals, and the lagoon throughout the year. Additionally, it can dynamically predict pesticide concentrations in various environmental matrices, including rice crops, surface water, and sediment. Finally, the DSS evaluates the risks associated with each pesticide and their mixtures for aquatic ecosystems, based on Species Sensitivity Distributions (SSDs).
+
+The DSS can be used to predict exposure and risks associated with different pesticides, considering their unique physico-chemical and toxicological properties, at a landscape level. It determines spatially explicit and dynamic variations in concentrations within each water body over time. This makes it a valuable tool for decision-making regarding rice cultivation management and implementing risk mitigation measures at an ecosystem-wide scale. Furthermore, it allows for prospective ecological risk assessments of new substances and the identification of pollution hot-spots and the combined effects of complex contaminant mixtures.
+
+On the practical side, the DSS is implemented as an R package called `{erahumed}`, distributed as open-source software and available for download [here](https://erahumed.github.io/erahumed/). The package includes a Graphical User Interface (GUI), implemented as a Shiny application, which allows users to run the models and analyze the results without directly interacting with the underlying R code.
+
+This documentation provides a comprehensive description of the DSS and is divided into two main parts. The first part, *Technical Description*, outlines the models underlying the DSS, including the environmental, hydrological, and physico-chemical parameters required for its operation, as well as the processes and equations used to calculate exposure and risks. The second part, *User Manual*, provides step-by-step instructions for using the software, with a particular focus on its GUI. In addition, an *Appendix* details the data used by the DSS.
