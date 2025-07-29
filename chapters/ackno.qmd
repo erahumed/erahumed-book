@@ -1,4 +1,4 @@
-# The ERAHUMED model: a bird's eye view {#sec-ackno}
+# Acknowledgements {#sec-ackno}
 
 The ERAHUMED DSS has been financed by the Talented Researcher Support Programme - PlanGenT (CIDEGENT/2020/043) of the Generalitat Valenciana.
 
