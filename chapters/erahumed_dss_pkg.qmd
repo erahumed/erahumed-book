@@ -1,58 +1,25 @@
 # The `{erahumed}` R package {#sec-erahumed-pkg}
 
-As mentioned in @sec-erahumed-gui, the software infrastructure of the ERAHUMED 
-DSS is a library for the R programming language. The `{erahumed}` R package 
-already has extensive documentation, which you can consult on its 
-[main website](https://erahumed.github.io/erahumed/). In particular, 
-[this article](https://erahumed.github.io/erahumed/articles/erahumed-workflow.html) 
-provides a step-by-step guide to the package’s main functionalities, explaining 
-how to run a simulation.  
+As mentioned in @sec-erahumed-gui, the software infrastructure of the ERAHUMED DSS is a library for the R programming language. The `{erahumed}` R package already has extensive documentation, which you can consult on its [main website](https://erahumed.github.io/erahumed/). In particular, [this article](https://erahumed.github.io/erahumed/articles/erahumed-workflow.html) provides a step-by-step guide to the package’s main functionalities, explaining how to run a simulation.
 
-The rest of this chapter provides brief instructions on installing R and the 
-`{erahumed}` package. If you are a proficient R user, you may confidently skip 
-this part and simply follow the instructions in the 
-[package README](https://erahumed.github.io/erahumed/) to install `{erahumed}` 
-and launch the Shiny app that provides its GUI.  
+The rest of this chapter provides brief instructions on installing R and the `{erahumed}` package. If you are a proficient R user, you may confidently skip this part and simply follow the instructions in the [package README](https://erahumed.github.io/erahumed/) to install `{erahumed}` and launch the Shiny app that provides its GUI.
 
-The `{erahumed}` R package is open-source software and is hosted 
-[on GitHub](https://github.com/erahumed/erahumed/). If you have a suggestion, 
-want to report a bug, or need help, feel free to open a 
-[GitHub issue](https://github.com/erahumed/erahumed/issues) (you will need to 
-sign in to GitHub with a personal account, which you can create for free). 
-Pull requests with code improvements are also welcome!
+The `{erahumed}` R package is open-source software and is hosted [on GitHub](https://github.com/erahumed/erahumed/). If you have a suggestion, want to report a bug, or need help, feel free to open a [GitHub issue](https://github.com/erahumed/erahumed/issues) (you will need to sign in to GitHub with a personal account, which you can create for free). Pull requests with code improvements are also welcome!
 
 ## Installing R {#sec-installing-r}
 
-R is a free programming language and software environment widely adopted in the 
-scientific community due to its powerful statistical capabilities and 
-user-friendly interface. The `{erahumed}` package allows users to run 
-simulations, prepare custom inputs, and explore outputs in detail—all from the R 
-command line. Compared to the graphical user interface (GUI), using R directly 
-provides greater flexibility and control over these operations.
+R is a free programming language and software environment widely adopted in the scientific community due to its powerful statistical capabilities and user-friendly interface. The `{erahumed}` package allows users to run simulations, prepare custom inputs, and explore outputs in detail—all from the R command line. Compared to the graphical user interface (GUI), using R directly provides greater flexibility and control over these operations.
 
-To install R, visit the 
-[official R project website](https://www.r-project.org/), where you will find 
-detailed installation instructions for various operating systems. If you are 
-new to R, there are many introductory resources available online, including the 
-[official R manual](https://cran.r-project.org/doc/manuals/R-intro.pdf) from the R Core Team.
-However, if your only goal is to run the ERAHUMED GUI on your local machine, you 
-won’t need extensive knowledge of R. Simply installing R and running a few 
-commands in the command line will be enough to get started.
+To install R, visit the [official R project website](https://www.r-project.org/), where you will find detailed installation instructions for various operating systems. If you are new to R, there are many introductory resources available online, including the [official R manual](https://cran.r-project.org/doc/manuals/R-intro.pdf) from the R Core Team. However, if your only goal is to run the ERAHUMED GUI on your local machine, you won’t need extensive knowledge of R. Simply installing R and running a few commands in the command line will be enough to get started.
 
 ## Installing `{erahumed}` {#sec-installing-erahumed}
 
-Once R is installed, setting up the `{erahumed}` package requires just one or 
-two commands in the R console. Detailed installation instructions are available [here](https://erahumed.github.io/erahumed/#installation).
-
+Once R is installed, setting up the `{erahumed}` package requires just one or two commands in the R console. Detailed installation instructions are available [here](https://erahumed.github.io/erahumed/#installation).
 
 ## Using `{erahumed}` {#sec-using-erahumed}
 
-For a quick start with `{erahumed}`—whether using the GUI or the R command 
-line—refer to the [usage guide](https://erahumed.github.io/erahumed/#usage). 
-For a more in-depth walkthrough of the command-line workflow, see the 
-[main package vignette](https://erahumed.github.io/erahumed/articles/erahumed-workflow.html).
+For a quick start with `{erahumed}`—whether using the GUI or the R command line—refer to the [usage guide](https://erahumed.github.io/erahumed/#usage). For a more in-depth walkthrough of the command-line workflow, see the [main package vignette](https://erahumed.github.io/erahumed/articles/erahumed-workflow.html).
 
-## Getting Help  
+## Getting Help
 
-For support and troubleshooting, visit the 
-[help section](https://erahumed.github.io/erahumed/#getting-help).  
+For support and troubleshooting, visit the [help section](https://erahumed.github.io/erahumed/#getting-help).

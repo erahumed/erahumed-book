@@ -69,10 +69,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
-
-<link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-
 
 
 </head>
@@ -226,15 +222,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#landscape-parameters" id="toc-landscape-parameters" class="nav-link active" data-scroll-target="#landscape-parameters"><span class="header-section-number">4.1</span> Landscape parameters</a></li>
-  <li><a href="#chemical-specific-parameters" id="toc-chemical-specific-parameters" class="nav-link" data-scroll-target="#chemical-specific-parameters"><span class="header-section-number">4.2</span> Chemical-specific parameters</a></li>
-  <li><a href="#data-frame-inputs" id="toc-data-frame-inputs" class="nav-link" data-scroll-target="#data-frame-inputs"><span class="header-section-number">4.3</span> Data frame inputs</a>
+  <li><a href="#landscape-parameters" id="toc-landscape-parameters" class="nav-link active" data-scroll-target="#landscape-parameters"><span class="header-section-number">4.1</span> Landscape parameters</a>
   <ul class="collapse">
-  <li><a href="#sec-weather-df" id="toc-sec-weather-df" class="nav-link" data-scroll-target="#sec-weather-df"><span class="header-section-number">4.3.1</span> Lake outflows and levels data frame</a></li>
-  <li><a href="#weather-data-frame" id="toc-weather-data-frame" class="nav-link" data-scroll-target="#weather-data-frame"><span class="header-section-number">4.3.2</span> Weather data frame</a></li>
-  <li><a href="#sec-management-df" id="toc-sec-management-df" class="nav-link" data-scroll-target="#sec-management-df"><span class="header-section-number">4.3.3</span> Rice paddy management data frame</a></li>
-  <li><a href="#sec-ca-schedules-df" id="toc-sec-ca-schedules-df" class="nav-link" data-scroll-target="#sec-ca-schedules-df"><span class="header-section-number">4.3.4</span> Chemical application schedules data frame</a></li>
+  <li><a href="#observational-inputs-hydrology-and-weather" id="toc-observational-inputs-hydrology-and-weather" class="nav-link" data-scroll-target="#observational-inputs-hydrology-and-weather"><span class="header-section-number">4.1.1</span> Observational inputs: hydrology and weather</a></li>
   </ul></li>
+  <li><a href="#chemical-parameters" id="toc-chemical-parameters" class="nav-link" data-scroll-target="#chemical-parameters"><span class="header-section-number">4.2</span> Chemical parameters</a></li>
+  <li><a href="#rfms-parameters" id="toc-rfms-parameters" class="nav-link" data-scroll-target="#rfms-parameters"><span class="header-section-number">4.3</span> RFMS parameters</a></li>
+  <li><a href="#spatial-allocation-parameters" id="toc-spatial-allocation-parameters" class="nav-link" data-scroll-target="#spatial-allocation-parameters"><span class="header-section-number">4.4</span> Spatial allocation parameters</a></li>
   </ul>
 </nav>
     </div>
@@ -260,15 +254,22 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This chapter serves as a central reference for all input parameters used in ERAHUMED simulations.</p>
+<p>This chapter serves as a central reference for all input parameters used in ERAHUMED simulations. In the tables below, a <code>numeric(n)</code> type indicates a numeric vector of <code>n</code> components, while <code>data.frame</code> inputs have more complex formats, detailed below.</p>
+<p><em>Note</em>: The <code>Type</code> column and, to some extent, the <code>Description</code> fields in <a href="#tbl-landscape-params" class="quarto-xref">Table&nbsp;<span>4.1</span></a> refer to the internal structures and conventions of the <code>{erahumed}</code> <em>R package</em>, which is presented in detail in <a href="erahumed_dss_pkg.html" class="quarto-xref"><span>Chapter 9</span></a> and references therein. However, the <code>Description</code> generally conveys the intended meaning and usage of each parameter, regardless of whether the user is interacting through the R package or the Shiny interface. Users of the Shiny GUI do not need to understand the R-specific details, as the interface provides appropriate input controls and guidance.</p>
+<p>The input parameters are grouped into four categories:</p>
+<ul>
+<li><p><strong>Landscape parameters</strong> (<a href="#tbl-landscape-params" class="quarto-xref">Table&nbsp;<span>4.1</span></a>) define the biophysical and climatic context in which simulations take place. These inputs characterize the structure and behavior of the Albufera system, including the temporal simulation window (<code>date_start</code>, <code>date_end</code>), the lake’s hydrology and geometry, and its interaction with weather and soil processes.</p></li>
+<li><p><strong>Chemical parameters</strong> (<a href="#tbl-chemical-params" class="quarto-xref">Table&nbsp;<span>4.2</span></a>) describe the physico-chemical and eco-toxicological characteristics of the pesticide compounds considered in the simulation. These include degradation rates, solubility, partition coefficients, and toxicity distribution parameters used for risk assessment.</p></li>
+<li><p><strong>RFMS parameters</strong> (<a href="#tbl-rfms-params" class="quarto-xref">Table&nbsp;<span>4.3</span></a>) specify how different rice field management systems (RFMSs) are configured. These parameters define the timing, frequency, and nature of chemical applications, as well as water management practices such as irrigation and drainage scheduling.</p></li>
+<li><p><strong>Spatial allocation</strong> parameters (<a href="#tbl-allocation-params" class="quarto-xref">Table&nbsp;<span>4.4</span></a>) captures how the different RFMSs are spatially distributed across the simulated landscape. This information determines which management practices are applied to which clusters of rice fields, affecting both contaminant fate and risk exposure.</p></li>
+</ul>
 <section id="landscape-parameters" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="landscape-parameters"><span class="header-section-number">4.1</span> Landscape parameters</h2>
-<p>Landscape parameters are collected in <a href="#tbl-landscape-params" class="quarto-xref">Table&nbsp;<span>4.1</span></a>. In this table, a <code>numeric(n)</code> type indicates a numeric vector of <code>n</code> components, while <code>data.frame</code> inputs have more complex formats, detailed below.</p>
 <div class="cell">
 <div id="tbl-landscape-params" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-landscape-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4.1: ERAHUMED input parameters
+Table&nbsp;4.1: ERAHUMED input parameters: Landscape
 </figcaption>
 <div aria-describedby="tbl-landscape-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -278,172 +279,179 @@ Table&nbsp;4.1: ERAHUMED input parameters
 <th style="text-align: left;" data-quarto-table-cell-role="th">Parameter</th>
 <th style="text-align: left;" data-quarto-table-cell-role="th">Name</th>
 <th style="text-align: left;" data-quarto-table-cell-role="th">Unit</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Group</th>
 <th style="text-align: left;" data-quarto-table-cell-role="th">Type</th>
 <th style="text-align: left;" data-quarto-table-cell-role="th">Description</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd" data-grouplength="8">
-<td colspan="5" style="border-bottom: 1px solid"><strong>Environmental parameters</strong></td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1"><code>bd_g_cm3</code></td>
-<td style="text-align: left;">Bulk density of sediment</td>
-<td style="text-align: left;">g·cm⁻²</td>
-<td style="text-align: left;"><code>numeric(1)</code></td>
-<td style="text-align: left;">A positive number. Bulk density of the sediment (including both the solid material and the pore spaces). Expressed in grams per cubic centimeter.</td>
-</tr>
 <tr class="odd">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1"><code>dact_m</code></td>
-<td style="text-align: left;">Depth of active sediment</td>
-<td style="text-align: left;">m</td>
-<td style="text-align: left;"><code>numeric(1)</code></td>
-<td style="text-align: left;">A positive number. Active sediment layer depth, where “active”” refers to the portion of the sediment that is actually involved in chemical exchange or transport processes. Expressed in meters.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1"><code>foc_sed</code></td>
-<td style="text-align: left;">Fraction of organic content in sediment</td>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;"><code>numeric(1)</code></td>
-<td style="text-align: left;">A number between <code>0</code> and <code>1</code>. Fraction of organic matter content within sediment.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1"><code>foc_ss</code></td>
-<td style="text-align: left;">Fraction of organic content in suspended solid</td>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;"><code>numeric(1)</code></td>
-<td style="text-align: left;">A number between <code>0</code> and <code>1</code>. Fraction of organic matter content within suspended solids.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1"><code>jgrow</code></td>
-<td style="text-align: left;">Maturation cycle length</td>
-<td style="text-align: left;">day</td>
-<td style="text-align: left;"><code>numeric(1)</code></td>
-<td style="text-align: left;">A positive integer. Length (in days) of crop maturation cycle in rice paddies.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1"><code>porosity</code></td>
-<td style="text-align: left;">Porosity</td>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;"><code>numeric(1)</code></td>
-<td style="text-align: left;">A number between <code>0</code> and <code>1</code>. The fraction of the total sediment volume that is occupied by pore spaces.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1"><code>qseep_m_day</code></td>
-<td style="text-align: left;">Seepage rate</td>
-<td style="text-align: left;">m·day⁻¹</td>
-<td style="text-align: left;"><code>numeric(1)</code></td>
-<td style="text-align: left;">A positive number. Seepage rate, <em>i.e.</em> the rate at which water seeps through the sediment or soil. Expressed in meters per day.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1"><code>css_ppm</code></td>
-<td style="text-align: left;">Suspended solid concentration</td>
-<td style="text-align: left;">ppm</td>
-<td style="text-align: left;"><code>numeric(1)</code></td>
-<td style="text-align: left;">A positive number. Concentration of water suspended solids, expressed in parts per million.</td>
-</tr>
-<tr class="even" data-grouplength="3">
-<td colspan="5" style="border-bottom: 1px solid"><strong>General</strong></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1"><code>date_end</code></td>
-<td style="text-align: left;">End Date</td>
-<td style="text-align: left;">N/A</td>
-<td style="text-align: left;"><code>Date(1)</code></td>
-<td style="text-align: left;">A single-value <code>Date</code> vector (or a convertible object). Defines the ending date of the date interval for the simulation.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1"><code>seed</code></td>
-<td style="text-align: left;">Simulation random seed</td>
-<td style="text-align: left;">N/A</td>
-<td style="text-align: left;"><code>numeric(1)</code></td>
-<td style="text-align: left;">Seed for random number generation used by the simulation algorithms.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1"><code>date_start</code></td>
+<td style="text-align: left;"><code>date_start</code></td>
 <td style="text-align: left;">Start Date</td>
 <td style="text-align: left;">N/A</td>
+<td style="text-align: left;">General</td>
 <td style="text-align: left;"><code>Date(1)</code></td>
 <td style="text-align: left;">A single-value <code>Date</code> vector (or a convertible object). Defines the starting date of the date interval for the simulation.</td>
 </tr>
-<tr class="even" data-grouplength="7">
-<td colspan="5" style="border-bottom: 1px solid"><strong>Hydrology</strong></td>
+<tr class="even">
+<td style="text-align: left;"><code>date_end</code></td>
+<td style="text-align: left;">End Date</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">General</td>
+<td style="text-align: left;"><code>Date(1)</code></td>
+<td style="text-align: left;">A single-value <code>Date</code> vector (or a convertible object). Defines the ending date of the date interval for the simulation.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1"><code>height_thresh_cm</code></td>
-<td style="text-align: left;">Cluster Height Threshold</td>
-<td style="text-align: left;">cm</td>
+<td style="text-align: left;"><code>seed</code></td>
+<td style="text-align: left;">Simulation random seed</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">General</td>
 <td style="text-align: left;"><code>numeric(1)</code></td>
-<td style="text-align: left;">A positive number. Height threshold for water levels, below which a cluster is considered to be emptied.</td>
+<td style="text-align: left;">Seed for random number generation used by the simulation algorithms.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1"><code>ditch_level_m</code></td>
-<td style="text-align: left;">Ditch water level</td>
-<td style="text-align: left;">m</td>
-<td style="text-align: left;"><code>numeric(1)</code></td>
-<td style="text-align: left;">Constant water depth in ditches.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1"><code>ideal_flow_rate_cm</code></td>
-<td style="text-align: left;">Ideal flow rate</td>
-<td style="text-align: left;">cm</td>
-<td style="text-align: left;"><code>numeric(1)</code></td>
-<td style="text-align: left;">Ideal inflow/outflow of a cluster, for days in which the cluster is scheduled to be in flux (<em>i.e.</em> when being simultaneously irrigated and drained). Expressed in centimeters of water depth per day.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1"><code>outflows_df</code></td>
+<td style="text-align: left;"><code>outflows_df</code></td>
 <td style="text-align: left;">Lake outflows and levels data frame</td>
 <td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Hydrology</td>
 <td style="text-align: left;"><code>data.frame</code></td>
 <td style="text-align: left;">Time-series dataset that provides the observational hydrological data on the Albufera lake, along the template of <code>albufera_outflows</code> (the default value).</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1"><code>petp_surface_m2</code></td>
-<td style="text-align: left;">PET surface</td>
+<td style="text-align: left;"><code>storage_curve_slope_m2</code></td>
+<td style="text-align: left;">Storage curve slope</td>
 <td style="text-align: left;">m²</td>
+<td style="text-align: left;">Hydrology</td>
 <td style="text-align: left;"><code>numeric(1)</code></td>
-<td style="text-align: left;">The surface area (in square meters) used to convert precipitation and evapotranspiration per unit area into volume changes for the Albufera Lake. The default numeric value was computed by the package authors and corresponds to the average flooded surface of the Albufera lake and its irrigation ditches.</td>
+<td style="text-align: left;">Slope of the (linear) storage curve of the Albufera Lake, in square meters. Multiplying this value by the change in the lake’s water level gives the corresponding change in water <em>volume</em>. The default numeric values are derived from the CHJ report <a href="https://www.chj.es/Descargas/ProyectosOPH/Consulta%20publica/PHC-2015-2021/ReferenciasBibliograficas/HumedalesZonasProtegidas/CHJ,2012.Aquatool_Albufera.pdf"><em>Modelo de seguimiento de l’Albufera de Valencia con AQUATOOLDMA</em></a>.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1"><code>storage_curve_intercept_m3</code></td>
+<td style="text-align: left;"><code>storage_curve_intercept_m3</code></td>
 <td style="text-align: left;">Storage curve intercept</td>
 <td style="text-align: left;">m³</td>
+<td style="text-align: left;">Hydrology</td>
 <td style="text-align: left;"><code>numeric(1)</code></td>
 <td style="text-align: left;">Intercept of the linear storage curve for the Albufera Lake, expressed in cubic meters. This value represents the lake’s water volume when the water level is at sea level. The default numeric values are derived from the CHJ report <a href="https://www.chj.es/Descargas/ProyectosOPH/Consulta%20publica/PHC-2015-2021/ReferenciasBibliograficas/HumedalesZonasProtegidas/CHJ,2012.Aquatool_Albufera.pdf"><em>Modelo de seguimiento de l’Albufera de Valencia con AQUATOOLDMA</em></a>.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1"><code>storage_curve_slope_m2</code></td>
-<td style="text-align: left;">Storage curve slope</td>
+<td style="text-align: left;"><code>petp_surface_m2</code></td>
+<td style="text-align: left;">PET surface</td>
 <td style="text-align: left;">m²</td>
+<td style="text-align: left;">Hydrology</td>
 <td style="text-align: left;"><code>numeric(1)</code></td>
-<td style="text-align: left;">Slope of the (linear) storage curve of the Albufera Lake, in square meters. Multiplying this value by the change in the lake’s water level gives the corresponding change in water <em>volume</em>. The default numeric values are derived from the CHJ report <a href="https://www.chj.es/Descargas/ProyectosOPH/Consulta%20publica/PHC-2015-2021/ReferenciasBibliograficas/HumedalesZonasProtegidas/CHJ,2012.Aquatool_Albufera.pdf"><em>Modelo de seguimiento de l’Albufera de Valencia con AQUATOOLDMA</em></a>.</td>
+<td style="text-align: left;">The surface area (in square meters) used to convert precipitation and evapotranspiration per unit area into volume changes for the Albufera Lake. The default numeric value was computed by the package authors and corresponds to the average flooded surface of the Albufera lake and its irrigation ditches.</td>
 </tr>
-<tr class="even" data-grouplength="1">
-<td colspan="5" style="border-bottom: 1px solid"><strong>Meteorology</strong></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1"><code>weather_df</code></td>
+<tr class="even">
+<td style="text-align: left;"><code>weather_df</code></td>
 <td style="text-align: left;">Weather data frame</td>
 <td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Meteorology</td>
 <td style="text-align: left;"><code>data.frame</code></td>
 <td style="text-align: left;">A dataset that provides the relevant metereological time series, along the template of <code>albufera_weather</code> (the default value).</td>
 </tr>
-<tr class="even" data-grouplength="2">
-<td colspan="5" style="border-bottom: 1px solid"><strong>Pesticide application scheme</strong></td>
-</tr>
 <tr class="odd">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1"><code>cluster_map</code></td>
-<td style="text-align: left;">Cluster map of management systems</td>
-<td style="text-align: left;">N/A</td>
-<td style="text-align: left;"><code>erahumed_cluster_map</code></td>
-<td style="text-align: left;">An object of class <code>cluster_map</code>. Defines how different rice field management systems are assigned to spatial clusters within the simulation.</td>
+<td style="text-align: left;"><code>ideal_flow_rate_cm</code></td>
+<td style="text-align: left;">Ideal flow rate</td>
+<td style="text-align: left;">cm</td>
+<td style="text-align: left;">Environmental properties</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Ideal inflow/outflow of a cluster, for days in which the cluster is scheduled to be in flux (<em>i.e.</em> when being simultaneously irrigated and drained). Expressed in centimeters of water depth per day.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left; padding-left: 2em;" data-indentlevel="1"><code>covmax</code></td>
+<td style="text-align: left;"><code>height_thresh_cm</code></td>
+<td style="text-align: left;">Cluster Height Threshold</td>
+<td style="text-align: left;">cm</td>
+<td style="text-align: left;">Environmental properties</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">A positive number. Height threshold for water levels, below which a cluster is considered to be emptied.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>ditch_level_m</code></td>
+<td style="text-align: left;">Ditch water level</td>
+<td style="text-align: left;">m</td>
+<td style="text-align: left;">Environmental properties</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Constant water depth in ditches.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>covmax</code></td>
 <td style="text-align: left;">Max interception potential</td>
 <td style="text-align: left;">1</td>
+<td style="text-align: left;">Environmental properties</td>
 <td style="text-align: left;"><code>numeric(1)</code></td>
 <td style="text-align: left;">A number between <code>0</code> and <code>1</code>. Maximum potential fraction of applied chemicals intercepted by foliage at crop maturation.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>jgrow</code></td>
+<td style="text-align: left;">Maturation cycle length</td>
+<td style="text-align: left;">day</td>
+<td style="text-align: left;">Environmental properties</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">A positive integer. Length (in days) of crop maturation cycle in rice paddies.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>dact_m</code></td>
+<td style="text-align: left;">Depth of active sediment</td>
+<td style="text-align: left;">m</td>
+<td style="text-align: left;">Environmental properties</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">A positive number. Active sediment layer depth, where “active”” refers to the portion of the sediment that is actually involved in chemical exchange or transport processes. Expressed in meters.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>css_ppm</code></td>
+<td style="text-align: left;">Suspended solid concentration</td>
+<td style="text-align: left;">ppm</td>
+<td style="text-align: left;">Environmental properties</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">A positive number. Concentration of water suspended solids, expressed in parts per million.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>foc_ss</code></td>
+<td style="text-align: left;">Fraction of organic content in suspended solid</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Environmental properties</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">A number between <code>0</code> and <code>1</code>. Fraction of organic matter content within suspended solids.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>foc_sed</code></td>
+<td style="text-align: left;">Fraction of organic content in sediment</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Environmental properties</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">A number between <code>0</code> and <code>1</code>. Fraction of organic matter content within sediment.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>bd_g_cm3</code></td>
+<td style="text-align: left;">Bulk density of sediment</td>
+<td style="text-align: left;">g·cm⁻²</td>
+<td style="text-align: left;">Environmental properties</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">A positive number. Bulk density of the sediment (including both the solid material and the pore spaces). Expressed in grams per cubic centimeter.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>qseep_m_day</code></td>
+<td style="text-align: left;">Seepage rate</td>
+<td style="text-align: left;">m·day⁻¹</td>
+<td style="text-align: left;">Environmental properties</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">A positive number. Seepage rate, <em>i.e.</em> the rate at which water seeps through the sediment or soil. Expressed in meters per day.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>porosity</code></td>
+<td style="text-align: left;">Porosity</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Environmental properties</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">A number between <code>0</code> and <code>1</code>. The fraction of the total sediment volume that is occupied by pore spaces.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>rfms_map</code></td>
+<td style="text-align: left;">Map of rice field management systems</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Agrochemical management</td>
+<td style="text-align: left;"><code>erahumed_rfms_map</code></td>
+<td style="text-align: left;">An object of class <code>rfms_map</code> that defines how different rice field management systems (RFMSs) are assigned to spatial clusters within the simulation. This object also encapsulates the full set of user-defined agrochemical configurations, including custom chemicals and RFMSs, and serves as the main interface for scenario customization. See <code>rfms</code> for an overview of RFMS definitions and customization options.</td>
 </tr>
 </tbody>
 </table>
@@ -454,16 +462,18 @@ Table&nbsp;4.1: ERAHUMED input parameters
 </figure>
 </div>
 </div>
-</section>
-<section id="chemical-specific-parameters" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="chemical-specific-parameters"><span class="header-section-number">4.2</span> Chemical-specific parameters</h2>
-<p>In addition to landscape parameters, ERAHUMED includes a set of parameters for each supported chemical, defining their physico-chemical and toxicological properties. At this stage, these parameters are internal and not reported here. However, our roadmap includes future support for customizing these parameters and defining new chemicals.</p>
-</section>
-<section id="data-frame-inputs" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="data-frame-inputs"><span class="header-section-number">4.3</span> Data frame inputs</h2>
-<p>We detail in the following sections the format of data frame inputs.</p>
-<section id="sec-weather-df" class="level3" data-number="4.3.1">
-<h3 data-number="4.3.1" class="anchored" data-anchor-id="sec-weather-df"><span class="header-section-number">4.3.1</span> Lake outflows and levels data frame</h3>
+<section id="observational-inputs-hydrology-and-weather" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="observational-inputs-hydrology-and-weather"><span class="header-section-number">4.1.1</span> Observational inputs: hydrology and weather</h3>
+<p>Hydrological and meteorological data provide the empirical starting point for ERAHUMED simulations. These observational inputs are supplied as data frames and are used to drive the water balance, pesticide transport, and evapotranspiration dynamics in the model.</p>
+<p>Users working with historical scenarios are encouraged to provide real-world data from the corresponding time period, enabling retrospective simulations under observed environmental conditions. Conversely, for future or hypothetical scenarios, users may define synthetic datasets that reflect the expected or desired characteristics of the scenario—e.g., altered rainfall regimes or management-induced changes in outflow patterns.</p>
+<p>By default, ERAHUMED includes representative data covering a typical agricultural year in the Albufera Natural Park:</p>
+<ul>
+<li><p>Hydrological data (<code>outflows_df</code>) are derived from continuous measurements of water outflows and lake levels, provided by the <em>Confederación Hidrográfica del Júcar</em> (CHJ). These records can be accessed through the <a href="https://aps.chj.es/">CHJ hydrological data portal</a>.</p></li>
+<li><p>Meteorological data (<code>weather_df</code>) originate from the <em>Benifaió</em> weather station, operated by the <em>Instituto Valenciano de Investigaciones Agrarias</em> (IVIA). This station is considered representative of the local climate within the park. Historical meteorological records are publicly available at the <a href="http://riegos.ivia.es/">IVIA website</a>.</p></li>
+</ul>
+<p>We detail below the format and required fields for each of these data frames.</p>
+<section id="sec-weather-df" class="level4" data-number="4.1.1.1">
+<h4 data-number="4.1.1.1" class="anchored" data-anchor-id="sec-weather-df"><span class="header-section-number">4.1.1.1</span> Lake outflows and levels data frame</h4>
 <p>Time-series dataset that provides the observational hydrological data on the Albufera lake, along the template of <code>albufera_outflows</code> (the default value).</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -505,8 +515,8 @@ Table&nbsp;4.1: ERAHUMED input parameters
 </div>
 </div>
 </section>
-<section id="weather-data-frame" class="level3" data-number="4.3.2">
-<h3 data-number="4.3.2" class="anchored" data-anchor-id="weather-data-frame"><span class="header-section-number">4.3.2</span> Weather data frame</h3>
+<section id="weather-data-frame" class="level4" data-number="4.1.1.2">
+<h4 data-number="4.1.1.2" class="anchored" data-anchor-id="weather-data-frame"><span class="header-section-number">4.1.1.2</span> Weather data frame</h4>
 <p>A dataset that provides the relevant metereological time series, along the template of <code>albufera_weather</code> (the default value).</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -548,42 +558,383 @@ Table&nbsp;4.1: ERAHUMED input parameters
 </div>
 </div>
 </section>
-<section id="sec-management-df" class="level3" data-number="4.3.3">
-<h3 data-number="4.3.3" class="anchored" data-anchor-id="sec-management-df"><span class="header-section-number">4.3.3</span> Rice paddy management data frame</h3>
+</section>
+</section>
+<section id="chemical-parameters" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="chemical-parameters"><span class="header-section-number">4.2</span> Chemical parameters</h2>
 <div class="cell">
+<div id="tbl-chemical-params" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-chemical-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.2: ERAHUMED input parameters: Chemicals
+</figcaption>
+<div aria-describedby="tbl-chemical-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="caption-top">
-<caption>[]</caption>
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th style="text-align: left;">Description</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Parameter</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Name</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Unit</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Group</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Type</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Description</th>
 </tr>
 </thead>
 <tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>display_name</code></td>
+<td style="text-align: left;">Chemical display name</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Chemical identity</td>
+<td style="text-align: left;"><code>character(1)</code></td>
+<td style="text-align: left;">The common name of the chemical (e.g., “Acetamiprid”).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>tmoa_id</code></td>
+<td style="text-align: left;">Toxic mode of action ID</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Chemical identity</td>
+<td style="text-align: left;"><code>character(1)</code></td>
+<td style="text-align: left;">Identifier for the toxic mode of action (e.g., “NicotinicAcetylcholine”).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>MW</code></td>
+<td style="text-align: left;">Molecular weight</td>
+<td style="text-align: left;">g/mol</td>
+<td style="text-align: left;">Physicochemical properties</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Molecular weight in grams per mole.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ksetl_m_day</code></td>
+<td style="text-align: left;">Settling rate</td>
+<td style="text-align: left;">m/day</td>
+<td style="text-align: left;">Transport parameters</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Settling rate, representing particle-bound transfer to sediment.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>sol_ppm</code></td>
+<td style="text-align: left;">Solubility</td>
+<td style="text-align: left;">ppm</td>
+<td style="text-align: left;">Physicochemical properties</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Water solubility.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>koc_cm3_g</code></td>
+<td style="text-align: left;">Koc</td>
+<td style="text-align: left;">cm ³ /g</td>
+<td style="text-align: left;">Sorption</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Organic carbon-water partition coefficient (Koc).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>fet_cm</code></td>
+<td style="text-align: left;">Foliar extraction term</td>
+<td style="text-align: left;">1/cm</td>
+<td style="text-align: left;">Transport parameters</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Fraction of pesticide washed off from foliage per cm of rainfall.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>kf_day</code></td>
+<td style="text-align: left;">Foliage degradation rate</td>
+<td style="text-align: left;">1/day</td>
+<td style="text-align: left;">Degradation</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Degradation rate in foliage.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>kw_day</code></td>
+<td style="text-align: left;">Water column degradation rate</td>
+<td style="text-align: left;">1/day</td>
+<td style="text-align: left;">Degradation</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Degradation rate in the water column.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ks_sat_day</code></td>
+<td style="text-align: left;">Saturated sediment degradation rate</td>
+<td style="text-align: left;">1/day</td>
+<td style="text-align: left;">Degradation</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Degradation rate in saturated sediment.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>ks_unsat_day</code></td>
+<td style="text-align: left;">Unsaturated sediment degradation rate</td>
+<td style="text-align: left;">1/day</td>
+<td style="text-align: left;">Degradation</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Degradation rate in unsaturated sediment.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>kw_temp</code></td>
+<td style="text-align: left;">Water degradation reference temp.</td>
+<td style="text-align: left;">° C</td>
+<td style="text-align: left;">Degradation</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Reference temperature for kw_day.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>ks_sat_temp</code></td>
+<td style="text-align: left;">Sat. sediment degradation ref. temp.</td>
+<td style="text-align: left;">° C</td>
+<td style="text-align: left;">Degradation</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Reference temperature for ks_sat_day.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ks_unsat_temp</code></td>
+<td style="text-align: left;">Unsat. sediment degradation ref. temp.</td>
+<td style="text-align: left;">° C</td>
+<td style="text-align: left;">Degradation</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Reference temperature for ks_unsat_day.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>Q10_kw</code></td>
+<td style="text-align: left;">Q10 for water degradation</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Degradation</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Q10 coefficient for temperature correction of degradation in water.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>Q10_ks_sat</code></td>
+<td style="text-align: left;">Q10 for sat. sediment degradation</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Degradation</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Q10 coefficient for temperature correction in saturated sediment.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>Q10_ks_unsat</code></td>
+<td style="text-align: left;">Q10 for unsat. sediment degradation</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Degradation</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Q10 coefficient for temperature correction in unsaturated sediment.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ssd_acute_mu</code></td>
+<td style="text-align: left;">SSD acute mean (log10)</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Toxicity</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Mean (log10 scale) of the acute species sensitivity distribution.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>ssd_acute_sigma</code></td>
+<td style="text-align: left;">SSD acute std. deviation (log10)</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Toxicity</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Standard deviation (log10 scale) of the acute species sensitivity distribution.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ssd_chronic_mu</code></td>
+<td style="text-align: left;">SSD chronic mean (log10)</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Toxicity</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Mean (log10 scale) of the chronic species sensitivity distribution.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>ssd_chronic_sigma</code></td>
+<td style="text-align: left;">SSD chronic std. deviation (log10)</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Toxicity</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Standard deviation (log10 scale) of the chronic species sensitivity distribution.</td>
+</tr>
 </tbody>
 </table>
+
+
+</div>
+</div>
+</figure>
 </div>
 </div>
 </section>
-<section id="sec-ca-schedules-df" class="level3" data-number="4.3.4">
-<h3 data-number="4.3.4" class="anchored" data-anchor-id="sec-ca-schedules-df"><span class="header-section-number">4.3.4</span> Chemical application schedules data frame</h3>
+<section id="rfms-parameters" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="rfms-parameters"><span class="header-section-number">4.3</span> RFMS parameters</h2>
 <div class="cell">
+<div id="tbl-rfms-params" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rfms-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.3: ERAHUMED input parameters: Rice-Field Management Systems
+</figcaption>
+<div aria-describedby="tbl-rfms-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="caption-top">
-<caption>[]</caption>
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th style="text-align: left;">Description</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Parameter</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Name</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Unit</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Group</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Type</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Description</th>
 </tr>
 </thead>
 <tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>sowing_yday</code></td>
+<td style="text-align: left;">Start of sowing season</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Calendar</td>
+<td style="text-align: left;"><code>integer(1)</code></td>
+<td style="text-align: left;">Day of the year marking the start of the sowing season (1–366, assuming a leap year).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>harvesting_yday</code></td>
+<td style="text-align: left;">End of sowing season</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Calendar</td>
+<td style="text-align: left;"><code>integer(1)</code></td>
+<td style="text-align: left;">Day of the year marking the end of the sowing season (1–366, assuming a leap year).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>perellona_start_yday</code></td>
+<td style="text-align: left;">Start of Perellona</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Calendar</td>
+<td style="text-align: left;"><code>integer(1)</code></td>
+<td style="text-align: left;">Day of the year marking the beginning of the <em>Perellona</em> flooding period (after harvest).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>perellona_end_yday</code></td>
+<td style="text-align: left;">End of Perellona</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Calendar</td>
+<td style="text-align: left;"><code>integer(1)</code></td>
+<td style="text-align: left;">Day of the year marking the end of the <em>Perellona</em> flooding period (before sowing).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>flow_height_cm</code></td>
+<td style="text-align: left;">Target water level (sowing)</td>
+<td style="text-align: left;">cm</td>
+<td style="text-align: left;">Hydrology</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Target water level (in cm) during the regular days of the sowing season, excluding emptying and transition days.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>perellona_height_cm</code></td>
+<td style="text-align: left;">Target water level (Perellona)</td>
+<td style="text-align: left;">cm</td>
+<td style="text-align: left;">Hydrology</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Target water level (in cm) during the <em>Perellona</em> flooding period.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>display_name</code></td>
+<td style="text-align: left;">Display name</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Metadata</td>
+<td style="text-align: left;"><code>character(1)</code></td>
+<td style="text-align: left;">Name of the management system to be displayed in output plots and summaries.</td>
+</tr>
 </tbody>
 </table>
+
+
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="spatial-allocation-parameters" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="spatial-allocation-parameters"><span class="header-section-number">4.4</span> Spatial allocation parameters</h2>
+<div class="cell">
+<div id="tbl-allocation-params" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-allocation-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.4: ERAHUMED input parameters: Rice-Field surface allocation
+</figcaption>
+<div aria-describedby="tbl-allocation-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Parameter</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Name</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Unit</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Group</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Type</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>map</code></td>
+<td style="text-align: left;">Cluster map</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Inputs</td>
+<td style="text-align: left;"><code>erahumed_rfms_map</code></td>
+<td style="text-align: left;">A cluster map created with <code>new_rfms_map()</code> or <code>default_rfms_map()</code>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>system</code></td>
+<td style="text-align: left;">Management system</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Inputs</td>
+<td style="text-align: left;"><code>erahumed_rfms</code></td>
+<td style="text-align: left;">A management system to assign, created with <code>new_rfms()</code> or helper functions such as <code>bomba()</code> or <code>clearfield()</code>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>target_fraction</code></td>
+<td style="text-align: left;">Target allocation fraction</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Allocation settings</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">The fraction of surface area <strong>within the selected subset</strong> of clusters (filtered by <code>ditches</code> and <code>field_type</code>) to allocate to the given system. Must be a number between 0 and 1.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ditches</code></td>
+<td style="text-align: left;">Ditches</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Allocation settings</td>
+<td style="text-align: left;"><code>integer</code></td>
+<td style="text-align: left;">A vector of ditch IDs (e.g., 1:26) defining the subset of clusters to be considered for allocation. Defaults to all ditches.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>field_type</code></td>
+<td style="text-align: left;">Field type</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Allocation settings</td>
+<td style="text-align: left;"><code>character(1)</code></td>
+<td style="text-align: left;">Type of field to consider when selecting clusters. Must be one of:
+<p></p>
+<ul>
+<li><code>"regular"</code> – only regular fields</li>
+<li><code>"tancat"</code> – only tancats</li>
+<li><code>"both"</code> – all field types (default).</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</figure>
 </div>
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

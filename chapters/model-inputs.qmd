@@ -1,95 +1,87 @@
+```{r}
+#| include: false
+get_param_kable <- function(fun = c("simulation", "chemical", "rfms", "allocation")) 
+{
+  df <- erahumed:::get_param_docs_df(fun = fun, fmt_markdown = gt::vec_fmt_markdown)
+  knitr::kable(df, format = "html", escape = FALSE)
+}
+```
+
 # Model inputs {#sec-model-inputs}
 
-This chapter serves as a central reference for all input parameters used in ERAHUMED simulations.
+This chapter serves as a central reference for all input parameters used in 
+ERAHUMED simulations. In the tables below, a `numeric(n)` type indicates a numeric vector 
+of `n` components, while `data.frame` inputs have more complex formats, detailed 
+below.
+
+*Note*: The `Type` column and, to some extent, the `Description` fields in @tbl-landscape-params refer to the internal structures and conventions of the 
+`{erahumed}` *R package*, which is presented in detail in @sec-erahumed-pkg and
+references therein. However, the `Description` generally conveys the 
+intended meaning and usage of each parameter, regardless of whether the user 
+is interacting through the R package or the Shiny interface. Users of the Shiny 
+GUI do not need to understand the R-specific details, as the interface provides 
+appropriate input controls and guidance.
+
+The input parameters are grouped into four categories:
+
+* **Landscape parameters** (@tbl-landscape-params) define the biophysical and climatic context in which simulations take place. These inputs characterize the structure and behavior of the Albufera system, including the temporal simulation window (`date_start`, `date_end`), the lake’s hydrology and geometry, and its interaction with weather and soil processes.
+
+* **Chemical parameters** (@tbl-chemical-params) describe the physico-chemical and eco-toxicological characteristics of the pesticide compounds considered in the simulation. These include degradation rates, solubility, partition coefficients, and toxicity distribution parameters used for risk assessment.
+
+* **RFMS parameters** (@tbl-rfms-params) specify how different rice field management systems (RFMSs) are configured. These parameters define the timing, frequency, and nature of chemical applications, as well as water management practices such as irrigation and drainage scheduling.
+
+* **Spatial allocation** parameters (@tbl-allocation-params) captures how the different RFMSs are spatially distributed across the simulated landscape. This information determines which management practices are applied to which clusters of rice fields, affecting both contaminant fate and risk exposure.
 
 ## Landscape parameters
-
-Landscape parameters are collected in @tbl-landscape-params. In this table, a `numeric(n)` type indicates a numeric vector of `n` components, while `data.frame` inputs have more complex formats, detailed below.
 
 ```{r}
 #| echo: false
 #| label: tbl-landscape-params
-#| tbl-cap: "ERAHUMED input parameters"
-
-if (knitr::opts_knit$get("rmarkdown.pandoc.to") == "html") {
-  render_fun <- function(x) {
-    x <- dplyr::arrange(x, Group, Name)
-    grps_rle <- rle(x$Group)
-    pack_rows_idx <- grps_rle$lengths
-    names(pack_rows_idx) <- grps_rle$values
-    x <- dplyr::select(x, -Group)
-    
-    knitr::kable(x, format = "html", escape = FALSE) |> 
-      kableExtra::pack_rows(index = pack_rows_idx)
-    }
-  } else {
-  render_fun <- function(x) {
-    knitr::kable(x, format = "latex")
-    }
-}
-
-strip_roxy_macros <- function(x) 
-  gsub("\\\\link(?:\\[[^]]+\\])?\\{([^}]+)\\}", "`\\1`", x = x)
-
-wrap_bcktcks <- function(x) paste0("`", x, "`")
-
-input_docs_df <- function() {
-  docs <- erahumed:::erahumed_input_docs()
-
-  res <- data.frame(Parameter = names(docs) |> 
-                      wrap_bcktcks() |> gt::vec_fmt_markdown(),
-                    Name = NA,
-                    Unit = NA,
-                    Group = NA,
-                    Type = NA, 
-                    Description = NA
-                    )
-  
-  for (i in seq_along(docs)) {
-    res[i, "Name"] <- (docs[[i]]$name %||% res[i, "Parameter"])
-    res[i, "Unit"] <- (docs[[i]]$unit %||% "N/A")
-    res[i, "Type"] <- docs[[i]]$type |> 
-      wrap_bcktcks() |> gt::vec_fmt_markdown()
-    res[i, "Group"] <- docs[[i]]$group
-    res[i, "Description"] <- docs[[i]]$description |> 
-      strip_roxy_macros() |> gt::vec_fmt_markdown()
-      
-  }
-  
-  return(res)
-}
-
-input_docs_df() |>
-  render_fun()
+#| tbl-cap: "ERAHUMED input parameters: Landscape"
+get_param_kable(fun = "simulation")
 ```
 
-## Chemical-specific parameters
+### Observational inputs: hydrology and weather
 
-In addition to landscape parameters, ERAHUMED includes a set of parameters for each supported chemical, defining their physico-chemical and toxicological properties. At this stage, these parameters are internal and not reported here. However, our roadmap includes future support for customizing these parameters and defining new chemicals.
+Hydrological and meteorological data provide the empirical starting point for 
+ERAHUMED simulations. These observational inputs are supplied as data frames 
+and are used to drive the water balance, pesticide transport, and 
+evapotranspiration dynamics in the model.
 
-## Data frame inputs
+Users working with historical scenarios are encouraged to provide real-world data from the corresponding time period, enabling retrospective simulations under observed environmental conditions. Conversely, for future or hypothetical scenarios, users may define synthetic datasets that reflect the expected or desired characteristics of the scenario—e.g., altered rainfall regimes or management-induced changes in outflow patterns.
 
-We detail in the following sections the format of data frame inputs.
+By default, ERAHUMED includes representative data covering a typical agricultural year in the Albufera Natural Park:
+
+* Hydrological data (`outflows_df`) are derived from continuous measurements of 
+water outflows and lake levels, provided by the *Confederación Hidrográfica del 
+Júcar* (CHJ). These records can be accessed through the 
+[CHJ hydrological data portal](https://aps.chj.es/).
+
+* Meteorological data (`weather_df`) originate from the *Benifaió* weather 
+station, operated by the *Instituto Valenciano de Investigaciones Agrarias* 
+(IVIA). This station is considered representative of the local climate within the park. Historical meteorological records are publicly available at the [IVIA website](http://riegos.ivia.es/). 
+
+We detail below the format and required fields for each of these data frames.
 
 ```{r}
 #| include: false
 df_input_description <- function(name) {
-  docs <- erahumed:::erahumed_input_docs(name)
+  docs <- erahumed:::get_param_docs(name, fun = "simulation")
   
   res <- list()
   
-  res$caption <- paste0(docs$name, " [", docs$cardinality, "]")
+  res$caption <- paste0(docs$name, " [", docs$df$cardinality, "]")
   
-  res$description <- strip_roxy_macros(docs$description)
+  res$description <- erahumed:::strip_roxy_macros(docs$description)
   
-  cls <- docs$columns
+  cls <- docs$df$columns
   res$table <- data.frame(Column = names(cls), Description = as.character(cls))
   
   return(res)
 }
 ```
 
-### Lake outflows and levels data frame {#sec-weather-df}
+#### Lake outflows and levels data frame {#sec-weather-df}
 
 ```{r}
 #| include: false
@@ -103,7 +95,7 @@ outflows_df_desc <- df_input_description("outflows_df")
 knitr::kable(outflows_df_desc$table, caption = outflows_df_desc$caption)
 ```
 
-### Weather data frame
+#### Weather data frame
 
 ```{r}
 #| include: false
@@ -117,30 +109,30 @@ weather_df_desc <- df_input_description("weather_df")
 knitr::kable(weather_df_desc$table, caption = weather_df_desc$caption)
 ```
 
-### Rice paddy management data frame {#sec-management-df}
-
-```{r}
-#| include: false
-management_df_desc <- df_input_description("management_df")
-```
-
-`r management_df_desc$description`
+## Chemical parameters
 
 ```{r}
 #| echo: false
-knitr::kable(management_df_desc$table, caption = management_df_desc$caption)
+#| label: tbl-chemical-params
+#| tbl-cap: "ERAHUMED input parameters: Chemicals"
+get_param_kable(fun = "chemical")
 ```
 
-### Chemical application schedules data frame {#sec-ca-schedules-df}
-
-```{r}
-#| include: false
-ca_schedules_df_desc <- df_input_description("ca_schedules_df")
-```
-
-`r ca_schedules_df_desc$description`
+## RFMS parameters
 
 ```{r}
 #| echo: false
-knitr::kable(ca_schedules_df_desc$table, caption = ca_schedules_df_desc$caption)
+#| label: tbl-rfms-params
+#| tbl-cap: "ERAHUMED input parameters: Rice-Field Management Systems"
+get_param_kable(fun = "rfms")
 ```
+
+## Spatial allocation parameters
+
+```{r}
+#| echo: false
+#| label: tbl-allocation-params
+#| tbl-cap: "ERAHUMED input parameters: Rice-Field surface allocation"
+get_param_kable(fun = "allocation")
+```
+

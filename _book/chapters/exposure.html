@@ -288,7 +288,7 @@ window.Quarto = {
 <section id="sec-ca" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="sec-ca"><span class="header-section-number">6.1</span> Pesticide applications</h2>
 <p>The simulation of pesticide applications to rice fields follows a straightforward algorithm that takes as input the scheduled application list and the system’s hydrology (<a href="hydrology.html" class="quarto-xref"><span>Chapter 5</span></a>). The algorithm outputs a list of actual applications, specifying the application day and the applied mass. Since the application of each pesticide is computed independently of others, we focus on a single pesticide for the present discussion.</p>
-<p>The information on scheduled applications is contained in the <code>ca_schedules_df</code> data frame, whose structure is described in detail in <a href="model-inputs.html#sec-ca-schedules-df" class="quarto-xref"><span>Section 4.3.4</span></a>. For each scheduled application, this data set specifies:</p>
+<p>The information on scheduled applications is contained in the <code>ca_schedules_df</code> data frame, whose structure is described in detail in <span class="quarto-unresolved-ref">?sec-ca-schedules-df</span>. For each scheduled application, this data set specifies:</p>
 <ul>
 <li>An application day <span class="math inline">\(D\)</span>, representing the day of the crop cycle when the pesticide is expected to be applied.</li>
 <li>An application amount, expressed in units of mass per unit area.</li>
@@ -448,7 +448,7 @@ c = \min\left[\frac{d_s(t)}{j_{\text{grow}}},\,1\right]\cdot c_{\text{max}},
 <p>Daily degradation rates <span class="math inline">\(k_{f,w,s}(t)\)</span> for the chemical are modeled through the Arrhenius equation, schematically:</p>
 <p><span class="math display">\[
 k(t) = k_0 \cdot Q_{10}^{\frac{T(t)-T_0}{10}}
-\]</span> where <span class="math inline">\(k_0\)</span> is the degradation rate <span class="math inline">\(k_0\)</span> at a reference temperature <span class="math inline">\(T_0\)</span>, <span class="math inline">\(Q_{10}\)</span> is a numerical constant, and <span class="math inline">\(T(t)\)</span> is the average temperature on day <span class="math inline">\(t\)</span>. The constants <span class="math inline">\(k_0\)</span> and <span class="math inline">\(Q_10\)</span> are internal model parameters, while <span class="math inline">\(T(t)\)</span> is given by <code>weather_df$temperature_ave</code>, see <a href="model-inputs.html#sec-weather-df" class="quarto-xref"><span>Section 4.3.1</span></a>.</p>
+\]</span> where <span class="math inline">\(k_0\)</span> is the degradation rate <span class="math inline">\(k_0\)</span> at a reference temperature <span class="math inline">\(T_0\)</span>, <span class="math inline">\(Q_{10}\)</span> is a numerical constant, and <span class="math inline">\(T(t)\)</span> is the average temperature on day <span class="math inline">\(t\)</span>. The constants <span class="math inline">\(k_0\)</span> and <span class="math inline">\(Q_10\)</span> are internal model parameters, while <span class="math inline">\(T(t)\)</span> is given by <code>weather_df$temperature_ave</code>, see <a href="model-inputs.html#sec-weather-df" class="quarto-xref"><span>Section 4.1.1.1</span></a>.</p>
 </section>
 <section id="diffusion-rates" class="level4" data-number="6.2.4.3">
 <h4 data-number="6.2.4.3" class="anchored" data-anchor-id="diffusion-rates"><span class="header-section-number">6.2.4.3</span> Diffusion rates</h4>
