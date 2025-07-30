@@ -52,7 +52,7 @@ customization options greatly expand its capabilities. They enable the
 simulation and comparison of alternative scenarios, making the software a 
 powerful resource for exploring potential changes in management or chemical use. 
 Detailed guidance on how to define and allocate custom chemicals and RFMSs is 
-provided in @sec-ui-chemicals and @sec-ui-rfms, respectively.
+provided in the following Sections.
 
 The next Section provides a detailed description of all model inputs, including 
 hydrological data, chemical properties, and management practices, which underpin 
