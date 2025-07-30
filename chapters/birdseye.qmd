@@ -34,11 +34,26 @@ and irrigation ditches. Details on this model are provided in @sec-hydrology.
 
 2. Exposure to chemicals is calculated by first simulating their application to 
 rice fields based on typical cultivation patterns. The dispersion of chemicals 
-is then modeled using a simplified set of differential equations designed to 
+is then modeled using a set of differential equations designed to 
 capture the key physical processes driving their spread. These calculations are
 described in detail @sec-exposure.
 
-3. The impact of chemicals is evaluated across all water bodies using a 
-simplified approach based on Species Sensitivity Distributions, utilizing 
-publicly available toxicity data for their estimation. This is described in 
-detail in @sec-risk.
+3. The impact of chemicals across all water bodies is assessed using 
+model-based approaches, currently including Species Sensitivity Distributions 
+(SSDs) and Risk Quotients (RQs). These approaches rely on publicly available 
+toxicity data to estimate ecological risk. Full details of the risk assessment 
+methodology are provided in @sec-risk.
+
+In addition to the default simulation workflow, the ERAHUMED software includes 
+advanced features that allow users to define custom chemical compounds and 
+rice field management systems (RFMSs). While current agrochemical practices 
+in the Albufera Natural Park are already built into the tool, these 
+customization options greatly expand its capabilities. They enable the 
+simulation and comparison of alternative scenarios, making the software a 
+powerful resource for exploring potential changes in management or chemical use. 
+Detailed guidance on how to define and allocate custom chemicals and RFMSs is 
+provided in @sec-ui-chemicals and @sec-ui-rfms, respectively.
+
+The next Section provides a detailed description of all model inputs, including 
+hydrological data, chemical properties, and management practices, which underpin 
+the simulation layers described above.

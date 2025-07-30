@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "ERAHUMED DSS",
     "section": "",
-    "text": "Preface\nThe purpose of this book is to provide a comprehensive reference for the ERAHUMED Decision Support System. Here you can find the technical descriptions of the algorithms employed by the system, as well as the user manual for the accompanying software.\nThe Support System and, hence, this book are currently under development on Github. In particular, the {erahumed} R package is hosted here.\nFor general information on the ERAHUMED project, please refer to the official website. If you want to get in touch, you can contact any of us via e-mail:\n\nAndreu Rico (Coordinator)\nPablo Amador (PhD Researcher)\nValerio Gherardi (Software Developer)",
+    "text": "Preface\nThe purpose of this book is to provide a comprehensive reference for the ERAHUMED Decision Support System. Here you can find the technical descriptions of the algorithms employed by the system, as well as the user manual for the accompanying software.\nThe Support System and, hence, this book are currently under development on Github. In particular, the {erahumed} R package is hosted here.\nFor general information on the ERAHUMED project, please refer to the official website. If you want to get in touch, you can contact any of us via e-mail:",
     "crumbs": [
       "Preface"
     ]
@@ -34,7 +34,7 @@
     "href": "chapters/birdseye.html",
     "title": "3  The ERAHUMED model: a bird’s eye view",
     "section": "",
-    "text": "The ERAHUMED model for assessing the ecological status of the Albufera Natural Park consists of three key components:\nFrom a spatial perspective, the natural park is divided into three types of water bodies: the Albufera lake, rice field clusters1, and irrigation ditches, which hydrologically connect the lake to the fields. Each of the model’s computational layers incorporates specific quantitative models to simulate the relevant processes across all water bodies. This is summarized in Figure 3.1, where arrows indicate downstream dependencies and define the logical computation order.\nTo clarify this structure, we can summarize the role of each simulation layer in Figure 3.1 as follows:",
+    "text": "The ERAHUMED model for assessing the ecological status of the Albufera Natural Park consists of three key components:\nFrom a spatial perspective, the natural park is divided into three types of water bodies: the Albufera lake, rice field clusters1, and irrigation ditches, which hydrologically connect the lake to the fields. Each of the model’s computational layers incorporates specific quantitative models to simulate the relevant processes across all water bodies. This is summarized in Figure 3.1, where arrows indicate downstream dependencies and define the logical computation order.\nTo clarify this structure, we can summarize the role of each simulation layer in Figure 3.1 as follows:\nIn addition to the default simulation workflow, the ERAHUMED software includes advanced features that allow users to define custom chemical compounds and rice field management systems (RFMSs). While current agrochemical practices in the Albufera Natural Park are already built into the tool, these customization options greatly expand its capabilities. They enable the simulation and comparison of alternative scenarios, making the software a powerful resource for exploring potential changes in management or chemical use. Detailed guidance on how to define and allocate custom chemicals and RFMSs is provided in ?sec-ui-chemicals and ?sec-ui-rfms, respectively.\nThe next Section provides a detailed description of all model inputs, including hydrological data, chemical properties, and management practices, which underpin the simulation layers described above.",
     "crumbs": [
       "Technical description",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>The ERAHUMED model: a bird's eye view</span>"
@@ -345,6 +345,16 @@
     "crumbs": [
       "Appendices",
       "<span class='chapter-number'>A</span>  <span class='chapter-title'>Input Data</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#software-version",
+    "href": "index.html#software-version",
+    "title": "ERAHUMED DSS",
+    "section": "Software version",
+    "text": "Software version\nThis manual corresponds to version 0.20.0.9000 of the {erahumed} R package.",
+    "crumbs": [
+      "Preface"
     ]
   }
 ]
