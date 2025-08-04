@@ -10,19 +10,7 @@ get_param_kable <- function(fun = c("simulation", "chemical", "rfms", "allocatio
 # Model inputs {#sec-model-inputs}
 
 This chapter serves as a central reference for all input parameters used in 
-ERAHUMED simulations. In the tables below, a `numeric(n)` type indicates a numeric vector 
-of `n` components, while `data.frame` inputs have more complex formats, detailed 
-below.
-
-*Note*: The `Type` column and, to some extent, the `Description` fields in @tbl-landscape-params refer to the internal structures and conventions of the 
-`{erahumed}` *R package*, which is presented in detail in @sec-erahumed-pkg and
-references therein. However, the `Description` generally conveys the 
-intended meaning and usage of each parameter, regardless of whether the user 
-is interacting through the R package or the Shiny interface. Users of the Shiny 
-GUI do not need to understand the R-specific details, as the interface provides 
-appropriate input controls and guidance.
-
-The input parameters are grouped into four categories:
+ERAHUMED simulations. Parameters are grouped into four categories:
 
 * **Landscape parameters** (@tbl-landscape-params) define the biophysical and climatic context in which simulations take place. These inputs characterize the structure and behavior of the Albufera system, including the temporal simulation window (`date_start`, `date_end`), the lake’s hydrology and geometry, and its interaction with weather and soil processes.
 
@@ -31,6 +19,14 @@ The input parameters are grouped into four categories:
 * **RFMS parameters** (@tbl-rfms-params) specify how different rice field management systems (RFMSs) are configured. These parameters define the timing, frequency, and nature of chemical applications, as well as water management practices such as irrigation and drainage scheduling.
 
 * **Spatial allocation** parameters (@tbl-allocation-params) captures how the different RFMSs are spatially distributed across the simulated landscape. This information determines which management practices are applied to which clusters of rice fields, affecting both contaminant fate and risk exposure.
+
+*Note*: The `Type` column and, to some extent, the `Description` fields in @tbl-landscape-params refer to the internal structures and conventions of the 
+`{erahumed}` *R package*, which is presented in detail in @sec-erahumed-pkg and
+references therein. However, the `Description` generally conveys the 
+intended meaning and usage of each parameter, regardless of whether the user 
+is interacting through the R package or the Shiny interface. Users of the Shiny 
+GUI do not need to understand the R-specific details, as the interface provides 
+appropriate input controls and guidance.
 
 ## Landscape parameters
 
