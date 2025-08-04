@@ -22,11 +22,11 @@ book:
   chapters:
   - index.qmd
   - chapters/intro.qmd
+  - chapters/birdseye.qmd
   - chapters/ackno.qmd
 
   - part: Technical description
     chapters:
-    - chapters/birdseye.qmd
     - chapters/model-inputs.qmd
     - chapters/hydrology.qmd
     - chapters/exposure.qmd
