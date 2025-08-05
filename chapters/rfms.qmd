@@ -46,6 +46,8 @@ During the sowing season, the field is maintained at a constant target water lev
 
 During the *Perellonà*, the field is flooded to a higher water level (`perellona_height_cm`), simulating the traditional post-harvest flooding practice. This flooding is only applied if the cluster is marked as a *tancat*.
 
+Outside both the sowing season and the *Perellonà*, the field is assumed to be dry (i.e., water level is zero), regardless of the cluster type.
+
 Based on the resulting daily water level schedule, two boolean variables are derived:
 
 -   `ideal_irrigation`: `TRUE` on days when the water level increases or remains constant while being above zero. These days are interpreted by the model as requiring active irrigation to maintain or restore the target level.
