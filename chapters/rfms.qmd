@@ -1,123 +1,55 @@
 # Rice Field Management Systems {#sec-rfms}
 
-We begin our detailed description of the models implemented in the ERAHUMED 
-Decision Support System by introducing how rice field management systems (RFMSs) 
-are represented and configured. This is a natural starting point, as RFMSs 
-define the agricultural and chemical practices that shape the simulation 
-scenarios. They determine when and how water is managed in the fields, and 
-which pesticides are applied, forming the basis upon which hydrological flows, 
-chemical exposure, and ecological risks are computed.
+We begin our detailed description of the models implemented in the ERAHUMED Decision Support System by introducing how rice field management systems (RFMSs) are represented and configured. This is a natural starting point, as RFMSs define the agricultural and chemical practices that shape the simulation scenarios. They determine when and how water is managed in the fields, and which pesticides are applied, forming the basis upon which hydrological flows, chemical exposure, and ecological risks are computed.
 
-In ERAHUMED, RFMSs serve as scenario-defining units that encapsulate the 
-temporal patterns of agricultural operations for rice cultivation. These 
-include:
+In ERAHUMED, RFMSs serve as scenario-defining units that encapsulate the temporal patterns of agricultural operations for rice cultivation. These include:
 
-* The crop calendar (sowing and harvesting dates), as well as the start and end 
-dates for the Perellonà period.
+-   The crop calendar (sowing and harvesting dates), as well as the start and end dates for the Perellonà period.
 
-* The application of chemical substances (e.g., pesticides).
+-   The application of chemical substances (e.g., pesticides).
 
-From this information, the system infers the irrigation and drainage patterns 
-for each rice field cluster throughout the simulation period.
+From this information, the system infers the irrigation and drainage patterns for each rice field cluster throughout the simulation period.
 
-In the following sections, we describe the components that make up a complete 
-rice field management system. We begin with the definition of chemicals, 
-detailing the key physico-chemical and toxicological properties used to 
-characterize each substance. We then explain how RFMSs are constructed by 
-specifying crop calendar dates and scheduling chemical applications. In this 
-part, particular attention is given to how the irrigation and drainage schedules 
-are automatically derived from the crop cycle and the Perellonà period. Finally, 
-we describe how RFMSs are spatially assigned to rice field clusters.
+In the following sections, we describe the components that make up a complete rice field management system. We begin with the definition of chemicals, detailing the key physico-chemical and toxicological properties used to characterize each substance. We then explain how RFMSs are constructed by specifying crop calendar dates and scheduling chemical applications. In this part, particular attention is given to how the irrigation and drainage schedules are automatically derived from the crop cycle and the Perellonà period. Finally, we describe how RFMSs are spatially assigned to rice field clusters.
 
 ## Chemicals {#sec-chemicals}
 
 Each rice field management system (RFMS) in ERAHUMED schedules applications of one or more chemical substances, typically pesticides. To simulate their transport, transformation, and ecological effects, each chemical must be defined as a structured object with a set of physicochemical, environmental, and toxicological properties.
 
-A chemical is characterized by the following groups of parameters 
-(*cf.* @tbl-chemical-params):
+A chemical is characterized by the following groups of parameters (*cf.* @tbl-chemical-params):
 
-* **Identity**
-Each chemical has a display name (`display_name`) and an identifier for its 
-toxic mode of action (`tmoa_id`), used to group substances by their biological 
-effect.
+-   **Identity** Each chemical has a display name (`display_name`) and an identifier for its toxic mode of action (`tmoa_id`), used to group substances by their biological effect.
 
-* **Physicochemical properties**
-These include molecular weight (`MW`) and water solubility (`sol_ppm`), which 
-influence transport processes and partitioning in the environment.
+-   **Physicochemical properties** These include molecular weight (`MW`) and water solubility (`sol_ppm`), which influence transport processes and partitioning in the environment.
 
-* **Transport parameters**
-Parameters such as the settling rate to sediment (`ksetl_m_day`) and the foliar 
-wash-off coefficient (`fet_cm`) describe how the chemical moves within the 
-system after application.
+-   **Transport parameters** Parameters such as the settling rate to sediment (`ksetl_m_day`) and the foliar wash-off coefficient (`fet_cm`) describe how the chemical moves within the system after application.
 
-* **Sorption**
-The organic carbon-water partition coefficient (`koc_cm3_g`) governs how 
-strongly the chemical binds to soils and sediments.
+-   **Sorption** The organic carbon-water partition coefficient (`koc_cm3_g`) governs how strongly the chemical binds to soils and sediments.
 
-* **Degradation**
-Degradation rates are specified separately for foliage (`kf_day`), the water 
-column (`kw_day`), saturated sediment (`ks_sat_day`), and unsaturated sediment 
-(`ks_unsat_day`). Each rate can be adjusted for temperature using a reference 
-temperature (`*_temp`) and a Q10 coefficient (`Q10_*`).
+-   **Degradation** Degradation rates are specified separately for foliage (`kf_day`), the water column (`kw_day`), saturated sediment (`ks_sat_day`), and unsaturated sediment (`ks_unsat_day`). Each rate can be adjusted for temperature using a reference temperature (`*_temp`) and a Q10 coefficient (`Q10_*`).
 
-* **Toxicity**
-Toxic effects on aquatic organisms are described using species sensitivity distributions (SSD). Separate parameters are provided for acute (`ssd_acute_mu`, `ssd_acute_sigma`) 
-and chronic (`ssd_chronic_mu`, `ssd_chronic_sigma`) toxicity, both expressed on 
-the log₁₀ scale.
+-   **Toxicity** Toxic effects on aquatic organisms are described using species sensitivity distributions (SSD). Separate parameters are provided for acute (`ssd_acute_mu`, `ssd_acute_sigma`) and chronic (`ssd_chronic_mu`, `ssd_chronic_sigma`) toxicity, both expressed on the log₁₀ scale.
 
 ## Rice Field Management Systems {#sec-rfms-definition}
 
-A Rice Field Management System (RFMS) defines the temporal structure of 
-agricultural practices relevant to pesticide exposure and water management in 
-ERAHUMED. Each RFMS serves as a reusable template that can be assigned to one or 
-more rice field clusters in the simulation landscape.
+A Rice Field Management System (RFMS) defines the temporal structure of agricultural practices relevant to pesticide exposure and water management in ERAHUMED. Each RFMS serves as a reusable template that can be assigned to one or more rice field clusters in the simulation landscape.
 
-An RFMS is defined by two main components (*cf.* @tbl-rfms-params and 
-@tbl-application-params):
+An RFMS is defined by two main components (*cf.* @tbl-rfms-params and @tbl-application-params):
 
-* **Crop calendar**
-The sowing and harvesting dates, and the start and end of the Perellonà period 
-(a traditional post-harvest flooding phase specific to the region), and the 
-respective target water levels in rice field clusters.
+-   **Crop calendar** The sowing and harvesting dates, and the start and end of the Perellonà period (a traditional post-harvest flooding phase specific to the region), and the respective target water levels in rice field clusters.
 
-* **Chemical applications** 
-A schedule of pesticide applications, specifying the chemical, dose, and day of 
-application relative to the crop calendar.
+-   **Chemical applications** A schedule of pesticide applications, specifying the chemical, dose, and day of application relative to the crop calendar.
 
-From this minimal definition, ERAHUMED automatically derives the water management 
-schedule for each rice field cluster. This includes the timing and magnitude of 
-irrigation and drainage events throughout the year, based on a set of simple rules:
+From this minimal definition, ERAHUMED automatically derives the water management schedule for each rice field cluster. This includes the timing and magnitude of irrigation and drainage events throughout the year, based on a set of simple rules:
 
-During the sowing season, the field is maintained at a constant target water 
-level (corresponding to the `flow_height_cm` of  @tbl-rfms-params), except for 
-periods in which ground pesticide applications require temporary draining. These 
-draining periods are computed from the applications' timing (`seed_day` of 
-@tbl-application-params) and declared emptying duration (`emptying_days`).
-For ground applications requiring more than one emptying day, it is assumed that 
-the actual pesticide application occurs on the last day of the emptying window, 
-following a period of one or more drained days.
+During the sowing season, the field is maintained at a constant target water level (corresponding to the `flow_height_cm` of @tbl-rfms-params), except for periods in which ground pesticide applications require temporary draining. These draining periods are computed from the applications' timing (`seed_day` of @tbl-application-params) and declared emptying duration (`emptying_days`). For ground applications requiring more than one emptying day, it is assumed that the actual pesticide application occurs on the last day of the emptying window, following a period of one or more drained days.
 
-During the Perellonà, the field is flooded to a higher water level 
-(`perellona_height_cm`), simulating the traditional post-harvest flooding 
-practice. 
+During the *Perellonà*, the field is flooded to a higher water level (`perellona_height_cm`), simulating the traditional post-harvest flooding practice. This flooding is only applied if the cluster is marked as a *tancat*.
 
-During the *Perellonà*, the field is flooded to a higher water level 
-(`perellona_height_cm`), simulating the traditional post-harvest flooding 
-practice. This flooding is only applied if the cluster is marked as a *tancat*.
+Based on the resulting daily water level schedule, two boolean variables are derived:
 
-Based on the resulting daily water level schedule, two boolean variables are 
-derived:
+-   `ideal_irrigation`: `TRUE` on days when the water level increases or remains constant while being above zero. These days are interpreted by the model as requiring active irrigation to maintain or restore the target level.
 
-* `ideal_irrigation`: `TRUE` on days when the water level increases or remains 
-constant while being above zero. These days are interpreted by the model as requiring active irrigation to maintain or restore the target level.
+-   `ideal_draining`: `TRUE` on days when the water level decreases, or when it remains constant at a nonzero value, indicating a draining phase.
 
-* `ideal_draining`: `TRUE` on days when the water level decreases, or when it 
-remains constant at a nonzero value, indicating a draining phase.
-
-These irrigation and draining flags are passed to the hydrological simulation 
-algorithms, where they determine water exchange rates between rice fields and 
-the surrounding water bodies, and thus influence pesticide transport, dilution, 
-and accumulation.
-
-
-
+These irrigation and draining flags are passed to the hydrological simulation algorithms, where they determine water exchange rates between rice fields and the surrounding water bodies, and thus influence pesticide transport, dilution, and accumulation.

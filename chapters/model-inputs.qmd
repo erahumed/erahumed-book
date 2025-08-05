@@ -18,6 +18,8 @@ ERAHUMED simulations. Parameters are grouped into four categories:
 
 * **RFMS parameters** (@tbl-rfms-params) specify how different rice field management systems (RFMSs) are configured. These parameters define the timing, frequency, and nature of chemical applications, as well as water management practices such as irrigation and drainage scheduling.
 
+* **Chemical application parameters** (@tbl-application-params) define the specific pesticide treatments that can be scheduled within each RFMS. These parameters include the chemical used, the application rate, the day of application relative to sowing, the method of application (ground or aerial), and the duration of field emptying required for ground applications.
+
 * **Spatial allocation** parameters (@tbl-allocation-params) captures how the different RFMSs are spatially distributed across the simulated landscape. This information determines which management practices are applied to which clusters of rice fields, affecting both contaminant fate and risk exposure.
 
 *Note*: The `Type` column and, to some extent, the `Description` fields in @tbl-landscape-params refer to the internal structures and conventions of the 
@@ -121,6 +123,15 @@ get_param_kable(fun = "chemical")
 #| label: tbl-rfms-params
 #| tbl-cap: "ERAHUMED input parameters: Rice-Field Management Systems"
 get_param_kable(fun = "rfms")
+```
+
+## Chemical application parameters
+
+```{r}
+#| echo: false
+#| label: tbl-application-params
+#| tbl-cap: "ERAHUMED input parameters: Chemical Applications"
+get_param_kable(fun = "application")
 ```
 
 ## Spatial allocation parameters

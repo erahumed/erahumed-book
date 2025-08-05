@@ -234,7 +234,8 @@ ul.task-list li input[type="checkbox"] {
   </ul></li>
   <li><a href="#chemical-parameters" id="toc-chemical-parameters" class="nav-link" data-scroll-target="#chemical-parameters"><span class="header-section-number">4.2</span> Chemical parameters</a></li>
   <li><a href="#rfms-parameters" id="toc-rfms-parameters" class="nav-link" data-scroll-target="#rfms-parameters"><span class="header-section-number">4.3</span> RFMS parameters</a></li>
-  <li><a href="#spatial-allocation-parameters" id="toc-spatial-allocation-parameters" class="nav-link" data-scroll-target="#spatial-allocation-parameters"><span class="header-section-number">4.4</span> Spatial allocation parameters</a></li>
+  <li><a href="#chemical-application-parameters" id="toc-chemical-application-parameters" class="nav-link" data-scroll-target="#chemical-application-parameters"><span class="header-section-number">4.4</span> Chemical application parameters</a></li>
+  <li><a href="#spatial-allocation-parameters" id="toc-spatial-allocation-parameters" class="nav-link" data-scroll-target="#spatial-allocation-parameters"><span class="header-section-number">4.5</span> Spatial allocation parameters</a></li>
   </ul>
 </nav>
     </div>
@@ -265,7 +266,8 @@ ul.task-list li input[type="checkbox"] {
 <li><p><strong>Landscape parameters</strong> (<a href="#tbl-landscape-params" class="quarto-xref">Table&nbsp;<span>4.1</span></a>) define the biophysical and climatic context in which simulations take place. These inputs characterize the structure and behavior of the Albufera system, including the temporal simulation window (<code>date_start</code>, <code>date_end</code>), the lake’s hydrology and geometry, and its interaction with weather and soil processes.</p></li>
 <li><p><strong>Chemical parameters</strong> (<a href="#tbl-chemical-params" class="quarto-xref">Table&nbsp;<span>4.2</span></a>) describe the physico-chemical and eco-toxicological characteristics of the pesticide compounds considered in the simulation. These include degradation rates, solubility, partition coefficients, and toxicity distribution parameters used for risk assessment.</p></li>
 <li><p><strong>RFMS parameters</strong> (<a href="#tbl-rfms-params" class="quarto-xref">Table&nbsp;<span>4.3</span></a>) specify how different rice field management systems (RFMSs) are configured. These parameters define the timing, frequency, and nature of chemical applications, as well as water management practices such as irrigation and drainage scheduling.</p></li>
-<li><p><strong>Spatial allocation</strong> parameters (<a href="#tbl-allocation-params" class="quarto-xref">Table&nbsp;<span>4.4</span></a>) captures how the different RFMSs are spatially distributed across the simulated landscape. This information determines which management practices are applied to which clusters of rice fields, affecting both contaminant fate and risk exposure.</p></li>
+<li><p><strong>Chemical application parameters</strong> (<a href="#tbl-application-params" class="quarto-xref">Table&nbsp;<span>4.4</span></a>) define the specific pesticide treatments that can be scheduled within each RFMS. These parameters include the chemical used, the application rate, the day of application relative to sowing, the method of application (ground or aerial), and the duration of field emptying required for ground applications.</p></li>
+<li><p><strong>Spatial allocation</strong> parameters (<a href="#tbl-allocation-params" class="quarto-xref">Table&nbsp;<span>4.5</span></a>) captures how the different RFMSs are spatially distributed across the simulated landscape. This information determines which management practices are applied to which clusters of rice fields, affecting both contaminant fate and risk exposure.</p></li>
 </ul>
 <p><em>Note</em>: The <code>Type</code> column and, to some extent, the <code>Description</code> fields in <a href="#tbl-landscape-params" class="quarto-xref">Table&nbsp;<span>4.1</span></a> refer to the internal structures and conventions of the <code>{erahumed}</code> <em>R package</em>, which is presented in detail in <a href="erahumed_dss_pkg.html" class="quarto-xref"><span>Chapter 10</span></a> and references therein. However, the <code>Description</code> generally conveys the intended meaning and usage of each parameter, regardless of whether the user is interacting through the R package or the Shiny interface. Users of the Shiny GUI do not need to understand the R-specific details, as the interface provides appropriate input controls and guidance.</p>
 <section id="landscape-parameters" class="level2" data-number="4.1">
@@ -853,13 +855,93 @@ Table&nbsp;4.3: ERAHUMED input parameters: Rice-Field Management Systems
 </div>
 </div>
 </section>
-<section id="spatial-allocation-parameters" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="spatial-allocation-parameters"><span class="header-section-number">4.4</span> Spatial allocation parameters</h2>
+<section id="chemical-application-parameters" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="chemical-application-parameters"><span class="header-section-number">4.4</span> Chemical application parameters</h2>
+<div class="cell">
+<div id="tbl-application-params" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-application-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.4: ERAHUMED input parameters: Chemical Applications
+</figcaption>
+<div aria-describedby="tbl-application-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Parameter</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Name</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Unit</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Group</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Type</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>system</code></td>
+<td style="text-align: left;">RFMS object</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Input object</td>
+<td style="text-align: left;"><code>erahumed_rfms</code></td>
+<td style="text-align: left;">A rice field management system to which the application is added. See [rfms] for details.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>chemical</code></td>
+<td style="text-align: left;">Chemical</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Chemical</td>
+<td style="text-align: left;"><code>erahumed_chemical</code></td>
+<td style="text-align: left;">Chemical compound to be applied. See [chemical] for details.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>amount_kg_ha</code></td>
+<td style="text-align: left;">Application rate</td>
+<td style="text-align: left;">kg/ha</td>
+<td style="text-align: left;">Application</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Amount of active ingredient applied per hectare.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>seed_day</code></td>
+<td style="text-align: left;">Application day after seeding</td>
+<td style="text-align: left;">days</td>
+<td style="text-align: left;">Application</td>
+<td style="text-align: left;"><code>integer(1)</code></td>
+<td style="text-align: left;">Number of days after seeding when the application is performed.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>type</code></td>
+<td style="text-align: left;">Application type</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">Application</td>
+<td style="text-align: left;"><code>character(1)</code></td>
+<td style="text-align: left;">Application method, either ‘ground’ (requiring draining) or ‘aerial’.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>emptying_days</code></td>
+<td style="text-align: left;">Emptying duration</td>
+<td style="text-align: left;">days</td>
+<td style="text-align: left;">Application</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Number of days the field remains empty <strong>before</strong> a ground application. The chemical is always assumed to be applied on the <strong>last day</strong> of this emptying period. Ignored if the application type is <code>"aerial"</code>.</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="spatial-allocation-parameters" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="spatial-allocation-parameters"><span class="header-section-number">4.5</span> Spatial allocation parameters</h2>
 <div class="cell">
 <div id="tbl-allocation-params" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-allocation-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;4.4: ERAHUMED input parameters: Rice-Field surface allocation
+Table&nbsp;4.5: ERAHUMED input parameters: Rice-Field surface allocation
 </figcaption>
 <div aria-describedby="tbl-allocation-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
