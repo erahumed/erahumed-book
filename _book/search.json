@@ -189,6 +189,28 @@
     ]
   },
   {
+    "objectID": "chapters/rfms.html#sec-cluster-map",
+    "href": "chapters/rfms.html#sec-cluster-map",
+    "title": "5  Rice Field Management Systems",
+    "section": "5.3 Mapping RFMSs to Clusters",
+    "text": "5.3 Mapping RFMSs to Clusters\nOnce a set of RFMS has been defined, they must be assigned to the spatial units of the simulation — the rice field clusters. This is done using a cluster map, which associates each cluster with a specific RFMS and determines whether Perellonà flooding is active.\nThe assignment process supports both uniform and heterogeneous scenarios. A cluster map is typically initialized by assigning a default RFMS to all clusters. Additional systems can then be allocated to specific subsets of clusters to reflect more complex landscape configurations.\nAllocations are based on spatial and structural filtering criteria:\n\nDitch: clusters are grouped by their associated ditch, allowing allocations to target specific hydrological subunits.\nField type: clusters are classified as regular or tancat (fields that undergo Perellonà flooding).\n\nTo allocate a new RFMS, a fraction of the surface area within the selected subset (defined by ditch and field type) is randomly assigned to the new system. Clusters are sampled without replacement until the requested surface area is reached, or until all eligible clusters are exhausted — in which case a partial allocation is performed.",
+    "crumbs": [
+      "Technical description",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Rice Field Management Systems</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/rfms.html#sec-builtins",
+    "href": "chapters/rfms.html#sec-builtins",
+    "title": "5  Rice Field Management Systems",
+    "section": "5.4 Built-in Presets",
+    "text": "5.4 Built-in Presets\nERAHUMED includes a set of predefined elements to support scenario design and simulation without requiring users to define all inputs manually. These presets provide a convenient starting point for realistic simulations based on typical practices observed in the Albufera Natural Park.\n\n5.4.1 Cluster Map\nThe function default_rfms_map() returns a ready-to-use cluster map that allocates different RFMSs across the simulation landscape based on simple structural rules.\n\nThe J. Sendra management system is assigned to all clusters by default.\nThe Clearfield system is then allocated to a subset of clusters:\n\n80% of the surface area in ditches 1–9 (Northern area)\n20% of the surface area in ditches 10–26 (Southern area)\n\n\nCluster selection within each ditch range is randomized but constrained to meet the target surface fractions. This spatial configuration captures a realistic distribution of management systems across the park and can be used as-is or further customized.\n\n\n5.4.2 Management Systems\nThe following built-in RFMSs are available:\n\nJ. Sendra\nA modern and widely adopted management system. It includes multiple herbicide, insecticide, and fungicide applications:\n\nGround applications of cyhalofop-butyl, penoxsulam, acetamiprid, bentazone, and MCPA during early to mid-season.\nTwo aerial applications of azoxystrobin and difenoconazole near the end of the season, for fungal disease control.\n\nClearfield\nA system compatible with Clearfield® rice varieties, emphasizing herbicide tolerance and simplified chemical use:\n\nHerbicide applications of cycloxydim at seed_day = 18 and 52.\nInsecticide (acetamiprid) and aerial fungicides (azoxystrobin, difenoconazole) are applied as in the J. Sendra system, but without MCPA or cyhalofop-butyl.\n\nBomba\nA legacy management system formerly used for traditional rice varieties. It includes:\n\n-    The same herbicide and insecticide treatments as the J. Sendra system.\n\n-    An additional third round of aerial fungicide applications (azoxystrobin and difenoconazole) later in the season (`seed_day = 104`), resulting in a more intensive treatment schedule.\nAlthough the Bomba system is not currently in use, it remains available for comparison with modern practices or for use in hypothetical scenarios.\n\n\n5.4.3 Chemicals\nERAHUMED includes built-in definitions for a range of commonly used pesticides in rice cultivation. Each chemical is defined with its physicochemical, environmental, and toxicological properties. The available chemicals are:\n\nAcetamiprid\nA neonicotinoid insecticide targeting the nicotinic acetylcholine receptor. Used to control sap-feeding insects.\nAzoxystrobin\nA broad-spectrum fungicide of the strobilurin class. Inhibits mitochondrial respiration in fungi.\nBentazone\nA contact herbicide acting on photosystem II. Used for post-emergence control of broadleaf weeds.\nCycloxydim\nA selective systemic herbicide targeting Acetyl-CoA carboxylase (ACCase). Effective against grass weeds.\nCyhalofop-butyl\nA selective herbicide for post-emergence control of grasses. Inhibits ACCase activity.\nDifenoconazole\nA triazole fungicide that inhibits sterol biosynthesis, used to control various fungal diseases.\nMCPA\nA systemic phenoxy herbicide that mimics auxin activity. Controls broadleaf weeds.\nPenoxsulam\nAn ALS-inhibiting herbicide (acetolactate synthase), used for selective control of broadleaf and sedge weeds.\n\nThese chemical definitions are used internally by the built-in RFMSs and can also be reused or modified in user-defined systems.",
+    "crumbs": [
+      "Technical description",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Rice Field Management Systems</span>"
+    ]
+  },
+  {
     "objectID": "chapters/hydrology.html",
     "href": "chapters/hydrology.html",
     "title": "6  Hydrological model of the Albufera Natural Park",

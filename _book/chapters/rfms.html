@@ -230,6 +230,13 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#sec-chemicals" id="toc-sec-chemicals" class="nav-link active" data-scroll-target="#sec-chemicals"><span class="header-section-number">5.1</span> Chemicals</a></li>
   <li><a href="#sec-rfms-definition" id="toc-sec-rfms-definition" class="nav-link" data-scroll-target="#sec-rfms-definition"><span class="header-section-number">5.2</span> Rice Field Management Systems</a></li>
+  <li><a href="#sec-cluster-map" id="toc-sec-cluster-map" class="nav-link" data-scroll-target="#sec-cluster-map"><span class="header-section-number">5.3</span> Mapping RFMSs to Clusters</a></li>
+  <li><a href="#sec-builtins" id="toc-sec-builtins" class="nav-link" data-scroll-target="#sec-builtins"><span class="header-section-number">5.4</span> Built-in Presets</a>
+  <ul class="collapse">
+  <li><a href="#cluster-map" id="toc-cluster-map" class="nav-link" data-scroll-target="#cluster-map"><span class="header-section-number">5.4.1</span> Cluster Map</a></li>
+  <li><a href="#management-systems" id="toc-management-systems" class="nav-link" data-scroll-target="#management-systems"><span class="header-section-number">5.4.2</span> Management Systems</a></li>
+  <li><a href="#chemicals" id="toc-chemicals" class="nav-link" data-scroll-target="#chemicals"><span class="header-section-number">5.4.3</span> Chemicals</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -294,8 +301,83 @@ ul.task-list li input[type="checkbox"] {
 <li><p><code>ideal_draining</code>: <code>TRUE</code> on days when the water level decreases, or when it remains constant at a nonzero value, indicating a draining phase.</p></li>
 </ul>
 <p>These irrigation and draining flags are passed to the hydrological simulation algorithms, where they determine water exchange rates between rice fields and the surrounding water bodies, and thus influence pesticide transport, dilution, and accumulation.</p>
+</section>
+<section id="sec-cluster-map" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="sec-cluster-map"><span class="header-section-number">5.3</span> Mapping RFMSs to Clusters</h2>
+<p>Once a set of RFMS has been defined, they must be assigned to the spatial units of the simulation — the rice field clusters. This is done using a cluster map, which associates each cluster with a specific RFMS and determines whether <em>Perellonà</em> flooding is active.</p>
+<p>The assignment process supports both uniform and heterogeneous scenarios. A cluster map is typically initialized by assigning a default RFMS to all clusters. Additional systems can then be allocated to specific subsets of clusters to reflect more complex landscape configurations.</p>
+<p>Allocations are based on spatial and structural filtering criteria:</p>
+<ul>
+<li><p><strong>Ditch</strong>: clusters are grouped by their associated ditch, allowing allocations to target specific hydrological subunits.</p></li>
+<li><p><strong>Field type</strong>: clusters are classified as regular or tancat (fields that undergo Perellonà flooding).</p></li>
+</ul>
+<p>To allocate a new RFMS, a fraction of the surface area within the selected subset (defined by ditch and field type) is randomly assigned to the new system. Clusters are sampled without replacement until the requested surface area is reached, or until all eligible clusters are exhausted — in which case a partial allocation is performed.</p>
+</section>
+<section id="sec-builtins" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="sec-builtins"><span class="header-section-number">5.4</span> Built-in Presets</h2>
+<p>ERAHUMED includes a set of predefined elements to support scenario design and simulation without requiring users to define all inputs manually. These presets provide a convenient starting point for realistic simulations based on typical practices observed in the Albufera Natural Park.</p>
+<section id="cluster-map" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="cluster-map"><span class="header-section-number">5.4.1</span> Cluster Map</h3>
+<p>The function <code>default_rfms_map()</code> returns a ready-to-use cluster map that allocates different RFMSs across the simulation landscape based on simple structural rules.</p>
+<ul>
+<li><p>The <strong>J. Sendra</strong> management system is assigned to all clusters by default.</p></li>
+<li><p>The <strong>Clearfield</strong> system is then allocated to a subset of clusters:</p>
+<ul>
+<li><p>80% of the surface area in ditches 1–9 (Northern area)</p></li>
+<li><p>20% of the surface area in ditches 10–26 (Southern area)</p></li>
+</ul></li>
+</ul>
+<p>Cluster selection within each ditch range is randomized but constrained to meet the target surface fractions. This spatial configuration captures a realistic distribution of management systems across the park and can be used as-is or further customized.</p>
+</section>
+<section id="management-systems" class="level3" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="management-systems"><span class="header-section-number">5.4.2</span> Management Systems</h3>
+<p>The following built-in RFMSs are available:</p>
+<ul>
+<li><p><strong>J. Sendra</strong><br>
+A modern and widely adopted management system. It includes multiple herbicide, insecticide, and fungicide applications:</p>
+<ul>
+<li><p>Ground applications of cyhalofop-butyl, penoxsulam, acetamiprid, bentazone, and MCPA during early to mid-season.</p></li>
+<li><p>Two aerial applications of azoxystrobin and difenoconazole near the end of the season, for fungal disease control.</p></li>
+</ul></li>
+<li><p><strong>Clearfield</strong><br>
+A system compatible with Clearfield® rice varieties, emphasizing herbicide tolerance and simplified chemical use:</p>
+<ul>
+<li><p>Herbicide applications of cycloxydim at <code>seed_day = 18</code> and <code>52</code>.</p></li>
+<li><p>Insecticide (acetamiprid) and aerial fungicides (azoxystrobin, difenoconazole) are applied as in the J. Sendra system, but without MCPA or cyhalofop-butyl.</p></li>
+</ul></li>
+<li><p><strong>Bomba</strong><br>
+A legacy management system formerly used for traditional rice varieties. It includes:</p></li>
+</ul>
+<pre><code>-    The same herbicide and insecticide treatments as the J. Sendra system.
+
+-    An additional third round of aerial fungicide applications (azoxystrobin and difenoconazole) later in the season (`seed_day = 104`), resulting in a more intensive treatment schedule.</code></pre>
+<p>Although the Bomba system is not currently in use, it remains available for comparison with modern practices or for use in hypothetical scenarios.</p>
+</section>
+<section id="chemicals" class="level3" data-number="5.4.3">
+<h3 data-number="5.4.3" class="anchored" data-anchor-id="chemicals"><span class="header-section-number">5.4.3</span> Chemicals</h3>
+<p>ERAHUMED includes built-in definitions for a range of commonly used pesticides in rice cultivation. Each chemical is defined with its physicochemical, environmental, and toxicological properties. The available chemicals are:</p>
+<ul>
+<li><p><strong>Acetamiprid</strong><br>
+A neonicotinoid insecticide targeting the nicotinic acetylcholine receptor. Used to control sap-feeding insects.</p></li>
+<li><p><strong>Azoxystrobin</strong><br>
+A broad-spectrum fungicide of the strobilurin class. Inhibits mitochondrial respiration in fungi.</p></li>
+<li><p><strong>Bentazone</strong><br>
+A contact herbicide acting on photosystem II. Used for post-emergence control of broadleaf weeds.</p></li>
+<li><p><strong>Cycloxydim</strong><br>
+A selective systemic herbicide targeting Acetyl-CoA carboxylase (ACCase). Effective against grass weeds.</p></li>
+<li><p><strong>Cyhalofop-butyl</strong><br>
+A selective herbicide for post-emergence control of grasses. Inhibits ACCase activity.</p></li>
+<li><p><strong>Difenoconazole</strong><br>
+A triazole fungicide that inhibits sterol biosynthesis, used to control various fungal diseases.</p></li>
+<li><p><strong>MCPA</strong><br>
+A systemic phenoxy herbicide that mimics auxin activity. Controls broadleaf weeds.</p></li>
+<li><p><strong>Penoxsulam</strong></p>
+<p>An ALS-inhibiting herbicide (acetolactate synthase), used for selective control of broadleaf and sedge weeds.</p></li>
+</ul>
+<p>These chemical definitions are used internally by the built-in RFMSs and can also be reused or modified in user-defined systems.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
