@@ -8,7 +8,7 @@
 
 <meta name="description" content="The ERAHUMED Decision Support System: Software Manual and Technical Documentation.">
 
-<title>Appendix A — Input Data – ERAHUMED DSS</title>
+<title>5&nbsp; Rice Field Management Systems – ERAHUMED DSS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/references.html" rel="prev">
+<link href="../chapters/hydrology.html" rel="next">
+<link href="../chapters/model-inputs.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/input_data.html">Appendices</a></li><li class="breadcrumb-item"><a href="../chapters/input_data.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Input Data</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-inputs.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/rfms.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rice Field Management Systems</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -147,7 +148,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/rfms.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapters/rfms.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rice Field Management Systems</span></span></a>
   </div>
 </li>
@@ -211,7 +212,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/input_data.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapters/input_data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Input Data</span></span></a>
   </div>
 </li>
@@ -227,20 +228,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-data-hydro" id="toc-sec-data-hydro" class="nav-link active" data-scroll-target="#sec-data-hydro"><span class="header-section-number">A.1</span> Hydrological data</a></li>
-  <li><a href="#sec-data-meteo" id="toc-sec-data-meteo" class="nav-link" data-scroll-target="#sec-data-meteo"><span class="header-section-number">A.2</span> Meteorological data</a></li>
-  <li><a href="#sec-data-albufera-management" id="toc-sec-data-albufera-management" class="nav-link" data-scroll-target="#sec-data-albufera-management"><span class="header-section-number">A.3</span> Albufera Rice Paddies Management</a></li>
-  <li><a href="#sec-storage-curve" id="toc-sec-storage-curve" class="nav-link" data-scroll-target="#sec-storage-curve"><span class="header-section-number">A.4</span> Storage curve and P-ETP function</a></li>
-  <li><a href="#sec-data-rice-clusters" id="toc-sec-data-rice-clusters" class="nav-link" data-scroll-target="#sec-data-rice-clusters"><span class="header-section-number">A.5</span> Definition of rice clusters</a></li>
+  <li><a href="#sec-chemicals" id="toc-sec-chemicals" class="nav-link active" data-scroll-target="#sec-chemicals"><span class="header-section-number">5.1</span> Chemicals</a></li>
+  <li><a href="#sec-rfms-definition" id="toc-sec-rfms-definition" class="nav-link" data-scroll-target="#sec-rfms-definition"><span class="header-section-number">5.2</span> Rice Field Management Systems</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/input_data.html">Appendices</a></li><li class="breadcrumb-item"><a href="../chapters/input_data.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Input Data</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-inputs.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/rfms.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rice Field Management Systems</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Appendix A — Input Data</h1>
+<h1 class="title"><span id="sec-rfms" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rice Field Management Systems</span></span></h1>
 </div>
 
 
@@ -257,20 +255,45 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="sec-data-hydro" class="level2" data-number="A.1">
-<h2 data-number="A.1" class="anchored" data-anchor-id="sec-data-hydro"><span class="header-section-number">A.1</span> Hydrological data</h2>
+<p>We begin our detailed description of the models implemented in the ERAHUMED Decision Support System by introducing how rice field management systems (RFMSs) are represented and configured. This is a natural starting point, as RFMSs define the agricultural and chemical practices that shape the simulation scenarios. They determine when and how water is managed in the fields, and which pesticides are applied, forming the basis upon which hydrological flows, chemical exposure, and ecological risks are computed.</p>
+<p>In ERAHUMED, RFMSs serve as scenario-defining units that encapsulate the temporal patterns of agricultural operations for rice cultivation. These include:</p>
+<ul>
+<li><p>The crop calendar (sowing and harvesting dates), as well as the start and end dates for the Perellonà period.</p></li>
+<li><p>The application of chemical substances (e.g., pesticides).</p></li>
+</ul>
+<p>From this information, the system infers the irrigation and drainage patterns for each rice field cluster throughout the simulation period.</p>
+<p>In the following sections, we describe the components that make up a complete rice field management system. We begin with the definition of chemicals, detailing the key physico-chemical and toxicological properties used to characterize each substance. We then explain how RFMSs are constructed by specifying crop calendar dates and scheduling chemical applications. In this part, particular attention is given to how the irrigation and drainage schedules are automatically derived from the crop cycle and the Perellonà period. Finally, we describe how RFMSs are spatially assigned to rice field clusters.</p>
+<section id="sec-chemicals" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="sec-chemicals"><span class="header-section-number">5.1</span> Chemicals</h2>
+<p>Each rice field management system (RFMS) in ERAHUMED schedules applications of one or more chemical substances, typically pesticides. To simulate their transport, transformation, and ecological effects, each chemical must be defined as a structured object with a set of physicochemical, environmental, and toxicological properties.</p>
+<p>A chemical is characterized by the following groups of parameters (<em>cf.</em> <a href="model-inputs.html#tbl-chemical-params" class="quarto-xref">Table&nbsp;<span>4.2</span></a>):</p>
+<ul>
+<li><p><strong>Identity</strong> Each chemical has a display name (<code>display_name</code>) and an identifier for its toxic mode of action (<code>tmoa_id</code>), used to group substances by their biological effect.</p></li>
+<li><p><strong>Physicochemical properties</strong> These include molecular weight (<code>MW</code>) and water solubility (<code>sol_ppm</code>), which influence transport processes and partitioning in the environment.</p></li>
+<li><p><strong>Transport parameters</strong> Parameters such as the settling rate to sediment (<code>ksetl_m_day</code>) and the foliar wash-off coefficient (<code>fet_cm</code>) describe how the chemical moves within the system after application.</p></li>
+<li><p><strong>Sorption</strong> The organic carbon-water partition coefficient (<code>koc_cm3_g</code>) governs how strongly the chemical binds to soils and sediments.</p></li>
+<li><p><strong>Degradation</strong> Degradation rates are specified separately for foliage (<code>kf_day</code>), the water column (<code>kw_day</code>), saturated sediment (<code>ks_sat_day</code>), and unsaturated sediment (<code>ks_unsat_day</code>). Each rate can be adjusted for temperature using a reference temperature (<code>*_temp</code>) and a Q10 coefficient (<code>Q10_*</code>).</p></li>
+<li><p><strong>Toxicity</strong> Toxic effects on aquatic organisms are described using species sensitivity distributions (SSD). Separate parameters are provided for acute (<code>ssd_acute_mu</code>, <code>ssd_acute_sigma</code>) and chronic (<code>ssd_chronic_mu</code>, <code>ssd_chronic_sigma</code>) toxicity, both expressed on the log₁₀ scale.</p></li>
+</ul>
 </section>
-<section id="sec-data-meteo" class="level2" data-number="A.2">
-<h2 data-number="A.2" class="anchored" data-anchor-id="sec-data-meteo"><span class="header-section-number">A.2</span> Meteorological data</h2>
-</section>
-<section id="sec-data-albufera-management" class="level2" data-number="A.3">
-<h2 data-number="A.3" class="anchored" data-anchor-id="sec-data-albufera-management"><span class="header-section-number">A.3</span> Albufera Rice Paddies Management</h2>
-</section>
-<section id="sec-storage-curve" class="level2" data-number="A.4">
-<h2 data-number="A.4" class="anchored" data-anchor-id="sec-storage-curve"><span class="header-section-number">A.4</span> Storage curve and P-ETP function</h2>
-</section>
-<section id="sec-data-rice-clusters" class="level2" data-number="A.5">
-<h2 data-number="A.5" class="anchored" data-anchor-id="sec-data-rice-clusters"><span class="header-section-number">A.5</span> Definition of rice clusters</h2>
+<section id="sec-rfms-definition" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="sec-rfms-definition"><span class="header-section-number">5.2</span> Rice Field Management Systems</h2>
+<p>A Rice Field Management System (RFMS) defines the temporal structure of agricultural practices relevant to pesticide exposure and water management in ERAHUMED. Each RFMS serves as a reusable template that can be assigned to one or more rice field clusters in the simulation landscape.</p>
+<p>An RFMS is defined by two main components (<em>cf.</em> <a href="model-inputs.html#tbl-rfms-params" class="quarto-xref">Table&nbsp;<span>4.3</span></a> and <span class="quarto-unresolved-ref">?tbl-application-params</span>):</p>
+<ul>
+<li><p><strong>Crop calendar</strong> The sowing and harvesting dates, and the start and end of the Perellonà period (a traditional post-harvest flooding phase specific to the region), and the respective target water levels in rice field clusters.</p></li>
+<li><p><strong>Chemical applications</strong> A schedule of pesticide applications, specifying the chemical, dose, and day of application relative to the crop calendar.</p></li>
+</ul>
+<p>From this minimal definition, ERAHUMED automatically derives the water management schedule for each rice field cluster. This includes the timing and magnitude of irrigation and drainage events throughout the year, based on a set of simple rules:</p>
+<p>During the sowing season, the field is maintained at a constant target water level (corresponding to the <code>flow_height_cm</code> of <a href="model-inputs.html#tbl-rfms-params" class="quarto-xref">Table&nbsp;<span>4.3</span></a>), except for periods in which ground pesticide applications require temporary draining. These draining periods are computed from the applications’ timing (<code>seed_day</code> of <span class="quarto-unresolved-ref">?tbl-application-params</span>) and declared emptying duration (<code>emptying_days</code>). For ground applications requiring more than one emptying day, it is assumed that the actual pesticide application occurs on the last day of the emptying window, following a period of one or more drained days.</p>
+<p>During the Perellonà, the field is flooded to a higher water level (<code>perellona_height_cm</code>), simulating the traditional post-harvest flooding practice.</p>
+<p>During the <em>Perellonà</em>, the field is flooded to a higher water level (<code>perellona_height_cm</code>), simulating the traditional post-harvest flooding practice. This flooding is only applied if the cluster is marked as a <em>tancat</em>.</p>
+<p>Based on the resulting daily water level schedule, two boolean variables are derived:</p>
+<ul>
+<li><p><code>ideal_irrigation</code>: <code>TRUE</code> on days when the water level increases or remains constant while being above zero. These days are interpreted by the model as requiring active irrigation to maintain or restore the target level.</p></li>
+<li><p><code>ideal_draining</code>: <code>TRUE</code> on days when the water level decreases, or when it remains constant at a nonzero value, indicating a draining phase.</p></li>
+</ul>
+<p>These irrigation and draining flags are passed to the hydrological simulation algorithms, where they determine water exchange rates between rice fields and the surrounding water bodies, and thus influence pesticide transport, dilution, and accumulation.</p>
 
 
 </section>
@@ -695,11 +718,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/references.html" class="pagination-link" aria-label="References">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">References</span>
+      <a href="../chapters/model-inputs.html" class="pagination-link" aria-label="Model inputs">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model inputs</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../chapters/hydrology.html" class="pagination-link" aria-label="Hydrological model of the Albufera Natural Park">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Hydrological model of the Albufera Natural Park</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

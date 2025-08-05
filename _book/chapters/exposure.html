@@ -8,7 +8,7 @@
 
 <meta name="description" content="The ERAHUMED Decision Support System: Software Manual and Technical Documentation.">
 
-<title>6&nbsp; Exposure – ERAHUMED DSS</title>
+<title>7&nbsp; Exposure – ERAHUMED DSS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -111,7 +111,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-inputs.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/exposure.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Exposure</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-inputs.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/exposure.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exposure</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -151,7 +151,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/birdseye.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ERAHUMED model: a bird’s eye view</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conceptual overview of the ERAHUMED model</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -177,20 +177,26 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/rfms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rice Field Management Systems</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/hydrology.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hydrological model of the Albufera Natural Park</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Hydrological model of the Albufera Natural Park</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/exposure.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Exposure</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exposure</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/risk.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Risk assessment</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Risk assessment</span></span></a>
   </div>
 </li>
       </ul>
@@ -207,13 +213,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/erahumed_dss_ui.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">The ERAHUMED DSS Graphical User Interface</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">The ERAHUMED DSS Graphical User Interface</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/erahumed_dss_pkg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">The <code>{erahumed}</code> R package</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The <code>{erahumed}</code> R package</span></span></a>
   </div>
 </li>
       </ul>
@@ -251,13 +257,13 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-ca" id="toc-sec-ca" class="nav-link active" data-scroll-target="#sec-ca"><span class="header-section-number">6.1</span> Pesticide applications</a></li>
-  <li><a href="#pesticide-dispersion" id="toc-pesticide-dispersion" class="nav-link" data-scroll-target="#pesticide-dispersion"><span class="header-section-number">6.2</span> Pesticide dispersion</a>
+  <li><a href="#sec-ca" id="toc-sec-ca" class="nav-link active" data-scroll-target="#sec-ca"><span class="header-section-number">7.1</span> Pesticide applications</a></li>
+  <li><a href="#pesticide-dispersion" id="toc-pesticide-dispersion" class="nav-link" data-scroll-target="#pesticide-dispersion"><span class="header-section-number">7.2</span> Pesticide dispersion</a>
   <ul class="collapse">
-  <li><a href="#diagram-of-physical-processes" id="toc-diagram-of-physical-processes" class="nav-link" data-scroll-target="#diagram-of-physical-processes"><span class="header-section-number">6.2.1</span> Diagram of physical processes</a></li>
-  <li><a href="#sec-ct-eqs" id="toc-sec-ct-eqs" class="nav-link" data-scroll-target="#sec-ct-eqs"><span class="header-section-number">6.2.2</span> Evolution Equations</a></li>
-  <li><a href="#sec-ct-solution" id="toc-sec-ct-solution" class="nav-link" data-scroll-target="#sec-ct-solution"><span class="header-section-number">6.2.3</span> Semi-analytic solution of Equation&nbsp;<span>6.1</span></a></li>
-  <li><a href="#sec-ct-inputs" id="toc-sec-ct-inputs" class="nav-link" data-scroll-target="#sec-ct-inputs"><span class="header-section-number">6.2.4</span> Input parameters (correspondence with <span>Chapter 4</span>)</a></li>
+  <li><a href="#diagram-of-physical-processes" id="toc-diagram-of-physical-processes" class="nav-link" data-scroll-target="#diagram-of-physical-processes"><span class="header-section-number">7.2.1</span> Diagram of physical processes</a></li>
+  <li><a href="#sec-ct-eqs" id="toc-sec-ct-eqs" class="nav-link" data-scroll-target="#sec-ct-eqs"><span class="header-section-number">7.2.2</span> Evolution Equations</a></li>
+  <li><a href="#sec-ct-solution" id="toc-sec-ct-solution" class="nav-link" data-scroll-target="#sec-ct-solution"><span class="header-section-number">7.2.3</span> Semi-analytic solution of Equation&nbsp;<span>7.1</span></a></li>
+  <li><a href="#sec-ct-inputs" id="toc-sec-ct-inputs" class="nav-link" data-scroll-target="#sec-ct-inputs"><span class="header-section-number">7.2.4</span> Input parameters (correspondence with <span>Chapter 4</span>)</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -265,9 +271,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-inputs.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/exposure.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Exposure</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-inputs.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/exposure.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exposure</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-exposure" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Exposure</span></span></h1>
+<h1 class="title"><span id="sec-exposure" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exposure</span></span></h1>
 </div>
 
 
@@ -285,33 +291,33 @@ window.Quarto = {
 
 
 <p>This Chapter describes how ERAHUMED models pesticide exposure in the Albufera Natural Park. The hydrological simulation discussed in the previous Chapter provides the foundation for this analysis, as water serves as the primary medium for pesticide transport. Here, we outline how ERAHUMED simulates the introduction, dispersion, and fate of pesticides within the system. This includes processes such as deposition, degradation, and transfer between water bodies. By integrating hydrological dynamics with chemical behavior, the model estimates exposure levels over time and space, supporting risk assessment efforts.</p>
-<section id="sec-ca" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="sec-ca"><span class="header-section-number">6.1</span> Pesticide applications</h2>
-<p>The simulation of pesticide applications to rice fields follows a straightforward algorithm that takes as input the scheduled application list and the system’s hydrology (<a href="hydrology.html" class="quarto-xref"><span>Chapter 5</span></a>). The algorithm outputs a list of actual applications, specifying the application day and the applied mass. Since the application of each pesticide is computed independently of others, we focus on a single pesticide for the present discussion.</p>
+<section id="sec-ca" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="sec-ca"><span class="header-section-number">7.1</span> Pesticide applications</h2>
+<p>The simulation of pesticide applications to rice fields follows a straightforward algorithm that takes as input the scheduled application list and the system’s hydrology (<a href="hydrology.html" class="quarto-xref"><span>Chapter 6</span></a>). The algorithm outputs a list of actual applications, specifying the application day and the applied mass. Since the application of each pesticide is computed independently of others, we focus on a single pesticide for the present discussion.</p>
 <p>The information on scheduled applications is contained in the <code>ca_schedules_df</code> data frame, whose structure is described in detail in <span class="quarto-unresolved-ref">?sec-ca-schedules-df</span>. For each scheduled application, this data set specifies:</p>
 <ul>
 <li>An application day <span class="math inline">\(D\)</span>, representing the day of the crop cycle when the pesticide is expected to be applied.</li>
 <li>An application amount, expressed in units of mass per unit area.</li>
 <li>An application type, which is either <em>aerial</em> or <em>ground</em>, that determines the required rice field conditions for the application.</li>
 </ul>
-<p>To determine the actual application date, we proceed as follows (for notation related to cluster hydrology, see <a href="hydrology.html#sec-hbc" class="quarto-xref"><span>Section 5.4.2</span></a>):</p>
+<p>To determine the actual application date, we proceed as follows (for notation related to cluster hydrology, see <a href="hydrology.html#sec-hbc" class="quarto-xref"><span>Section 6.4.2</span></a>):</p>
 <ol type="1">
-<li><p><strong>Filtering by irrigation and draining states.</strong> For ground applications, we select only those days in which both <span class="math inline">\(\text{Ir}_{c,t} = \text{Dr}_{c,t} = 0\)</span>, where <span class="math inline">\(\text{Ir}_{c,t}\)</span> and <span class="math inline">\(\text{Dr}_{c,t}\)</span> are the true (as opposed to ideal) irrigation and draining states time-series, defined after <a href="hydrology.html#eq-hbc-delayed-day" class="quarto-xref">Equation&nbsp;<span>5.9</span></a>. Similarly, for aerial applications, we select days according to <span class="math inline">\(\text{Ir}_{c,t} = \text{Dr}_{c,t} = 1\)</span>.</p></li>
+<li><p><strong>Filtering by irrigation and draining states.</strong> For ground applications, we select only those days in which both <span class="math inline">\(\text{Ir}_{c,t} = \text{Dr}_{c,t} = 0\)</span>, where <span class="math inline">\(\text{Ir}_{c,t}\)</span> and <span class="math inline">\(\text{Dr}_{c,t}\)</span> are the true (as opposed to ideal) irrigation and draining states time-series, defined after <a href="hydrology.html#eq-hbc-delayed-day" class="quarto-xref">Equation&nbsp;<span>6.9</span></a>. Similarly, for aerial applications, we select days according to <span class="math inline">\(\text{Ir}_{c,t} = \text{Dr}_{c,t} = 1\)</span>.</p></li>
 <li><p><strong>Filtering by water depth (ground applications only).</strong> For ground applications, from the days selected in the previous step, we further filter those where the simulated water depth of the cluster satisfies <span class="math inline">\(h_{c,t} &lt; h_{\text{thresh}}\)</span>.</p></li>
 <li><p><strong>Ensuring separation between applications of the same pesticide.</strong> We retain only those days that are at least five days apart from any previous application of the same chemical.</p></li>
-<li><p><strong>Selecting the final application day.</strong> From the remaining candidate days, we choose the one where the <em>delayed day</em> <span class="math inline">\(d_{c,t}\)</span> defined by <a href="hydrology.html#eq-hbc-delayed-day" class="quarto-xref">Equation&nbsp;<span>5.9</span></a> is closest to <span class="math inline">\(D\)</span>, the originally scheduled application day.</p></li>
+<li><p><strong>Selecting the final application day.</strong> From the remaining candidate days, we choose the one where the <em>delayed day</em> <span class="math inline">\(d_{c,t}\)</span> defined by <a href="hydrology.html#eq-hbc-delayed-day" class="quarto-xref">Equation&nbsp;<span>6.9</span></a> is closest to <span class="math inline">\(D\)</span>, the originally scheduled application day.</p></li>
 </ol>
-<p>These steps are repeated for all subsequent applications of a given pesticide in a given cluster. It is worth noting that the algorithm for simulating the cluster hydrological balance (<a href="hydrology.html#sec-hbc" class="quarto-xref"><span>Section 5.4.2</span></a>) guarantees that at least one candidate application day will always remain available in the final selection step.</p>
+<p>These steps are repeated for all subsequent applications of a given pesticide in a given cluster. It is worth noting that the algorithm for simulating the cluster hydrological balance (<a href="hydrology.html#sec-hbc" class="quarto-xref"><span>Section 6.4.2</span></a>) guarantees that at least one candidate application day will always remain available in the final selection step.</p>
 </section>
-<section id="pesticide-dispersion" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="pesticide-dispersion"><span class="header-section-number">6.2</span> Pesticide dispersion</h2>
-<p>As illustrated in our hydrological model (<a href="hydrology.html#fig-hydrology-scheme" class="quarto-xref">Figure&nbsp;<span>5.1</span></a>), pesticides applied to rice field clusters are transported through water flow into ditches, then into the Albufera lake, and ultimately to the sea.</p>
+<section id="pesticide-dispersion" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="pesticide-dispersion"><span class="header-section-number">7.2</span> Pesticide dispersion</h2>
+<p>As illustrated in our hydrological model (<a href="hydrology.html#fig-hydrology-scheme" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>), pesticides applied to rice field clusters are transported through water flow into ditches, then into the Albufera lake, and ultimately to the sea.</p>
 <p>From a mathematical perspective, the fate of these chemicals is governed by a system of differential equations that captures key physico-chemical processes, including transport, diffusion between compartments, and degradation.</p>
-<p>The remainder of this chapter describes our approach to pesticide dispersion. We define the simplified differential system used to model these processes in <a href="#sec-ct-eqs" class="quarto-xref"><span>Section 6.2.2</span></a>, and we present our semi-analytic solution method in <a href="#sec-ct-solution" class="quarto-xref"><span>Section 6.2.3</span></a>.</p>
-<section id="diagram-of-physical-processes" class="level3" data-number="6.2.1">
-<h3 data-number="6.2.1" class="anchored" data-anchor-id="diagram-of-physical-processes"><span class="header-section-number">6.2.1</span> Diagram of physical processes</h3>
+<p>The remainder of this chapter describes our approach to pesticide dispersion. We define the simplified differential system used to model these processes in <a href="#sec-ct-eqs" class="quarto-xref"><span>Section 7.2.2</span></a>, and we present our semi-analytic solution method in <a href="#sec-ct-solution" class="quarto-xref"><span>Section 7.2.3</span></a>.</p>
+<section id="diagram-of-physical-processes" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="diagram-of-physical-processes"><span class="header-section-number">7.2.1</span> Diagram of physical processes</h3>
 <p>The schematic diagram below illustrates the processes captured by our model for chemical dispersion. Directional arrows represent the transfer of chemical matter among the three compartments considered—Foliage, Water, and Soil—as well as exchanges with external water bodies (denoted as “Watercourse”).</p>
-<p>While the overall scheme applies to all landscape elements, specific details vary for clusters, ditches, and the lake (<em>cf.</em> the hydrological model of <a href="hydrology.html#fig-hydrology-scheme" class="quarto-xref">Figure&nbsp;<span>5.1</span></a>):</p>
+<p>While the overall scheme applies to all landscape elements, specific details vary for clusters, ditches, and the lake (<em>cf.</em> the hydrological model of <a href="hydrology.html#fig-hydrology-scheme" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>):</p>
 <ul>
 <li><strong>Clusters:</strong> Inflow waters originate outside the system and are assumed to be free of pesticides.</li>
 <li><strong>Ditches and the Albufera lake:</strong> No direct pesticide applications occur in these areas, meaning the foliage compartment plays no role in their dynamics.</li>
@@ -324,15 +330,15 @@ window.Quarto = {
 <img src="img/ct-diagram.jpg" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ct-diagram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.1: Scheme of physical processes considered in ERAHUMED model of chemical dispersion
+Figure&nbsp;7.1: Scheme of physical processes considered in ERAHUMED model of chemical dispersion
 </figcaption>
 </figure>
 </div>
 </section>
-<section id="sec-ct-eqs" class="level3" data-number="6.2.2">
-<h3 data-number="6.2.2" class="anchored" data-anchor-id="sec-ct-eqs"><span class="header-section-number">6.2.2</span> Evolution Equations</h3>
-<p>As in <a href="#sec-ca" class="quarto-xref"><span>Section 6.1</span></a>, we focus on a single pesticide and a fixed hydrological element (<em>e.g.</em>, a cluster). We denote its masses in the three compartments—foliage, water, and sediment—by <span class="math inline">\(m_f\)</span>, <span class="math inline">\(m_w\)</span>, and <span class="math inline">\(m_s\)</span>, respectively. We assume that, at any given time, these masses are fully diluted and homogeneously distributed. In particular, we can meaningfully define spatially constant concentrations <span class="math inline">\(c_f\)</span> and <span class="math inline">\(c_s\)</span> in the water<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and sediment compartments.</p>
-<p>We first describe the differential system that drives the temporal dynamics of <span class="math inline">\(m_f\)</span>, <span class="math inline">\(m_w\)</span> and <span class="math inline">\(m_s\)</span>. The correspondence between the parameters used in this and the following Section is provided in <a href="#sec-ct-inputs" class="quarto-xref"><span>Section 6.2.4</span></a>.</p>
+<section id="sec-ct-eqs" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="sec-ct-eqs"><span class="header-section-number">7.2.2</span> Evolution Equations</h3>
+<p>As in <a href="#sec-ca" class="quarto-xref"><span>Section 7.1</span></a>, we focus on a single pesticide and a fixed hydrological element (<em>e.g.</em>, a cluster). We denote its masses in the three compartments—foliage, water, and sediment—by <span class="math inline">\(m_f\)</span>, <span class="math inline">\(m_w\)</span>, and <span class="math inline">\(m_s\)</span>, respectively. We assume that, at any given time, these masses are fully diluted and homogeneously distributed. In particular, we can meaningfully define spatially constant concentrations <span class="math inline">\(c_f\)</span> and <span class="math inline">\(c_s\)</span> in the water<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and sediment compartments.</p>
+<p>We first describe the differential system that drives the temporal dynamics of <span class="math inline">\(m_f\)</span>, <span class="math inline">\(m_w\)</span> and <span class="math inline">\(m_s\)</span>. The correspondence between the parameters used in this and the following Section is provided in <a href="#sec-ct-inputs" class="quarto-xref"><span>Section 7.2.4</span></a>.</p>
 <p>The fundamental equations describing pesticide diffusion are given as follows:</p>
 <p><span id="eq-ct-ode"><span class="math display">\[
 \begin{split}
@@ -340,7 +346,7 @@ Figure&nbsp;6.1: Scheme of physical processes considered in ERAHUMED model of ch
 \dfrac{\text d{m}_w}{\text d t} &amp; = -(k_w+d_w+s+\frac{O}{V})m_w+d_sm_s+wm_f+a_w-\sigma(\frac{m_w}{\rho V}) \\
 \dfrac{\text d{m}_s}{\text d t} &amp; = (d_w+s)m_w-(k_s+d_s)m_s+a_s+\sigma(\frac{m_w}{\rho V})
 \end{split}
-\tag{6.1}\]</span></span></p>
+\tag{7.1}\]</span></span></p>
 <p>where:</p>
 <ul>
 <li><span class="math inline">\(a_{f,w,s}\)</span> are the mass income rates of the chemical in the three compartments, that include direct pesticide application and mass coming from inflows.</li>
@@ -353,11 +359,11 @@ Figure&nbsp;6.1: Scheme of physical processes considered in ERAHUMED model of ch
 <li><span class="math inline">\(\rho\)</span> is the chemical solubility in water,</li>
 <li><span class="math inline">\(\sigma(x)\)</span> is a function (not further specified, see below) that grows quickly for <span class="math inline">\(x &gt; 1\)</span>, and vanishes for <span class="math inline">\(x \leq 1\)</span>. This function accounts for solubility.</li>
 </ul>
-<p>Strictly speaking, all these terms have instantaneous time dependence<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Apart from making the <a href="#eq-ct-ode" class="quarto-xref">system&nbsp;<span>6.1</span></a> hard to attack by analytic means, such a dependence is troubling because we don’t have access to the exact time dependence of the majority of these terms (<em>e.g.</em> outflow, volume or chemical applications), our input consisting of simple daily average/cumulative values. On the other hand, if all the terms were constant, and if we could neglect <span class="math inline">\(\sigma\)</span>, the solution of <a href="#eq-ct-ode" class="quarto-xref">Equation&nbsp;<span>6.1</span></a> would be immediate, as the corresponding system becomes a linear ODE with constant coefficients, in addition whose eigenvalues and eigenvectors can be computed explicitly.</p>
+<p>Strictly speaking, all these terms have instantaneous time dependence<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Apart from making the <a href="#eq-ct-ode" class="quarto-xref">system&nbsp;<span>7.1</span></a> hard to attack by analytic means, such a dependence is troubling because we don’t have access to the exact time dependence of the majority of these terms (<em>e.g.</em> outflow, volume or chemical applications), our input consisting of simple daily average/cumulative values. On the other hand, if all the terms were constant, and if we could neglect <span class="math inline">\(\sigma\)</span>, the solution of <a href="#eq-ct-ode" class="quarto-xref">Equation&nbsp;<span>7.1</span></a> would be immediate, as the corresponding system becomes a linear ODE with constant coefficients, in addition whose eigenvalues and eigenvectors can be computed explicitly.</p>
 <p>What we use in practice is an intermediate semi-analytic approach that allows us to compute daily values of <span class="math inline">\(m_{f,w,s}\)</span>, which is described next.</p>
 </section>
-<section id="sec-ct-solution" class="level3" data-number="6.2.3">
-<h3 data-number="6.2.3" class="anchored" data-anchor-id="sec-ct-solution"><span class="header-section-number">6.2.3</span> Semi-analytic solution of <a href="#eq-ct-ode" class="quarto-xref">Equation&nbsp;<span>6.1</span></a></h3>
+<section id="sec-ct-solution" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="sec-ct-solution"><span class="header-section-number">7.2.3</span> Semi-analytic solution of <a href="#eq-ct-ode" class="quarto-xref">Equation&nbsp;<span>7.1</span></a></h3>
 <p>The time evolution of <span class="math inline">\(m_{f,w,s}\)</span> in a daily time-step (from <span class="math inline">\(t\)</span> to <span class="math inline">\(t+1\)</span>, say, assuming <span class="math inline">\(t\)</span> is measured in days) is obtained through the following four consecutive stages:</p>
 <ol type="1">
 <li>We compute the exact evolution of <span class="math inline">\(m_{f,w,s}\)</span> according to the linear ODE obtained by disregarding the processes of outflow, chemical application and solubility, and using daily constant values for all the remaining constants involved (described in more detail below).</li>
@@ -366,8 +372,8 @@ Figure&nbsp;6.1: Scheme of physical processes considered in ERAHUMED model of ch
 <li>We compare the resulting <span class="math inline">\(m_w\)</span> with the maximum amount allowed by the solubility in water, that is <span class="math inline">\(m_w ^{\text{max}}(t) = \rho V(t+1)\)</span> and transfer any excess to the sediment compartment (<span class="math inline">\(m_s\)</span>).</li>
 </ol>
 <p>In the following, we describe in full detail the computations involved in these four steps.</p>
-<section id="step-1-linear-ode-evolution-physico-chemical-processes" class="level4" data-number="6.2.3.1">
-<h4 data-number="6.2.3.1" class="anchored" data-anchor-id="step-1-linear-ode-evolution-physico-chemical-processes"><span class="header-section-number">6.2.3.1</span> Step 1: linear ODE evolution (physico-chemical processes)</h4>
+<section id="step-1-linear-ode-evolution-physico-chemical-processes" class="level4" data-number="7.2.3.1">
+<h4 data-number="7.2.3.1" class="anchored" data-anchor-id="step-1-linear-ode-evolution-physico-chemical-processes"><span class="header-section-number">7.2.3.1</span> Step 1: linear ODE evolution (physico-chemical processes)</h4>
 <p>Disregarding outflow, mass application and solubility, we get a linear ODE of the form:</p>
 <p><span id="eq-ct-ode-linear"><span class="math display">\[
 \begin{split}
@@ -375,7 +381,7 @@ Figure&nbsp;6.1: Scheme of physical processes considered in ERAHUMED model of ch
 \dfrac{\text d{m}_w}{\text d t} &amp; = a_{ww} m_w+a_{ws}m_s + w m_f, \\
 \dfrac{\text d{m}_s}{\text d t} &amp; = a_{sw}m_w+a_{ss}m_s,
 \end{split}
-\tag{6.2}\]</span></span></p>
+\tag{7.2}\]</span></span></p>
 <p>with:</p>
 <p><span id="eq-ct-ode-linear-coeffs"><span class="math display">\[
 \begin{split}
@@ -385,52 +391,52 @@ a_{ws}                  &amp;= d_s\\
 a_{sw}                  &amp;= d_w+s\\
 a_{ss}                  &amp;= -(k_s+d_s)
 \end{split}
-\tag{6.3}\]</span></span></p>
-<p>where the various physico-chemical parameters are assumed to be constant during a daily time-step (<em>cf.</em> <a href="#sec-ct-inputs" class="quarto-xref"><span>Section 6.2.4</span></a>).</p>
+\tag{7.3}\]</span></span></p>
+<p>where the various physico-chemical parameters are assumed to be constant during a daily time-step (<em>cf.</em> <a href="#sec-ct-inputs" class="quarto-xref"><span>Section 7.2.4</span></a>).</p>
 <p>The evolution of <span class="math inline">\(m_f\)</span> is easily obtained:</p>
 <p><span id="eq-mf-evolution"><span class="math display">\[
 m_f(t) = e^{\gamma t}m_f(0).
-\tag{6.4}\]</span></span></p>
-<p>Plugging this into the three-dimensional system <a href="#eq-ct-ode-linear" class="quarto-xref"><span>6.2</span></a> we obtain a reduced two-dimensional system for the water-sediment compartments:</p>
+\tag{7.4}\]</span></span></p>
+<p>Plugging this into the three-dimensional system <a href="#eq-ct-ode-linear" class="quarto-xref"><span>7.2</span></a> we obtain a reduced two-dimensional system for the water-sediment compartments:</p>
 <p><span id="eq-ct-ode-linear-reduced"><span class="math display">\[
 \begin{split}
 \dfrac{\text d{m}_w}{\text d t} &amp; = a_{ww} m_w+a_{ws}m_s + w e ^{\gamma t}m_f(0), \\
 \dfrac{\text d{m}_s}{\text d t} &amp; = a_{sw}m_w+a_{ss}m_s,
 \end{split}
-\tag{6.5}\]</span></span></p>
+\tag{7.5}\]</span></span></p>
 <p>which is solved explicitly with standard methods<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
 </section>
-<section id="step-2-mass-losses-due-to-outflow" class="level4" data-number="6.2.3.2">
-<h4 data-number="6.2.3.2" class="anchored" data-anchor-id="step-2-mass-losses-due-to-outflow"><span class="header-section-number">6.2.3.2</span> Step 2: mass losses due to outflow</h4>
+<section id="step-2-mass-losses-due-to-outflow" class="level4" data-number="7.2.3.2">
+<h4 data-number="7.2.3.2" class="anchored" data-anchor-id="step-2-mass-losses-due-to-outflow"><span class="header-section-number">7.2.3.2</span> Step 2: mass losses due to outflow</h4>
 <p>Mass losses due to outflow are computed as if the outflow process happened instantaneously after the processes discussed in the previous step took place. The amount of mass in the water compartment is affected as follows:</p>
 <p><span id="eq-mw-outflow"><span class="math display">\[
 m_w \to \frac{V_f}{V_i} m_w,
-\tag{6.6}\]</span></span></p>
+\tag{7.6}\]</span></span></p>
 <p>where <span class="math inline">\(V_i\)</span> and <span class="math inline">\(V_f\)</span> denote the initial and final volume for the outflow process. Here <span class="math inline">\(V_f\)</span> coincides with the simulated value <span class="math inline">\(V(t+1)\)</span> for the relevant water body and <span class="math inline">\(V_i = V_f + O(t)\)</span>, where <span class="math inline">\(O(t)\)</span> denotes the total simulated outflow for day <span class="math inline">\(t\)</span>.</p>
 </section>
-<section id="step-3-mass-income-from-direct-application-and-inflows" class="level4" data-number="6.2.3.3">
-<h4 data-number="6.2.3.3" class="anchored" data-anchor-id="step-3-mass-income-from-direct-application-and-inflows"><span class="header-section-number">6.2.3.3</span> Step 3: mass income from direct application and inflows</h4>
+<section id="step-3-mass-income-from-direct-application-and-inflows" class="level4" data-number="7.2.3.3">
+<h4 data-number="7.2.3.3" class="anchored" data-anchor-id="step-3-mass-income-from-direct-application-and-inflows"><span class="header-section-number">7.2.3.3</span> Step 3: mass income from direct application and inflows</h4>
 <p>These contributions are computed as instantaneous and subsequent to outflow. Masses in the various compartments (<span class="math inline">\(i = f,\,w,\,s\)</span>) are modified as follows: <span id="eq-mi-application"><span class="math display">\[
 m_i \to m_i + a_i
-\tag{6.7}\]</span></span></p>
+\tag{7.7}\]</span></span></p>
 <p>As mentioned above, <span class="math inline">\(a_i\)</span> accounts for both direct pesticide applications and water inflow, that is:</p>
 <p><span class="math display">\[
 a_i = a_i ^{\text{app}} + a_i ^{\text{inflow}}
 \]</span> The calculation of direct application rates from input parameters is described below. As to the second term, the amount of incoming mass is exactly given by the amount of outgoing mass in the outflow of the preceding element along the water course chain, which is computed as detailed in the previous Section.</p>
 </section>
-<section id="step-4-solubility" class="level4" data-number="6.2.3.4">
-<h4 data-number="6.2.3.4" class="anchored" data-anchor-id="step-4-solubility"><span class="header-section-number">6.2.3.4</span> Step 4: solubility</h4>
+<section id="step-4-solubility" class="level4" data-number="7.2.3.4">
+<h4 data-number="7.2.3.4" class="anchored" data-anchor-id="step-4-solubility"><span class="header-section-number">7.2.3.4</span> Step 4: solubility</h4>
 <p>The chemical density in the water compartment after Steps 1, 2, and 3 is eventually compared with the chemical’s solubility <span class="math inline">\(\rho\)</span>, and any mass excess is instantaneously transferred to the sediment compartment. This implies the following modifications:</p>
 <p><span id="eq-m-solubility"><span class="math display">\[
 m_s \to m_s + \max(0, \,m_w - \rho V(t+1)),\quad m_w\to\max(m_w,\,\rho V(t+1)).
-\tag{6.8}\]</span></span></p>
+\tag{7.8}\]</span></span></p>
 </section>
 </section>
-<section id="sec-ct-inputs" class="level3" data-number="6.2.4">
-<h3 data-number="6.2.4" class="anchored" data-anchor-id="sec-ct-inputs"><span class="header-section-number">6.2.4</span> Input parameters (correspondence with <a href="model-inputs.html" class="quarto-xref"><span>Chapter 4</span></a>)</h3>
-<p>This Section describes the sources of the various numerical inputs to <a href="#eq-ct-ode" class="quarto-xref">Equation&nbsp;<span>6.1</span></a>.</p>
-<section id="pesticide-application-rates" class="level4" data-number="6.2.4.1">
-<h4 data-number="6.2.4.1" class="anchored" data-anchor-id="pesticide-application-rates"><span class="header-section-number">6.2.4.1</span> Pesticide application rates</h4>
+<section id="sec-ct-inputs" class="level3" data-number="7.2.4">
+<h3 data-number="7.2.4" class="anchored" data-anchor-id="sec-ct-inputs"><span class="header-section-number">7.2.4</span> Input parameters (correspondence with <a href="model-inputs.html" class="quarto-xref"><span>Chapter 4</span></a>)</h3>
+<p>This Section describes the sources of the various numerical inputs to <a href="#eq-ct-ode" class="quarto-xref">Equation&nbsp;<span>7.1</span></a>.</p>
+<section id="pesticide-application-rates" class="level4" data-number="7.2.4.1">
+<h4 data-number="7.2.4.1" class="anchored" data-anchor-id="pesticide-application-rates"><span class="header-section-number">7.2.4.1</span> Pesticide application rates</h4>
 <p>Application rates are given by:</p>
 <p><span class="math display">\[
 \begin{split}
@@ -443,15 +449,15 @@ a_w^{\text{app}} &amp;= A(t)\cdot (1-\text{drift})\cdot(1-\text{SNK})(1-c(t))I(h
 c = \min\left[\frac{d_s(t)}{j_{\text{grow}}},\,1\right]\cdot c_{\text{max}},
 \]</span> where <span class="math inline">\(d_s(t)\)</span> is the number of days elapsed from seeding, assumed to be on the 20th of April, while <span class="math inline">\(j_\text{grow}\)</span> and <span class="math inline">\(c_\text{max}\)</span> correspond to the input parameters <code>jgrow</code> and <code>covmax</code>.</p>
 </section>
-<section id="degradation-rates" class="level4" data-number="6.2.4.2">
-<h4 data-number="6.2.4.2" class="anchored" data-anchor-id="degradation-rates"><span class="header-section-number">6.2.4.2</span> Degradation rates</h4>
+<section id="degradation-rates" class="level4" data-number="7.2.4.2">
+<h4 data-number="7.2.4.2" class="anchored" data-anchor-id="degradation-rates"><span class="header-section-number">7.2.4.2</span> Degradation rates</h4>
 <p>Daily degradation rates <span class="math inline">\(k_{f,w,s}(t)\)</span> for the chemical are modeled through the Arrhenius equation, schematically:</p>
 <p><span class="math display">\[
 k(t) = k_0 \cdot Q_{10}^{\frac{T(t)-T_0}{10}}
 \]</span> where <span class="math inline">\(k_0\)</span> is the degradation rate <span class="math inline">\(k_0\)</span> at a reference temperature <span class="math inline">\(T_0\)</span>, <span class="math inline">\(Q_{10}\)</span> is a numerical constant, and <span class="math inline">\(T(t)\)</span> is the average temperature on day <span class="math inline">\(t\)</span>. The constants <span class="math inline">\(k_0\)</span> and <span class="math inline">\(Q_10\)</span> are internal model parameters, while <span class="math inline">\(T(t)\)</span> is given by <code>weather_df$temperature_ave</code>, see <a href="model-inputs.html#sec-weather-df" class="quarto-xref"><span>Section 4.1.1.1</span></a>.</p>
 </section>
-<section id="diffusion-rates" class="level4" data-number="6.2.4.3">
-<h4 data-number="6.2.4.3" class="anchored" data-anchor-id="diffusion-rates"><span class="header-section-number">6.2.4.3</span> Diffusion rates</h4>
+<section id="diffusion-rates" class="level4" data-number="7.2.4.3">
+<h4 data-number="7.2.4.3" class="anchored" data-anchor-id="diffusion-rates"><span class="header-section-number">7.2.4.3</span> Diffusion rates</h4>
 <p>Diffusion rates are given by:</p>
 <p><span class="math display">\[
 d_w(t) = \frac{k_\text{dif}\cdot f_{D,w}}{h(t)}, \quad d_s = \frac{k_\text{dif}\cdot f_{D,s}}{h_{\text{act}}\cdot \text{pos}}
@@ -460,22 +466,22 @@ d_w(t) = \frac{k_\text{dif}\cdot f_{D,w}}{h(t)}, \quad d_s = \frac{k_\text{dif}\
 k_\text{dif} = \left( \frac{69.35}{365} - \text{pos}\cdot M^{-2/3} \right)\frac{\text{m}}{\text{day}}
 \]</span> where <span class="math inline">\(M\)</span> is the molecular weight of the chemical (internal parameter); finally, <span class="math inline">\(f_{D,w}\)</span> and <span class="math inline">\(f_{D,s}\)</span> are given by:</p>
 </section>
-<section id="settling-rate" class="level4" data-number="6.2.4.4">
-<h4 data-number="6.2.4.4" class="anchored" data-anchor-id="settling-rate"><span class="header-section-number">6.2.4.4</span> Settling rate</h4>
+<section id="settling-rate" class="level4" data-number="7.2.4.4">
+<h4 data-number="7.2.4.4" class="anchored" data-anchor-id="settling-rate"><span class="header-section-number">7.2.4.4</span> Settling rate</h4>
 <p>The daily settling rate is computed as:</p>
 <p><span class="math display">\[
 s(t) = \dfrac{k_s(1-f_{D,w})}{h(t)}
 \]</span> where <span class="math inline">\(k_s\)</span> is a (chemical-specific) internal parameter.</p>
 </section>
-<section id="washout-rate" class="level4" data-number="6.2.4.5">
-<h4 data-number="6.2.4.5" class="anchored" data-anchor-id="washout-rate"><span class="header-section-number">6.2.4.5</span> Washout rate</h4>
+<section id="washout-rate" class="level4" data-number="7.2.4.5">
+<h4 data-number="7.2.4.5" class="anchored" data-anchor-id="washout-rate"><span class="header-section-number">7.2.4.5</span> Washout rate</h4>
 <p>The daily washout rate is computed as:</p>
 <p><span class="math display">\[
 w(t) = \text{fet} \cdot P(t)
 \]</span> where <span class="math inline">\(P(t)\)</span> is the daily precipitation per unit area, while <span class="math inline">\(\text{fet}\)</span> is a (chemical-specific) internal parameter.</p>
 </section>
-<section id="solubility" class="level4" data-number="6.2.4.6">
-<h4 data-number="6.2.4.6" class="anchored" data-anchor-id="solubility"><span class="header-section-number">6.2.4.6</span> Solubility</h4>
+<section id="solubility" class="level4" data-number="7.2.4.6">
+<h4 data-number="7.2.4.6" class="anchored" data-anchor-id="solubility"><span class="header-section-number">7.2.4.6</span> Solubility</h4>
 <p>The solubility <span class="math inline">\(\rho\)</span> of chemical is an internal parameter.</p>
 
 
@@ -921,12 +927,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../chapters/hydrology.html" class="pagination-link" aria-label="Hydrological model of the Albufera Natural Park">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hydrological model of the Albufera Natural Park</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Hydrological model of the Albufera Natural Park</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/risk.html" class="pagination-link" aria-label="Risk assessment">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Risk assessment</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Risk assessment</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -1,3 +1,7 @@
+---
+prefer-html: true
+---
+
 # Conceptual overview of the ERAHUMED model {#sec-birdseye}
 
 Before diving into the technical details of the ERAHUMED Decision Support System, this chapter provides a high-level overview of its core structure and modeling approach. The goal is to offer readers an intuitive understanding of what ERAHUMED does—how it conceptualizes the landscape of the Albufera Natural Park, simulates water and chemical dynamics, and evaluates ecological risks—before introducing the formal models and data inputs that underpin each component.

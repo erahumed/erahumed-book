@@ -8,7 +8,7 @@
 
 <meta name="description" content="The ERAHUMED Decision Support System: Software Manual and Technical Documentation.">
 
-<title>7&nbsp; Risk assessment – ERAHUMED DSS</title>
+<title>8&nbsp; Risk assessment – ERAHUMED DSS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -82,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-inputs.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/risk.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Risk assessment</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-inputs.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/risk.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Risk assessment</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -122,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/birdseye.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ERAHUMED model: a bird’s eye view</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conceptual overview of the ERAHUMED model</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -148,20 +148,26 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/rfms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rice Field Management Systems</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/hydrology.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hydrological model of the Albufera Natural Park</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Hydrological model of the Albufera Natural Park</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/exposure.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Exposure</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exposure</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/risk.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Risk assessment</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Risk assessment</span></span></a>
   </div>
 </li>
       </ul>
@@ -178,13 +184,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/erahumed_dss_ui.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">The ERAHUMED DSS Graphical User Interface</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">The ERAHUMED DSS Graphical User Interface</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/erahumed_dss_pkg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">The <code>{erahumed}</code> R package</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The <code>{erahumed}</code> R package</span></span></a>
   </div>
 </li>
       </ul>
@@ -222,16 +228,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#calculation-of-risk-using-ssds" id="toc-calculation-of-risk-using-ssds" class="nav-link active" data-scroll-target="#calculation-of-risk-using-ssds"><span class="header-section-number">7.1</span> Calculation of risk using SSDs</a></li>
+  <li><a href="#calculation-of-risk-using-ssds" id="toc-calculation-of-risk-using-ssds" class="nav-link active" data-scroll-target="#calculation-of-risk-using-ssds"><span class="header-section-number">8.1</span> Calculation of risk using SSDs</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-inputs.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/risk.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Risk assessment</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-inputs.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/risk.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Risk assessment</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-risk" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Risk assessment</span></span></h1>
+<h1 class="title"><span id="sec-risk" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Risk assessment</span></span></h1>
 </div>
 
 
@@ -249,11 +255,11 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>This Chapter describes how ERAHUMED assesses the toxicological risks associated with pesticide exposure in the Albufera Natural Park. Building on the hydrological and exposure models from the previous Chapters, this step estimates the potential impacts on aquatic organisms and the broader ecosystem. We employ the Species Sensitivity Distribution (SSD) approach, a widely used method in ecological risk assessment [TODO reference]. This approach allows for the identification of high-risk scenarios, supporting management decisions to mitigate adverse effects.</p>
-<section id="calculation-of-risk-using-ssds" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="calculation-of-risk-using-ssds"><span class="header-section-number">7.1</span> Calculation of risk using SSDs</h2>
+<section id="calculation-of-risk-using-ssds" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="calculation-of-risk-using-ssds"><span class="header-section-number">8.1</span> Calculation of risk using SSDs</h2>
 <p>The risk calculation follows the approach outlined in [TODO A.Rico Reference], to which we refer the reader for further details. Here, we summarize the key aspects relevant to our model.</p>
-<p>SSDs transform the chemical concentrations computed in the previous “Exposure” simulation layer (<a href="exposure.html" class="quarto-xref"><span>Chapter 6</span></a>) into the potentially affected fraction of species (PAF). As described in [TODO], chemicals are grouped by toxic mode of action (TMoA), and different TMoAs are assumed to act independently.</p>
-<p>Separate distributions are used to assess acute and chronic risks. In the case of acute risk, we use daily chemical concentration values (computed as described in <a href="exposure.html" class="quarto-xref"><span>Chapter 6</span></a>). For chronic risk, we use a 21-day rolling average of concentrations.</p>
+<p>SSDs transform the chemical concentrations computed in the previous “Exposure” simulation layer (<a href="exposure.html" class="quarto-xref"><span>Chapter 7</span></a>) into the potentially affected fraction of species (PAF). As described in [TODO], chemicals are grouped by toxic mode of action (TMoA), and different TMoAs are assumed to act independently.</p>
+<p>Separate distributions are used to assess acute and chronic risks. In the case of acute risk, we use daily chemical concentration values (computed as described in <a href="exposure.html" class="quarto-xref"><span>Chapter 7</span></a>). For chronic risk, we use a 21-day rolling average of concentrations.</p>
 <p>The parameters of each SSD, as well as the TMoA classification for each chemical, are internal to ERAHUMED and are not directly accessible to the user.</p>
 
 
@@ -680,12 +686,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../chapters/exposure.html" class="pagination-link" aria-label="Exposure">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Exposure</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exposure</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/erahumed_dss_ui.html" class="pagination-link" aria-label="The ERAHUMED DSS Graphical User Interface">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">The ERAHUMED DSS Graphical User Interface</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">The ERAHUMED DSS Graphical User Interface</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

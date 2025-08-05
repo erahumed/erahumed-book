@@ -28,6 +28,7 @@ book:
   - part: Technical description
     chapters:
     - chapters/model-inputs.qmd
+    - chapters/rfms.qmd
     - chapters/hydrology.qmd
     - chapters/exposure.qmd
     - chapters/risk.qmd
@@ -47,8 +48,6 @@ bibliography: references.bib
 format:
   html:
     theme: cosmo
-  pdf:
-    documentclass: scrreprt
 
 editor: visual
 

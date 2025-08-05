@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/hydrology.html" rel="next">
+<link href="../chapters/rfms.html" rel="next">
 <link href="../chapters/ackno.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -122,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/birdseye.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The ERAHUMED model: a bird’s eye view</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conceptual overview of the ERAHUMED model</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -148,20 +148,26 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chapters/rfms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rice Field Management Systems</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../chapters/hydrology.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hydrological model of the Albufera Natural Park</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Hydrological model of the Albufera Natural Park</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/exposure.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Exposure</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exposure</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/risk.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Risk assessment</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Risk assessment</span></span></a>
   </div>
 </li>
       </ul>
@@ -178,13 +184,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/erahumed_dss_ui.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">The ERAHUMED DSS Graphical User Interface</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">The ERAHUMED DSS Graphical User Interface</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/erahumed_dss_pkg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">The <code>{erahumed}</code> R package</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">The <code>{erahumed}</code> R package</span></span></a>
   </div>
 </li>
       </ul>
@@ -261,7 +267,7 @@ ul.task-list li input[type="checkbox"] {
 <li><p><strong>RFMS parameters</strong> (<a href="#tbl-rfms-params" class="quarto-xref">Table&nbsp;<span>4.3</span></a>) specify how different rice field management systems (RFMSs) are configured. These parameters define the timing, frequency, and nature of chemical applications, as well as water management practices such as irrigation and drainage scheduling.</p></li>
 <li><p><strong>Spatial allocation</strong> parameters (<a href="#tbl-allocation-params" class="quarto-xref">Table&nbsp;<span>4.4</span></a>) captures how the different RFMSs are spatially distributed across the simulated landscape. This information determines which management practices are applied to which clusters of rice fields, affecting both contaminant fate and risk exposure.</p></li>
 </ul>
-<p><em>Note</em>: The <code>Type</code> column and, to some extent, the <code>Description</code> fields in <a href="#tbl-landscape-params" class="quarto-xref">Table&nbsp;<span>4.1</span></a> refer to the internal structures and conventions of the <code>{erahumed}</code> <em>R package</em>, which is presented in detail in <a href="erahumed_dss_pkg.html" class="quarto-xref"><span>Chapter 9</span></a> and references therein. However, the <code>Description</code> generally conveys the intended meaning and usage of each parameter, regardless of whether the user is interacting through the R package or the Shiny interface. Users of the Shiny GUI do not need to understand the R-specific details, as the interface provides appropriate input controls and guidance.</p>
+<p><em>Note</em>: The <code>Type</code> column and, to some extent, the <code>Description</code> fields in <a href="#tbl-landscape-params" class="quarto-xref">Table&nbsp;<span>4.1</span></a> refer to the internal structures and conventions of the <code>{erahumed}</code> <em>R package</em>, which is presented in detail in <a href="erahumed_dss_pkg.html" class="quarto-xref"><span>Chapter 10</span></a> and references therein. However, the <code>Description</code> generally conveys the intended meaning and usage of each parameter, regardless of whether the user is interacting through the R package or the Shiny interface. Users of the Shiny GUI do not need to understand the R-specific details, as the interface provides appropriate input controls and guidance.</p>
 <section id="landscape-parameters" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="landscape-parameters"><span class="header-section-number">4.1</span> Landscape parameters</h2>
 <div class="cell">
@@ -1361,8 +1367,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/hydrology.html" class="pagination-link" aria-label="Hydrological model of the Albufera Natural Park">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hydrological model of the Albufera Natural Park</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/rfms.html" class="pagination-link" aria-label="Rice Field Management Systems">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Rice Field Management Systems</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
