@@ -1,44 +1,25 @@
-# Hydrological model of the Albufera Natural Park {#sec-hydrology}
+# Hydrological balance calculations {#sec-hydrology}
 
 The first step in assessing toxicological risks in the Albufera Natural Park is to determine the system's hydrology, as water serves as the primary transport medium for the chemicals under study. Specifically, by "hydrology," we refer to the water volumes present in each water body at a given moment and the flow of water between them over a defined time frame (*e.g.*, one day). Since most of these quantities are not directly measurable, they must be estimated through simulation. This Chapter outlines the algorithms used for this process.
 
-## Definition of hydrological elements {#sec-hydrology-defs}
+## Overview {#sec-hydrology-overview}
 
-Our hydrological model represents the Albufera Natural Park in terms of three main landscape elements (or "water bodies"): rice field clusters, irrigation ditches, and Albufera Lake.
+The hydrological module of ERAHUMED simulates the distribution and flow of water across the three main landscape elements of the Albufera Natural Park: the Albufera lake, rice field clusters, and irrigation ditches. This spatial representation was outlined in @sec-hydrogeo. For reference, we reproduce below the schematic diagram of the hydrogeographical model employed by ERAHUMED:\
 
-The definition of rice field clusters and irrigation ditches used in our modeling is discussed in detail in Ref. \[TODO: insert Pablo's paper reference\]. For our purposes, we note that:
+![Schematic representation of the ERAHUMED hydrogeographical model flow.](img/hydrology_scheme.jpg){#fig-hydrology-scheme-2 fig-align="center"}
 
--   The park’s cultivation area is divided into rice field clusters, each comprising several rice fields that share the same hydrological management system (*tancat* or regular) and rice variety (*J.Sendra*, *Bomba* or *Clearfield*).
+The overall simulation proceeds in three sequential steps:
 
--   Each cluster is assumed to drain into a single irrigation ditch, selected based on the shortest distance (see Ref. TODO for details).
+1.  **Lake Hydrology**\
+    The water balance of the Albufera lake is computed first. Observed time series of lake water levels and outflows are combined with meteorological data on precipitation and evapotranspiration. The balance equation is used to estimate the unknown total inflow to the lake.
 
-## Random assignation of rice variety
+2.  **Cluster Hydrology**\
+    Once the lake’s inflows are determined, the water balance of individual rice field clusters is simulated. Each cluster follows a water management plan defined by its assigned Rice Field Management System (RFMS), which specifies ideal irrigation and drainage schedules. The simulation adjusts real flows based on hydrological constraints, including shared ditch capacity.
 
-Since the actual rice variety cultivated in individual fields is unknown, a random variety is assigned to each cluster based on the following criteria:
+3.  **Ditch Hydrology**\
+    Finally, the hydrology of irrigation ditches is resolved. Under the simplifying assumption of constant ditch water levels, inflows and outflows are equated, and ditch inflows are estimated from the aggregated outflows of the clusters that drain into them.
 
--   The proportion of cultivated surface allocated to each variety is determined by the `variety_prop` parameter (cf. @tbl-landscape-params).
--   The *Bomba* variety is cultivated exclusively in *tancats*.
--   The *Clearfield* variety is restricted to the northern part of the natural park, in clusters draining into ditches $1$ to $19$.
-
-## Scheme of the hydrological model {#sec-hydrology-scheme}
-
-This schematic diagram represents the simplified hydrological model of the Albufera Natural Park employed by ERAHUMED. It highlights water flows across the three primary landscape elements defined in the previous Section. Key simplifying assumptions embedded in the model and visually summarized in the diagram are as follows:
-
--   **Rice Clusters** Clusters are irrigated by external water sources and drain exclusively a single ditch. There is no direct hydrological interaction or exchange between individual clusters.
-
--   **Ditches** Ditches collect water from the clusters and, potentially, from additional external sources, channeling all inflows directly into the Albufera lake.
-
--   **The Albufera Lake** The lake receives water exclusively from the ditches. While two types of outflow are considered, namely direct discharge to the sea and water recirculation to the rice fields, the latter is typically negligible[^hydrology-1].
-
-[^hydrology-1]: Further details on this are discussed in @sec-hbl.
-
-![Scheme of ERAHUMED hydrological model of the Albufera Natural Park](img/hydrology-scheme.jpg){#fig-hydrology-scheme width="100%"}
-
-## Water balance calculations
-
-This section provides the details of the water balance calculations for (in the order of computation) the Albufera Lake, rice field clusters, and irrigation ditches of the park.
-
-### Albufera Lake {#sec-hbl}
+## Hydrology of the Albufera lake {#sec-hbl}
 
 Water balance calculations for the Albufera Lake are relatively simple. The relevant equation expressing hydrological balance is:
 
@@ -49,7 +30,7 @@ $$ {#eq-hbl-hydro-balance-symbolic}
 The variables collected into the following table, that enter the balance equation [-@eq-hbl-hydro-balance-symbolic], have direct correspondence with model input parameters listed in @sec-model-inputs (we use the notation `df$col` to indicate column `col` of data frame `df`).
 
 | Variable | Source | Units | Description |
-|-----------------|-----------------|-----------------|----------------------|
+|------------------|------------------|------------------|--------------------|
 | $h_t$ | `outflows_df$level` | $\text{m}$ | Lake water level daily time series |
 | $O_t^{\text{Pujol}}$ | `outflows_df$outflow_pujol` | $\text{m}^3$ | *Pujol* outflow daily time series |
 | $O_t^{\text{Perelló}}$ | `outflows_df$outflow_perello` | $\text{m}^3$ | *Perelló* outflow daily time series |
@@ -102,21 +83,21 @@ The rationale is that the simple sum of estuaries outflows omits potentially imp
 
 Once $O_t$ is calculated through @eq-hbl-total-outflow, $I_t$ can be immediately obtained from @eq-hbl-hydro-balance-explicit. Notice that whenever the aforementioned compensating outflow term due to water recirculation is included (which happens when the maximum in Eq. [-@eq-hbl-total-outflow] is given by the second term), the total inflow is always estimated to be zero.
 
-### Rice field clusters {#sec-hbc}
+## Hyodrology of rice field clusters {#sec-hbc}
 
 Water balance calculations for rice field clusters are complex due to the lack of observational data. The simulation algorithm relies on several key components:
 
 -   The hydrology of the Albufera lake (@sec-hbl).
--   Assumptions about the hydrological connections between the various water bodies in the natural park, detailed in @sec-hydrology-scheme.
--   An ideal yearly management plan for irrigation and drainage of the rice paddies.
+-   Assumptions about the hydrological connections between the various water bodies in the natural park, detailed in @sec-hydrogeo.
+-   An ideal yearly management plan for irrigation and drainage of rice field clusters, that depends on the management systems employed by individual clusters. The details of this derivation are described in @sec-rfms.
 
-The quantitative inputs for this calculation are collected in the following table; see the definition of the `management_df` input data frame, discussed in @sec-management-df. Below, $v$ denotes rice variety, and $\theta$ denotes the hydrological management system (*tancat* or *regular*).
+The quantitative inputs for this calculation are collected in the following table; the ideal irrigation/draining schedules and water levels are calculated as described in @sec-rfms-definition and are specific to the RFMS assigned to the cluster under study.
 
 | Variable | Source | Units | Description |
-|-----------------|------------------|-----------------|---------------------|
-| $\text{Ir}_{d,v,\theta}$ | `management_df$ideal_irrigation` | $\text{NA}$ | Boolean expressing whether a cluster of variety $v$  and management system $\theta$ is supposed to be irrigated on day of year $d$ |
-| $\text{Dr}_{d,v,\theta}$ | `management_df$ideal_draining` | $\text{NA}$ | Boolean expressing whether a cluster of variety $v$  and management system $\theta$ is supposed to be drained on day of year $d$ |
-| $\mathcal H _{d,v,\theta}$ | `management_df$ideal_height_eod_cm` | $\text{cm}$ | Ideal water depth (in $\text{cm}$) of a cluster of variety $v$  and management system $\theta$ on day of year $d$ |
+|------------------|------------------|------------------|-------------------|
+| $\text{Ir}_{d,c}$ | See text | $\text{NA}$ | Boolean expressing whether cluster $c$ is supposed to be irrigated on day of year $d$ |
+| $\text{Dr}_{d,c}$ | See text | $\text{NA}$ | Boolean expressing whether cluster $c$ is supposed to be drained on day of year $d$ |
+| $\mathcal H _{d,c}$ | See text | $\text{cm}$ | Ideal water depth (in $\text{cm}$) of cluster $c$ on day of year $d$ |
 | $k_\text{flow}$ | `ideal_flow_rate_cm` | $\text{cm}\cdot \text{day} ^{-1}$ | Rate of water flow through rice paddies during simultaneous irrigation and drainage, while maintaining a constant overall water level. |
 | $h_{\text{thres}}$ | `height_thresh_cm` | $\text{cm}$ | Water height below which a cluster is considered emptied. Used to determine delays in the draining/irrigation plan. Expressed in $\text{cm}$. |
 | $A_c$ | Internal parameter | $\text{m}^2$ | Surface area of cluster $c$ |
@@ -135,12 +116,11 @@ $$ V_{c,t+1}-V_{c,t} = I_{c,t}-O_{c,t} + (\text{P}_t-\text{ETP}_t)\times A_c $$ 
 
 where $\text{P}_t$ and $\text{ETP}_t$ are the same as in @sec-hbl.
 
-In what follows, we will focus on the set of all clusters draining into a given ditch, and we will enumerate clusters through the index $c = 1,\,2,\,\dots,\,N_C$. On the other hand, clusters are assumed to be irrigated from sources external the Albufera system, *i.e.*, not through any of the ditches that eventually flow into the lake. According to our assumptions on the hydrology of clusters and ditches (*cf.* @sec-hydrology-scheme), the sum of cluster outflows is constrained by:
+In what follows, we will focus on the set of all clusters draining into a given ditch, and we will enumerate clusters through the index $c = 1,\,2,\,\dots,\,N_C$. On the other hand, clusters are assumed to be irrigated from sources external the Albufera system, *i.e.*, not through any of the ditches that eventually flow into the lake. According to our assumptions on the hydrology of clusters and ditches (*cf.* @sec-hydrogeo), the sum of cluster outflows is constrained by:
 
 $$ \sum _{c = 1} ^ {N_C} O_{c,t} \leq Q_t $$ {#eq-hbc-outflow-constraint}
 
-where $Q_t$ denotes the inflow to the relevant ditch. With a small leap in logic, we anticipate from @sec-hbd, that the water levels in irrigation ditches are assumed to be constant, so that $Q_t$ can also be identified with the ditch 
-outflow, that is in turn estimated as:
+where $Q_t$ denotes the inflow to the relevant ditch. With a small leap in logic, we anticipate from @sec-hbd, that the water levels in irrigation ditches are assumed to be constant, so that $Q_t$ can also be identified with the ditch outflow, that is in turn estimated as:
 
 $$ Q_t = \frac{\text{Area of clusters draining into ditch}}{\text{Area of all clusters}} \times \text{Lake's Inflow}_t $$ {#eq-hbc-ditch-outflow}
 
@@ -149,7 +129,7 @@ where the lake's inflow is computed as described in @sec-hbl.
 Qualitatively speaking, the simulation determines daily values of $I_{c,t}$ and $O_{c,t}$ that satisfy Eqs. [-@eq-hbc-balance] and [-@eq-hbc-outflow-constraint], and such that the resulting hydrology aligns as closely as possible with the "ideal" conditions prescribed by the specified management plan. This is accomplished in three steps:
 
 1.  Computing ideal inflows and outflows based on current water levels and management plans.
-2.  Determining actual inflows and outflows, along with the corresponding actual water level changes.\
+2.  Determining actual inflows and outflows, along with the corresponding actual water level changes.
 3.  Adjusting management plan delays if some clusters were scheduled to be drained but could not be due to insufficient flow through the common ditch (see below for details).
 
 These steps are iterated on a daily basis, starting from some initial time (say $t = 0$) at which all cluster water levels match the ideal ones, and no plan delays are present.
@@ -158,9 +138,9 @@ Concerning the last step, a few words may serve to clarify the algorithm describ
 
 In what follows, the conversion between cluster water volumes and depths is provided by $V_{c,t} = A_c \cdot h_{c,t}$, and we denote by $\delta_{c,t}$ the time series of plan delays for cluster $c$, which is initialized by $\delta_{c,0} =0$.
 
-#### Step 1: ideal balance
+### Step 1: ideal balance
 
-Ideal balance quantities for each cluster $c$ are obtained from the management plan data-set, whose relevant row is identified by the cluster's rice variety $v$ and field type $\theta$, and the delayed day:
+Ideal balance quantities for each cluster $c$ are obtained from the ideal water management variables $\text{Ir}_{d,c}$, $\text{Dr}_{d,c}$ and $\mathcal H _{d,c}$, by matching the day of year $d$ with the *delayed day*:
 
 $$
 d_{c,t+1} = d_{t+1}-\delta_{c,t},
@@ -168,11 +148,7 @@ $$ {#eq-hbc-delayed-day}
 
 where $d_{t+1}$ denotes the day of year corresponding to time $t+1$, and $\delta_{c,t}$ the accumulated plan delay.
 
-Let $h _{c,t+1}^{\text{id}}$ denote the ideal depth for cluster $c$ at time 
-$t+1$ retrieved in this way, and $\text{Ir}_{c,t}$, $\text{Dr}_{c,t}$ the 
-corresponding irrigation and draining plans. Furthermore, denote by 
-$V_{c,t+1}^{\text{id}} = A_c \cdot h_{c,t+1}^{\text{id}}$ the corresponding 
-ideal water volume.
+Let $h _{c,t+1}^{\text{id}}$ denote the ideal depth for cluster $c$ at time $t+1$ retrieved in this way, and $\text{Ir}_{c,t}$, $\text{Dr}_{c,t}$ the corresponding irrigation and draining plans. Furthermore, denote by $V_{c,t+1}^{\text{id}} = A_c \cdot h_{c,t+1}^{\text{id}}$ the corresponding ideal water volume.
 
 In order to compute ideal inflow and outflow, we require (*cf.* @eq-hbc-balance):
 
@@ -203,11 +179,11 @@ $$ {#eq-hbc-id-flows}
 
 which satisfy @eq-hbc-balance-ideal and give rise to positive $O_{c,t}^\text{id}$ and $I_{c,t}^\text{id}$.
 
-#### Step 2: real balance
+### Step 2: real balance
 
-At each time-step $t$, the cluster's index set is randomly permuted [^simulation_layers-2], and the real flows are calculated as:
+At each time-step $t$, the cluster's index set is randomly permuted [^hydrology-1], and the real flows are calculated as:
 
-[^simulation_layers-2]: With some abuse of notation, we assume the indexes $c$ and $c'$ in @eq-hbc-real-flows to be sorted according to this random permutation.
+[^hydrology-1]: With some abuse of notation, we assume the indexes $c$ and $c'$ in @eq-hbc-real-flows to be sorted according to this random permutation.
 
 $$
 \begin{split}
@@ -224,17 +200,12 @@ $$ {#eq-hbc-balance-real}
 
 to be compared with @eq-hbc-balance-ideal.
 
-#### Step 3: updating the plan delay
+### Step 3: updating the plan delay
 
-The updated value $\delta _{c,t+1}$ is obtained as follows. If $d_{t+1}$ (the *actual* day of year) is outside of the window $W = [\text{20th of April},\,\text{15th of October}]$, then $\delta_{c,t+1} = 0$. Otherwise, if $h_{c,t}^\text{id} > 0$ or $h_{c,t} < h_{\text{thres}}$, the plan delay is unchanged: $\delta_{c,t+1} = \delta_{c,t}$. Finally, if $h_{c,t}^\text{id} = 0$ but $h_{c,t} > h_{\text{thres}}$, we add one day of delay: $\delta_{c,t+1} = \delta_{c,t}+1$.
+The updated value $\delta _{c,t+1}$ is obtained as follows. If $d_{t+1}$ (the *actual* day of year) is outside of the window $[\text{Sowing day},\,\text{Start of Perellonà}]$ (which is specified by the RFMS assigned to cluster $c$, see @sec-rfms-definition), then $\delta_{c,t+1} = 0$. Otherwise, if $h_{c,t}^\text{id} > 0$ or $h_{c,t} < h_{\text{thres}}$, the plan delay is unchanged: $\delta_{c,t+1} = \delta_{c,t}$. Finally, if $h_{c,t}^\text{id} = 0$ but $h_{c,t} > h_{\text{thres}}$, we add one day of delay: $\delta_{c,t+1} = \delta_{c,t}+1$.
 
-
-#### Step 3: updating the plan delay
-
-The updated value $\delta _{c,t+1}$ is obtained as follows. If $d_{t+1}$ (the *actual* day of year) is outside of the window $W = [\text{20th of April},\,\text{15th of October}]$, then $\delta_{c,t+1} = 0$. Otherwise, if $h_{c,t}^\text{id} > 0$ or $h_{c,t} < h_{\text{thres}}$, the plan delay is unchanged: $\delta_{c,t+1} = \delta_{c,t}$. Finally, if $h_{c,t}^\text{id} = 0$ but $h_{c,t} > h_{\text{thres}}$, we add one day of delay: $\delta_{c,t+1} = \delta_{c,t}+1$.
-
-### Irrigation ditches {#sec-hbd}
+## Hydrology of irrigation ditches {#sec-hbd}
 
 Our approach to the hydrology of irrigation ditches is simplified, with the main assumption being that all ditches have a common, constant water depth $h_\text{ditch}$ corresponding to the input parameter `ditch_level_m`.
 
-Using the index $D =1,2,\dots,26$ to enumerate the park's main ditches, ditch outflows to the Albufera lake $O_{D,t}$ are calculated according to @eq-hbc-ditch-outflow. These outflows also coincide with the total ditch inflows $I_{D,t}$ (due to the constant water volume assumption). 
+Using the index $D =1,2,\dots,26$ to enumerate the park's main ditches, ditch outflows to the Albufera lake $O_{D,t}$ are calculated according to @eq-hbc-ditch-outflow. These outflows also coincide with the total ditch inflows $I_{D,t}$ (due to the constant water volume assumption).

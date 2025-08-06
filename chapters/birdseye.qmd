@@ -49,7 +49,7 @@ model-based approaches, currently including Species Sensitivity Distributions
 toxicity data to estimate ecological risk. Full details of the risk assessment 
 methodology are provided in @sec-risk.
 
-## Hydrogeographical representation
+## Hydrogeographical representation {#sec-hydrogeo}
 
 The ERAHUMED model implements a spatially explicit representation of the 
 Albufera Natural Park to support ecological risk assessment of pesticide use. 

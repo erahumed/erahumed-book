@@ -184,7 +184,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/hydrology.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Hydrological model of the Albufera Natural Park</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Hydrological balance calculations</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -300,24 +300,24 @@ window.Quarto = {
 <li>An application amount, expressed in units of mass per unit area.</li>
 <li>An application type, which is either <em>aerial</em> or <em>ground</em>, that determines the required rice field conditions for the application.</li>
 </ul>
-<p>To determine the actual application date, we proceed as follows (for notation related to cluster hydrology, see <a href="hydrology.html#sec-hbc" class="quarto-xref"><span>Section 6.4.2</span></a>):</p>
+<p>To determine the actual application date, we proceed as follows (for notation related to cluster hydrology, see <a href="hydrology.html#sec-hbc" class="quarto-xref"><span>Section 6.3</span></a>):</p>
 <ol type="1">
 <li><p><strong>Filtering by irrigation and draining states.</strong> For ground applications, we select only those days in which both <span class="math inline">\(\text{Ir}_{c,t} = \text{Dr}_{c,t} = 0\)</span>, where <span class="math inline">\(\text{Ir}_{c,t}\)</span> and <span class="math inline">\(\text{Dr}_{c,t}\)</span> are the true (as opposed to ideal) irrigation and draining states time-series, defined after <a href="hydrology.html#eq-hbc-delayed-day" class="quarto-xref">Equation&nbsp;<span>6.9</span></a>. Similarly, for aerial applications, we select days according to <span class="math inline">\(\text{Ir}_{c,t} = \text{Dr}_{c,t} = 1\)</span>.</p></li>
 <li><p><strong>Filtering by water depth (ground applications only).</strong> For ground applications, from the days selected in the previous step, we further filter those where the simulated water depth of the cluster satisfies <span class="math inline">\(h_{c,t} &lt; h_{\text{thresh}}\)</span>.</p></li>
 <li><p><strong>Ensuring separation between applications of the same pesticide.</strong> We retain only those days that are at least five days apart from any previous application of the same chemical.</p></li>
 <li><p><strong>Selecting the final application day.</strong> From the remaining candidate days, we choose the one where the <em>delayed day</em> <span class="math inline">\(d_{c,t}\)</span> defined by <a href="hydrology.html#eq-hbc-delayed-day" class="quarto-xref">Equation&nbsp;<span>6.9</span></a> is closest to <span class="math inline">\(D\)</span>, the originally scheduled application day.</p></li>
 </ol>
-<p>These steps are repeated for all subsequent applications of a given pesticide in a given cluster. It is worth noting that the algorithm for simulating the cluster hydrological balance (<a href="hydrology.html#sec-hbc" class="quarto-xref"><span>Section 6.4.2</span></a>) guarantees that at least one candidate application day will always remain available in the final selection step.</p>
+<p>These steps are repeated for all subsequent applications of a given pesticide in a given cluster. It is worth noting that the algorithm for simulating the cluster hydrological balance (<a href="hydrology.html#sec-hbc" class="quarto-xref"><span>Section 6.3</span></a>) guarantees that at least one candidate application day will always remain available in the final selection step.</p>
 </section>
 <section id="pesticide-dispersion" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="pesticide-dispersion"><span class="header-section-number">7.2</span> Pesticide dispersion</h2>
-<p>As illustrated in our hydrological model (<a href="hydrology.html#fig-hydrology-scheme" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>), pesticides applied to rice field clusters are transported through water flow into ditches, then into the Albufera lake, and ultimately to the sea.</p>
+<p>As illustrated in our hydrological model (<a href="birdseye.html#fig-hydrology-scheme" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>), pesticides applied to rice field clusters are transported through water flow into ditches, then into the Albufera lake, and ultimately to the sea.</p>
 <p>From a mathematical perspective, the fate of these chemicals is governed by a system of differential equations that captures key physico-chemical processes, including transport, diffusion between compartments, and degradation.</p>
 <p>The remainder of this chapter describes our approach to pesticide dispersion. We define the simplified differential system used to model these processes in <a href="#sec-ct-eqs" class="quarto-xref"><span>Section 7.2.2</span></a>, and we present our semi-analytic solution method in <a href="#sec-ct-solution" class="quarto-xref"><span>Section 7.2.3</span></a>.</p>
 <section id="diagram-of-physical-processes" class="level3" data-number="7.2.1">
 <h3 data-number="7.2.1" class="anchored" data-anchor-id="diagram-of-physical-processes"><span class="header-section-number">7.2.1</span> Diagram of physical processes</h3>
 <p>The schematic diagram below illustrates the processes captured by our model for chemical dispersion. Directional arrows represent the transfer of chemical matter among the three compartments considered—Foliage, Water, and Soil—as well as exchanges with external water bodies (denoted as “Watercourse”).</p>
-<p>While the overall scheme applies to all landscape elements, specific details vary for clusters, ditches, and the lake (<em>cf.</em> the hydrological model of <a href="hydrology.html#fig-hydrology-scheme" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>):</p>
+<p>While the overall scheme applies to all landscape elements, specific details vary for clusters, ditches, and the lake (<em>cf.</em> the hydrological model of <a href="birdseye.html#fig-hydrology-scheme" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>):</p>
 <ul>
 <li><strong>Clusters:</strong> Inflow waters originate outside the system and are assumed to be free of pesticides.</li>
 <li><strong>Ditches and the Albufera lake:</strong> No direct pesticide applications occur in these areas, meaning the foliage compartment plays no role in their dynamics.</li>
@@ -926,8 +926,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/hydrology.html" class="pagination-link" aria-label="Hydrological model of the Albufera Natural Park">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Hydrological model of the Albufera Natural Park</span></span>
+      <a href="../chapters/hydrology.html" class="pagination-link" aria-label="Hydrological balance calculations">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Hydrological balance calculations</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
