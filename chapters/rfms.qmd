@@ -95,23 +95,23 @@ The following built-in RFMSs are available:
 -   **J. Sendra**\
     A modern and widely adopted management system. It includes multiple herbicide, insecticide, and fungicide applications:
 
-    -    Ground applications of cyhalofop-butyl, penoxsulam, acetamiprid, bentazone, and MCPA during early to mid-season.
+    -   Ground applications of cyhalofop-butyl, penoxsulam, acetamiprid, bentazone, and MCPA during early to mid-season.
 
-    -    Two aerial applications of azoxystrobin and difenoconazole near the end of the season, for fungal disease control.
+    -   Two aerial applications of azoxystrobin and difenoconazole near the end of the season, for fungal disease control.
 
 -   **Clearfield**\
     A system compatible with Clearfield® rice varieties, emphasizing herbicide tolerance and simplified chemical use:
 
-    -    Herbicide applications of cycloxydim at `seed_day = 18` and `52`.
+    -   Herbicide applications of cycloxydim at `seed_day = 18` and `52`.
 
     -   Insecticide (acetamiprid) and aerial fungicides (azoxystrobin, difenoconazole) are applied as in the J. Sendra system, but without MCPA or cyhalofop-butyl.
 
--    **Bomba**\
+-   **Bomba**\
     A legacy management system formerly used for traditional rice varieties. It includes:
 
-    -    The same herbicide and insecticide treatments as the J. Sendra system.
+    -   The same herbicide and insecticide treatments as the J. Sendra system.
 
-    -    An additional third round of aerial fungicide applications (azoxystrobin and difenoconazole) later in the season (`seed_day = 104`), resulting in a more intensive treatment schedule.
+    -   An additional third round of aerial fungicide applications (azoxystrobin and difenoconazole) later in the season (`seed_day = 104`), resulting in a more intensive treatment schedule.
 
 Although the Bomba system is not currently in use, it remains available for comparison with modern practices or for use in hypothetical scenarios.
 
@@ -140,8 +140,7 @@ ERAHUMED includes built-in definitions for a range of commonly used pesticides i
 -   **MCPA**\
     A systemic phenoxy herbicide that mimics auxin activity. Controls broadleaf weeds.
 
--   **Penoxsulam**
-
+-   **Penoxsulam**\
     An ALS-inhibiting herbicide (acetolactate synthase), used for selective control of broadleaf and sedge weeds.
 
 These chemical definitions are used internally by the built-in RFMSs and can also be reused or modified in user-defined systems.
