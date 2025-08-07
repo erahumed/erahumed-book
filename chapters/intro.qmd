@@ -10,4 +10,8 @@ The DSS can be used to predict exposure and risks associated with different pest
 
 On the practical side, the DSS is implemented as an R package called `{erahumed}`, distributed as open-source software and available for download [here](https://erahumed.github.io/erahumed/). The package includes a Graphical User Interface (GUI), implemented as a Shiny application, which allows users to run the models and analyze the results without directly interacting with the underlying R code.
 
-This documentation provides a comprehensive description of the DSS and is divided into two main parts. The first part, *Technical Description*, outlines the models underlying the DSS, including the environmental, hydrological, and physico-chemical parameters required for its operation, as well as the processes and equations used to calculate exposure and risks. The second part, *User Manual*, provides step-by-step instructions for using the software, with a particular focus on its GUI. In addition, an *Appendix* details the data used by the DSS.
+This documentation provides a comprehensive description of the ERAHUMED Decision Support System (DSS), covering both its scientific foundations and practical use. The main chapters detail the core components of the model—starting with an overview and followed by in-depth descriptions of input parameters, hydrology, pesticide exposure, and ecological risk assessment. These are complemented by two concluding chapters that briefly describe how to operate the system through the R package or the graphical user interface. These final chapters are intentionally concise, as a complete and up-to-date user manual is already available on the package website at https://erahumed.github.io/erahumed/, which may be sufficient for many practical purposes. 
+
+## Acknowledgements {#sec-ackno}
+
+The ERAHUMED DSS has been financed by the Talented Researcher Support Programme - PlanGenT (CIDEGENT/2020/043) of the Generalitat Valenciana.

@@ -2,7 +2,7 @@ project:
   type: book
 
 book:
-  title: "ERAHUMED DSS"
+  title: "ERAHUMED"
   author:
     - name: Valerio Gherardi
       orcid: 0000-0002-8215-3013
@@ -23,25 +23,14 @@ book:
   - index.qmd
   - chapters/intro.qmd
   - chapters/birdseye.qmd
-  - chapters/ackno.qmd
-
-  - part: Technical description
-    chapters:
-    - chapters/model-inputs.qmd
-    - chapters/rfms.qmd
-    - chapters/hydrology.qmd
-    - chapters/exposure.qmd
-    - chapters/risk.qmd
-
-  - part: User Manual
-    chapters:
-    - chapters/erahumed_dss_ui.qmd
-    - chapters/erahumed_dss_pkg.qmd
-
+  - chapters/model-inputs.qmd
+  - chapters/rfms.qmd
+  - chapters/hydrology.qmd
+  - chapters/exposure.qmd
+  - chapters/risk.qmd
+  - chapters/erahumed_dss_ui.qmd
+  - chapters/erahumed_dss_pkg.qmd
   - chapters/references.qmd
-
-  appendices:
-    - chapters/input_data.qmd
 
 bibliography: references.bib
 
