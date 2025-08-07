@@ -8,7 +8,7 @@
 
 <meta name="description" content="The ERAHUMED Decision Support System: Software Manual and Technical Documentation.">
 
-<title>8&nbsp; Risk assessment – ERAHUMED DSS</title>
+<title>8&nbsp; Risk Assessment – ERAHUMED DSS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,7 +21,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -70,6 +90,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -82,7 +131,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-inputs.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/risk.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Risk assessment</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-inputs.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/risk.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Risk Assessment</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -167,7 +216,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/risk.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Risk assessment</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Risk Assessment</span></span></a>
   </div>
 </li>
       </ul>
@@ -223,21 +272,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#calculation-of-risk-using-ssds" id="toc-calculation-of-risk-using-ssds" class="nav-link active" data-scroll-target="#calculation-of-risk-using-ssds"><span class="header-section-number">8.1</span> Calculation of risk using SSDs</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-inputs.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/risk.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Risk assessment</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-inputs.html">Technical description</a></li><li class="breadcrumb-item"><a href="../chapters/risk.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Risk Assessment</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-risk" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Risk assessment</span></span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Risk Assessment</span></h1>
 </div>
 
 
@@ -254,16 +297,37 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This Chapter describes how ERAHUMED assesses the toxicological risks associated with pesticide exposure in the Albufera Natural Park. Building on the hydrological and exposure models from the previous Chapters, this step estimates the potential impacts on aquatic organisms and the broader ecosystem. We employ the Species Sensitivity Distribution (SSD) approach, a widely used method in ecological risk assessment [TODO reference]. This approach allows for the identification of high-risk scenarios, supporting management decisions to mitigate adverse effects.</p>
-<section id="calculation-of-risk-using-ssds" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="calculation-of-risk-using-ssds"><span class="header-section-number">8.1</span> Calculation of risk using SSDs</h2>
-<p>The risk calculation follows the approach outlined in [TODO A.Rico Reference], to which we refer the reader for further details. Here, we summarize the key aspects relevant to our model.</p>
-<p>SSDs transform the chemical concentrations computed in the previous “Exposure” simulation layer (<a href="exposure.html" class="quarto-xref"><span>Chapter 7</span></a>) into the potentially affected fraction of species (PAF). As described in [TODO], chemicals are grouped by toxic mode of action (TMoA), and different TMoAs are assumed to act independently.</p>
-<p>Separate distributions are used to assess acute and chronic risks. In the case of acute risk, we use daily chemical concentration values (computed as described in <a href="exposure.html" class="quarto-xref"><span>Chapter 7</span></a>). For chronic risk, we use a 21-day rolling average of concentrations.</p>
-<p>The parameters of each SSD, as well as the TMoA classification for each chemical, are internal to ERAHUMED and are not directly accessible to the user.</p>
+<p>This chapter describes how ERAHUMED assesses the toxicological risks associated with pesticide exposure in the Albufera Natural Park. Building on the hydrological and exposure simulations described in previous chapters, the risk assessment module estimates potential impacts on aquatic organisms and the broader ecosystem.</p>
+<p>ERAHUMED adopts the <strong>Species Sensitivity Distribution (SSD)</strong> methodology—a widely used approach in ecological risk assessment <span class="citation" data-cites="posthuma2002ssd">(<a href="references.html#ref-posthuma2002ssd" role="doc-biblioref">Posthuma, Suter II, and Traas 2002</a>)</span>. This method enables the quantification of the <strong>Potentially Affected Fraction (PAF)</strong> of species at a given chemical concentration, offering a probabilistic estimate of ecosystem-level effects. By linking simulated concentrations to biological sensitivity, this layer identifies high-risk scenarios and supports decision-making aimed at mitigating adverse outcomes.</p>
+<p>As ERAHUMED applies predefined SSD parameters rather than computing them from toxicity data, the present chapter focuses on their application to simulation results. For details on the derivation and validation of SSDs, we refer the reader to <span class="citation" data-cites="amador2024multiple_stressors">(<a href="references.html#ref-amador2024multiple_stressors" role="doc-biblioref">Amador Crespo et al. 2024</a>)</span>.</p>
+<p>The risk estimation approach follows the methodology described in <span class="citation" data-cites="amador2024multiple_stressors">(<a href="references.html#ref-amador2024multiple_stressors" role="doc-biblioref">Amador Crespo et al. 2024</a>)</span>, to which we refer the reader for a detailed exposition. Here, we summarize the elements that are directly relevant to ERAHUMED’s implementation.</p>
+<p>SSDs are used to translate the pesticide concentrations computed in the <strong>Exposure</strong> module (<a href="exposure.html" class="quarto-xref"><span>Chapter 7</span></a>) into daily values of <strong>PAF</strong>. Chemicals are grouped according to their TMoA classification (encoded by the <code>tmoa_id</code> chemical parameter, <em>cf.</em> <a href="model-inputs.html#tbl-chemical-params" class="quarto-xref">Table&nbsp;<span>4.2</span></a>), and the effects of different TMoAs are assumed to be independent.</p>
+<p>Two distinct SSDs are provided for each chemical:</p>
+<ul>
+<li><strong>Acute risk</strong> is evaluated using <strong>daily concentrations</strong>.</li>
+<li><strong>Chronic risk</strong> is evaluated using a <strong>21-day rolling average</strong> of concentrations, reflecting longer-term exposure effects.</li>
+</ul>
+<p>The SSDs are assumed to follow a log-normal distribution and are thus parametrized in terms of their mean and standard deviations (<code>ssd_acute_mu/sigma</code> and <code>ssd_chronic_mu/sigma</code> parameters in <a href="model-inputs.html#tbl-chemical-params" class="quarto-xref">Table&nbsp;<span>4.2</span></a>).</p>
+<p>Risk estimates are computed both at the level of individual chemicals and at the level of their associated TMoA. This dual perspective enables the identification of both compound-specific risks and mode-of-action-level cumulative effects. To obtain the overall risk, ERAHUMED combines the risks associated with each TMoA under the assumption of statistical independence, following the approach described in <span class="citation" data-cites="amador2024multiple_stressors">(<a href="references.html#ref-amador2024multiple_stressors" role="doc-biblioref">Amador Crespo et al. 2024</a>)</span>. Specifically, the overall PAF is computed as:</p>
+<p><span id="eq-msPAF"><span class="math display">\[
+\text{msPAF} = 1 - \prod _i (1-\text{PAF}_i)
+\tag{8.1}\]</span></span></p>
+<p>where <span class="math inline">\(\text{PAF}_i\)</span> is the risk associated with TMoA <span class="math inline">\(i\)</span>.</p>
+<p>In addition to PAFs, ERAHUMED also computes Risk Quotients (RQs) by comparing simulated concentrations to the 5th percentile of the SSD (HC05), using the conventional ratio:</p>
+<p><span id="eq-rq"><span class="math display">\[
+\text{RQ} = \frac{\text{Concentration}}{\text{HC05}}
+\tag{8.2}\]</span></span></p>
+<p>Although the HC05 is derived from the same SSDs used for PAF calculation, the Risk Quotient (RQ) itself does not have a probabilistic interpretation. Instead, it serves as a simple descriptive indicator of potential concern, offering an alternative, threshold-based perspective on risk, complementary to the PAF.</p>
 
 
-</section>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-amador2024multiple_stressors" class="csl-entry" role="listitem">
+Amador Crespo, Pablo, Juan M. Soria, Jesús Moratalla-López, and Andreu Rico. 2024. <span>“Looking Beyond the Surface: Understanding the Role of Multiple Stressors on the Eutrophication Status of the Albufera Lake (Valencia, Spain).”</span> <em>Science of the Total Environment</em> 956: 177247. <a href="https://doi.org/10.1016/j.scitotenv.2024.177247">https://doi.org/10.1016/j.scitotenv.2024.177247</a>.
+</div>
+<div id="ref-posthuma2002ssd" class="csl-entry" role="listitem">
+Posthuma, Leo, Glenn W. Suter II, and Theo P. Traas. 2002. <em>Species Sensitivity Distributions in Ecotoxicology</em>. Boca Raton, FL: CRC Press.
+</div>
+</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
