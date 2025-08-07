@@ -1,113 +1,35 @@
 # Exposure {#sec-exposure}
 
-This Chapter describes how ERAHUMED models pesticide exposure in the Albufera 
-Natural Park. The hydrological simulation discussed in the previous Chapter 
-provides the foundation for this analysis, as water serves as the primary medium 
-for pesticide transport. Here, we outline how ERAHUMED simulates the 
-introduction, dispersion, and fate of pesticides within the system. This 
-includes processes such as deposition, degradation, and transfer between water 
-bodies. By integrating hydrological dynamics with chemical behavior, the model 
-estimates exposure levels over time and space, supporting risk assessment 
-efforts.
+This Chapter describes how ERAHUMED models pesticide exposure in the Albufera Natural Park. The hydrological simulation discussed in the previous Chapter provides the foundation for this analysis, as water serves as the primary medium for pesticide transport. Here, we outline how ERAHUMED simulates the introduction, dispersion, and fate of pesticides within the system. This includes processes such as deposition, degradation, and transfer between water bodies. By integrating hydrological dynamics with chemical behavior, the model estimates exposure levels over time and space.
 
-## Pesticide applications {#sec-ca}
+As illustrated in our hydrological model (@fig-hydrology-scheme), pesticides applied to rice field clusters are transported through water flow into ditches, then into the Albufera lake, and ultimately to the sea.
 
-The simulation of pesticide applications to rice fields follows a 
-straightforward algorithm that takes as input the scheduled application list and 
-the system's hydrology (@sec-hydrology). The algorithm outputs a list of actual 
-applications, specifying the application day and the applied mass. Since the 
-application of each pesticide is computed independently of others, we focus on a 
-single pesticide for the present discussion.
+From a mathematical perspective, the fate of chemicals in each water body—clusters, ditches, and the lake—is governed by the same system of differential equations. These equations represent key physico-chemical processes, including advective transport, diffusive exchange between compartments, and degradation. However, pesticide applications occur exclusively in clusters; concentrations in ditches and the lake arise solely from upstream inflows.
 
-The information on scheduled applications is contained in the `ca_schedules_df` 
-data frame, whose structure is described in detail in @sec-ca-schedules-df. For
-each scheduled application, this data set specifies:
+The remainder of this chapter describes our approach to pesticide dispersion. We define the simplified differential system used to model these processes in @sec-ct-eqs, and we present our semi-analytic solution method in @sec-ct-solution. @sec-ct-inputs finally describes how the parameters of the differential system are derived from the basic input parameters listed in @sec-model-inputs.
 
-* An application day $D$, representing the day of the crop cycle when the 
-pesticide is expected to be applied.
-* An application amount, expressed in units of mass per unit area.
-* An application type, which is either *aerial* or *ground*, that determines the
-required rice field conditions for the application.
+## Diagram of physical processes
 
-To determine the actual application date, we proceed as follows (for notation 
-related to cluster hydrology, see @sec-hbc):
+The schematic diagram below illustrates the processes captured by our model for chemical dispersion. Directional arrows represent the transfer of chemical matter among the three compartments considered—Foliage, Water, and Soil—as well as exchanges with external water bodies (denoted as "Watercourse").
 
-1. **Filtering by irrigation and draining states.** For ground applications, we 
-select only those days in which both $\text{Ir}_{c,t} = \text{Dr}_{c,t} = 0$, 
-where $\text{Ir}_{c,t}$ and $\text{Dr}_{c,t}$ are the true (as opposed to ideal) 
-irrigation and draining states time-series, defined after @eq-hbc-delayed-day. 
-Similarly, for aerial applications, we select days according to 
-$\text{Ir}_{c,t} = \text{Dr}_{c,t} = 1$.
+While the overall scheme applies to all landscape elements, specific details vary for clusters, ditches, and the lake (*cf.* the hydrological model of @fig-hydrology-scheme):
 
-2. **Filtering by water depth (ground applications only).** For ground 
-applications, from the days selected in the previous step, we further filter 
-those where the simulated water depth of the cluster satisfies 
-$h_{c,t} < h_{\text{thresh}}$.
-
-3. **Ensuring separation between applications of the same pesticide.** We retain 
-only those days that are at least five days apart from any previous application 
-of the same chemical.
-
-4. **Selecting the final application day.** From the remaining candidate days, 
-we choose the one where the *delayed day* $d_{c,t}$ defined by
-@eq-hbc-delayed-day is closest to $D$, the originally scheduled application day.
-
-These steps are repeated for all subsequent applications of a given pesticide 
-in a given cluster. It is worth noting that the algorithm for simulating the 
-cluster hydrological balance (@sec-hbc) guarantees that at least one candidate 
-application day will always remain available in the final selection step.
-
-## Pesticide dispersion
-
-As illustrated in our hydrological model (@fig-hydrology-scheme), pesticides 
-applied to rice field clusters are transported through water flow into ditches, 
-then into the Albufera lake, and ultimately to the sea.
-
-From a mathematical perspective, the fate of these chemicals is governed by a 
-system of differential equations that captures key physico-chemical processes, 
-including transport, diffusion between compartments, and degradation.
-
-The remainder of this chapter describes our approach to pesticide dispersion. 
-We define the simplified differential system used to model these processes in 
-@sec-ct-eqs, and we present our semi-analytic solution method in 
-@sec-ct-solution.
-
-### Diagram of physical processes
-
-The schematic diagram below illustrates the processes captured by our model 
-for chemical dispersion. Directional arrows represent the transfer of chemical 
-matter among the three compartments considered—Foliage, Water, and Soil—as well 
-as exchanges with external water bodies (denoted as "Watercourse").
-
-While the overall scheme applies to all landscape elements, specific details 
-vary for clusters, ditches, and the lake (*cf.* the hydrological model of 
-@fig-hydrology-scheme):
-
-* **Clusters:** Inflow waters originate outside the system and are assumed to 
-be free of pesticides.
-* **Ditches and the Albufera lake:** No direct pesticide applications occur 
-in these areas, meaning the foliage compartment plays no role in their dynamics.
-* **Ditches:** Receive inflows from two sources—clusters, which contribute 
-pesticide-laden water, and external sources, which are assumed to be free of 
-chemicals.
-* **Albufera lake:** Its only inflows come from ditches, which contain nonzero 
-chemical concentrations.
+-   **Clusters:** Inflow waters originate outside the system and are assumed to be free of pesticides.
+-   **Ditches and the Albufera lake:** No direct pesticide applications occur in these areas, meaning the foliage compartment plays no role in their dynamics.
+-   **Ditches:** Receive inflows from two sources—clusters, which contribute pesticide-laden water, and external sources, which are assumed to be free of chemicals.
+-   **Albufera lake:** Its only inflows come from ditches, which contain nonzero chemical concentrations.
 
 ![Scheme of physical processes considered in ERAHUMED model of chemical dispersion](img/ct-diagram.jpg){#fig-ct-diagram width="100%"}
 
-### Evolution Equations {#sec-ct-eqs}
+## Evolution Equations {#sec-ct-eqs}
 
-As in @sec-ca, we focus on a single pesticide and a fixed hydrological element 
-(*e.g.*, a cluster). We denote its masses in the three compartments—foliage, 
-water, and sediment—by $m_f$, $m_w$, and $m_s$, respectively. We assume that, 
-at any given time, these masses are fully diluted and homogeneously distributed. 
-In particular, we can meaningfully define spatially constant concentrations 
-$c_f$ and $c_s$ in the water^[Provided the water volume is nonzero.] and 
-sediment compartments.
+We focus on a single pesticide and a fixed hydrological element (*e.g.*, a cluster). We denote its masses in the three compartments—foliage[^exposure-1], water, and sediment—by $m_f$, $m_w$, and $m_s$, respectively. We assume that, at any given time, these masses are fully diluted and homogeneously distributed. In particular, we can meaningfully define spatially constant concentrations $c_f$ and $c_s$ in the water[^exposure-2] and sediment compartments.
 
-We first describe the differential system that drives the temporal dynamics of
-$m_f$, $m_w$ and $m_s$. The correspondence between the parameters used in this
-and the following Section is provided in @sec-ct-inputs.
+[^exposure-1]: The foliage compartment is only relevant for rice field clusters, as direct application is the only mechanism through which pesticides reach plant surfaces. Ditches and the lake do not receive foliar pesticide inputs.
+
+[^exposure-2]: Provided the water volume is nonzero.
+
+We provide below the differential system that drives the temporal dynamics of $m_f$, $m_w$ and $m_s$. The correspondence between the parameters used in this Section and the ERAHUMED model inputs is provided later (@sec-ct-inputs).
 
 The fundamental equations describing pesticide diffusion are given as follows:
 
@@ -121,8 +43,7 @@ $$ {#eq-ct-ode}
 
 where:
 
--   $a_{f,w,s}$ are the mass income rates of the chemical in the three compartments,
-that include direct pesticide application and mass coming from inflows.
+-   $a_{f,w,s}$ are the mass income rates of the chemical in the three compartments, that include direct pesticide application and mass coming from inflows.
 -   $k_{f,w,s}$ are the degradation rates of the chemical in the three compartments,
 -   $d_w$ and $d_s$ are the water-sediment diffusion rates,
 -   $s$ is the settling rate,
@@ -130,21 +51,17 @@ that include direct pesticide application and mass coming from inflows.
 -   $O$ is the outflow rate of the rice field,
 -   $V$ is the volume of water in the rice field,
 -   $\rho$ is the chemical solubility in water,
--   $\sigma(x)$ is a function (not further specified, see below) that grows 
-quickly for $x > 1$, and vanishes for $x \leq 1$. This function accounts for 
-solubility.
+-   $\sigma(x)$ is a function (not further specified, see below) that grows quickly for $x > 1$, and vanishes for $x \leq 1$. This function accounts for solubility.
 
-Strictly speaking, all these terms have instantaneous time dependence[^simulation_layers-3]. Apart from making the [system @eq-ct-ode] hard to attack by analytic means, such a dependence is troubling because we don't have access to the exact time dependence of the majority of these terms (*e.g.* outflow, volume or chemical applications), our input consisting of simple daily average/cumulative values. On the other hand, if all the terms were constant, and if we could neglect $\sigma$, the solution of @eq-ct-ode would be immediate, as the corresponding system becomes a linear ODE with constant coefficients, in addition whose eigenvalues and eigenvectors can be computed explicitly.
+Strictly speaking, all these terms have instantaneous time dependence[^exposure-3]. Apart from making the [system @eq-ct-ode] hard to attack by analytic means, such a dependence is troubling because we don't have access to the exact time dependence of the majority of these terms (*e.g.* outflow, volume or chemical applications), our input consisting of simple daily average/cumulative values. On the other hand, if all the terms were constant, and if we could neglect $\sigma$, the solution of @eq-ct-ode would be immediate, as the corresponding system becomes a linear ODE with constant coefficients, in addition whose eigenvalues and eigenvectors can be computed explicitly.
 
-[^simulation_layers-3]: This observation also includes pure physico-chemical "constants" such as degradation rates, where the time dependence would stem from *temperature* dependence.
+[^exposure-3]: This observation also includes pure physico-chemical "constants" such as degradation rates, where the time dependence would stem from *temperature* dependence.
 
-What we use in practice is an intermediate semi-analytic approach that allows us to compute daily values of $m_{f,w,s}$, which is described next. 
+What we use in practice is an intermediate semi-analytic approach that allows us to compute daily values of $m_{f,w,s}$, which is described next.
 
-### Semi-analytic solution of @eq-ct-ode {#sec-ct-solution}
+## Semi-analytic solution of @eq-ct-ode {#sec-ct-solution}
 
-The time evolution of $m_{f,w,s}$ in a daily time-step (from $t$ to $t+1$, say, 
-assuming $t$ is measured in days) is obtained through the following four 
-consecutive stages:
+The time evolution of $m_{f,w,s}$ in a daily time-step (from $t$ to $t+1$, say, assuming $t$ is measured in days) is obtained through the following four consecutive stages:
 
 1.  We compute the exact evolution of $m_{f,w,s}$ according to the linear ODE obtained by disregarding the processes of outflow, chemical application and solubility, and using daily constant values for all the remaining constants involved (described in more detail below).
 2.  We compute the $m_w$ losses due to outflow as if they happened instantaneously after the processes computed in the previous step took place, with the water volume of the rice paddy varying from $V(t+1)+O(t)$ to $V(t+1)$.
@@ -153,7 +70,7 @@ consecutive stages:
 
 In the following, we describe in full detail the computations involved in these four steps.
 
-#### Step 1: linear ODE evolution (physico-chemical processes)
+### Step 1: linear ODE evolution (physico-chemical processes)
 
 Disregarding outflow, mass application and solubility, we get a linear ODE of the form:
 
@@ -177,8 +94,7 @@ a_{ss}                  &= -(k_s+d_s)
 \end{split}
 $$ {#eq-ct-ode-linear-coeffs}
 
-where the various physico-chemical parameters are assumed to be constant during 
-a daily time-step (*cf.* @sec-ct-inputs).
+where the various physico-chemical parameters are assumed to be constant during a daily time-step (*cf.* @sec-ct-inputs).
 
 The evolution of $m_f$ is easily obtained:
 
@@ -195,9 +111,9 @@ $$
 \end{split}
 $$ {#eq-ct-ode-linear-reduced}
 
-which is solved explicitly with standard methods[^simulation_layers-5].
+which is solved explicitly with standard methods[^exposure-4].
 
-[^simulation_layers-5]: Letting $x = (m_w,\,m_s)^T$ and $b = w(m_f(0),0)^T$, the system can be rewritten in the form: $$ \dot x = Ax + e^{\gamma t }b $$ where $$ A = \begin{pmatrix} a_{ww} & a_{ws} \\ a_{sw} & a_{ss} \end{pmatrix} $$ The general solution reads: $$
+[^exposure-4]: Letting $x = (m_w,\,m_s)^T$ and $b = w(m_f(0),0)^T$, the system can be rewritten in the form: $$ \dot x = Ax + e^{\gamma t }b $$ where $$ A = \begin{pmatrix} a_{ww} & a_{ws} \\ a_{sw} & a_{ss} \end{pmatrix} $$ The general solution reads: $$
       x(t) = e^{At}x(0)+(e^{At}-e^{\gamma t}I)(A-\gamma I)^{-1}b
       $$ where $I$ is the identity matrix. Notice that the exponential can be computed explicitly from the eigenvalues of $A$: $$
       e^{At} = e^{\lambda _+ t} P_+ + e^{\lambda _- t} P_-,
@@ -207,7 +123,7 @@ which is solved explicitly with standard methods[^simulation_layers-5].
       P_{\pm} = \pm \frac{1}{\lambda _+ - \lambda _-}(A-\lambda _{\mp})
       $$
 
-#### Step 2: mass losses due to outflow
+### Step 2: mass losses due to outflow
 
 Mass losses due to outflow are computed as if the outflow process happened instantaneously after the processes discussed in the previous step took place. The amount of mass in the water compartment is affected as follows:
 
@@ -215,124 +131,135 @@ $$
 m_w \to \frac{V_f}{V_i} m_w,
 $$ {#eq-mw-outflow}
 
-where $V_i$ and $V_f$ denote the initial and final volume for the outflow process. 
-Here $V_f$ coincides with the simulated value $V(t+1)$ for the relevant water 
-body and $V_i = V_f + O(t)$, where $O(t)$ denotes the total simulated outflow 
-for day $t$.
+where $V_i$ and $V_f$ denote the initial and final volume for the outflow process. Here $V_f$ coincides with the simulated value $V(t+1)$ for the relevant water body and $V_i = V_f + O(t)$, where $O(t)$ denotes the total simulated outflow for day $t$.
 
-#### Step 3: mass income from direct application and inflows
+### Step 3: mass income from direct application and inflows
 
-These contributions are computed as instantaneous and subsequent to outflow. 
-Masses in the various compartments ($i = f,\,w,\,s$) are modified as follows:
-$$
+These contributions are computed as instantaneous and subsequent to outflow. Masses in the various compartments ($i = f,\,w,\,s$) are modified as follows: $$
 m_i \to m_i + a_i
 $$ {#eq-mi-application}
 
-As mentioned above, $a_i$ accounts for both direct pesticide applications and
-water inflow, that is:
+As mentioned above, $a_i$ accounts for both direct pesticide applications and water inflow, that is:
 
 $$
 a_i = a_i ^{\text{app}} + a_i ^{\text{inflow}}
-$$
-The calculation of direct application rates from input parameters is described 
-below. As to the second term, the amount of incoming mass is exactly given 
-by the amount of outgoing mass in the outflow of the preceding element along the 
-water course chain, which is computed as detailed in the previous Section.
+$$ 
 
-#### Step 4: solubility
+The calculation of direct application rates from input parameters is described below. As to the second term, the amount of incoming mass is exactly given by the amount of outgoing mass in the outflow of the preceding element along the water course chain, which is computed as detailed in the previous Section.
 
-The chemical density in the water compartment after Steps 1, 2, and 3 is 
-eventually compared with the chemical's solubility $\rho$, and any mass excess 
-is instantaneously transferred to the sediment compartment. This implies the 
-following modifications:
+### Step 4: solubility
+
+The chemical density in the water compartment after Steps 1, 2, and 3 is eventually compared with the chemical's solubility $\rho$, and any mass excess is instantaneously transferred to the sediment compartment. This implies the following modifications:
 
 $$
 m_s \to m_s + \max(0, \,m_w - \rho V(t+1)),\quad m_w\to\max(m_w,\,\rho V(t+1)).
 $$ {#eq-m-solubility}
 
-### Input parameters (correspondence with @sec-model-inputs) {#sec-ct-inputs}
+## Input parameters (correspondence with @sec-model-inputs) {#sec-ct-inputs}
 
-This Section describes the sources of the various numerical inputs to 
-@eq-ct-ode.
+This section describes the sources of the numerical inputs to @eq-ct-ode, highlighting their correspondence with the parameters listed in the tables of @sec-model-inputs.
 
-#### Pesticide application rates
+### Mass income rates
+
+Mass input to water elements arises from two sources: direct application and transport via inflow. Accordingly, we can express the total mass input as:
+
+$$
+a_X = a_X ^{\text{app}}+ a_X ^{\text{inflow}} \qquad (X = f,\,s,\,w).
+$$ {#eq-mass-income-breakdown}
+
+where $X$ denotes the compartment receiving the input.
+
+The inflow contribution is computed as:
+
+$$
+a_X ^{\text{inflow}} = \sum _{i} m_i ^{\text {inflow}},
+$$ {#eq-mass-inflow-sum}
+
+where the sum runs over the relevant inflow sources for the water body under consideration.  Inflow masses $m_i ^{\text {inflow}}$ @eq-mw-outflow are obtained from @eq-mw-outflow when the source is a hydrological element higher in the flow network (e.g., clusters for ditches, or ditches for the lake). At the current stage of development, external sources are assumed to have zero pesticide concentration and are thus excluded from the mass inflow calculation.
 
 Application rates are given by:
 
 $$
 \begin{split}
-a_f^{\text{app}} &= A(t)\cdot (1-\text{drift})\cdot c(t),\\
-a_s^{\text{app}} &= A(t)\cdot (1-\text{drift})(1-c(t))I(h(t+1)\neq0),\\
-a_w^{\text{app}} &= A(t)\cdot (1-\text{drift})\cdot(1-\text{SNK})(1-c(t))I(h(t+1)=0),\\
+a_f^{\text{app}} &= A(t)\cdot \phi(t),\\
+a_s^{\text{app}} &= A(t)(1-\phi(t))I(h(t+1)\neq0),\\
+a_w^{\text{app}} &= A(t)\cdot (1-\phi(t))I(h(t+1)=0),\\
 \end{split}
 $$
-Here, $A(t)$ is the applied amount on day $t$, whose computation was described
-in this chapter; $I(h(t+1)=0)$ is equal to one if the water level of the cluster
-$h(t+1) =0$, and vanishes otherwise^[The reason why the height of day $t+1$ is 
-used here is because, as mentioned above, applications are computed using the 
-final water volume of the cluster, as if all daily water flows already took 
-place.]; the quantities $\text{drift}$, $\text{SNK}$ 
-correspond to the internal `drift` and `SNK` parameters 
-(*cf.* @sec-model-inputs); finally $c$ is the coverage fraction, computed as:
+
+Here, $A(t)$ is the applied amount on day $t$, whose computation is described below; $I(h(t+1)=0)$ is equal to one if the water level of the cluster $h(t+1) =0$, and vanishes otherwise[^exposure-5]; the quantities $\text{drift}$, $\text{SNK}$ correspond to the internal `drift` and `SNK` parameters (*cf.* @sec-model-inputs); finally $c$ is the coverage fraction, computed as:
+
+[^exposure-5]: The reason why the height of day $t+1$ is used here is because, as mentioned above, applications are computed using the final water volume of the cluster, as if all daily water flows already took place.
 
 $$
-c = \min\left[\frac{d_s(t)}{j_{\text{grow}}},\,1\right]\cdot c_{\text{max}},
-$$
-where $d_s(t)$ is the number of days elapsed from seeding, assumed to be on the
-20th of April, while $j_\text{grow}$ and $c_\text{max}$ correspond to the 
-input parameters `jgrow` and `covmax`.
+\phi(t) = \min\left[\frac{d_s(t)}{j_{\text{grow}}},\,1\right]\cdot \phi_{\text{max}},
+$$ 
+where $d_s(t)$ is the number of days elapsed from seeding, while $j_\text{grow}$ and $\phi_\text{max}$ correspond to the input parameters `jgrow` and `covmax`.
 
-#### Degradation rates
+The actual day on which a pesticide application takes place is determined by adjusting the nominal application day specified in the RFMS definition (see @sec-rfms-definition) using the plan delay computed in the hydrological simulation (see @sec-hbc). Concretely, if we denote by $\mathcal D$ the nominal day of year for pesticide application, by $d_{t}$ the day of year corresponding to a given date $t$, and by $\delta _{c,t}$ the plan delay for a cluster $c$ on the same date (*cf.* @eq-hbc-delayed-day), the actual application date^[For simulations spanning multiple years, @eq-ct-application-day is applied independently within each year.] is given by:
 
-Daily degradation rates $k_{f,w,s}(t)$ for the chemical are modeled through 
-the Arrhenius equation, schematically:
+$$ T_{\text{application}} =\max\lbrace t \,\vert\, d_{t}-\delta_{c,t} = \mathcal D\rbrace  $$
+
+The amount of active ingredient applied is defined by the corresponding dose parameter in the input specification (*cf.* @tbl-application-params).
+
+### Degradation rates
+
+Daily degradation rates $k_{f,w,s}(t)$ for the chemical are modeled through the Arrhenius equation, schematically:
 
 $$
 k(t) = k_0 \cdot Q_{10}^{\frac{T(t)-T_0}{10}}
-$$
-where $k_0$ is the degradation rate $k_0$ at a reference temperature $T_0$, 
-$Q_{10}$ is a numerical constant, and $T(t)$ is the average temperature on day 
-$t$. The constants $k_0$ and $Q_10$ are internal model parameters, while $T(t)$ 
-is given by `weather_df$temperature_ave`, see @sec-weather-df.
+$$ 
+where $k_0$ is the degradation rate $k_0$ at a reference temperature $T_0$, $Q_{10}$ is a numerical constant, and $T(t)$ is the average temperature on day $t$. All these numerical quantities are chemical input parameters (see @tbl-chemical-params), except for the daily temperature $T(t)$, that comes from observational data (column `temperature_ave` of `weather_df`, see @sec-weather-df for reference). 
 
-#### Diffusion rates
+For the sediment compartment, we compute two degradation constants $k_s^{\text{sat/unsat}}$, for saturated and unsaturated sediment, respectively (the input parameters for the calculation of these two constants are independent, see @tbl-chemical-params). The degradation rate in the solid compartment at time $t$ is eventually given by:
+
+$$
+k_s(t) = k_s ^{\text{sat}}(t) I(h(t)\neq0)+k_s ^{\text{unsat}}(t) I(h(t)=0)
+$$  {#eq-solid-degradation-rate}
+
+
+
+### Diffusion rates
 
 Diffusion rates are given by:
 
 $$
 d_w(t) = \frac{k_\text{dif}\cdot f_{D,w}}{h(t)}, \quad d_s = \frac{k_\text{dif}\cdot f_{D,s}}{h_{\text{act}}\cdot \text{pos}}
-$$
-where $h(t)$ is the water depth of the hydrological element; $h_\text{act}$ is 
-the depth of active sediment, corresponding to the input parameter `dact_m`; 
-$text{pos}$ is the porosity, and is expressed in terms of input parameters as 
-`fc - wilting`; $k_\text{dif}$ is given by the empirical formula (see TODO):
+$$ where $h(t)$ is the water depth of the hydrological element; $h_\text{act}$ is the depth of active sediment, corresponding to the simulation parameter `dact_m`; $\text{pos}$ corresponds to the `porosity` simulation parameter; $k_\text{dif}$ is given by the empirical formula:
 
 $$
 k_\text{dif} = \left( \frac{69.35}{365} - \text{pos}\cdot M^{-2/3} \right)\frac{\text{m}}{\text{day}}
-$$
-where $M$ is the molecular weight of the chemical (internal parameter); finally,
-$f_{D,w}$ and $f_{D,s}$ are given by:
+$$ 
 
-#### Settling rate
+where $M$ is the molecular weight of the chemical (chemical parameter `MW`); finally, $f_{D,w}$ and $f_{D,s}$ are given by:
+
+$$
+f_{D,w} = \frac{1}{1+c^{\text{ss}}\cdot k_d^{\text{ss}} } \qquad f_{D,s} = \frac{\text{pos}}{\text{pos}+b_d\cdot k_d^{\text{sed}} } \qquad 
+$$
+
+where $c^{\text{ss}}$ and $b_d$ correspond to the input parameters `css_ppm` and `bd_g_cm3`, while $k_d^{\text{sed/ss}}$ are the partition sediment and suspended solid water partition coefficients, computed as:
+
+$$
+k_d ^{\text{sed/ss}} = \text{foc}^{\text{sed/ss}}\cdot k_\text{oc}
+$$
+where $\text{foc}^{\text{sed/ss}}$ correspond to the environmental parameters `foc_ss` and `foc_sed`, respectively, and $k_\text{oc}$ is the chemical parameter `koc_cm3_g`.
+ 
+### Settling rate
 
 The daily settling rate is computed as:
 
 $$
-s(t) = \dfrac{k_s(1-f_{D,w})}{h(t)}
-$$
-where $k_s$ is a (chemical-specific) internal parameter.
+s(t) = \dfrac{k_{\text{setl}}(1-f_{D,w})}{h(t)}
+$$ where $k_{\text{setl}}$ corresponds to the chemical parameter `k_setl_m_day`.
 
-
-#### Washout rate
+### Washout rate
 
 The daily washout rate is computed as:
 
 $$
 w(t) = \text{fet} \cdot P(t)
-$$
-where $P(t)$ is the daily precipitation per unit area, while $\text{fet}$ is
-a (chemical-specific) internal parameter.
+$$ where $P(t)$ is the daily precipitation per unit area, while $\text{fet}$ is the chemical parameter `fet_cm`.
 
-#### Solubility
+### Solubility
 
-The solubility $\rho$ of chemical is an internal parameter.
+The solubility $\rho$ of chemicals correspond to the `solubility` input parameter.
