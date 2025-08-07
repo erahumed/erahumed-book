@@ -2,7 +2,7 @@
 engine: knitr
 ---
 
-# Preface {.unnumbered}
+# Preface {#sec-preface .unnumbered}
 
 The purpose of this book is to provide a comprehensive reference for the [ERAHUMED Decision Support System](https://www.erahumed.com/decision-support-system/). Here you can find the technical descriptions of the algorithms employed by the system, as well as the user manual for the accompanying software.
 
@@ -16,5 +16,4 @@ For general information on the ERAHUMED project, please refer to the [official w
 
 ## Software version {.unnumbered}
 
-This manual corresponds to version `r utils::packageVersion("erahumed")` of the 
-`{erahumed}` R package.
+This manual corresponds to version `r utils::packageVersion("erahumed")` of the `{erahumed}` R package.

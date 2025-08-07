@@ -1,4 +1,4 @@
-# Risk Assessment
+# Risk Assessment {#sec-risk}
 
 This chapter describes how ERAHUMED assesses the toxicological risks associated with pesticide exposure in the Albufera Natural Park. Building on the hydrological and exposure simulations described in previous chapters, the risk assessment module estimates potential impacts on aquatic organisms and the broader ecosystem.
 
@@ -32,4 +32,3 @@ $$
 $$ {#eq-rq}
 
 Although the HC05 is derived from the same SSDs used for PAF calculation, the Risk Quotient (RQ) itself does not have a probabilistic interpretation. Instead, it serves as a simple descriptive indicator of potential concern, offering an alternative, threshold-based perspective on risk, complementary to the PAF.
- 

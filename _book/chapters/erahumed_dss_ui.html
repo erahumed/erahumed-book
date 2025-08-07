@@ -263,8 +263,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#how-to-run-the-gui" id="toc-how-to-run-the-gui" class="nav-link active" data-scroll-target="#how-to-run-the-gui"><span class="header-section-number">9.1</span> How to run the GUI</a></li>
-  <li><a href="#the-output-tab" id="toc-the-output-tab" class="nav-link" data-scroll-target="#the-output-tab"><span class="header-section-number">9.2</span> The <em>Output</em> tab</a></li>
-  <li><a href="#the-input-tab" id="toc-the-input-tab" class="nav-link" data-scroll-target="#the-input-tab"><span class="header-section-number">9.3</span> The <em>Input</em> tab</a></li>
+  <li><a href="#interface-overview-and-basic-workflow" id="toc-interface-overview-and-basic-workflow" class="nav-link" data-scroll-target="#interface-overview-and-basic-workflow"><span class="header-section-number">9.2</span> Interface Overview and Basic Workflow</a></li>
+  <li><a href="#getting-help" id="toc-getting-help" class="nav-link" data-scroll-target="#getting-help"><span class="header-section-number">9.3</span> Getting Help</a></li>
   </ul>
 </nav>
     </div>
@@ -291,7 +291,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>The easiest way to run a simulation with ERAHUMED is through its Graphical User Interface (GUI), which we describe in this chapter. The GUI provides an intuitive way to configure all model inputs described in <a href="model-inputs.html" class="quarto-xref"><span>Chapter 4</span></a> and includes predefined visualizations for main model outputs. This makes it an efficient tool for exploring the ecosystem’s behavior and analyzing its sensitivity to different scenarios. Additionally, users can export output data for further analysis outside the Decision Support System (DSS).</p>
-<p>The GUI is part of a broader software package—an R library—which we describe in detail in <a href="erahumed_dss_pkg.html" class="quarto-xref"><span>Chapter 10</span></a>. If the screenshots in this chapter differ from the interface you see, check the version number (displayed within the GUI) to ensure you are working with the same release.</p>
+<p>The GUI is part of a broader software package—an R library—which we describe in detail in <a href="erahumed_dss_pkg.html" class="quarto-xref"><span>Chapter 10</span></a>. If the interface described in this chapter differs from the one you see, please note that this manual refers to version 0.20.0.9000 of the ERAHUMED software. You can check your version number in the top-left corner of the GUI to ensure you are working with the same release.</p>
 <section id="how-to-run-the-gui" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="how-to-run-the-gui"><span class="header-section-number">9.1</span> How to run the GUI</h2>
 <p>At the present moment, the GUI can only be run from R, through the package <code>{erahumed}</code>, which is publicly available on <a href="https://erahumed.github.io/erahumed/">Github</a>. Details on R and on the <code>{erahumed}</code> package are provided in <a href="erahumed_dss_pkg.html" class="quarto-xref"><span>Chapter 10</span></a> and references therein (see, in particular, Sections <a href="erahumed_dss_pkg.html#sec-installing-r" class="quarto-xref"><span>10.1</span></a> and <a href="erahumed_dss_pkg.html#sec-installing-erahumed" class="quarto-xref"><span>10.2</span></a> for instructions on how to install R and the <code>{erahumed}</code> package). Once you have installed <code>{erahumed}</code>, you can access its GUI by running in R the following command:</p>
@@ -299,31 +299,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>erahumed<span class="sc">::</span><span class="fu">launch_dss</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="the-output-tab" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="the-output-tab"><span class="header-section-number">9.2</span> The <em>Output</em> tab</h2>
-<p>Upon launching the GUI, you are greeted by the <em>Output</em> tab (<a href="#fig-output-tab" class="quarto-xref">Figure&nbsp;<span>9.1</span></a>), which serves as the main dashboard for viewing model results through interactive visualizations. Generating the plots may take around 10 to 20 seconds, corresponding to the time required to complete a full simulation for a one-year period.</p>
-<p>The dashboard is divided into three sections, each corresponding to a model component:</p>
-<ul>
-<li><strong>Hydrology</strong> (<a href="hydrology.html" class="quarto-xref"><span>Chapter 6</span></a>): Displays water level variations and flow patterns over time.</li>
-<li><strong>Exposure</strong> (<a href="exposure.html" class="quarto-xref"><span>Chapter 7</span></a>): Shows the concentration of different pesticides in water and sediment.</li>
-<li><strong>Risk</strong> (<span class="quarto-unresolved-ref">?sec-risk</span>): Assesses potential ecological impacts based on pesticide exposure.</li>
-</ul>
-<p>Users can explore these components across different hydrological elements of the Albufera Natural Park, including the Albufera lake, irrigation ditches, and rice field clusters. The specific location can be selected using the “Water body” dropdown menu. The interactive plots allow users to zoom, pan, and filter data over specific time periods, facilitating a more detailed analysis of model outputs.</p>
-<p>The “Download results” button, located in the top-right corner, exports all raw model outputs as a compressed <code>.zip</code> file containing <code>.csv</code> data.</p>
-<div id="fig-output-tab" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-output-tab-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="img/output-tab.png" class="img-fluid figure-img" style="width:100.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-output-tab-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.1: Graphical User Interface - <em>Output</em> tab
-</figcaption>
-</figure>
-</div>
-<p>The visualizations in this tab reflect the selected input parameters. Adjusting inputs in the Input tab described in the next Section allows users to explore different scenarios and assess their impact on model outcomes.</p>
+<section id="interface-overview-and-basic-workflow" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="interface-overview-and-basic-workflow"><span class="header-section-number">9.2</span> Interface Overview and Basic Workflow</h2>
+<p>Once launched, the ERAHUMED Decision Support System (DSS) opens in your web browser. The interface is organized into multiple tabs that guide the user through the process of defining a simulation scenario, running the model, and exploring the results.</p>
+<p>At its core, the GUI follows a simple <strong>two-phase workflow</strong>:</p>
+<ol type="1">
+<li><p><strong>Set up the scenario</strong>:<br>
+Use the input tabs to configure landscape parameters, chemical definitions, rice field management systems (RFMS), spatial allocation, and simulation settings. Each section mirrors the corresponding input groups described in <a href="model-inputs.html" class="quarto-xref"><span>Chapter 4</span></a>, and most input fields are accompanied by labels and tooltips that make them self-explanatory.</p></li>
+<li><p><strong>Run the simulation</strong>:<br>
+When you are satisfied with your configuration, press the <strong>“Run”</strong> button located in the top right. The model will process your scenario and display outputs as interactive plots and summary tables.</p></li>
+</ol>
+<p>Simulation results can be exported in tabular format for post-processing or further analysis in R or other software environments, using the “Download results” button.</p>
 </section>
-<section id="the-input-tab" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="the-input-tab"><span class="header-section-number">9.3</span> The <em>Input</em> tab</h2>
+<section id="getting-help" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="getting-help"><span class="header-section-number">9.3</span> Getting Help</h2>
+<p>The ERAHUMED GUI is designed to be intuitive and self-explanatory, with tooltips and default values provided throughout to guide users through the simulation setup. However, if you encounter any difficulties or have questions, please don’t hesitate to reach out.</p>
+<p>Support and troubleshooting resources are available in the <a href="https://erahumed.github.io/erahumed/#getting-help">help section</a>, where you can also open an issue on GitHub. Alternatively, you are welcome to contact us directly via e-mail at the addresses provided in <a href="../index.html#sec-preface">the Preface</a>.</p>
 
 
 </section>
