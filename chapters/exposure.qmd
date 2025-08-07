@@ -182,8 +182,8 @@ Application rates are given by:
 $$
 \begin{split}
 a_f^{\text{app}} &= A(t)\cdot \phi(t),\\
-a_s^{\text{app}} &= A(t)(1-\phi(t))I(h(t+1)\neq0),\\
-a_w^{\text{app}} &= A(t)\cdot (1-\phi(t))I(h(t+1)=0),\\
+a_s^{\text{app}} &= A(t)(1-\phi(t))I(h(t+1)=0),\\
+a_w^{\text{app}} &= A(t)\cdot (1-\phi(t))I(h(t+1)\neq0),\\
 \end{split}
 $$
 
