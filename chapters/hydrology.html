@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="The ERAHUMED Decision Support System: Software Manual and Technical Documentation.">
+
+<title>5&nbsp; Hydrological balance calculations – ERAHUMED</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/exposure.html" rel="next">
+<link href="../chapters/rfms.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5fd9db47a040b21ac2cac9a0b3b722ba.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/hydrology.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hydrological balance calculations</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">ERAHUMED</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/birdseye.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conceptual overview of the ERAHUMED model</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/model-inputs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Model inputs</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/rfms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Rice Field Management Systems</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/hydrology.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hydrological balance calculations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/exposure.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Exposure</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/risk.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Risk Assessment</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/erahumed_dss_ui.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">The ERAHUMED DSS Graphical User Interface</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/erahumed_dss_pkg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">The <code>{erahumed}</code> R package</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-hydrology-overview" id="toc-sec-hydrology-overview" class="nav-link active" data-scroll-target="#sec-hydrology-overview"><span class="header-section-number">5.1</span> Overview</a></li>
+  <li><a href="#sec-hbl" id="toc-sec-hbl" class="nav-link" data-scroll-target="#sec-hbl"><span class="header-section-number">5.2</span> Hydrology of the Albufera lake</a></li>
+  <li><a href="#sec-hbc" id="toc-sec-hbc" class="nav-link" data-scroll-target="#sec-hbc"><span class="header-section-number">5.3</span> Hyodrology of rice field clusters</a>
+  <ul class="collapse">
+  <li><a href="#step-1-ideal-balance" id="toc-step-1-ideal-balance" class="nav-link" data-scroll-target="#step-1-ideal-balance"><span class="header-section-number">5.3.1</span> Step 1: ideal balance</a></li>
+  <li><a href="#step-2-real-balance" id="toc-step-2-real-balance" class="nav-link" data-scroll-target="#step-2-real-balance"><span class="header-section-number">5.3.2</span> Step 2: real balance</a></li>
+  <li><a href="#step-3-updating-the-plan-delay" id="toc-step-3-updating-the-plan-delay" class="nav-link" data-scroll-target="#step-3-updating-the-plan-delay"><span class="header-section-number">5.3.3</span> Step 3: updating the plan delay</a></li>
+  </ul></li>
+  <li><a href="#sec-hbd" id="toc-sec-hbd" class="nav-link" data-scroll-target="#sec-hbd"><span class="header-section-number">5.4</span> Hydrology of irrigation ditches</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-hydrology" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Hydrological balance calculations</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>The first step in assessing toxicological risks in the Albufera Natural Park is to determine the system’s hydrology, as water serves as the primary transport medium for the chemicals under study. Specifically, by “hydrology,” we refer to the water volumes present in each water body at a given moment and the flow of water between them over a defined time frame (<em>e.g.</em>, one day). Since most of these quantities are not directly measurable, they must be estimated through simulation. This Chapter outlines the algorithms used for this process.</p>
+<section id="sec-hydrology-overview" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="sec-hydrology-overview"><span class="header-section-number">5.1</span> Overview</h2>
+<p>The hydrological module of ERAHUMED simulates the distribution and flow of water across the three main landscape elements of the Albufera Natural Park: the Albufera lake, rice field clusters, and irrigation ditches. This spatial representation was outlined in <a href="birdseye.html#sec-hydrogeo" class="quarto-xref"><span>Section 2.2</span></a>. For reference, we reproduce below the schematic diagram of the hydrogeographical model employed by ERAHUMED:<br>
+</p>
+<div id="fig-hydrology-scheme-2" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-hydrology-scheme-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/hydrology_scheme.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hydrology-scheme-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.1: Schematic representation of the ERAHUMED hydrogeographical model flow.
+</figcaption>
+</figure>
+</div>
+<p>The overall simulation proceeds in three sequential steps:</p>
+<ol type="1">
+<li><p><strong>Lake Hydrology</strong><br>
+The water balance of the Albufera lake is computed first. Observed time series of lake water levels and outflows are combined with meteorological data on precipitation and evapotranspiration. The balance equation is used to estimate the unknown total inflow to the lake.</p></li>
+<li><p><strong>Cluster Hydrology</strong><br>
+Once the lake’s inflows are determined, the water balance of individual rice field clusters is simulated. Each cluster follows a water management plan defined by its assigned Rice Field Management System (RFMS), which specifies ideal irrigation and drainage schedules. The simulation adjusts real flows based on hydrological constraints, including shared ditch capacity.</p></li>
+<li><p><strong>Ditch Hydrology</strong><br>
+Finally, the hydrology of irrigation ditches is resolved. Under the simplifying assumption of constant ditch water levels, inflows and outflows are equated, and ditch inflows are estimated from the aggregated outflows of the clusters that drain into them.</p></li>
+</ol>
+</section>
+<section id="sec-hbl" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="sec-hbl"><span class="header-section-number">5.2</span> Hydrology of the Albufera lake</h2>
+<p>Water balance calculations for the Albufera Lake are relatively simple. The relevant equation expressing hydrological balance is:</p>
+<p><span id="eq-hbl-hydro-balance-symbolic"><span class="math display">\[
+\text{Volume Change} = \text{Inflow} - \text{Outflow} + \text{Precipitation} - \text{Evapotranspiration}.
+\tag{5.1}\]</span></span></p>
+<p>The variables collected into the following table, that enter the balance equation <a href="#eq-hbl-hydro-balance-symbolic" class="quarto-xref"><span>5.1</span></a>, have direct correspondence with model input parameters listed in <a href="model-inputs.html" class="quarto-xref"><span>Chapter 3</span></a> (we use the notation <code>df$col</code> to indicate column <code>col</code> of data frame <code>df</code>).</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Source</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(h_t\)</span></td>
+<td><code>outflows_df$level</code></td>
+<td><span class="math inline">\(\text{m}\)</span></td>
+<td>Lake water level daily time series</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(O_t^{\text{Pujol}}\)</span></td>
+<td><code>outflows_df$outflow_pujol</code></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td><em>Pujol</em> outflow daily time series</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(O_t^{\text{Perelló}}\)</span></td>
+<td><code>outflows_df$outflow_perello</code></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td><em>Perelló</em> outflow daily time series</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(O_t^{\text{Perellonet}}\)</span></td>
+<td><code>outflows_df$outflow_perellonet</code></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td><em>Perellonet</em> outflow daily time series</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\text{P}_t\)</span></td>
+<td><code>outflows_df$precipitation_mm</code></td>
+<td><span class="math inline">\(\text{mm}\)</span></td>
+<td>Precipitation (per unit area) daily time series</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\text{ET}_t\)</span></td>
+<td><code>outflows_df$evapotranspiration_mm</code></td>
+<td><span class="math inline">\(\text{mm}\)</span></td>
+<td>Evapotranspiration (per unit area) daily time series</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\alpha\)</span></td>
+<td><code>storage_curve_intercept_m3</code></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td>Storage curve intercept</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\beta\)</span></td>
+<td><code>storage_curve_slope_m2</code></td>
+<td><span class="math inline">\(\text{m}^2\)</span></td>
+<td>Storage curve slope</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\sigma _\text{PET}\)</span></td>
+<td><code>petp_surface_m2</code></td>
+<td><span class="math inline">\(\text{m}^2\)</span></td>
+<td>PET surface</td>
+</tr>
+</tbody>
+</table>
+<p>Calculated quantities are listed in the following table.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(V_t\)</span></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td>Lake water volume daily time series</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\Delta V_t \equiv V_{t+1}-V_t\)</span></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td>Lake water volume change daily time series</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\Delta V_t^{\text{PET}}\)</span></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td>Lake water volume change due to precipitation and evapotranspiration daily time series</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(I_t\)</span></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td>Lake total inflow daily time series</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(O_t\)</span></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td>Lake total outflow daily time series</td>
+</tr>
+</tbody>
+</table>
+<p>The volume time-series is computed as:</p>
+<p><span id="eq-hbl-storage-function"><span class="math display">\[
+V_t = \alpha + \beta \cdot h_t,
+\tag{5.2}\]</span></span></p>
+<p>while the volume changes due to precipitation and evapotranspiration are given by:</p>
+<p><span id="eq-hbl-petp-function"><span class="math display">\[
+\Delta V_t ^{\text{PET}} = \sigma _{\text{PET}}(\text{P}_t - \text{ET}_t),
+\tag{5.3}\]</span></span></p>
+<p>Total inflow and outflow must satisfy <a href="#eq-hbl-hydro-balance-symbolic" class="quarto-xref">Equation&nbsp;<span>5.1</span></a>, which we may rewrite explicitly as:</p>
+<p><span id="eq-hbl-hydro-balance-explicit"><span class="math display">\[
+\Delta V_{t} -\Delta V^{\text{PET}}_t = I_t - O_t,
+\tag{5.4}\]</span></span></p>
+<p>Strictly speaking, <span class="math inline">\(O_t\)</span> is not merely the sum of <span class="math inline">\(O_t^{\text{Pujol}}\)</span>, <span class="math inline">\(O_t^{\text{Perelló}}\)</span> and <span class="math inline">\(O_t^{\text{Perellonet}}\)</span>, but is rather calculated as follows:</p>
+<p><span id="eq-hbl-total-outflow"><span class="math display">\[
+O_t = \max
+\left[
+O_t^{\text{Pujol}} + O_t^{\text{Perelló}} + O_t^{\text{Perellonet}},\,
+\Delta V^{\text{PET}}_t -\Delta V_{t}
+\right].
+\tag{5.5}\]</span></span></p>
+<p>The rationale is that the simple sum of estuaries outflows omits potentially important contributions from <em>water recirculation</em>, that is to say, water being pumped out from the lake for rice-field irrigation, by the so-called <em>tancats</em>. Such amount of recirculated water is hard to estimate and, in the lack of a better model, we simply assume this to be negligible, <em>except</em> when a positive amount is required by <a href="#eq-hbl-hydro-balance-explicit" class="quarto-xref">Equation&nbsp;<span>5.4</span></a> itself, due the physical constraint that <span class="math inline">\(I_t \geq 0\)</span>.</p>
+<p>Once <span class="math inline">\(O_t\)</span> is calculated through <a href="#eq-hbl-total-outflow" class="quarto-xref">Equation&nbsp;<span>5.5</span></a>, <span class="math inline">\(I_t\)</span> can be immediately obtained from <a href="#eq-hbl-hydro-balance-explicit" class="quarto-xref">Equation&nbsp;<span>5.4</span></a>. Notice that whenever the aforementioned compensating outflow term due to water recirculation is included (which happens when the maximum in Eq. <a href="#eq-hbl-total-outflow" class="quarto-xref"><span>5.5</span></a> is given by the second term), the total inflow is always estimated to be zero.</p>
+</section>
+<section id="sec-hbc" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="sec-hbc"><span class="header-section-number">5.3</span> Hyodrology of rice field clusters</h2>
+<p>Water balance calculations for rice field clusters are complex due to the lack of observational data. The simulation algorithm relies on several key components:</p>
+<ul>
+<li>The hydrology of the Albufera lake (<a href="#sec-hbl" class="quarto-xref"><span>Section 5.2</span></a>).</li>
+<li>Assumptions about the hydrological connections between the various water bodies in the natural park, detailed in <a href="birdseye.html#sec-hydrogeo" class="quarto-xref"><span>Section 2.2</span></a>.</li>
+<li>An ideal yearly management plan for irrigation and drainage of rice field clusters, that depends on the management systems employed by individual clusters. The details of this derivation are described in <a href="rfms.html" class="quarto-xref"><span>Chapter 4</span></a>.</li>
+</ul>
+<p>The quantitative inputs for this calculation are collected in the following table; the ideal irrigation/draining schedules and water levels are calculated as described in <a href="rfms.html#sec-rfms-definition" class="quarto-xref"><span>Section 4.2</span></a> and are specific to the RFMS assigned to the cluster under study.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Source</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\text{Ir}_{d,c}\)</span></td>
+<td>See text</td>
+<td><span class="math inline">\(\text{NA}\)</span></td>
+<td>Boolean expressing whether cluster <span class="math inline">\(c\)</span> is supposed to be irrigated on day of year <span class="math inline">\(d\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\text{Dr}_{d,c}\)</span></td>
+<td>See text</td>
+<td><span class="math inline">\(\text{NA}\)</span></td>
+<td>Boolean expressing whether cluster <span class="math inline">\(c\)</span> is supposed to be drained on day of year <span class="math inline">\(d\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\mathcal H _{d,c}\)</span></td>
+<td>See text</td>
+<td><span class="math inline">\(\text{cm}\)</span></td>
+<td>Ideal water depth (in <span class="math inline">\(\text{cm}\)</span>) of cluster <span class="math inline">\(c\)</span> on day of year <span class="math inline">\(d\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(k_\text{flow}\)</span></td>
+<td><code>ideal_flow_rate_cm</code></td>
+<td><span class="math inline">\(\text{cm}\cdot \text{day} ^{-1}\)</span></td>
+<td>Rate of water flow through rice paddies during simultaneous irrigation and drainage, while maintaining a constant overall water level.</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(h_{\text{thres}}\)</span></td>
+<td><code>height_thresh_cm</code></td>
+<td><span class="math inline">\(\text{cm}\)</span></td>
+<td>Water height below which a cluster is considered emptied. Used to determine delays in the draining/irrigation plan. Expressed in <span class="math inline">\(\text{cm}\)</span>.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(A_c\)</span></td>
+<td>Internal parameter</td>
+<td><span class="math inline">\(\text{m}^2\)</span></td>
+<td>Surface area of cluster <span class="math inline">\(c\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The outputs are collected below, where the indices <span class="math inline">\(c\)</span> and <span class="math inline">\(t\)</span> denotes the cluster and time, respectively:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Units</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(V_{c,t}\)</span></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td>Cluster’s water volume</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(I_{c,t}\)</span></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td>Cluster’s inflow</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(O_{c,t}\)</span></td>
+<td><span class="math inline">\(\text{m}^3\)</span></td>
+<td>Cluster’s outflow</td>
+</tr>
+</tbody>
+</table>
+<p>The fundamental equation for hydrological balance is:</p>
+<p><span id="eq-hbc-balance"><span class="math display">\[ V_{c,t+1}-V_{c,t} = I_{c,t}-O_{c,t} + (\text{P}_t-\text{ETP}_t)\times A_c  \tag{5.6}\]</span></span></p>
+<p>where <span class="math inline">\(\text{P}_t\)</span> and <span class="math inline">\(\text{ETP}_t\)</span> are the same as in <a href="#sec-hbl" class="quarto-xref"><span>Section 5.2</span></a>.</p>
+<p>In what follows, we will focus on the set of all clusters draining into a given ditch, and we will enumerate clusters through the index <span class="math inline">\(c = 1,\,2,\,\dots,\,N_C\)</span>. On the other hand, clusters are assumed to be irrigated from sources external the Albufera system, <em>i.e.</em>, not through any of the ditches that eventually flow into the lake. According to our assumptions on the hydrology of clusters and ditches (<em>cf.</em> <a href="birdseye.html#sec-hydrogeo" class="quarto-xref"><span>Section 2.2</span></a>), the sum of cluster outflows is constrained by:</p>
+<p><span id="eq-hbc-outflow-constraint"><span class="math display">\[ \sum _{c = 1} ^ {N_C} O_{c,t} \leq Q_t  \tag{5.7}\]</span></span></p>
+<p>where <span class="math inline">\(Q_t\)</span> denotes the inflow to the relevant ditch. With a small leap in logic, we anticipate from <a href="#sec-hbd" class="quarto-xref"><span>Section 5.4</span></a>, that the water levels in irrigation ditches are assumed to be constant, so that <span class="math inline">\(Q_t\)</span> can also be identified with the ditch outflow, that is in turn estimated as:</p>
+<p><span id="eq-hbc-ditch-outflow"><span class="math display">\[ Q_t = \frac{\text{Area of clusters draining into ditch}}{\text{Area of all clusters}} \times \text{Lake's Inflow}_t  \tag{5.8}\]</span></span></p>
+<p>where the lake’s inflow is computed as described in <a href="#sec-hbl" class="quarto-xref"><span>Section 5.2</span></a>.</p>
+<p>Qualitatively speaking, the simulation determines daily values of <span class="math inline">\(I_{c,t}\)</span> and <span class="math inline">\(O_{c,t}\)</span> that satisfy Eqs. <a href="#eq-hbc-balance" class="quarto-xref"><span>5.6</span></a> and <a href="#eq-hbc-outflow-constraint" class="quarto-xref"><span>5.7</span></a>, and such that the resulting hydrology aligns as closely as possible with the “ideal” conditions prescribed by the specified management plan. This is accomplished in three steps:</p>
+<ol type="1">
+<li>Computing ideal inflows and outflows based on current water levels and management plans.</li>
+<li>Determining actual inflows and outflows, along with the corresponding actual water level changes.</li>
+<li>Adjusting management plan delays if some clusters were scheduled to be drained but could not be due to insufficient flow through the common ditch (see below for details).</li>
+</ol>
+<p>These steps are iterated on a daily basis, starting from some initial time (say <span class="math inline">\(t = 0\)</span>) at which all cluster water levels match the ideal ones, and no plan delays are present.</p>
+<p>Concerning the last step, a few words may serve to clarify the algorithm described below. The purpose of management plan delays is to ensure that during each year’s sowing season, all cluster’s are eventually emptied as required for ground applications of chemicals (modeled in subsequent layers of the simulation). This is achieved by postponing the management plan by one day whenever an emptying condition is not met. Outside of the sowing window, delays are reset to zero to prevent them from accumulating indefinitely, which would be unrealistic.</p>
+<p>In what follows, the conversion between cluster water volumes and depths is provided by <span class="math inline">\(V_{c,t} = A_c \cdot h_{c,t}\)</span>, and we denote by <span class="math inline">\(\delta_{c,t}\)</span> the time series of plan delays for cluster <span class="math inline">\(c\)</span>, which is initialized by <span class="math inline">\(\delta_{c,0} =0\)</span>.</p>
+<section id="step-1-ideal-balance" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="step-1-ideal-balance"><span class="header-section-number">5.3.1</span> Step 1: ideal balance</h3>
+<p>Ideal balance quantities for each cluster <span class="math inline">\(c\)</span> are obtained from the ideal water management variables <span class="math inline">\(\text{Ir}_{d,c}\)</span>, <span class="math inline">\(\text{Dr}_{d,c}\)</span> and <span class="math inline">\(\mathcal H _{d,c}\)</span>, by matching the day of year <span class="math inline">\(d\)</span> with the <em>delayed day</em>:</p>
+<p><span id="eq-hbc-delayed-day"><span class="math display">\[
+d_{c,t+1} = d_{t+1}-\delta_{c,t},
+\tag{5.9}\]</span></span></p>
+<p>where <span class="math inline">\(d_{t+1}\)</span> denotes the day of year corresponding to time <span class="math inline">\(t+1\)</span>, and <span class="math inline">\(\delta_{c,t}\)</span> the accumulated plan delay.</p>
+<p>Let <span class="math inline">\(h _{c,t+1}^{\text{id}}\)</span> denote the ideal depth for cluster <span class="math inline">\(c\)</span> at time <span class="math inline">\(t+1\)</span> retrieved in this way, and <span class="math inline">\(\text{Ir}_{c,t}\)</span>, <span class="math inline">\(\text{Dr}_{c,t}\)</span> the corresponding irrigation and draining plans. Furthermore, denote by <span class="math inline">\(V_{c,t+1}^{\text{id}} = A_c \cdot h_{c,t+1}^{\text{id}}\)</span> the corresponding ideal water volume.</p>
+<p>In order to compute ideal inflow and outflow, we require (<em>cf.</em> <a href="#eq-hbc-balance" class="quarto-xref">Equation&nbsp;<span>5.6</span></a>):</p>
+<p><span id="eq-hbc-balance-ideal"><span class="math display">\[
+V_{c,t+1}^{\text{id}} = \max \lbrace V_{c,t}^{\text{id}}  + (\text{P}_t-\text{ETP}_t)\times A_c,0 \rbrace + I_{c,t}^{\text{id}}-O_{c,t}^{\text{id}}
+\tag{5.10}\]</span></span></p>
+<p>Clearly, <a href="#eq-hbc-balance-ideal" class="quarto-xref">Equation&nbsp;<span>5.10</span></a> alone does not individually specify <span class="math inline">\(I_{c,t}^{\text{id}}\)</span> and <span class="math inline">\(O_{c,t}^{\text{id}}\)</span>, but only their difference <span class="math inline">\(\Delta _{c,t}^{\text{id}}= I_{c,t}^{\text{id}}-O_{c,t}^{\text{id}}\)</span>. In order to fix both these quantities:</p>
+<p><span id="eq-hbc-id-flows-zero"><span class="math display">\[
+\begin{split}
+(I_{c,t} ^\text{id})^{(0)}&amp;= \begin{cases}
+  k_\text{flow}  &amp; \text{if }\text{Ir}_{c,t} = \text{Dr}_{c,t} = 1 \\
+  0 &amp; \text{otherwise}
+\end{cases},\\
+(O_{c,t} ^\text{id})^{(0)}&amp;=(I_{c,t} ^\text{id})^{(0)}-\Delta _{c,t}^{\text{id}}.
+\end{split}
+\tag{5.11}\]</span></span></p>
+<p>and, in order to ensure that flows are positive, we finally set:</p>
+<p><span id="eq-hbc-id-flows"><span class="math display">\[
+\begin{split}
+O_{c,t} ^\text{id} &amp;= \max\lbrace(O_{c,t} ^\text{id})^{(0)},\,0\rbrace\\
+I_{c,t} ^\text{id} &amp;= O_{c,t} ^\text{id} + \Delta _{c,t}^{\text{id}},
+\end{split}
+\tag{5.12}\]</span></span></p>
+<p>which satisfy <a href="#eq-hbc-balance-ideal" class="quarto-xref">Equation&nbsp;<span>5.10</span></a> and give rise to positive <span class="math inline">\(O_{c,t}^\text{id}\)</span> and <span class="math inline">\(I_{c,t}^\text{id}\)</span>.</p>
+</section>
+<section id="step-2-real-balance" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="step-2-real-balance"><span class="header-section-number">5.3.2</span> Step 2: real balance</h3>
+<p>At each time-step <span class="math inline">\(t\)</span>, the cluster’s index set is randomly permuted <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, and the real flows are calculated as:</p>
+<p><span id="eq-hbc-real-flows"><span class="math display">\[
+\begin{split}
+O_{c,t} &amp;= \min \lbrace O_{c,t}^\text{id},\,Q_t-\sum_{c'&lt;c}O_{c',t} \rbrace ,\\
+I_{c,t} &amp;= \max\lbrace I_{c,t}^\text{id}-O_{c,t}^\text{id} + O_{c,t},\,0 \rbrace
+\end{split}
+\tag{5.13}\]</span></span></p>
+<p>In simple terms, clusters are emptied in a random order within the allowed capacity of the corresponding ditch. Using <a href="#eq-hbc-real-flows" class="quarto-xref">Equation&nbsp;<span>5.13</span></a>, we finally determine the real water level achieved as:</p>
+<p><span id="eq-hbc-balance-real"><span class="math display">\[
+V_{c,t+1} = \max \lbrace V_{c,t}  + (\text{P}_t-\text{ETP}_t)\times A_c,0 \rbrace + I_{c,t}-O_{c,t}
+\tag{5.14}\]</span></span></p>
+<p>to be compared with <a href="#eq-hbc-balance-ideal" class="quarto-xref">Equation&nbsp;<span>5.10</span></a>.</p>
+</section>
+<section id="step-3-updating-the-plan-delay" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="step-3-updating-the-plan-delay"><span class="header-section-number">5.3.3</span> Step 3: updating the plan delay</h3>
+<p>The updated value <span class="math inline">\(\delta _{c,t+1}\)</span> is obtained as follows. If <span class="math inline">\(d_{t+1}\)</span> (the <em>actual</em> day of year) is outside of the window <span class="math inline">\([\text{Sowing day},\,\text{Start of Perellonà}]\)</span> (which is specified by the RFMS assigned to cluster <span class="math inline">\(c\)</span>, see <a href="rfms.html#sec-rfms-definition" class="quarto-xref"><span>Section 4.2</span></a>), then <span class="math inline">\(\delta_{c,t+1} = 0\)</span>. Otherwise, if <span class="math inline">\(h_{c,t}^\text{id} &gt; 0\)</span> or <span class="math inline">\(h_{c,t} &lt; h_{\text{thres}}\)</span>, the plan delay is unchanged: <span class="math inline">\(\delta_{c,t+1} = \delta_{c,t}\)</span>. Finally, if <span class="math inline">\(h_{c,t}^\text{id} = 0\)</span> but <span class="math inline">\(h_{c,t} &gt; h_{\text{thres}}\)</span>, we add one day of delay: <span class="math inline">\(\delta_{c,t+1} = \delta_{c,t}+1\)</span>.</p>
+</section>
+</section>
+<section id="sec-hbd" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="sec-hbd"><span class="header-section-number">5.4</span> Hydrology of irrigation ditches</h2>
+<p>Our approach to the hydrology of irrigation ditches is simplified, with the main assumption being that all ditches have a common, constant water depth <span class="math inline">\(h_\text{ditch}\)</span> corresponding to the input parameter <code>ditch_level_m</code>.</p>
+<p>Using the index <span class="math inline">\(D =1,2,\dots,26\)</span> to enumerate the park’s main ditches, ditch outflows to the Albufera lake <span class="math inline">\(O_{D,t}\)</span> are calculated according to <a href="#eq-hbc-ditch-outflow" class="quarto-xref">Equation&nbsp;<span>5.8</span></a>. These outflows also coincide with the total ditch inflows <span class="math inline">\(I_{D,t}\)</span> (due to the constant water volume assumption).</p>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>With some abuse of notation, we assume the indexes <span class="math inline">\(c\)</span> and <span class="math inline">\(c'\)</span> in <a href="#eq-hbc-real-flows" class="quarto-xref">Equation&nbsp;<span>5.13</span></a> to be sorted according to this random permutation.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/rfms.html" class="pagination-link" aria-label="Rice Field Management Systems">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Rice Field Management Systems</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/exposure.html" class="pagination-link" aria-label="Exposure">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Exposure</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
