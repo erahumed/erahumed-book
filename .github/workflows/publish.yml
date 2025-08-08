@@ -30,7 +30,8 @@ jobs:
             libgeos-dev \
             libproj-dev \
             libtbb-dev \
-            libnetcdf-dev
+            libnetcdf-dev \
+            libudunits2-dev
 
       - name: Install R Dependencies
         uses: r-lib/actions/setup-renv@v2
