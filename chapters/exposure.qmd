@@ -198,7 +198,7 @@ where $d_s(t)$ is the number of days elapsed from seeding, while $j_\text{grow}$
 
 The actual day on which a pesticide application takes place is determined by adjusting the nominal application day specified in the RFMS definition (see @sec-rfms-definition) using the plan delay computed in the hydrological simulation (see @sec-hbc). Concretely, if we denote by $\mathcal D$ the nominal day of year for pesticide application, by $d_{t}$ the day of year corresponding to a given date $t$, and by $\delta _{c,t}$ the plan delay for a cluster $c$ on the same date (*cf.* @eq-hbc-delayed-day), the actual application date^[For simulations spanning multiple years, @eq-ct-application-day is applied independently within each year.] is given by:
 
-$$ T_{\text{application}} =\max\lbrace t \,\vert\, d_{t}-\delta_{c,t} = \mathcal D\rbrace  $$
+$$ T_{\text{application}} =\max\lbrace t \,\vert\, d_{t}-\delta_{c,t} = \mathcal D\rbrace  $$ {#eq-ct-application-day}
 
 The amount of active ingredient applied is defined by the corresponding dose parameter in the input specification (*cf.* @tbl-application-params).
 
