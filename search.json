@@ -14,7 +14,7 @@
     "href": "index.html#software-version",
     "title": "ERAHUMED",
     "section": "Software version",
-    "text": "Software version\nThis manual corresponds to version 0.20.1 of the {erahumed} R package.",
+    "text": "Software version\nThis manual corresponds to version 0.21.0 of the {erahumed} R package.",
     "crumbs": [
       "Preface"
     ]
@@ -324,7 +324,7 @@
     "href": "chapters/erahumed_dss_ui.html",
     "title": "8  The ERAHUMED DSS Graphical User Interface",
     "section": "",
-    "text": "8.1 How to run the GUI\nThe easiest way to run a simulation with ERAHUMED is through its Graphical User Interface (GUI), which we describe in this chapter. The GUI provides an intuitive way to configure all model inputs described in Chapter 3 and includes predefined visualizations for main model outputs. This makes it an efficient tool for exploring the ecosystem’s behavior and analyzing its sensitivity to different scenarios. Additionally, users can export output data for further analysis outside the Decision Support System (DSS).\nThe GUI is part of a broader software package—an R library—which we describe in detail in Chapter 9. If the interface described in this chapter differs from the one you see, please note that this manual refers to version 0.20.1 of the ERAHUMED software. You can check your version number in the top-left corner of the GUI to ensure you are working with the same release.\nAt the present moment, the GUI can only be run from R, through the package {erahumed}, which is publicly available on Github. Details on R and on the {erahumed} package are provided in Chapter 9 and references therein (see, in particular, Sections 9.1 and 9.2 for instructions on how to install R and the {erahumed} package). Once you have installed {erahumed}, you can access its GUI by running in R the following command:\nerahumed::launch_dss()",
+    "text": "8.1 How to run the GUI\nThe easiest way to run a simulation with ERAHUMED is through its Graphical User Interface (GUI), which we describe in this chapter. The GUI provides an intuitive way to configure all model inputs described in Chapter 3 and includes predefined visualizations for main model outputs. This makes it an efficient tool for exploring the ecosystem’s behavior and analyzing its sensitivity to different scenarios. Additionally, users can export output data for further analysis outside the Decision Support System (DSS).\nThe GUI is part of a broader software package—an R library—which we describe in detail in Chapter 9. If the interface described in this chapter differs from the one you see, please note that this manual refers to version 0.21.0 of the ERAHUMED software. You can check your version number in the top-left corner of the GUI to ensure you are working with the same release.\nAt the present moment, the GUI can only be run from R, through the package {erahumed}, which is publicly available on Github. Details on R and on the {erahumed} package are provided in Chapter 9 and references therein (see, in particular, Sections 9.1 and 9.2 for instructions on how to install R and the {erahumed} package). Once you have installed {erahumed}, you can access its GUI by running in R the following command:\nerahumed::launch_dss()",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>The ERAHUMED DSS Graphical User Interface</span>"
     ]
