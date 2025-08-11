@@ -1070,7 +1070,7 @@
     },
     "erahumed": {
       "Package": "erahumed",
-      "Version": "0.20.1",
+      "Version": "0.21.0",
       "Source": "GitHub",
       "Title": "ERAHUMED Data Analysis and Visualization",
       "Authors@R": "c( person(\"Valerio\", \"Gherardi\", email = \"vgherard840@gmail.com\",  role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-8215-3013\")), person(\"Pablo\", \"Amador\", email = \"pamadorc@gmail.com\",  role = \"aut\", comment = c(ORCID = \"0000-0002-3793-8794\")), person(\"Andreu\", \"Rico\", email = NULL,  role = \"rev\", comment = c(ORCID = \"0000-0002-1820-4218\"))       )",
@@ -1131,8 +1131,8 @@
       "RemoteHost": "api.github.com",
       "RemoteRepo": "erahumed",
       "RemoteUsername": "erahumed",
-      "RemoteRef": "v0.20.1",
-      "RemoteSha": "9f944e4f6e3d3b65d658245dcbe054f3e1bfc8c9",
+      "RemoteRef": "v0.21.0",
+      "RemoteSha": "05cca149bdf585341a5c5c926175ac40593dd2b8",
       "NeedsCompilation": "no",
       "Author": "Valerio Gherardi [aut, cre] (ORCID: <https://orcid.org/0000-0002-8215-3013>), Pablo Amador [aut] (ORCID: <https://orcid.org/0000-0002-3793-8794>), Andreu Rico [rev] (ORCID: <https://orcid.org/0000-0002-1820-4218>)",
       "Maintainer": "Valerio Gherardi <vgherard840@gmail.com>"
