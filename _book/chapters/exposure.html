@@ -406,7 +406,7 @@ a_w^{\text{app}} &amp;= A(t)\cdot (1-\phi(t))I(h(t+1)\neq0),\\
 \phi(t) = \min\left[\frac{d_s(t)}{j_{\text{grow}}},\,1\right]\cdot \phi_{\text{max}},
 \]</span> where <span class="math inline">\(d_s(t)\)</span> is the number of days elapsed from seeding, while <span class="math inline">\(j_\text{grow}\)</span> and <span class="math inline">\(\phi_\text{max}\)</span> correspond to the input parameters <code>jgrow</code> and <code>covmax</code>.</p>
 <p>The actual day on which a pesticide application takes place is determined by adjusting the nominal application day specified in the RFMS definition (see <a href="rfms.html#sec-rfms-definition" class="quarto-xref"><span>Section 4.2</span></a>) using the plan delay computed in the hydrological simulation (see <a href="hydrology.html#sec-hbc" class="quarto-xref"><span>Section 5.3</span></a>). Concretely, if we denote by <span class="math inline">\(\mathcal D\)</span> the nominal day of year for pesticide application, by <span class="math inline">\(d_{t}\)</span> the day of year corresponding to a given date <span class="math inline">\(t\)</span>, and by <span class="math inline">\(\delta _{c,t}\)</span> the plan delay for a cluster <span class="math inline">\(c\)</span> on the same date (<em>cf.</em> <a href="hydrology.html#eq-hbc-delayed-day" class="quarto-xref">Equation&nbsp;<span>5.9</span></a>), the actual application date<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> is given by:</p>
-<p><span class="math display">\[ T_{\text{application}} =\max\lbrace t \,\vert\, d_{t}-\delta_{c,t} = \mathcal D\rbrace  \]</span></p>
+<p><span id="eq-ct-application-day"><span class="math display">\[ T_{\text{application}} =\max\lbrace t \,\vert\, d_{t}-\delta_{c,t} = \mathcal D\rbrace   \tag{6.11}\]</span></span></p>
 <p>The amount of active ingredient applied is defined by the corresponding dose parameter in the input specification (<em>cf.</em> <a href="model-inputs.html#tbl-application-params" class="quarto-xref">Table&nbsp;<span>3.4</span></a>).</p>
 </section>
 <section id="degradation-rates" class="level3" data-number="6.4.2">
@@ -418,7 +418,7 @@ k(t) = k_0 \cdot Q_{10}^{\frac{T(t)-T_0}{10}}
 <p>For the sediment compartment, we compute two degradation constants <span class="math inline">\(k_s^{\text{sat/unsat}}\)</span>, for saturated and unsaturated sediment, respectively (the input parameters for the calculation of these two constants are independent, see <a href="model-inputs.html#tbl-chemical-params" class="quarto-xref">Table&nbsp;<span>3.2</span></a>). The degradation rate in the solid compartment at time <span class="math inline">\(t\)</span> is eventually given by:</p>
 <p><span id="eq-solid-degradation-rate"><span class="math display">\[
 k_s(t) = k_s ^{\text{sat}}(t) I(h(t)\neq0)+k_s ^{\text{unsat}}(t) I(h(t)=0)
-\tag{6.11}\]</span></span></p>
+\tag{6.12}\]</span></span></p>
 </section>
 <section id="diffusion-rates" class="level3" data-number="6.4.3">
 <h3 data-number="6.4.3" class="anchored" data-anchor-id="diffusion-rates"><span class="header-section-number">6.4.3</span> Diffusion rates</h3>
@@ -475,7 +475,7 @@ w(t) = \text{fet} \cdot P(t)
   P_{\pm} = \pm \frac{1}{\lambda _+ - \lambda _-}(A-\lambda _{\mp})
   \]</span><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>The reason why the height of day <span class="math inline">\(t+1\)</span> is used here is because, as mentioned above, applications are computed using the final water volume of the cluster, as if all daily water flows already took place.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>For simulations spanning multiple years, <span class="quarto-unresolved-ref">?eq-ct-application-day</span> is applied independently within each year.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>For simulations spanning multiple years, <a href="#eq-ct-application-day" class="quarto-xref">Equation&nbsp;<span>6.11</span></a> is applied independently within each year.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
