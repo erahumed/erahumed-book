@@ -2,13 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="description" content="The ERAHUMED Decision Support System: Software Manual and Technical Documentation.">
 
-<title>3&nbsp; Model inputs – ERAHUMED</title>
+<title>3&nbsp; Model inputs – ERAHUMED DSS: a decision support system for the environmental risk
+assessment of pesticide management practices in Mediterranean wetlands</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -35,14 +36,15 @@ ul.task-list li input[type="checkbox"] {
 <link href="../chapters/birdseye.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-e8de9bd59ba156b9e4cb33cd6f01d621.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-d58359eb3ecc31d3bec1ed479c2cbb3a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -96,9 +98,11 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">ERAHUMED</a> 
+      <a href="../">ERAHUMED DSS: a decision support system for the environmental risk assessment of pesticide management practices in Mediterranean wetlands</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -123,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/birdseye.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conceptual overview of the ERAHUMED model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conceptual overview</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -188,9 +192,9 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#observational-inputs-hydrology-and-weather" id="toc-observational-inputs-hydrology-and-weather" class="nav-link" data-scroll-target="#observational-inputs-hydrology-and-weather"><span class="header-section-number">3.1.1</span> Observational inputs: hydrology and weather</a></li>
   </ul></li>
-  <li><a href="#chemical-parameters" id="toc-chemical-parameters" class="nav-link" data-scroll-target="#chemical-parameters"><span class="header-section-number">3.2</span> Chemical parameters</a></li>
+  <li><a href="#pesticide-parameters" id="toc-pesticide-parameters" class="nav-link" data-scroll-target="#pesticide-parameters"><span class="header-section-number">3.2</span> Pesticide parameters</a></li>
   <li><a href="#rfms-parameters" id="toc-rfms-parameters" class="nav-link" data-scroll-target="#rfms-parameters"><span class="header-section-number">3.3</span> RFMS parameters</a></li>
-  <li><a href="#chemical-application-parameters" id="toc-chemical-application-parameters" class="nav-link" data-scroll-target="#chemical-application-parameters"><span class="header-section-number">3.4</span> Chemical application parameters</a></li>
+  <li><a href="#pesticide-application-schemes" id="toc-pesticide-application-schemes" class="nav-link" data-scroll-target="#pesticide-application-schemes"><span class="header-section-number">3.4</span> Pesticide application schemes</a></li>
   <li><a href="#spatial-allocation-parameters" id="toc-spatial-allocation-parameters" class="nav-link" data-scroll-target="#spatial-allocation-parameters"><span class="header-section-number">3.5</span> Spatial allocation parameters</a></li>
   </ul>
 </nav>
@@ -217,13 +221,13 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This chapter serves as a central reference for all input parameters used in ERAHUMED simulations. Parameters are grouped into four categories:</p>
+<p>This chapter serves as a central reference for all input parameters used by the ERAHUMED DSS. Input parameters are grouped into four categories:</p>
 <ul>
-<li><p><strong>Landscape parameters</strong> (<a href="#tbl-landscape-params" class="quarto-xref">Table&nbsp;<span>3.1</span></a>) define the biophysical and climatic context in which simulations take place. These inputs characterize the structure and behavior of the Albufera system, including the temporal simulation window (<code>date_start</code>, <code>date_end</code>), the lake’s hydrology and geometry, and its interaction with weather and soil processes.</p></li>
-<li><p><strong>Chemical parameters</strong> (<a href="#tbl-chemical-params" class="quarto-xref">Table&nbsp;<span>3.2</span></a>) describe the physico-chemical and eco-toxicological characteristics of the pesticide compounds considered in the simulation. These include degradation rates, solubility, partition coefficients, and toxicity distribution parameters used for risk assessment.</p></li>
-<li><p><strong>RFMS parameters</strong> (<a href="#tbl-rfms-params" class="quarto-xref">Table&nbsp;<span>3.3</span></a>) specify how different rice field management systems (RFMSs) are configured. These parameters define the timing, frequency, and nature of chemical applications, as well as water management practices such as irrigation and drainage scheduling.</p></li>
-<li><p><strong>Chemical application parameters</strong> (<a href="#tbl-application-params" class="quarto-xref">Table&nbsp;<span>3.4</span></a>) define the specific pesticide treatments that can be scheduled within each RFMS. These parameters include the chemical used, the application rate, the day of application relative to sowing, the method of application (ground or aerial), and the duration of field emptying required for ground applications.</p></li>
-<li><p><strong>Spatial allocation</strong> parameters (<a href="#tbl-allocation-params" class="quarto-xref">Table&nbsp;<span>3.5</span></a>) captures how the different RFMSs are spatially distributed across the simulated landscape. This information determines which management practices are applied to which clusters of rice fields, affecting both contaminant fate and risk exposure.</p></li>
+<li><p><strong>Landscape parameters</strong> (<a href="#tbl-landscape-params" class="quarto-xref">Table&nbsp;<span>3.1</span></a>): define the biophysical and climatic context in which simulations take place. These inputs characterize the physical conditions of the Albufera Natural Park, including the temporal simulation window (<code>date_start</code>, <code>date_end</code>), the lake’s hydrology and geometry, and its interaction with weather and soil processes.</p></li>
+<li><p><strong>Pesticide parameters</strong> (<a href="#tbl-chemical-params" class="quarto-xref">Table&nbsp;<span>3.2</span></a>): describe the physico-chemical and eco-toxicological characteristics of the pesticide compounds considered in the simulation. These include environmental degradation rates, solubility, partition coefficients, and toxicity data used for risk assessment.</p></li>
+<li><p><strong>RFMS parameters</strong> (<a href="#tbl-rfms-params" class="quarto-xref">Table&nbsp;<span>3.3</span></a>): specify how different rice field management systems (RFMSs) are configured. These parameters define the timing, frequency, and nature of pesticide applications, as well as water management practices such as irrigation and drainage scheduling.</p></li>
+<li><p><strong>Pesticide application schemes</strong> (<a href="#tbl-application-params" class="quarto-xref">Table&nbsp;<span>3.4</span></a>): define the specific pesticide treatments that can be scheduled within each RFMS. These parameters include the chemical used, the dose, the day of application relative to sowing, the method of application (ground or aerial), and the duration of field emptying required for ground applications.</p></li>
+<li><p><strong>Spatial allocation</strong> parameters (<a href="#tbl-allocation-params" class="quarto-xref">Table&nbsp;<span>3.5</span></a>): captures how the different RFMSs are spatially distributed across the simulated landscape. This information determines which management practices are applied to which clusters of rice fields, affecting both contaminant fate and risk exposure.</p></li>
 </ul>
 <p><em>Note</em>: The <code>Type</code> column and, to some extent, the <code>Description</code> fields in <a href="#tbl-landscape-params" class="quarto-xref">Table&nbsp;<span>3.1</span></a> refer to the internal structures and conventions of the <code>{erahumed}</code> <em>R package</em>, which is presented in detail in <a href="erahumed_dss_pkg.html" class="quarto-xref"><span>Chapter 9</span></a> and references therein. However, the <code>Description</code> generally conveys the intended meaning and usage of each parameter, regardless of whether the user is interacting through the R package or the Shiny interface. Users of the Shiny GUI do not need to understand the R-specific details, as the interface provides appropriate input controls and guidance.</p>
 <section id="landscape-parameters" class="level2" data-number="3.1">
@@ -232,11 +236,11 @@ ul.task-list li input[type="checkbox"] {
 <div id="tbl-landscape-params" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-landscape-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3.1: ERAHUMED input parameters: Landscape
+Table&nbsp;3.1: ERAHUMED DSS input parameters: Landscape
 </figcaption>
 <div aria-describedby="tbl-landscape-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">Parameter</th>
@@ -425,7 +429,7 @@ Table&nbsp;3.1: ERAHUMED input parameters: Landscape
 </div>
 <section id="observational-inputs-hydrology-and-weather" class="level3" data-number="3.1.1">
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="observational-inputs-hydrology-and-weather"><span class="header-section-number">3.1.1</span> Observational inputs: hydrology and weather</h3>
-<p>Hydrological and meteorological data provide the empirical starting point for ERAHUMED simulations. These observational inputs are supplied as data frames and are used to drive the water balance, pesticide transport, and evapotranspiration dynamics in the model.</p>
+<p>Hydrological and meteorological data provide the empirical starting point for ERAHUMED DSS simulations. These observational inputs are supplied as data frames and are used to drive the water balance, pesticide transport, and evapotranspiration dynamics in the model.</p>
 <p>Users working with historical scenarios are encouraged to provide real-world data from the corresponding time period, enabling retrospective simulations under observed environmental conditions. Conversely, for future or hypothetical scenarios, users may define synthetic datasets that reflect the expected or desired characteristics of the scenario—e.g., altered rainfall regimes or management-induced changes in outflow patterns.</p>
 <p>By default, ERAHUMED includes representative data covering a typical agricultural year in the Albufera Natural Park:</p>
 <ul>
@@ -521,17 +525,17 @@ Table&nbsp;3.1: ERAHUMED input parameters: Landscape
 </section>
 </section>
 </section>
-<section id="chemical-parameters" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="chemical-parameters"><span class="header-section-number">3.2</span> Chemical parameters</h2>
+<section id="pesticide-parameters" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="pesticide-parameters"><span class="header-section-number">3.2</span> Pesticide parameters</h2>
 <div class="cell">
 <div id="tbl-chemical-params" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-chemical-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3.2: ERAHUMED input parameters: Chemicals
+Table&nbsp;3.2: ERAHUMED DSS input parameters: Pesticides
 </figcaption>
 <div aria-describedby="tbl-chemical-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">Parameter</th>
@@ -725,11 +729,11 @@ Table&nbsp;3.2: ERAHUMED input parameters: Chemicals
 <div id="tbl-rfms-params" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rfms-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3.3: ERAHUMED input parameters: Rice-Field Management Systems
+Table&nbsp;3.3: ERAHUMED DSS input parameters: Rice-Field Management Systems
 </figcaption>
 <div aria-describedby="tbl-rfms-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">Parameter</th>
@@ -805,17 +809,17 @@ Table&nbsp;3.3: ERAHUMED input parameters: Rice-Field Management Systems
 </div>
 </div>
 </section>
-<section id="chemical-application-parameters" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="chemical-application-parameters"><span class="header-section-number">3.4</span> Chemical application parameters</h2>
+<section id="pesticide-application-schemes" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="pesticide-application-schemes"><span class="header-section-number">3.4</span> Pesticide application schemes</h2>
 <div class="cell">
 <div id="tbl-application-params" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-application-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3.4: ERAHUMED input parameters: Chemical Applications
+Table&nbsp;3.4: ERAHUMED DSS input parameters: Pesticide Applications
 </figcaption>
 <div aria-describedby="tbl-application-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">Parameter</th>
@@ -889,11 +893,11 @@ Table&nbsp;3.4: ERAHUMED input parameters: Chemical Applications
 <div id="tbl-allocation-params" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-allocation-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;3.5: ERAHUMED input parameters: Rice-Field surface allocation
+Table&nbsp;3.5: ERAHUMED DSS input parameters: Rice-Field surface allocation
 </figcaption>
 <div aria-describedby="tbl-allocation-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<table class="do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 16%">
 <col style="width: 16%">
@@ -1022,13 +1026,14 @@ Table&nbsp;3.5: ERAHUMED input parameters: Rice-Field surface allocation
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -1372,8 +1377,8 @@ Table&nbsp;3.5: ERAHUMED input parameters: Rice-Field surface allocation
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapters/birdseye.html" class="pagination-link" aria-label="Conceptual overview of the ERAHUMED model">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conceptual overview of the ERAHUMED model</span></span>
+      <a href="../chapters/birdseye.html" class="pagination-link" aria-label="Conceptual overview">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conceptual overview</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

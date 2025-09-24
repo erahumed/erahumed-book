@@ -2,13 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="description" content="The ERAHUMED Decision Support System: Software Manual and Technical Documentation.">
 
-<title>6&nbsp; Exposure – ERAHUMED</title>
+<title>6&nbsp; Exposure – ERAHUMED DSS: a decision support system for the environmental risk
+assessment of pesticide management practices in Mediterranean wetlands</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -35,14 +36,15 @@ ul.task-list li input[type="checkbox"] {
 <link href="../chapters/hydrology.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-e8de9bd59ba156b9e4cb33cd6f01d621.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-d58359eb3ecc31d3bec1ed479c2cbb3a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -85,7 +87,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -125,9 +127,11 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">ERAHUMED</a> 
+      <a href="../">ERAHUMED DSS: a decision support system for the environmental risk assessment of pesticide management practices in Mediterranean wetlands</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -152,7 +156,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/birdseye.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conceptual overview of the ERAHUMED model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conceptual overview</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -256,7 +260,7 @@ window.Quarto = {
 </header>
 
 
-<p>This Chapter describes how ERAHUMED models pesticide exposure in the Albufera Natural Park. The hydrological simulation discussed in the previous Chapter provides the foundation for this analysis, as water serves as the primary medium for pesticide transport. Here, we outline how ERAHUMED simulates the introduction, dispersion, and fate of pesticides within the system. This includes processes such as deposition, degradation, and transfer between water bodies. By integrating hydrological dynamics with chemical behavior, the model estimates exposure levels over time and space.</p>
+<p>This Chapter describes how the ERAHUMED DSS models pesticide exposure in the water and sediment of the water bodies of the Albufera Natural Park. The hydrological simulation discussed in the previous Chapter provides the foundation for this analysis, as water serves as the primary medium for pesticide transport. Here, we outline how ERAHUMED simulates the introduction, dispersion, and fate of pesticides within the system. This includes processes such as deposition, degradation, and transfer between water bodies. By integrating hydrological dynamics with chemical fate and transport, the model estimates exposure levels over time and space.</p>
 <p>As illustrated in our hydrological model (<a href="birdseye.html#fig-hydrology-scheme" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>), pesticides applied to rice field clusters are transported through water flow into ditches, then into the Albufera lake, and ultimately to the sea.</p>
 <p>From a mathematical perspective, the fate of chemicals in each water body—clusters, ditches, and the lake—is governed by the same system of differential equations. These equations represent key physico-chemical processes, including advective transport, diffusive exchange between compartments, and degradation. However, pesticide applications occur exclusively in clusters; concentrations in ditches and the lake arise solely from upstream inflows.</p>
 <p>The remainder of this chapter describes our approach to pesticide dispersion. We define the simplified differential system used to model these processes in <a href="#sec-ct-eqs" class="quarto-xref"><span>Section 6.2</span></a>, and we present our semi-analytic solution method in <a href="#sec-ct-solution" class="quarto-xref"><span>Section 6.3</span></a>. <a href="#sec-ct-inputs" class="quarto-xref"><span>Section 6.4</span></a> finally describes how the parameters of the differential system are derived from the basic input parameters listed in <a href="model-inputs.html" class="quarto-xref"><span>Chapter 3</span></a>.</p>
@@ -305,7 +309,7 @@ Figure&nbsp;6.1: Scheme of physical processes considered in ERAHUMED model of ch
 <li><span class="math inline">\(\rho\)</span> is the chemical solubility in water,</li>
 <li><span class="math inline">\(\sigma(x)\)</span> is a function (not further specified, see below) that grows quickly for <span class="math inline">\(x &gt; 1\)</span>, and vanishes for <span class="math inline">\(x \leq 1\)</span>. This function accounts for solubility.</li>
 </ul>
-<p>Strictly speaking, all these terms have instantaneous time dependence<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Apart from making the <a href="#eq-ct-ode" class="quarto-xref">system&nbsp;<span>6.1</span></a> hard to attack by analytic means, such a dependence is troubling because we don’t have access to the exact time dependence of the majority of these terms (<em>e.g.</em> outflow, volume or chemical applications), our input consisting of simple daily average/cumulative values. On the other hand, if all the terms were constant, and if we could neglect <span class="math inline">\(\sigma\)</span>, the solution of <a href="#eq-ct-ode" class="quarto-xref">Equation&nbsp;<span>6.1</span></a> would be immediate, as the corresponding system becomes a linear ODE with constant coefficients, in addition whose eigenvalues and eigenvectors can be computed explicitly.</p>
+<p>Strictly speaking, all these terms have instantaneous time dependence<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Apart from making the <a href="#eq-ct-ode" class="quarto-xref">system&nbsp;<span>6.1</span></a> hard to attack by analytic means, such a dependence is troubling because we don’t have access to the exact time dependence of the majority of these terms (<em>e.g.</em> outflow, volume or chemical applications), our input consisting of simple daily average/cumulative values. On the other hand, if all the terms were constant, and if we could neglect <span class="math inline">\(\sigma\)</span>, the solution of <a href="#eq-ct-ode" class="quarto-xref">Equation&nbsp;<span>6.1</span></a> would be immediate, as the corresponding system becomes a linear Ordinary Differential Equation (ODE) with constant coefficients, in addition whose eigenvalues and eigenvectors can be computed explicitly.</p>
 <p>What we use in practice is an intermediate semi-analytic approach that allows us to compute daily values of <span class="math inline">\(m_{f,w,s}\)</span>, which is described next.</p>
 </section>
 <section id="sec-ct-solution" class="level2" data-number="6.3">
@@ -532,13 +536,14 @@ w(t) = \text{fet} \cdot P(t)
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

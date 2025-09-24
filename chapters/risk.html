@@ -2,13 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="description" content="The ERAHUMED Decision Support System: Software Manual and Technical Documentation.">
 
-<title>7&nbsp; Risk Assessment – ERAHUMED</title>
+<title>7&nbsp; Risk Assessment – ERAHUMED DSS: a decision support system for the environmental risk
+assessment of pesticide management practices in Mediterranean wetlands</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -55,14 +56,15 @@ div.csl-indent {
 <link href="../chapters/exposure.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-e8de9bd59ba156b9e4cb33cd6f01d621.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-d58359eb3ecc31d3bec1ed479c2cbb3a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -105,7 +107,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -145,9 +147,11 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">ERAHUMED</a> 
+      <a href="../">ERAHUMED DSS: a decision support system for the environmental risk assessment of pesticide management practices in Mediterranean wetlands</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -172,7 +176,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/birdseye.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conceptual overview of the ERAHUMED model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conceptual overview</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -253,32 +257,24 @@ window.Quarto = {
 </header>
 
 
-<p>This chapter describes how ERAHUMED assesses the toxicological risks associated with pesticide exposure in the Albufera Natural Park. Building on the hydrological and exposure simulations described in previous chapters, the risk assessment module estimates potential impacts on aquatic organisms and the broader ecosystem.</p>
-<p>ERAHUMED adopts the <strong>Species Sensitivity Distribution (SSD)</strong> methodology—a widely used approach in ecological risk assessment <span class="citation" data-cites="posthuma2002ssd">(<a href="references.html#ref-posthuma2002ssd" role="doc-biblioref">Posthuma, Suter II, and Traas 2002</a>)</span>. This method enables the quantification of the <strong>Potentially Affected Fraction (PAF)</strong> of species at a given chemical concentration, offering a probabilistic estimate of ecosystem-level effects. By linking simulated concentrations to biological sensitivity, this layer identifies high-risk scenarios and supports decision-making aimed at mitigating adverse outcomes.</p>
-<p>As ERAHUMED applies predefined SSD parameters rather than computing them from toxicity data, the present chapter focuses on their application to simulation results. For details on the derivation and validation of SSDs, we refer the reader to <span class="citation" data-cites="amador2024multiple_stressors">(<a href="references.html#ref-amador2024multiple_stressors" role="doc-biblioref">Amador Crespo et al. 2024</a>)</span>.</p>
-<p>The risk estimation approach follows the methodology described in <span class="citation" data-cites="amador2024multiple_stressors">(<a href="references.html#ref-amador2024multiple_stressors" role="doc-biblioref">Amador Crespo et al. 2024</a>)</span>, to which we refer the reader for a detailed exposition. Here, we summarize the elements that are directly relevant to ERAHUMED’s implementation.</p>
-<p>SSDs are used to translate the pesticide concentrations computed in the <strong>Exposure</strong> module (<a href="exposure.html" class="quarto-xref"><span>Chapter 6</span></a>) into daily values of <strong>PAF</strong>. Chemicals are grouped according to their TMoA classification (encoded by the <code>tmoa_id</code> chemical parameter, <em>cf.</em> <a href="model-inputs.html#tbl-chemical-params" class="quarto-xref">Table&nbsp;<span>3.2</span></a>), and the effects of different TMoAs are assumed to be independent.</p>
-<p>Two distinct SSDs are provided for each chemical:</p>
+<p>This chapter describes how the ERAHUMED DSS assesses the ecotoxicological risks associated with pesticide exposure in the Albufera Natural Park. The ERAHUMED DSS follows a deterministic and a probabilistic approach.</p>
+<p>The deterministic approach is based on the calculation of <strong>Risk Quotients</strong> (RQs) for each individual compound and for the mixture of substances. The RQ (acute) is calculated by dividing the calculated daily pesticide concentration in water by the Predicted No Effect Concentration (acute) provided by the user. The RQ (chronic) is calculated by dividing the 21-day pesticide rolling average concentration in water by the Predicted No Effect Concentration (chronic) provided by the user. The RQ for the mixture is calculated as the sum of the individual RQs of the compounds that form the mixture. RQs larger than one are considered to pose an unacceptable risk for the aquatic ecosystem.</p>
+<p>The probabilistic apporach is based on <strong>Species Sensitivity Distributions (SSD)</strong> <span class="citation" data-cites="posthuma2002ssd">(<a href="references.html#ref-posthuma2002ssd" role="doc-biblioref">Posthuma, Suter II, and Traas 2002</a>)</span>. This method enables the quantification of the <strong>Potentially Affected Fraction (PAF)</strong> of species at a given chemical concentration, offering a probabilistic estimate of ecosystem-level effects. SSDs are used to translate the pesticide concentrations computed in the <strong>Exposure</strong> module (<a href="exposure.html" class="quarto-xref"><span>Chapter 6</span></a>) into daily values of <strong>PAF</strong>. Chemicals are grouped according to their TMoA classification (encoded by the <code>tmoa_id</code> chemical parameter, <em>cf.</em> <a href="model-inputs.html#tbl-chemical-params" class="quarto-xref">Table&nbsp;<span>3.2</span></a>), and the effects of different TMoAs are assumed to be independent. Two distinct SSDs are provided for each chemical:</p>
 <ul>
 <li><strong>Acute risk</strong> is evaluated using <strong>daily concentrations</strong>.</li>
 <li><strong>Chronic risk</strong> is evaluated using a <strong>21-day rolling average</strong> of concentrations, reflecting longer-term exposure effects.</li>
 </ul>
 <p>The SSDs are assumed to follow a log-normal distribution and are thus parametrized in terms of their mean and standard deviations (<code>ssd_acute_mu/sigma</code> and <code>ssd_chronic_mu/sigma</code> parameters in <a href="model-inputs.html#tbl-chemical-params" class="quarto-xref">Table&nbsp;<span>3.2</span></a>).</p>
-<p>Risk estimates are computed both at the level of individual chemicals and at the level of their associated TMoA. This dual perspective enables the identification of both compound-specific risks and mode-of-action-level cumulative effects. To obtain the overall risk, ERAHUMED combines the risks associated with each TMoA under the assumption of statistical independence, following the approach described in <span class="citation" data-cites="amador2024multiple_stressors">(<a href="references.html#ref-amador2024multiple_stressors" role="doc-biblioref">Amador Crespo et al. 2024</a>)</span>. Specifically, the overall PAF is computed as:</p>
+<p>Probabilistic risk estimates are computed both at the level of individual chemicals and at the level of their associated TMoA. This dual perspective enables the identification of both compound-specific risks and mode-of-action-level cumulative effects. To obtain the overall risk, ERAHUMED combines the risks associated with each TMoA assuming concentration addition. Finally, the overall PAF is computed as follows, assuming effect addition:</p>
 <p><span id="eq-msPAF"><span class="math display">\[
 \text{msPAF} = 1 - \prod _i (1-\text{PAF}_i)
 \tag{7.1}\]</span></span></p>
-<p>where <span class="math inline">\(\text{PAF}_i\)</span> is the risk associated with TMoA <span class="math inline">\(i\)</span>.</p>
-<p>In addition to PAFs, ERAHUMED also computes Risk Quotients (RQs) by comparing simulated concentrations to the 5th percentile of the SSD (HC05), using the conventional ratio:</p>
-<p><span id="eq-rq"><span class="math display">\[
-\text{RQ} = \frac{\text{Concentration}}{\text{HC05}}
-\tag{7.2}\]</span></span></p>
-<p>Although the HC05 is derived from the same SSDs used for PAF calculation, the Risk Quotient (RQ) itself does not have a probabilistic interpretation. Instead, it serves as a simple descriptive indicator of potential concern, offering an alternative, threshold-based perspective on risk, complementary to the PAF.</p>
+<p>where <span class="math inline">\(\text{PAF}_i\)</span> is the risk associated with TMoA <span class="math inline">\(i\)</span>. For further details, see <span class="citation" data-cites="martinez2024pharmaceutical">(<a href="references.html#ref-martinez2024pharmaceutical" role="doc-biblioref">Martı́nez-Megı́as et al. 2024</a>)</span>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-amador2024multiple_stressors" class="csl-entry" role="listitem">
-Amador Crespo, Pablo, Juan M. Soria, Jesús Moratalla-López, and Andreu Rico. 2024. <span>“Looking Beyond the Surface: Understanding the Role of Multiple Stressors on the Eutrophication Status of the Albufera Lake (Valencia, Spain).”</span> <em>Science of the Total Environment</em> 956: 177247. <a href="https://doi.org/10.1016/j.scitotenv.2024.177247">https://doi.org/10.1016/j.scitotenv.2024.177247</a>.
+<div id="ref-martinez2024pharmaceutical" class="csl-entry" role="listitem">
+Martı́nez-Megı́as, Claudia, Alba Arenas-Sánchez, Diana Manjarrés-López, Sandra Pérez, Yolanda Soriano, Yolanda Picó, and Andreu Rico. 2024. <span>“Pharmaceutical and Pesticide Mixtures in a Mediterranean Coastal Wetland: Comparison of Sampling Methods, Ecological Risks, and Removal by a Constructed Wetland.”</span> <em>Environmental Science and Pollution Research</em> 31 (10): 14593–609.
 </div>
 <div id="ref-posthuma2002ssd" class="csl-entry" role="listitem">
 Posthuma, Leo, Glenn W. Suter II, and Theo P. Traas. 2002. <em>Species Sensitivity Distributions in Ecotoxicology</em>. Boca Raton, FL: CRC Press.
@@ -337,13 +333,14 @@ Posthuma, Leo, Glenn W. Suter II, and Theo P. Traas. 2002. <em>Species Sensitivi
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

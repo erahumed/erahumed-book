@@ -2,13 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="description" content="The ERAHUMED Decision Support System: Software Manual and Technical Documentation.">
 
-<title>1&nbsp; Introduction – ERAHUMED</title>
+<title>1&nbsp; Introduction – ERAHUMED DSS: a decision support system for the environmental risk
+assessment of pesticide management practices in Mediterranean wetlands</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -35,14 +36,15 @@ ul.task-list li input[type="checkbox"] {
 <link href="../index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-e8de9bd59ba156b9e4cb33cd6f01d621.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-d58359eb3ecc31d3bec1ed479c2cbb3a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -96,9 +98,11 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">ERAHUMED</a> 
+      <a href="../">ERAHUMED DSS: a decision support system for the environmental risk assessment of pesticide management practices in Mediterranean wetlands</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -123,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/birdseye.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conceptual overview of the ERAHUMED model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conceptual overview</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -179,14 +183,8 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#sec-ackno" id="toc-sec-ackno" class="nav-link active" data-scroll-target="#sec-ackno"><span class="header-section-number">1.1</span> Acknowledgements</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -210,18 +208,15 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Mediterranean coastal wetlands are exposed to multiple anthropogenic pressures, one of the most significant being pollution from intensive rice production. Among the most critical pollutants associated with rice cultivation are synthetic pesticides, particularly herbicides, insecticides, and fungicides. Once applied in rice production, pesticides can be transported through spray-drift, surface runoff or leaching into nearby water bodies, threatening the structure and functioning of aquatic ecosystems.</p>
-<p>The ERAHUMED Decision Support System (DSS) was designed to evaluate the exposure and risks of pesticides used in rice cultivation, focusing on the Albufera Natural Park as a reference and study wetland. The Albufera Natural Park, located near Valencia, Spain, is one of the most important wetlands in the Mediterranean region. It spans an area of 21 hectares, including the Albufera lagoon, surrounding marshlands, rice fields, and sand dunes. The freshwater lagoon is connected to the Mediterranean Sea through a system of canals known as “<em>golas</em>.” The park is a Ramsar site and hosts a wide variety of flora and fauna, including several endemic and endangered species.</p>
-<p>The DSS dynamically calculates the volume of water available in rice fields, canals, and the lagoon throughout the year. Additionally, it can dynamically predict pesticide concentrations in various environmental matrices, including rice crops, surface water, and sediment. Finally, the DSS evaluates the risks associated with each pesticide and their mixtures for aquatic ecosystems, based on Species Sensitivity Distributions (SSDs).</p>
-<p>The DSS can be used to predict exposure and risks associated with different pesticides, considering their unique physico-chemical and toxicological properties, at a landscape level. It determines spatially explicit and dynamic variations in concentrations within each water body over time. This makes it a valuable tool for decision-making regarding rice cultivation management and implementing risk mitigation measures at an ecosystem-wide scale. Furthermore, it allows for prospective ecological risk assessments of new substances and the identification of pollution hot-spots and the combined effects of complex contaminant mixtures.</p>
-<p>On the practical side, the DSS is implemented as an R package called <code>{erahumed}</code>, distributed as open-source software and available for download <a href="https://erahumed.github.io/erahumed/">here</a>. The package includes a Graphical User Interface (GUI), implemented as a Shiny application, which allows users to run the models and analyze the results without directly interacting with the underlying R code.</p>
-<p>This documentation provides a comprehensive description of the ERAHUMED Decision Support System (DSS), covering both its scientific foundations and practical use. The main chapters detail the core components of the model—starting with an overview and followed by in-depth descriptions of input parameters, hydrology, pesticide exposure, and ecological risk assessment. These are complemented by two concluding chapters that briefly describe how to operate the system through the R package or the graphical user interface. These final chapters are intentionally concise, as a complete and up-to-date user manual is already available on the package website at https://erahumed.github.io/erahumed/, which may be sufficient for many practical purposes.</p>
-<section id="sec-ackno" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="sec-ackno"><span class="header-section-number">1.1</span> Acknowledgements</h2>
+<p>Mediterranean coastal wetlands are exposed to multiple anthropogenic pressures, one of the most significant being pollution from intensive rice production. Among the most critical pollutants associated with rice cultivation are synthetic pesticides, particularly herbicides, insecticides, and fungicides. Once applied in rice production, pesticides can be transported by surface runoff or leaching into nearby water bodies, threatening the structure and functioning of aquatic ecosystems.</p>
+<p>The ERAHUMED Decision Support System (DSS) was designed to evaluate the exposure and risks of pesticides schemes used in rice cultivation, focusing on the Albufera Natural Park as a reference and study wetland. The Albufera Natural Park, located near Valencia, Spain, is one of the most important wetlands in the Mediterranean region. It spans an area of 21 hectares, including the Albufera lagoon, surrounding marshlands, rice fields, and sand dunes. The freshwater lagoon is connected to the Mediterranean Sea through a system of canals known as “<em>golas</em>.” The Albufera Natural Park is a Ramsar site and hosts a wide variety of flora and fauna, including several endemic and endangered species.</p>
+<p>The ERAHUMED DSS dynamically calculates the volume of water available in rice fields, canals, and the lagoon throughout the year. Additionally, it can dynamically predict pesticide concentrations in various environmental matrices, including rice crops, surface water, and sediment. Finally, the DSS evaluates the risks associated with each pesticide and their mixtures for aquatic ecosystems, based on Risk Quotients (RQs) and Species Sensitivity Distributions (SSDs).</p>
+<p>The ERAHUMED DSS uses a flexible approach able to predict the exposure and risks of different pesticide application schemes that can vary at a wide spatial and temporal scale. It determines spatially explicit and dynamic variations in pesticide concentrations within each water body over time. This makes it a valuable tool for decision-making regarding rice cultivation management and implementing risk mitigation measures at an ecosystem-wide scale. Furthermore, it allows for prospective ecological risk assessments of new substances and application schemes, as well as the identification of pollution hot-spots and the combined effects of complex contaminant mixtures.</p>
+<p>The ERAHUMED DSS is implemented as an R package called <code>{erahumed}</code>, distributed as open-source software and available for download <a href="https://erahumed.github.io/erahumed/">here</a>. The package includes a Graphical User Interface (GUI), implemented as a Shiny application, which allows users to run the models and analyze the results without directly interacting with the underlying R code.</p>
+<p>This documentation provides a comprehensive description of the ERAHUMED Decision Support System (DSS), covering both its scientific foundations and practical use. The main chapters detail the core components of the model—starting with an overview and followed by in-depth descriptions of input parameters, hydrology, pesticide exposure, and ecological risk assessment. These are complemented by two concluding chapters that briefly describe how to operate the system through the R package or the graphical user interface. These final chapters are intentionally concise, as a complete user manual is already available on the package website at <a href="https://erahumed.github.io/erahumed/" class="uri">https://erahumed.github.io/erahumed/</a>.</p>
 <p>The ERAHUMED DSS has been financed by the Talented Researcher Support Programme - PlanGenT (CIDEGENT/2020/043) of the Generalitat Valenciana.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -275,13 +270,14 @@ ul.task-list li input[type="checkbox"] {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -630,8 +626,8 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/birdseye.html" class="pagination-link" aria-label="Conceptual overview of the ERAHUMED model">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conceptual overview of the ERAHUMED model</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/birdseye.html" class="pagination-link" aria-label="Conceptual overview">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conceptual overview</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
