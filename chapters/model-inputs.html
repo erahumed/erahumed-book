@@ -361,7 +361,7 @@ Table&nbsp;3.1: ERAHUMED DSS input parameters: Landscape
 <td style="text-align: left;">m</td>
 <td style="text-align: left;">Environmental properties</td>
 <td style="text-align: left;"><code>numeric(1)</code></td>
-<td style="text-align: left;">A positive number. Active sediment layer depth, where “active”” refers to the portion of the sediment that is actually involved in chemical exchange or transport processes. Expressed in meters.</td>
+<td style="text-align: left;">A positive number. Active sediment layer depth, where “active” refers to the portion of the sediment that is actually involved in chemical exchange or transport processes. Expressed in meters.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>css_ppm</code></td>
@@ -373,7 +373,7 @@ Table&nbsp;3.1: ERAHUMED DSS input parameters: Landscape
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>foc_ss</code></td>
-<td style="text-align: left;">Fraction of organic content in suspended solid</td>
+<td style="text-align: left;">Fraction of organic matter content in suspended solid</td>
 <td style="text-align: left;">1</td>
 <td style="text-align: left;">Environmental properties</td>
 <td style="text-align: left;"><code>numeric(1)</code></td>
@@ -381,7 +381,7 @@ Table&nbsp;3.1: ERAHUMED DSS input parameters: Landscape
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>foc_sed</code></td>
-<td style="text-align: left;">Fraction of organic content in sediment</td>
+<td style="text-align: left;">Fraction of organic matter content in sediment</td>
 <td style="text-align: left;">1</td>
 <td style="text-align: left;">Environmental properties</td>
 <td style="text-align: left;"><code>numeric(1)</code></td>
@@ -390,26 +390,26 @@ Table&nbsp;3.1: ERAHUMED DSS input parameters: Landscape
 <tr class="even">
 <td style="text-align: left;"><code>bd_g_cm3</code></td>
 <td style="text-align: left;">Bulk density of sediment</td>
-<td style="text-align: left;">g·cm⁻²</td>
+<td style="text-align: left;">g·cm⁻³</td>
 <td style="text-align: left;">Environmental properties</td>
 <td style="text-align: left;"><code>numeric(1)</code></td>
 <td style="text-align: left;">A positive number. Bulk density of the sediment (including both the solid material and the pore spaces). Expressed in grams per cubic centimeter.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>qseep_m_day</code></td>
-<td style="text-align: left;">Seepage rate</td>
-<td style="text-align: left;">m·day⁻¹</td>
-<td style="text-align: left;">Environmental properties</td>
-<td style="text-align: left;"><code>numeric(1)</code></td>
-<td style="text-align: left;">A positive number. Seepage rate, <em>i.e.</em> the rate at which water seeps through the sediment or soil. Expressed in meters per day.</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;"><code>porosity</code></td>
 <td style="text-align: left;">Porosity</td>
 <td style="text-align: left;">1</td>
 <td style="text-align: left;">Environmental properties</td>
 <td style="text-align: left;"><code>numeric(1)</code></td>
 <td style="text-align: left;">A number between <code>0</code> and <code>1</code>. The fraction of the total sediment volume that is occupied by pore spaces.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ksetl_m_day</code></td>
+<td style="text-align: left;">Settling rate</td>
+<td style="text-align: left;">m/day</td>
+<td style="text-align: left;">Environmental properties</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Settling rate, representing particle-bound transfer to sediment.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>rfms_map</code></td>
@@ -498,15 +498,15 @@ Table&nbsp;3.1: ERAHUMED DSS input parameters: Landscape
 <td style="text-align: left;">Date of measurement</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">temperature_ave</td>
+<td style="text-align: left;">temperature_ave_celsius</td>
 <td style="text-align: left;">Daily average temperature (degrees Celsius)</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">temperature_min</td>
+<td style="text-align: left;">temperature_min_celsius</td>
 <td style="text-align: left;">Daily minimum temperature (degrees Celsius)</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">temperature_max</td>
+<td style="text-align: left;">temperature_max_celsius</td>
 <td style="text-align: left;">Daily maximum temperature (degrees Celsius).</td>
 </tr>
 <tr class="odd">
@@ -571,14 +571,6 @@ Table&nbsp;3.2: ERAHUMED DSS input parameters: Pesticides
 <td style="text-align: left;">Molecular weight in grams per mole.</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>ksetl_m_day</code></td>
-<td style="text-align: left;">Settling rate</td>
-<td style="text-align: left;">m/day</td>
-<td style="text-align: left;">Transport parameters</td>
-<td style="text-align: left;"><code>numeric(1)</code></td>
-<td style="text-align: left;">Settling rate, representing particle-bound transfer to sediment.</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;"><code>sol_ppm</code></td>
 <td style="text-align: left;">Solubility</td>
 <td style="text-align: left;">ppm</td>
@@ -586,15 +578,15 @@ Table&nbsp;3.2: ERAHUMED DSS input parameters: Pesticides
 <td style="text-align: left;"><code>numeric(1)</code></td>
 <td style="text-align: left;">Water solubility.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>koc_cm3_g</code></td>
 <td style="text-align: left;">Koc</td>
-<td style="text-align: left;">cm ³ /g</td>
+<td style="text-align: left;">cm³/g</td>
 <td style="text-align: left;">Sorption</td>
 <td style="text-align: left;"><code>numeric(1)</code></td>
 <td style="text-align: left;">Organic carbon-water partition coefficient (Koc).</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>fet_cm</code></td>
 <td style="text-align: left;">Foliar extraction term</td>
 <td style="text-align: left;">1/cm</td>
@@ -602,7 +594,7 @@ Table&nbsp;3.2: ERAHUMED DSS input parameters: Pesticides
 <td style="text-align: left;"><code>numeric(1)</code></td>
 <td style="text-align: left;">Fraction of pesticide washed off from foliage per cm of rainfall.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>kf_day</code></td>
 <td style="text-align: left;">Foliage degradation rate</td>
 <td style="text-align: left;">1/day</td>
@@ -610,7 +602,7 @@ Table&nbsp;3.2: ERAHUMED DSS input parameters: Pesticides
 <td style="text-align: left;"><code>numeric(1)</code></td>
 <td style="text-align: left;">Degradation rate in foliage.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>kw_day</code></td>
 <td style="text-align: left;">Water column degradation rate</td>
 <td style="text-align: left;">1/day</td>
@@ -618,7 +610,7 @@ Table&nbsp;3.2: ERAHUMED DSS input parameters: Pesticides
 <td style="text-align: left;"><code>numeric(1)</code></td>
 <td style="text-align: left;">Degradation rate in the water column.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>ks_sat_day</code></td>
 <td style="text-align: left;">Saturated sediment degradation rate</td>
 <td style="text-align: left;">1/day</td>
@@ -626,7 +618,7 @@ Table&nbsp;3.2: ERAHUMED DSS input parameters: Pesticides
 <td style="text-align: left;"><code>numeric(1)</code></td>
 <td style="text-align: left;">Degradation rate in saturated sediment.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>ks_unsat_day</code></td>
 <td style="text-align: left;">Unsaturated sediment degradation rate</td>
 <td style="text-align: left;">1/day</td>
@@ -634,85 +626,101 @@ Table&nbsp;3.2: ERAHUMED DSS input parameters: Pesticides
 <td style="text-align: left;"><code>numeric(1)</code></td>
 <td style="text-align: left;">Degradation rate in unsaturated sediment.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>kw_temp</code></td>
 <td style="text-align: left;">Water degradation reference temp.</td>
-<td style="text-align: left;">° C</td>
+<td style="text-align: left;">°C</td>
 <td style="text-align: left;">Degradation</td>
 <td style="text-align: left;"><code>numeric(1)</code></td>
-<td style="text-align: left;">Reference temperature for kw_day.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>ks_sat_temp</code></td>
-<td style="text-align: left;">Sat. sediment degradation ref. temp.</td>
-<td style="text-align: left;">° C</td>
-<td style="text-align: left;">Degradation</td>
-<td style="text-align: left;"><code>numeric(1)</code></td>
-<td style="text-align: left;">Reference temperature for ks_sat_day.</td>
+<td style="text-align: left;">Reference temperature for kw (degradation rate in water).</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>ks_unsat_temp</code></td>
-<td style="text-align: left;">Unsat. sediment degradation ref. temp.</td>
-<td style="text-align: left;">° C</td>
+<td style="text-align: left;"><code>ks_sat_temp</code></td>
+<td style="text-align: left;">Sat. sediment degradation ref. temp.</td>
+<td style="text-align: left;">°C</td>
 <td style="text-align: left;">Degradation</td>
 <td style="text-align: left;"><code>numeric(1)</code></td>
-<td style="text-align: left;">Reference temperature for ks_unsat_day.</td>
+<td style="text-align: left;">Reference temperature for ks_sat (degradation rate in saturated sediment).</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;"><code>ks_unsat_temp</code></td>
+<td style="text-align: left;">Unsat. sediment degradation ref. temp.</td>
+<td style="text-align: left;">°C</td>
+<td style="text-align: left;">Degradation</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Reference temperature for ks_unsat (degradation rate in unsaturated sediment).</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;"><code>Q10_kw</code></td>
 <td style="text-align: left;">Q10 for water degradation</td>
-<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">1</td>
 <td style="text-align: left;">Degradation</td>
 <td style="text-align: left;"><code>numeric(1)</code></td>
 <td style="text-align: left;">Q10 coefficient for temperature correction of degradation in water.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>Q10_ks_sat</code></td>
 <td style="text-align: left;">Q10 for sat. sediment degradation</td>
-<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">1</td>
 <td style="text-align: left;">Degradation</td>
 <td style="text-align: left;"><code>numeric(1)</code></td>
 <td style="text-align: left;">Q10 coefficient for temperature correction in saturated sediment.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>Q10_ks_unsat</code></td>
 <td style="text-align: left;">Q10 for unsat. sediment degradation</td>
-<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">1</td>
 <td style="text-align: left;">Degradation</td>
 <td style="text-align: left;"><code>numeric(1)</code></td>
 <td style="text-align: left;">Q10 coefficient for temperature correction in unsaturated sediment.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>ssd_acute_mu</code></td>
-<td style="text-align: left;">SSD acute mean (log10)</td>
-<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">SSD acute mean on log-scale</td>
+<td style="text-align: left;">log₁₀(μg/L)</td>
 <td style="text-align: left;">Toxicity</td>
 <td style="text-align: left;"><code>numeric(1)</code></td>
-<td style="text-align: left;">Mean (log10 scale) of the acute species sensitivity distribution.</td>
+<td style="text-align: left;">Mean (log10 scale) of the acute species sensitivity distribution. The unit of this input (log10(microgram/liter)) is interpreted as follows: the base 10 exponential of the input is the median (according to the acute SSD) concentration in micrograms per liter.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>ssd_acute_sigma</code></td>
-<td style="text-align: left;">SSD acute std. deviation (log10)</td>
-<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">SSD acute std. deviation on log-scale</td>
+<td style="text-align: left;">1</td>
 <td style="text-align: left;">Toxicity</td>
 <td style="text-align: left;"><code>numeric(1)</code></td>
 <td style="text-align: left;">Standard deviation (log10 scale) of the acute species sensitivity distribution.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>ssd_chronic_mu</code></td>
-<td style="text-align: left;">SSD chronic mean (log10)</td>
-<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">SSD chronic mean on log-scale</td>
+<td style="text-align: left;">log₁₀(μg/L)</td>
 <td style="text-align: left;">Toxicity</td>
 <td style="text-align: left;"><code>numeric(1)</code></td>
-<td style="text-align: left;">Mean (log10 scale) of the chronic species sensitivity distribution.</td>
+<td style="text-align: left;">Mean (log10 scale) of the chronic species sensitivity distribution. The unit of this input (log10(microgram/liter)) is interpreted as follows: the base 10 exponential of the input is the median (according to the chronic SSD) concentration in micrograms per liter.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>ssd_chronic_sigma</code></td>
-<td style="text-align: left;">SSD chronic std. deviation (log10)</td>
-<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">SSD chronic std. deviation on log-scale</td>
+<td style="text-align: left;">1</td>
 <td style="text-align: left;">Toxicity</td>
 <td style="text-align: left;"><code>numeric(1)</code></td>
 <td style="text-align: left;">Standard deviation (log10 scale) of the chronic species sensitivity distribution.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>pnec_acute_ug_L</code></td>
+<td style="text-align: left;">Predicted No Effect Concentration for acute risk</td>
+<td style="text-align: left;">μg/L</td>
+<td style="text-align: left;">Toxicity</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Predicted No Effect Concentration used for the computation of acute risk quotients.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>pnec_chronic_ug_L</code></td>
+<td style="text-align: left;">Predicted No Effect Concentration for chronic risk</td>
+<td style="text-align: left;">μg/L</td>
+<td style="text-align: left;">Toxicity</td>
+<td style="text-align: left;"><code>numeric(1)</code></td>
+<td style="text-align: left;">Predicted No Effect Concentration used for the computation of chronic risk quotients.</td>
 </tr>
 </tbody>
 </table>
