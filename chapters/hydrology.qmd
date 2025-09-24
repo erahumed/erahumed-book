@@ -83,7 +83,7 @@ The rationale is that the simple sum of estuaries outflows omits potentially imp
 
 Once $O_t$ is calculated through @eq-hbl-total-outflow, $I_t$ can be immediately obtained from @eq-hbl-hydro-balance-explicit. Notice that whenever the aforementioned compensating outflow term due to water recirculation is included (which happens when the maximum in Eq. [-@eq-hbl-total-outflow] is given by the second term), the total inflow is always estimated to be zero.
 
-## Hyodrology of rice field clusters {#sec-hbc}
+## Hydrology of rice field clusters {#sec-hbc}
 
 Water balance calculations for rice field clusters are complex due to the lack of observational data. The simulation algorithm relies on several key components:
 
