@@ -2,104 +2,62 @@
 prefer-html: true
 ---
 
-# Conceptual overview of the ERAHUMED model {#sec-birdseye}
+# Conceptual overview {#sec-birdseye}
 
-Before diving into the technical details of the ERAHUMED Decision Support System, this chapter provides a high-level overview of its core structure and modeling approach. The goal is to offer readers an intuitive understanding of what ERAHUMED does—how it conceptualizes the landscape of the Albufera Natural Park, simulates water and chemical dynamics, and evaluates ecological risks—before introducing the formal models and data inputs that underpin each component.
+This chapter provides a high-level overview of the core structure and modeling approach used by the ERAHUMED DSS. The goal is to offer readers an intuitive understanding of what ERAHUMED does—how it conceptualizes the landscape of the Albufera Natural Park, simulates water and chemical dynamics, and evaluates ecological risks—before introducing the formal models and data inputs that underpin each component.
 
 We outline the main building blocks of the simulation workflow, the hydrogeographical simplifications that allow for efficient modeling of the park’s complex water system, and the customization capabilities available to simulate diverse agrochemical management scenarios. Together, these elements form the foundation upon which the more detailed descriptions in the following chapters will build.
 
 ## Structure of ecological risk simulations
 
-The ERAHUMED model for assessing the ecological status of the Albufera Natural 
-Park consists of three key components:
+The ERAHUMED DSS consists of three key components:
 
-* **Hydrology**: Water dynamics within the park
-* **Exposure**: Estimating the exposure to toxic chemicals
-* **Risk Assessment**: Evaluating the impact of exposure
+-   **Hydrological dynamics within the park**
+-   **Pesticide exposure assessment**
+-   **Pesticide risk assessment**
 
-From a spatial perspective, the natural park is divided into three types of 
-water bodies: the Albufera lake, rice field clusters, and irrigation 
-ditches, which hydrologically connect the lake to the fields. Each of the model’s 
-computational layers incorporates specific quantitative models to simulate the 
-relevant processes across all water bodies. This is summarized in @fig-layers, 
-where arrows indicate downstream dependencies and define the logical computation 
-order.
+From a spatial perspective, the natural park is divided into three types of water bodies: the rice field clusters, the drainage/irrigation ditches, and the Albufera lake, which are hydrologically connected. Each of the model’s computational layers incorporates specific quantitative models to simulate the relevant processes across all water bodies. This is summarized in @fig-layers, where arrows indicate downstream dependencies and define the logical computation order.
 
+![Scheme of ERAHUMED model components. Directional arrows indicate the downstream dependencies of the various simulation layers.](img/layers.png){#fig-layers width="100%"}
 
-![Scheme of ERAHUMED model components. Directional arrows indicate the downstream dependencies of the various simulation layers.](img/layers.png){width=100% #fig-layers}
+To clarify this structure, we can summarize the role of each simulation layer in @fig-layers as follows:
 
-To clarify this structure, we can summarize the role of each simulation layer in
-@fig-layers as follows:
+1.  The system's hydrology, including water volumes and flows for all hydrological elements, is derived from minimal input data: daily water levels and sea outlet outflows for the Albufera lake. This is achieved through a set of simplifying assumptions about the hydrology of rice fields and irrigation ditches. Details on this model are provided in @sec-hydrology.
 
-1. The system's hydrology, including water volumes and flows for all 
-hydrological elements, is derived from minimal input data: daily water levels 
-and sea outlet outflows for the Albufera lake. This is achieved 
-through a set of simplifying assumptions about the hydrology of rice fields 
-and irrigation ditches. Details on this model are provided in @sec-hydrology.
+2.  Exposure to pesticides is calculated by first simulating their application to rice fields based on typical cultivation patterns. The dispersion of chemicals is then modeled using a set of differential equations designed to capture the key physical processes driving their transfer and transport across environmental compartments and water bodies. These calculations are described in detail in @sec-exposure.
 
-2. Exposure to chemicals is calculated by first simulating their application to 
-rice fields based on typical cultivation patterns. The dispersion of chemicals 
-is then modeled using a set of differential equations designed to 
-capture the key physical processes driving their spread. These calculations are
-described in detail in @sec-exposure.
-
-3. The impact of chemicals across all water bodies is assessed using 
-model-based approaches, currently including Species Sensitivity Distributions 
-(SSDs) and Risk Quotients (RQs). These approaches rely on publicly available 
-toxicity data to estimate ecological risk. Full details of the risk assessment 
-methodology are provided in @sec-risk.
+3.  The pesticide risks to non-target aquatic organisms due to acute and chronic water exposure across all water bodies is assessed using model-based approaches, currently including Risk Quotients (RQs) and Species Sensitivity Distributions (SSDs). These approaches rely on publicly available toxicity data to estimate ecological risks. Full details of the risk assessment methodology are provided in @sec-risk.
 
 ## Hydrogeographical representation {#sec-hydrogeo}
 
-The ERAHUMED model implements a spatially explicit representation of the 
-Albufera Natural Park to support ecological risk assessment of pesticide use. 
-This representation captures the hydrological and geographical structure of the 
-park through a simplified model that focuses on the dominant water flow 
-pathways and landscape units relevant to exposure and risk modeling.
+The ERAHUMED model implements a spatially explicit representation of the Albufera Natural Park to support ecological risk assessment of pesticide use. This representation captures the hydrological and geographical structure of the park through a simplified model that focuses on the dominant water flow pathways and landscape units relevant to exposure and risk modeling.
 
-At the core of this model are three hydro-geographical components:
+At the core of this model , there are three hydro-geographical components:
 
-* **Rice field clusters**, representing the agricultural units where pesticide 
-applications occur.
+-   **Rice field clusters**, representing the agricultural units where pesticide applications occur.
 
-* **Ditches**, which act as conduits for water (and associated pesticide loads) 
-draining from the fields.
+-   **Ditches**, which act as conduits for water (and associated pesticide loads) draining from the fields to the Albufera lake.
 
-* **The Albufera lake**, which serves as the terminal water body receiving 
-inputs from the surrounding landscape.
+-   **The Albufera lake**, which serves as the terminal water body receiving inputs from the surrounding landscape.
 
-The actual geographical identification of clusters and ditches was provided in @martinez2024pharmaceutical, to which we refer the reader for further details.
-This resulted in 552 rice field clusters, distributed across the irrigation 
-sub-basins identified by 26 ditches, that are shown below in an interactive map.
+The actual geographical identification of clusters and ditches was provided by @martinez2024pharmaceutical, to which we refer the reader for further details. This resulted in 552 rice field clusters, distributed across the irrigation sub-basins identified by 26 ditches, that are shown below in an interactive map.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 erahumed:::plot_albufera_clusters()
 ```
 
+The schematic diagram shown in @fig-hydrology-scheme illustrates the simplified conceptual model of the Albufera Natural Park used by the ERAHUMED DSS. The model accounts for water flows across three primary landscape elements: rice clusters, ditches, and the Albufera lake, as depicted by the directional arrows. Key simplifying assumptions embedded in the model and visually summarized in the diagram include:
 
-The schematic diagram shown in @fig-hydrology-scheme illustrates the simplified 
-conceptual model of the Albufera Natural Park used in ERAHUMED. The model 
-accounts for water flows across three primary landscape elements: rice 
-clusters, ditches, and the Albufera lake, as depicted by the directional arrows. 
-Key simplifying assumptions embedded in the model and visually summarized in the 
-diagram are as follows:
+-   **Rice field clusters** Clusters are irrigated by external water sources and drain exclusively into the ditches. There is no direct hydrological interaction or exchange between individual clusters.
 
-* **Rice field clusters** Clusters are irrigated by external water sources and drain 
-exclusively into the ditches. There is no direct hydrological interaction or 
-exchange between individual clusters.
+-   **Ditches** Ditches collect water from the clusters and, potentially, from additional external sources. They channel all inflows directly into the Albufera lake.
 
-* **Ditches** Ditches collect water from the clusters and, potentially, from 
-additional external sources. They channel all inflows directly into the Albufera 
-lake.
+-   **The Albufera Lake** The lake receives water exclusively from the ditches. While two types of outflow are considered, namely direct discharge to the sea and water recirculation to the rice fields, the latter is considered to be negligible[^birdseye-1] and is not taken into account by the model.
 
-* **The Albufera Lake**
-The lake receives water exclusively from the ditches. While two types of outflow are considered, namely direct discharge to the sea and water recirculation to the rice fields, the latter is typically negligible^[Further details on this will be provided elsewhere.].
+[^birdseye-1]: Further details on this will be provided elsewhere.
 
+![Schematic representation of the ERAHUMED DSS hydrogeographical model flow.](img/hydrology_scheme.jpg){#fig-hydrology-scheme fig-align="center"}
 
-![Schematic representation of the ERAHUMED hydrogeographical model flow.](img/hydrology_scheme.jpg){#fig-hydrology-scheme fig-align="center"}
+## Custom pesticide schedules
 
-
-
-## Custom agrochemical schedules
-
-Beyond the default simulation workflow, the ERAHUMED software provides advanced tools for defining custom chemical compounds and rice field management systems (RFMSs). While current agrochemical practices in the Albufera Natural Park are included by default, users can simulate and compare alternative scenarios by modifying or introducing new chemicals and management systems. This makes ERAHUMED a powerful resource for exploring future changes in agricultural practices or regulatory strategies.
+The ERAHUMED DSS provides advanced tools for defining custom pesticide and rice field management practices. While current pesticide use practices in the Albufera Natural Park are included by default, users can simulate and compare alternative scenarios by modifying or introducing new pesticides, dosages, application schemes and management practices. This makes the ERAHUMED DSS a powerful resource for exploring future changes in agrochemical use practices or risk mitigation strategies.
