@@ -1,6 +1,6 @@
 # Exposure {#sec-exposure}
 
-This Chapter describes how ERAHUMED models pesticide exposure in the Albufera Natural Park. The hydrological simulation discussed in the previous Chapter provides the foundation for this analysis, as water serves as the primary medium for pesticide transport. Here, we outline how ERAHUMED simulates the introduction, dispersion, and fate of pesticides within the system. This includes processes such as deposition, degradation, and transfer between water bodies. By integrating hydrological dynamics with chemical behavior, the model estimates exposure levels over time and space.
+This Chapter describes how the ERAHUMED DSS models pesticide exposure in the water and sediment of the water bodies of the Albufera Natural Park. The hydrological simulation discussed in the previous Chapter provides the foundation for this analysis, as water serves as the primary medium for pesticide transport. Here, we outline how ERAHUMED simulates the introduction, dispersion, and fate of pesticides within the system. This includes processes such as deposition, degradation, and transfer between water bodies. By integrating hydrological dynamics with chemical fate and transport, the model estimates exposure levels over time and space.
 
 As illustrated in our hydrological model (@fig-hydrology-scheme), pesticides applied to rice field clusters are transported through water flow into ditches, then into the Albufera lake, and ultimately to the sea.
 
@@ -53,7 +53,7 @@ where:
 -   $\rho$ is the chemical solubility in water,
 -   $\sigma(x)$ is a function (not further specified, see below) that grows quickly for $x > 1$, and vanishes for $x \leq 1$. This function accounts for solubility.
 
-Strictly speaking, all these terms have instantaneous time dependence[^exposure-3]. Apart from making the [system @eq-ct-ode] hard to attack by analytic means, such a dependence is troubling because we don't have access to the exact time dependence of the majority of these terms (*e.g.* outflow, volume or chemical applications), our input consisting of simple daily average/cumulative values. On the other hand, if all the terms were constant, and if we could neglect $\sigma$, the solution of @eq-ct-ode would be immediate, as the corresponding system becomes a linear ODE with constant coefficients, in addition whose eigenvalues and eigenvectors can be computed explicitly.
+Strictly speaking, all these terms have instantaneous time dependence[^exposure-3]. Apart from making the [system @eq-ct-ode] hard to attack by analytic means, such a dependence is troubling because we don't have access to the exact time dependence of the majority of these terms (*e.g.* outflow, volume or chemical applications), our input consisting of simple daily average/cumulative values. On the other hand, if all the terms were constant, and if we could neglect $\sigma$, the solution of @eq-ct-ode would be immediate, as the corresponding system becomes a linear Ordinary Differential Equation (ODE) with constant coefficients, in addition whose eigenvalues and eigenvectors can be computed explicitly.
 
 [^exposure-3]: This observation also includes pure physico-chemical "constants" such as degradation rates, where the time dependence would stem from *temperature* dependence.
 
@@ -143,7 +143,7 @@ As mentioned above, $a_i$ accounts for both direct pesticide applications and wa
 
 $$
 a_i = a_i ^{\text{app}} + a_i ^{\text{inflow}}
-$$ 
+$$
 
 The calculation of direct application rates from input parameters is described below. As to the second term, the amount of incoming mass is exactly given by the amount of outgoing mass in the outflow of the preceding element along the water course chain, which is computed as detailed in the previous Section.
 
@@ -175,7 +175,7 @@ $$
 a_X ^{\text{inflow}} = \sum _{i} m_i ^{\text {inflow}},
 $$ {#eq-mass-inflow-sum}
 
-where the sum runs over the relevant inflow sources for the water body under consideration.  Inflow masses $m_i ^{\text {inflow}}$ @eq-mw-outflow are obtained from @eq-mw-outflow when the source is a hydrological element higher in the flow network (e.g., clusters for ditches, or ditches for the lake). At the current stage of development, external sources are assumed to have zero pesticide concentration and are thus excluded from the mass inflow calculation.
+where the sum runs over the relevant inflow sources for the water body under consideration. Inflow masses $m_i ^{\text {inflow}}$ @eq-mw-outflow are obtained from @eq-mw-outflow when the source is a hydrological element higher in the flow network (e.g., clusters for ditches, or ditches for the lake). At the current stage of development, external sources are assumed to have zero pesticide concentration and are thus excluded from the mass inflow calculation.
 
 Application rates are given by:
 
@@ -193,10 +193,11 @@ Here, $A(t)$ is the applied amount on day $t$, whose computation is described be
 
 $$
 \phi(t) = \min\left[\frac{d_s(t)}{j_{\text{grow}}},\,1\right]\cdot \phi_{\text{max}},
-$$ 
-where $d_s(t)$ is the number of days elapsed from seeding, while $j_\text{grow}$ and $\phi_\text{max}$ correspond to the input parameters `jgrow` and `covmax`.
+$$ where $d_s(t)$ is the number of days elapsed from seeding, while $j_\text{grow}$ and $\phi_\text{max}$ correspond to the input parameters `jgrow` and `covmax`.
 
-The actual day on which a pesticide application takes place is determined by adjusting the nominal application day specified in the RFMS definition (see @sec-rfms-definition) using the plan delay computed in the hydrological simulation (see @sec-hbc). Concretely, if we denote by $\mathcal D$ the nominal day of year for pesticide application, by $d_{t}$ the day of year corresponding to a given date $t$, and by $\delta _{c,t}$ the plan delay for a cluster $c$ on the same date (*cf.* @eq-hbc-delayed-day), the actual application date^[For simulations spanning multiple years, @eq-ct-application-day is applied independently within each year.] is given by:
+The actual day on which a pesticide application takes place is determined by adjusting the nominal application day specified in the RFMS definition (see @sec-rfms-definition) using the plan delay computed in the hydrological simulation (see @sec-hbc). Concretely, if we denote by $\mathcal D$ the nominal day of year for pesticide application, by $d_{t}$ the day of year corresponding to a given date $t$, and by $\delta _{c,t}$ the plan delay for a cluster $c$ on the same date (*cf.* @eq-hbc-delayed-day), the actual application date[^exposure-6] is given by:
+
+[^exposure-6]: For simulations spanning multiple years, @eq-ct-application-day is applied independently within each year.
 
 $$ T_{\text{application}} =\max\lbrace t \,\vert\, d_{t}-\delta_{c,t} = \mathcal D\rbrace  $$ {#eq-ct-application-day}
 
@@ -208,16 +209,13 @@ Daily degradation rates $k_{f,w,s}(t)$ for the chemical are modeled through the 
 
 $$
 k(t) = k_0 \cdot Q_{10}^{\frac{T(t)-T_0}{10}}
-$$ 
-where $k_0$ is the degradation rate $k_0$ at a reference temperature $T_0$, $Q_{10}$ is a numerical constant, and $T(t)$ is the average temperature on day $t$. All these numerical quantities are chemical input parameters (see @tbl-chemical-params), except for the daily temperature $T(t)$, that comes from observational data (column `temperature_ave` of `weather_df`, see @sec-weather-df for reference). 
+$$ where $k_0$ is the degradation rate $k_0$ at a reference temperature $T_0$, $Q_{10}$ is a numerical constant, and $T(t)$ is the average temperature on day $t$. All these numerical quantities are chemical input parameters (see @tbl-chemical-params), except for the daily temperature $T(t)$, that comes from observational data (column `temperature_ave` of `weather_df`, see @sec-weather-df for reference).
 
 For the sediment compartment, we compute two degradation constants $k_s^{\text{sat/unsat}}$, for saturated and unsaturated sediment, respectively (the input parameters for the calculation of these two constants are independent, see @tbl-chemical-params). The degradation rate in the solid compartment at time $t$ is eventually given by:
 
 $$
 k_s(t) = k_s ^{\text{sat}}(t) I(h(t)\neq0)+k_s ^{\text{unsat}}(t) I(h(t)=0)
-$$  {#eq-solid-degradation-rate}
-
-
+$$ {#eq-solid-degradation-rate}
 
 ### Diffusion rates
 
@@ -229,7 +227,7 @@ $$ where $h(t)$ is the water depth of the hydrological element; $h_\text{act}$ i
 
 $$
 k_\text{dif} = \left( \frac{69.35}{365} - \text{pos}\cdot M^{-2/3} \right)\frac{\text{m}}{\text{day}}
-$$ 
+$$
 
 where $M$ is the molecular weight of the chemical (chemical parameter `MW`); finally, $f_{D,w}$ and $f_{D,s}$ are given by:
 
@@ -241,9 +239,8 @@ where $c^{\text{ss}}$ and $b_d$ correspond to the input parameters `css_ppm` and
 
 $$
 k_d ^{\text{sed/ss}} = \text{foc}^{\text{sed/ss}}\cdot k_\text{oc}
-$$
-where $\text{foc}^{\text{sed/ss}}$ correspond to the environmental parameters `foc_ss` and `foc_sed`, respectively, and $k_\text{oc}$ is the chemical parameter `koc_cm3_g`.
- 
+$$ where $\text{foc}^{\text{sed/ss}}$ correspond to the environmental parameters `foc_ss` and `foc_sed`, respectively, and $k_\text{oc}$ is the chemical parameter `koc_cm3_g`.
+
 ### Settling rate
 
 The daily settling rate is computed as:
