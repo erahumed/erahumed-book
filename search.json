@@ -2,7 +2,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "ERAHUMED DSS: a decision support system for the environmental risk assessment of pesticide management practices in Mediterranean wetlands",
+    "title": "ERAHUMED Decision Support System",
     "section": "",
     "text": "Preface\nThe purpose of this book is to provide a comprehensive reference for the ERAHUMED Decision Support System. Here you can find the technical descriptions of the algorithms employed by the system, as well as the user manual for the accompanying software.\nThe software has now reached a mature state and is under active development on Github. In particular, the {erahumed} R package is hosted here.\nFor general information on the ERAHUMED project, please refer to the official website. If you want to get in touch, please contact:",
     "crumbs": [
@@ -12,7 +12,7 @@
   {
     "objectID": "index.html#software-version",
     "href": "index.html#software-version",
-    "title": "ERAHUMED DSS: a decision support system for the environmental risk assessment of pesticide management practices in Mediterranean wetlands",
+    "title": "ERAHUMED Decision Support System",
     "section": "Software version",
     "text": "Software version\nThis manual corresponds to version 0.21.0 of the {erahumed} R package.",
     "crumbs": [
