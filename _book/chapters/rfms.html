@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.42">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="The ERAHUMED Decision Support System: Software Manual and Technical Documentation.">
+<meta name="description" content="ERAHUMED DSS: a decision support system for the environmental risk assessment of pesticide management practices in Mediterranean wetlands — Software Manual and Technical Documentation.">
 
-<title>4&nbsp; Rice Field Management Systems – ERAHUMED</title>
+<title>4&nbsp; Rice Field Management Systems – ERAHUMED Decision Support System</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,15 +33,16 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="../">
 <link href="../chapters/hydrology.html" rel="next">
 <link href="../chapters/model-inputs.html" rel="prev">
-<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8da5b4427184b79ecddefad3d342027e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-364982630eef5352dd1537128a8ed5cb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -73,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -97,7 +98,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">ERAHUMED</a> 
+      <a href="../">ERAHUMED Decision Support System</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -122,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/birdseye.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conceptual overview of the ERAHUMED model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conceptual overview</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -183,14 +184,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-chemicals" id="toc-sec-chemicals" class="nav-link active" data-scroll-target="#sec-chemicals"><span class="header-section-number">4.1</span> Chemicals</a></li>
+  <li><a href="#sec-chemicals" id="toc-sec-chemicals" class="nav-link active" data-scroll-target="#sec-chemicals"><span class="header-section-number">4.1</span> Pesticides</a></li>
   <li><a href="#sec-rfms-definition" id="toc-sec-rfms-definition" class="nav-link" data-scroll-target="#sec-rfms-definition"><span class="header-section-number">4.2</span> Rice Field Management Systems</a></li>
   <li><a href="#sec-cluster-map" id="toc-sec-cluster-map" class="nav-link" data-scroll-target="#sec-cluster-map"><span class="header-section-number">4.3</span> Mapping RFMSs to Clusters</a></li>
-  <li><a href="#sec-builtins" id="toc-sec-builtins" class="nav-link" data-scroll-target="#sec-builtins"><span class="header-section-number">4.4</span> Built-in Presets</a>
+  <li><a href="#sec-builtins" id="toc-sec-builtins" class="nav-link" data-scroll-target="#sec-builtins"><span class="header-section-number">4.4</span> Built-in presets</a>
   <ul class="collapse">
-  <li><a href="#cluster-map" id="toc-cluster-map" class="nav-link" data-scroll-target="#cluster-map"><span class="header-section-number">4.4.1</span> Cluster Map</a></li>
-  <li><a href="#management-systems" id="toc-management-systems" class="nav-link" data-scroll-target="#management-systems"><span class="header-section-number">4.4.2</span> Management Systems</a></li>
-  <li><a href="#chemicals" id="toc-chemicals" class="nav-link" data-scroll-target="#chemicals"><span class="header-section-number">4.4.3</span> Chemicals</a></li>
+  <li><a href="#cluster-map" id="toc-cluster-map" class="nav-link" data-scroll-target="#cluster-map"><span class="header-section-number">4.4.1</span> Cluster map</a></li>
+  <li><a href="#management-systems" id="toc-management-systems" class="nav-link" data-scroll-target="#management-systems"><span class="header-section-number">4.4.2</span> Management systems</a></li>
+  <li><a href="#pesticides" id="toc-pesticides" class="nav-link" data-scroll-target="#pesticides"><span class="header-section-number">4.4.3</span> Pesticides</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -217,39 +218,39 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>We begin our detailed description of the models implemented in the ERAHUMED Decision Support System by introducing how rice field management systems (RFMSs) are represented and configured. This is a natural starting point, as RFMSs define the agricultural and chemical practices that shape the simulation scenarios. They determine when and how water is managed in the fields, and which pesticides are applied, forming the basis upon which hydrological flows, chemical exposure, and ecological risks are computed.</p>
-<p>In ERAHUMED, RFMSs serve as scenario-defining units that encapsulate the temporal patterns of agricultural operations for rice cultivation. These include:</p>
+<p>The detailed description of the models implemented in the ERAHUMED DSS will start by introducing how rice field management systems (RFMSs) are represented and configured. This is a natural starting point, as RFMSs define the agricultural and chemical practices that shape the simulation scenarios. They determine when and how water is managed in the fields, and which pesticides are applied, forming the basis upon which hydrological flows, chemical exposure, and ecological risks are computed.</p>
+<p>In ERAHUMED DSS, RFMSs serve as scenario-defining units that encapsulate the temporal patterns of agricultural operations for rice cultivation. These include:</p>
 <ul>
-<li><p>The crop calendar (sowing and harvesting dates), as well as the start and end dates for the Perellonà period.</p></li>
-<li><p>The application of chemical substances (e.g., pesticides).</p></li>
+<li><p>The crop calendar (sowing and harvesting dates), as well as the start and end dates for the winter flooding (Perellonà) period.</p></li>
+<li><p>The application of pesticides.</p></li>
 </ul>
 <p>From this information, the system infers the irrigation and drainage patterns for each rice field cluster throughout the simulation period.</p>
-<p>In the following sections, we describe the components that make up a complete rice field management system. We begin with the definition of chemicals, detailing the key physico-chemical and toxicological properties used to characterize each substance. We then explain how RFMSs are constructed by specifying crop calendar dates and scheduling chemical applications. In this part, particular attention is given to how the irrigation and drainage schedules are automatically derived from the crop cycle and the Perellonà period. Finally, we describe how RFMSs are spatially assigned to rice field clusters.</p>
+<p>In the following sections, we describe the components that make up a complete rice field management system. We begin with the definition of chemicals, detailing the key physico-chemical and toxicological properties used to characterize each substance. We then explain how RFMSs are constructed by specifying crop calendar dates and scheduling chemical applications. In this part, particular attention is given to how the irrigation and drainage schedules are automatically derived from the crop cycle and the winter flooding (Perellonà) period. Finally, we describe how RFMSs are spatially assigned to rice field clusters.</p>
 <section id="sec-chemicals" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="sec-chemicals"><span class="header-section-number">4.1</span> Chemicals</h2>
-<p>Each rice field management system (RFMS) in ERAHUMED schedules applications of one or more chemical substances, typically pesticides. To simulate their transport, transformation, and ecological effects, each chemical must be defined as a structured object with a set of physicochemical, environmental, and toxicological properties.</p>
+<h2 data-number="4.1" class="anchored" data-anchor-id="sec-chemicals"><span class="header-section-number">4.1</span> Pesticides</h2>
+<p>Each RFMS schedules applications of one or more pesticides. To simulate their transport, transformation, and ecological risks, each chemical must be defined as a structured object with a set of physicochemical, environmental, and toxicological properties.</p>
 <p>A chemical is characterized by the following groups of parameters (<em>cf.</em> <a href="model-inputs.html#tbl-chemical-params" class="quarto-xref">Table&nbsp;<span>3.2</span></a>):</p>
 <ul>
-<li><p><strong>Identity</strong> Each chemical has a display name (<code>display_name</code>) and an identifier for its toxic mode of action (<code>tmoa_id</code>), used to group substances by their biological effect.</p></li>
+<li><p><strong>Identity:</strong> Each chemical has a display name (<code>display_name</code>) and an identifier for its toxic mode of action (<code>tmoa_id</code>), used to group substances by their ecological effect.</p></li>
 <li><p><strong>Physicochemical properties</strong> These include molecular weight (<code>MW</code>) and water solubility (<code>sol_ppm</code>), which influence transport processes and partitioning in the environment.</p></li>
 <li><p><strong>Transport parameters</strong> Parameters such as the settling rate to sediment (<code>ksetl_m_day</code>) and the foliar wash-off coefficient (<code>fet_cm</code>) describe how the chemical moves within the system after application.</p></li>
 <li><p><strong>Sorption</strong> The organic carbon-water partition coefficient (<code>koc_cm3_g</code>) governs how strongly the chemical binds to soils and sediments.</p></li>
 <li><p><strong>Degradation</strong> Degradation rates are specified separately for foliage (<code>kf_day</code>), the water column (<code>kw_day</code>), saturated sediment (<code>ks_sat_day</code>), and unsaturated sediment (<code>ks_unsat_day</code>). Each rate can be adjusted for temperature using a reference temperature (<code>*_temp</code>) and a Q10 coefficient (<code>Q10_*</code>).</p></li>
-<li><p><strong>Toxicity</strong> Toxic effects on aquatic organisms are described using species sensitivity distributions (SSD). Separate parameters are provided for acute (<code>ssd_acute_mu</code>, <code>ssd_acute_sigma</code>) and chronic (<code>ssd_chronic_mu</code>, <code>ssd_chronic_sigma</code>) toxicity, both expressed on the log₁₀ scale.</p></li>
+<li><p><strong>Toxicity</strong> Toxic effects on aquatic organisms are described using Risk Quotients (RQs) and Species Sensitivity Distributions (SSDs). Separate parameters are provided for acute (<code>pnec_acute_ug_L</code>, <code>ssd_acute_mu</code>, <code>ssd_acute_sigma</code>) and chronic (<code>pnec_chronic_ug_L</code>, <code>ssd_chronic_mu</code>, <code>ssd_chronic_sigma</code>) toxicity.</p></li>
 </ul>
 </section>
 <section id="sec-rfms-definition" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="sec-rfms-definition"><span class="header-section-number">4.2</span> Rice Field Management Systems</h2>
-<p>A Rice Field Management System (RFMS) defines the temporal structure of agricultural practices relevant to pesticide exposure and water management in ERAHUMED. Each RFMS serves as a reusable template that can be assigned to one or more rice field clusters in the simulation landscape.</p>
+<p>A Rice Field Management System (RFMS) defines the temporal structure of agricultural practices relevant to pesticide exposure and water management in the ERAHUMED DSS. Each RFMS serves as a reusable template that can be assigned to one or more rice field clusters in the simulation landscape.</p>
 <p>An RFMS is defined by two main components (<em>cf.</em> <a href="model-inputs.html#tbl-rfms-params" class="quarto-xref">Table&nbsp;<span>3.3</span></a> and <a href="model-inputs.html#tbl-application-params" class="quarto-xref">Table&nbsp;<span>3.4</span></a>):</p>
 <ul>
-<li><p><strong>Crop calendar</strong> The sowing and harvesting dates, and the start and end of the Perellonà period (a traditional post-harvest flooding phase specific to the region), and the respective target water levels in rice field clusters.</p></li>
-<li><p><strong>Chemical applications</strong> A schedule of pesticide applications, specifying the chemical, dose, and day of application relative to the crop calendar.</p></li>
+<li><p><strong>Crop calendar</strong>: The sowing and harvesting dates, and the start and end of the Perellonà period (<em>i.e.</em> a traditional post-harvest flooding phase specific to the region that lasts for the entire winter), and the respective target water levels in rice field clusters.</p></li>
+<li><p><strong>Chemical applications</strong>: A schedule of pesticide applications, specifying the chemical, dose, and day of application relative to the crop calendar.</p></li>
 </ul>
-<p>From this minimal definition, ERAHUMED automatically derives the water management schedule for each rice field cluster. This includes the timing and magnitude of irrigation and drainage events throughout the year, based on a set of simple rules:</p>
-<p>During the sowing season, the field is maintained at a constant target water level (corresponding to the <code>flow_height_cm</code> of <a href="model-inputs.html#tbl-rfms-params" class="quarto-xref">Table&nbsp;<span>3.3</span></a>), except for periods in which ground pesticide applications require temporary draining. These draining periods are computed from the applications’ timing (<code>seed_day</code> of <a href="model-inputs.html#tbl-application-params" class="quarto-xref">Table&nbsp;<span>3.4</span></a>) and declared emptying duration (<code>emptying_days</code>). For ground applications requiring more than one emptying day, it is assumed that the actual pesticide application occurs on the last day of the emptying window, following a period of one or more drained days.</p>
-<p>During the <em>Perellonà</em>, the field is flooded to a higher water level (<code>perellona_height_cm</code>), simulating the traditional post-harvest flooding practice. This flooding is only applied if the cluster is marked as a <em>tancat</em>.</p>
-<p>Outside both the sowing season and the <em>Perellonà</em>, the field is assumed to be dry (i.e., water level is zero), regardless of the cluster type.</p>
+<p>From this minimal definition, the ERAHUMED DSS automatically derives the water management schedule for each rice field cluster. This includes the timing and magnitude of irrigation and drainage events throughout the year, based on a set of simple rules:</p>
+<p>During the sowing season, the rice field is maintained at a constant target water level (corresponding to the <code>flow_height_cm</code> of <a href="model-inputs.html#tbl-rfms-params" class="quarto-xref">Table&nbsp;<span>3.3</span></a>), except for periods in which ground pesticide applications require temporary draining. These draining periods are computed from the applications’ timing (<code>seed_day</code> of <a href="model-inputs.html#tbl-application-params" class="quarto-xref">Table&nbsp;<span>3.4</span></a>) and declared emptying duration (<code>emptying_days</code>). For ground applications requiring more than one emptying day, it is assumed that the actual pesticide application occurs on the last day of the emptying window, following a period of one or more drained days.</p>
+<p>During the winter flooding, the field is flooded to a higher water level (<code>perellona_height_cm</code>), simulating the traditional post-harvest flooding practice. This flooding is only applied if the cluster is marked as a <em>tancat</em> (fields that undergo Perellonà flooding).</p>
+<p>Outside both the sowing season and the winter flooding, the field is assumed to be dry (i.e., water level is zero), regardless of the cluster type.</p>
 <p>Based on the resulting daily water level schedule, two boolean variables are derived:</p>
 <ul>
 <li><p><code>ideal_irrigation</code>: <code>TRUE</code> on days when the water level increases or remains constant while being above zero. These days are interpreted by the model as requiring active irrigation to maintain or restore the target level.</p></li>
@@ -259,20 +260,20 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="sec-cluster-map" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="sec-cluster-map"><span class="header-section-number">4.3</span> Mapping RFMSs to Clusters</h2>
-<p>Once a set of RFMS has been defined, they must be assigned to the spatial units of the simulation — the rice field clusters. This is done using a cluster map, which associates each cluster with a specific RFMS and determines whether <em>Perellonà</em> flooding is active.</p>
+<p>Once a set of RFMS has been defined, they must be assigned to the spatial units of the simulation — the rice field clusters. This is done using a cluster map, which associates each cluster with a specific RFMS.</p>
 <p>The assignment process supports both uniform and heterogeneous scenarios. A cluster map is typically initialized by assigning a default RFMS to all clusters. Additional systems can then be allocated to specific subsets of clusters to reflect more complex landscape configurations.</p>
 <p>Allocations are based on spatial and structural filtering criteria:</p>
 <ul>
 <li><p><strong>Ditch</strong>: clusters are grouped by their associated ditch, allowing allocations to target specific hydrological subunits.</p></li>
-<li><p><strong>Field type</strong>: clusters are classified as regular or tancat (fields that undergo Perellonà flooding).</p></li>
+<li><p><strong>Field type</strong>: clusters are classified as regular or <em>tancat</em> (fields that undergo Perellonà flooding).</p></li>
 </ul>
-<p>To allocate a new RFMS, a fraction of the surface area within the selected subset (defined by ditch and field type) is randomly assigned to the new system. Clusters are sampled without replacement until the requested surface area is reached, or until all eligible clusters are exhausted — in which case a partial allocation is performed.</p>
+<p>To allocate a new RFMS, a fraction of the surface area within the selected subset (defined by ditch and field type) is randomly assigned to the new system. Clusters are sampled without replacement until the requested surface area is reached, or until all eligible clusters are exhausted — in that case a partial allocation is performed.</p>
 </section>
 <section id="sec-builtins" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="sec-builtins"><span class="header-section-number">4.4</span> Built-in Presets</h2>
-<p>ERAHUMED includes a set of predefined elements to support scenario design and simulation without requiring users to define all inputs manually. These presets provide a convenient starting point for realistic simulations based on typical practices observed in the Albufera Natural Park.</p>
+<h2 data-number="4.4" class="anchored" data-anchor-id="sec-builtins"><span class="header-section-number">4.4</span> Built-in presets</h2>
+<p>The ERAHUMED DSS includes a set of predefined elements to support scenario design and simulation without requiring users to define all inputs manually. These presets provide a convenient starting point for realistic simulations based on typical practices observed in the Albufera Natural Park.</p>
 <section id="cluster-map" class="level3" data-number="4.4.1">
-<h3 data-number="4.4.1" class="anchored" data-anchor-id="cluster-map"><span class="header-section-number">4.4.1</span> Cluster Map</h3>
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="cluster-map"><span class="header-section-number">4.4.1</span> Cluster map</h3>
 <p>The function <code>default_rfms_map()</code> returns a ready-to-use cluster map that allocates different RFMSs across the simulation landscape based on simple structural rules.</p>
 <ul>
 <li><p>The <strong>J. Sendra</strong> management system is assigned to all clusters by default.</p></li>
@@ -285,11 +286,11 @@ ul.task-list li input[type="checkbox"] {
 <p>Cluster selection within each ditch range is randomized but constrained to meet the target surface fractions. This spatial configuration captures a realistic distribution of management systems across the park and can be used as-is or further customized.</p>
 </section>
 <section id="management-systems" class="level3" data-number="4.4.2">
-<h3 data-number="4.4.2" class="anchored" data-anchor-id="management-systems"><span class="header-section-number">4.4.2</span> Management Systems</h3>
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="management-systems"><span class="header-section-number">4.4.2</span> Management systems</h3>
 <p>The following built-in RFMSs are available:</p>
 <ul>
 <li><p><strong>J. Sendra</strong><br>
-A modern and widely adopted management system. It includes multiple herbicide, insecticide, and fungicide applications:</p>
+A modern rice variety and widely adopted management system. It includes multiple herbicide, insecticide, and fungicide applications:</p>
 <ul>
 <li><p>Ground applications of cyhalofop-butyl, penoxsulam, acetamiprid, bentazone, and MCPA during early to mid-season.</p></li>
 <li><p>Two aerial applications of azoxystrobin and difenoconazole near the end of the season, for fungal disease control.</p></li>
@@ -307,10 +308,10 @@ A legacy management system formerly used for traditional rice varieties. It incl
 <li><p>An additional third round of aerial fungicide applications (azoxystrobin and difenoconazole) later in the season (<code>seed_day = 104</code>), resulting in a more intensive treatment schedule.</p></li>
 </ul></li>
 </ul>
-<p>Although the Bomba system is not currently in use, it remains available for comparison with modern practices or for use in hypothetical scenarios.</p>
+<p>Although the Bomba system is declining, it remains available for comparison with modern practices or for use in hypothetical scenarios.</p>
 </section>
-<section id="chemicals" class="level3" data-number="4.4.3">
-<h3 data-number="4.4.3" class="anchored" data-anchor-id="chemicals"><span class="header-section-number">4.4.3</span> Chemicals</h3>
+<section id="pesticides" class="level3" data-number="4.4.3">
+<h3 data-number="4.4.3" class="anchored" data-anchor-id="pesticides"><span class="header-section-number">4.4.3</span> Pesticides</h3>
 <p>ERAHUMED includes built-in definitions for a range of commonly used pesticides in rice cultivation. Each chemical is defined with its physicochemical, environmental, and toxicological properties. The available chemicals are:</p>
 <ul>
 <li><p><strong>Acetamiprid</strong><br>
@@ -338,236 +339,242 @@ An ALS-inhibiting herbicide (acetolactate synthase), used for selective control 
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
         }
-        return container.innerHTML
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -575,185 +582,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../chapters/model-inputs.html" class="pagination-link" aria-label="Model inputs">

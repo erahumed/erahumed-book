@@ -3,8 +3,7 @@ project:
 
 book:
   title: |
-    ERAHUMED DSS: a decision support system for the environmental risk
-    assessment of pesticide management practices in Mediterranean wetlands
+    ERAHUMED Decision Support System
   author:
     - name: Valerio Gherardi
       orcid: 0000-0002-8215-3013
@@ -16,8 +15,9 @@ book:
     - name: Andreu Rico
       orcid: 0000-0002-1820-4218
   description: |
-    The ERAHUMED Decision Support System: Software Manual and Technical
-    Documentation.
+    ERAHUMED DSS: a decision support system for the environmental risk
+    assessment of pesticide management practices in Mediterranean wetlands —
+    Software Manual and Technical Documentation.
   cover-image: cover.png
 # favicon: images/cover-2e-small.png
 
