@@ -2,7 +2,9 @@ project:
   type: book
 
 book:
-  title: "ERAHUMED"
+  title: |
+    ERAHUMED DSS: a decision support system for the environmental risk
+    assessment of pesticide management practices in Mediterranean wetlands
   author:
     - name: Valerio Gherardi
       orcid: 0000-0002-8215-3013
