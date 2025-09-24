@@ -1,6 +1,6 @@
 # Hydrological balance calculations {#sec-hydrology}
 
-The first step in assessing toxicological risks in the Albufera Natural Park is to determine the system's hydrology, as water serves as the primary transport medium for the chemicals under study. Specifically, by "hydrology," we refer to the water volumes present in each water body at a given moment and the flow of water between them over a defined time frame (*e.g.*, one day). Since most of these quantities are not directly measurable, they must be estimated through simulation. This Chapter outlines the algorithms used for this process.
+The first step to run the ERAHUMED DSS is to determine the system's hydrology, as water serves as the primary transport medium for the chemicals under study. Specifically, by "hydrology," we refer to the water volumes present in each water body at a given moment and the flow of water between them over a defined time frame (*e.g.*, one day). Since most of these quantities are not directly measurable, they must be estimated through simulation. This Chapter outlines the algorithms used for this process.
 
 ## Overview {#sec-hydrology-overview}
 
@@ -30,7 +30,7 @@ $$ {#eq-hbl-hydro-balance-symbolic}
 The variables collected into the following table, that enter the balance equation [-@eq-hbl-hydro-balance-symbolic], have direct correspondence with model input parameters listed in @sec-model-inputs (we use the notation `df$col` to indicate column `col` of data frame `df`).
 
 | Variable | Source | Units | Description |
-|------------------|------------------|------------------|--------------------|
+|------------------|------------------|------------------|-------------------|
 | $h_t$ | `outflows_df$level` | $\text{m}$ | Lake water level daily time series |
 | $O_t^{\text{Pujol}}$ | `outflows_df$outflow_pujol` | $\text{m}^3$ | *Pujol* outflow daily time series |
 | $O_t^{\text{Perelló}}$ | `outflows_df$outflow_perello` | $\text{m}^3$ | *Perelló* outflow daily time series |
