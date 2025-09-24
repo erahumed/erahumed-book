@@ -9,17 +9,17 @@ get_param_kable <- function(fun = c("simulation", "chemical", "rfms", "allocatio
 
 # Model inputs {#sec-model-inputs}
 
-This chapter serves as a central reference for all input parameters used in ERAHUMED simulations. Parameters are grouped into four categories:
+This chapter serves as a central reference for all input parameters used by the ERAHUMED DSS. Input parameters are grouped into four categories:
 
--   **Landscape parameters** (@tbl-landscape-params) define the biophysical and climatic context in which simulations take place. These inputs characterize the structure and behavior of the Albufera system, including the temporal simulation window (`date_start`, `date_end`), the lake’s hydrology and geometry, and its interaction with weather and soil processes.
+-   **Landscape parameters** (@tbl-landscape-params): define the biophysical and climatic context in which simulations take place. These inputs characterize the physical conditions of the Albufera Natural Park, including the temporal simulation window (`date_start`, `date_end`), the lake’s hydrology and geometry, and its interaction with weather and soil processes.
 
--   **Chemical parameters** (@tbl-chemical-params) describe the physico-chemical and eco-toxicological characteristics of the pesticide compounds considered in the simulation. These include degradation rates, solubility, partition coefficients, and toxicity distribution parameters used for risk assessment.
+-   **Pesticide parameters** (@tbl-chemical-params): describe the physico-chemical and eco-toxicological characteristics of the pesticide compounds considered in the simulation. These include environmental degradation rates, solubility, partition coefficients, and toxicity data used for risk assessment.
 
--   **RFMS parameters** (@tbl-rfms-params) specify how different rice field management systems (RFMSs) are configured. These parameters define the timing, frequency, and nature of chemical applications, as well as water management practices such as irrigation and drainage scheduling.
+-   **RFMS parameters** (@tbl-rfms-params): specify how different rice field management systems (RFMSs) are configured. These parameters define the timing, frequency, and nature of pesticide applications, as well as water management practices such as irrigation and drainage scheduling.
 
--   **Chemical application parameters** (@tbl-application-params) define the specific pesticide treatments that can be scheduled within each RFMS. These parameters include the chemical used, the application rate, the day of application relative to sowing, the method of application (ground or aerial), and the duration of field emptying required for ground applications.
+-   **Pesticide application schemes** (@tbl-application-params): define the specific pesticide treatments that can be scheduled within each RFMS. These parameters include the chemical used, the dose, the day of application relative to sowing, the method of application (ground or aerial), and the duration of field emptying required for ground applications.
 
--   **Spatial allocation** parameters (@tbl-allocation-params) captures how the different RFMSs are spatially distributed across the simulated landscape. This information determines which management practices are applied to which clusters of rice fields, affecting both contaminant fate and risk exposure.
+-   **Spatial allocation** parameters (@tbl-allocation-params): captures how the different RFMSs are spatially distributed across the simulated landscape. This information determines which management practices are applied to which clusters of rice fields, affecting both contaminant fate and risk exposure.
 
 *Note*: The `Type` column and, to some extent, the `Description` fields in @tbl-landscape-params refer to the internal structures and conventions of the `{erahumed}` *R package*, which is presented in detail in @sec-erahumed-pkg and references therein. However, the `Description` generally conveys the intended meaning and usage of each parameter, regardless of whether the user is interacting through the R package or the Shiny interface. Users of the Shiny GUI do not need to understand the R-specific details, as the interface provides appropriate input controls and guidance.
 
@@ -28,13 +28,13 @@ This chapter serves as a central reference for all input parameters used in ERAH
 ```{r}
 #| echo: false
 #| label: tbl-landscape-params
-#| tbl-cap: "ERAHUMED input parameters: Landscape"
+#| tbl-cap: "ERAHUMED DSS input parameters: Landscape"
 get_param_kable(fun = "simulation")
 ```
 
 ### Observational inputs: hydrology and weather
 
-Hydrological and meteorological data provide the empirical starting point for ERAHUMED simulations. These observational inputs are supplied as data frames and are used to drive the water balance, pesticide transport, and evapotranspiration dynamics in the model.
+Hydrological and meteorological data provide the empirical starting point for ERAHUMED DSS simulations. These observational inputs are supplied as data frames and are used to drive the water balance, pesticide transport, and evapotranspiration dynamics in the model.
 
 Users working with historical scenarios are encouraged to provide real-world data from the corresponding time period, enabling retrospective simulations under observed environmental conditions. Conversely, for future or hypothetical scenarios, users may define synthetic datasets that reflect the expected or desired characteristics of the scenario—e.g., altered rainfall regimes or management-induced changes in outflow patterns.
 
@@ -92,12 +92,12 @@ weather_df_desc <- df_input_description("weather_df")
 knitr::kable(weather_df_desc$table, caption = weather_df_desc$caption)
 ```
 
-## Chemical parameters
+## Pesticide parameters
 
 ```{r}
 #| echo: false
 #| label: tbl-chemical-params
-#| tbl-cap: "ERAHUMED input parameters: Chemicals"
+#| tbl-cap: "ERAHUMED DSS input parameters: Pesticides"
 get_param_kable(fun = "chemical")
 ```
 
@@ -106,16 +106,16 @@ get_param_kable(fun = "chemical")
 ```{r}
 #| echo: false
 #| label: tbl-rfms-params
-#| tbl-cap: "ERAHUMED input parameters: Rice-Field Management Systems"
+#| tbl-cap: "ERAHUMED DSS input parameters: Rice-Field Management Systems"
 get_param_kable(fun = "rfms")
 ```
 
-## Chemical application parameters
+## Pesticide application schemes
 
 ```{r}
 #| echo: false
 #| label: tbl-application-params
-#| tbl-cap: "ERAHUMED input parameters: Chemical Applications"
+#| tbl-cap: "ERAHUMED DSS input parameters: Pesticide Applications"
 get_param_kable(fun = "application")
 ```
 
@@ -124,6 +124,6 @@ get_param_kable(fun = "application")
 ```{r}
 #| echo: false
 #| label: tbl-allocation-params
-#| tbl-cap: "ERAHUMED input parameters: Rice-Field surface allocation"
+#| tbl-cap: "ERAHUMED DSS input parameters: Rice-Field surface allocation"
 get_param_kable(fun = "allocation")
 ```
