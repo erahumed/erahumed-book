@@ -78,13 +78,11 @@ The ERAHUMED DSS includes a set of predefined elements to support scenario desig
 
 The function `default_rfms_map()` returns a ready-to-use cluster map that allocates different RFMSs across the simulation landscape based on simple structural rules.
 
--   The **J. Sendra** management system is assigned to all clusters by default.
+-   The **Bomba** management system is allocated to 20% of the surface area of *tancat*-type clusters, corresponding to approximately 10% of the total surface area of the park.
 
--   The **Clearfield** system is then allocated to a subset of clusters:
+-   The **Clearfield** system is assigned to 40% of the area within the drainage sub-basin comprising ditches 1 to 19.
 
-    -   80% of the surface area in ditches 1–9 (Northern area)
-
-    -   20% of the surface area in ditches 10–26 (Southern area)
+-   All remaining clusters are assigned the **J. Sendra** management system.
 
 Cluster selection within each ditch range is randomized but constrained to meet the target surface fractions. This spatial configuration captures a realistic distribution of management systems across the park and can be used as-is or further customized.
 
