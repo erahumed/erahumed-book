@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.24">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -40,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-0dd2bd5de344125cf763a379ddc3eb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -97,9 +97,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="../index.html" class="sidebar-logo-link">
-      </a>
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">ERAHUMED Decision Support System</a> 
     </div>
@@ -279,12 +277,9 @@ ul.task-list li input[type="checkbox"] {
 <h3 data-number="4.4.1" class="anchored" data-anchor-id="cluster-map"><span class="header-section-number">4.4.1</span> Cluster map</h3>
 <p>The function <code>default_rfms_map()</code> returns a ready-to-use cluster map that allocates different RFMSs across the simulation landscape based on simple structural rules.</p>
 <ul>
-<li><p>The <strong>J. Sendra</strong> management system is assigned to all clusters by default.</p></li>
-<li><p>The <strong>Clearfield</strong> system is then allocated to a subset of clusters:</p>
-<ul>
-<li><p>80% of the surface area in ditches 1–9 (Northern area)</p></li>
-<li><p>20% of the surface area in ditches 10–26 (Southern area)</p></li>
-</ul></li>
+<li><p>The <strong>Bomba</strong> management system is allocated to 20% of the surface area of <em>tancat</em>-type clusters, corresponding to approximately 10% of the total surface area of the park.</p></li>
+<li><p>The <strong>Clearfield</strong> system is assigned to 40% of the area within the drainage sub-basin comprising ditches 1 to 19.</p></li>
+<li><p>All remaining clusters are assigned the <strong>J. Sendra</strong> management system.</p></li>
 </ul>
 <p>Cluster selection within each ditch range is randomized but constrained to meet the target surface fractions. This spatial configuration captures a realistic distribution of management systems across the park and can be used as-is or further customized.</p>
 </section>
